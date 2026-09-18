@@ -1,0 +1,102 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+jspm_packages/
+
+# Only npm is used in this project; other lockfiles are accidental
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# Build output
+dist/
+dist-ssr/
+build/
+out/
+*.tsbuildinfo
+
+# Vite / tooling caches
+.vite/
+node_modules/.vite/
+.cache/
+.temp/
+.tmp/
+.eslintcache
+.stylelintcache
+
+# PWA generated artefacts (vite-plugin-pwa writes these into the build)
+dev-dist/
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
+public/registerSW.js
+
+# Test output
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
+.vitest-cache/
+*.lcov
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+
+# Supabase local development
+.branches/
+.temp/
+supabase/.branches/
+supabase/.temp/
+supabase/logs/
+supabase/.env
+
+# Netlify
+.netlify/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Editors and IDEs
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Local agent/tooling configuration (shared config stays tracked)
+.claude/settings.local.json
+.impeccable/config.local.json
