@@ -128,10 +128,10 @@ export function AppProvider({
       const pinned = visible.find((r) => r.id === pinnedId);
       if (pinned) return pinned;
     }
-    const daily = pickDaily(references, today);
-    if (daily && visible.some((r) => r.id === daily.id)) return daily;
-    return visible[0] ?? null;
-  }, [visible, pinnedId, references, today]);
+    // Seeded on the day and the filter combination, so narrowing a filter
+    // moves to a genuinely different piece instead of the first match.
+    return pickDaily(references, filters, today);
+  }, [visible, pinnedId, references, filters, today]);
 
   const surprise = useCallback(() => {
     const next = surpriseMe(references, filters, featured?.id ?? null, random);

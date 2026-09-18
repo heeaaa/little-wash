@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
 import {
   activeFilterCount,
+  dailySeed,
+  dayNumber,
   filterReferences,
   findReference,
   matchesTime,
@@ -8,7 +10,7 @@ import {
   surpriseMe,
 } from "./catalog";
 import { mulberry32 } from "./shuffle";
-import { DEFAULT_FILTERS, type PaintReference } from "./types";
+import { DEFAULT_FILTERS, type Filters, type PaintReference } from "./types";
 
 function make(
   id: string,
@@ -150,23 +152,95 @@ describe("surpriseMe", () => {
 });
 
 describe("pickDaily", () => {
-  it("is stable for the same date", () => {
-    const date = new Date("2026-09-18T08:00:00Z");
-    expect(pickDaily(CATALOG, date)?.id).toBe(pickDaily(CATALOG, date)?.id);
+  const DAY = new Date("2026-09-18T08:00:00Z");
+
+  it("is stable for the same date and filters", () => {
+    expect(pickDaily(CATALOG, DEFAULT_FILTERS, DAY)?.id).toBe(
+      pickDaily(CATALOG, DEFAULT_FILTERS, DAY)?.id,
+    );
   });
 
-  it("changes across days (over the catalogue cycle)", () => {
+  it("is stable across times of day within one calendar day", () => {
+    const morning = new Date(2026, 8, 18, 6, 0, 0);
+    const night = new Date(2026, 8, 18, 23, 30, 0);
+    expect(pickDaily(CATALOG, DEFAULT_FILTERS, morning)?.id).toBe(
+      pickDaily(CATALOG, DEFAULT_FILTERS, night)?.id,
+    );
+  });
+
+  it("changes across days", () => {
     const ids = new Set<string>();
-    for (let day = 0; day < CATALOG.length; day += 1) {
-      const date = new Date(Date.UTC(2026, 0, 1 + day));
-      const pick = pickDaily(CATALOG, date);
+    for (let day = 0; day < 40; day += 1) {
+      const pick = pickDaily(CATALOG, DEFAULT_FILTERS, new Date(Date.UTC(2026, 0, 1 + day)));
       if (pick) ids.add(pick.id);
     }
-    expect(ids.size).toBe(CATALOG.length);
+    expect(ids.size).toBeGreaterThan(1);
+  });
+
+  it("only ever returns a piece matching the active filters", () => {
+    for (let day = 0; day < 60; day += 1) {
+      const date = new Date(Date.UTC(2026, 0, 1 + day));
+      const pick = pickDaily(CATALOG, { ...DEFAULT_FILTERS, difficulty: "gentle" }, date);
+      expect(pick?.difficulty).toBe("gentle");
+    }
+  });
+
+  /**
+   * Regression. The previous rule picked the day's piece from the whole
+   * catalogue and fell back to the first match when it did not fit the filters,
+   * so a narrowed pool was dominated by its first item: measured 75% of days
+   * for a two-item pool, where a fair share is 50%. With the filters now the
+   * primary control on Today, that made the app feel stuck on the piece the
+   * user was trying to move away from.
+   */
+  it("spreads the pick across a narrowed pool instead of favouring the first match", () => {
+    const gentle = { ...DEFAULT_FILTERS, difficulty: "gentle" as const };
+    const pool = filterReferences(CATALOG, gentle);
+    expect(pool).toHaveLength(2);
+
+    const DAYS = 120;
+    const counts = new Map<string, number>();
+    for (let day = 0; day < DAYS; day += 1) {
+      const pick = pickDaily(CATALOG, gentle, new Date(Date.UTC(2026, 0, 1 + day)));
+      if (pick) counts.set(pick.id, (counts.get(pick.id) ?? 0) + 1);
+    }
+
+    // Every piece in the pool is reachable, and none dominates the way the
+    // first-match fallback did.
+    expect(counts.size).toBe(pool.length);
+    for (const piece of pool) {
+      const share = (counts.get(piece.id) ?? 0) / DAYS;
+      expect(share).toBeGreaterThan(0.3);
+      expect(share).toBeLessThan(0.7);
+    }
+  });
+
+  it("varies between filter states on the same day", () => {
+    const states: Filters[] = [
+      DEFAULT_FILTERS,
+      { ...DEFAULT_FILTERS, difficulty: "gentle" },
+      { ...DEFAULT_FILTERS, time: "15" },
+      { ...DEFAULT_FILTERS, subject: "fruit" },
+    ];
+    const seeds = new Set(states.map((f) => dailySeed(f, DAY)));
+    expect(seeds.size).toBe(states.length);
+  });
+
+  it("returns null when nothing matches the filters", () => {
+    expect(
+      pickDaily(CATALOG, { time: "5", difficulty: "stretch", subject: "fruit" }, DAY),
+    ).toBeNull();
   });
 
   it("returns null for an empty catalogue", () => {
-    expect(pickDaily([], new Date())).toBeNull();
+    expect(pickDaily([], DEFAULT_FILTERS, DAY)).toBeNull();
+  });
+});
+
+describe("dayNumber", () => {
+  it("is constant within a calendar day and increments across days", () => {
+    expect(dayNumber(new Date(2026, 8, 18, 0, 1))).toBe(dayNumber(new Date(2026, 8, 18, 23, 59)));
+    expect(dayNumber(new Date(2026, 8, 19))).toBe(dayNumber(new Date(2026, 8, 18)) + 1);
   });
 });
 

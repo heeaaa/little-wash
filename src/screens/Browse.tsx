@@ -7,7 +7,12 @@ import { RefArt } from "@/components/RefArt";
 import { MetaRow } from "@/components/MetaRow";
 import { SaveButton } from "@/components/SaveButton";
 import { SubjectTag } from "@/components/SubjectTag";
-import { FilterControls } from "@/components/FilterControls";
+import {
+  ClearFilters,
+  FilterControls,
+  PrimaryFilters,
+  SubjectSheet,
+} from "@/components/FilterControls";
 import { EmptyState } from "@/components/EmptyState";
 import { type PaintReference, pigment, type Subject } from "@/lib/types";
 
@@ -49,11 +54,24 @@ export function Browse() {
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
         <div className="min-w-0">
+          {/*
+            Same hierarchy as Today on small screens: the controls precede the
+            results they act on rather than collapsing to the foot of a very
+            long page.
+          */}
+          <section aria-label="Narrow the catalogue" className="mb-8 lg:hidden">
+            <div className="flex flex-col gap-5 rounded-card border border-line bg-surface-raised p-4 shadow-lift">
+              <PrimaryFilters idPrefix="browse-m" />
+              <SubjectSheet idPrefix="browse-m" />
+              <ClearFilters className="self-start" />
+            </div>
+          </section>
+
           <div className="flex items-baseline gap-3 border-b border-line pb-2">
             <h2 className="font-display text-xl font-medium tracking-tight text-ink">
               {activeFilters > 0 ? "Matching pieces" : "The whole catalogue"}
             </h2>
-            <span className="tnum text-[0.85rem] text-ink-faint">{visible.length}</span>
+            <span className="tnum text-[0.85rem] text-ink-soft">{visible.length}</span>
           </div>
 
           {visible.length === 0 ? (
@@ -71,9 +89,9 @@ export function Browse() {
           )}
         </div>
 
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
           <div className="rounded-card border border-line bg-surface-raised p-5 shadow-lift">
-            <FilterControls layout="stack" idPrefix="browse" />
+            <FilterControls idPrefix="browse-d" />
           </div>
         </aside>
       </div>

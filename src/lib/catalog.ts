@@ -1,5 +1,5 @@
-import type { Filters, PaintReference, TimeBand } from "./types";
-import { pickDifferent, type RandomSource } from "./shuffle";
+import { DEFAULT_FILTERS, type Filters, type PaintReference, type TimeBand } from "./types";
+import { mulberry32, pickDifferent, type RandomSource } from "./shuffle";
 
 /** Upper bound (inclusive) of minutes that each time band accepts. */
 const TIME_BAND_MAX: Record<TimeBand, number> = {
@@ -57,20 +57,53 @@ export function surpriseMe(
   return pickDifferent(pool, currentId, random);
 }
 
+/** Whole days since the epoch, in the viewer's own calendar day. */
+export function dayNumber(date: Date): number {
+  return Math.floor(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86_400_000,
+  );
+}
+
+/** FNV-1a over the filter triple, so each filter state gets its own stream. */
+function hashFilters(filters: Filters): number {
+  const key = `${filters.time}|${filters.difficulty}|${filters.subject}`;
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < key.length; i += 1) {
+    hash ^= key.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return hash >>> 0;
+}
+
 /**
- * The daily featured piece. Deterministic for a given date so everyone sees the
- * same "today" and it is stable across reloads, with no streak or pressure logic.
+ * Seed for the daily pick. Combines the calendar day with the active filter
+ * combination so the choice is stable within a day but differs between filter
+ * states. Exported for tests; callers use pickDaily.
+ */
+export function dailySeed(filters: Filters, date: Date): number {
+  return (hashFilters(filters) ^ Math.imul(dayNumber(date), 0x9e3779b1)) >>> 0;
+}
+
+/**
+ * The featured piece for today, chosen from the pieces that match the active
+ * filters.
+ *
+ * Deterministic in (date, filters): everyone sees the same "today", it survives
+ * reloads, and there is no streak or pressure logic anywhere in it. Seeding on
+ * the filters as well as the day matters because the filters are the primary
+ * control on Today - picking the first match would hand back the same piece
+ * every time a filter changed, making the app feel stuck exactly when someone
+ * is engaging with it.
  */
 export function pickDaily(
   all: readonly PaintReference[],
+  filters: Filters = DEFAULT_FILTERS,
   date: Date = new Date(),
 ): PaintReference | null {
-  if (all.length === 0) return null;
-  const dayNumber = Math.floor(
-    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86_400_000,
-  );
-  const index = ((dayNumber % all.length) + all.length) % all.length;
-  return all[index] ?? null;
+  const pool = filterReferences(all, filters);
+  if (pool.length === 0) return null;
+  const index = Math.floor(mulberry32(dailySeed(filters, date))() * pool.length);
+  return pool[index] ?? pool[0] ?? null;
 }
 
 export function findReference(

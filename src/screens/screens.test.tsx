@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { AppProvider, type DirectionId } from "@/state/AppContext";
 import { REFERENCES } from "@/data/references";
+import { DIFFICULTY_NOTE } from "@/lib/types";
 import { mulberry32 } from "@/lib/shuffle";
 import { Today } from "@/screens/Today";
 import { Browse } from "@/screens/Browse";
@@ -39,33 +40,95 @@ function featuredTitle(): string {
 }
 
 describe("Today (shared editorial screen)", () => {
-  it("shows featured + more to try for treatment A", () => {
+  it("shows one piece and does not hand back the catalogue", () => {
     renderScreen(Today, { direction: "a" });
     expect(screen.getByRole("heading", { name: /today.s wash/i })).toBeInTheDocument();
     expect(screen.getByTestId("featured")).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /more to try/i })).toBeInTheDocument();
+    // "More to try" belongs to Browse now: offering it here reopens the very
+    // decision this screen exists to close.
+    expect(screen.queryByRole("heading", { name: /more to try/i })).not.toBeInTheDocument();
   });
 
-  it("renders in treatment B too", () => {
-    renderScreen(Today, { direction: "b" });
-    expect(screen.getByTestId("featured")).toBeInTheDocument();
+  it("leads with time and energy, and keeps subject behind a control", () => {
+    renderScreen(Today, { direction: "a" });
+    // Both primary questions are present as labelled groups.
+    expect(screen.getAllByRole("group", { name: /how long have you got/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("group", { name: /how much energy/i }).length).toBeGreaterThan(0);
+    // Subject is reachable, but not as a seven-option row on the surface.
+    expect(screen.getAllByRole("button", { name: /^Subject/ }).length).toBeGreaterThan(0);
   });
 
   it("narrows to stretch pieces when filtered", async () => {
     const user = userEvent.setup();
     renderScreen(Today, { direction: "a" });
-    expect(screen.getAllByText("Ripe Pear").length).toBeGreaterThan(0);
-    await user.click(screen.getByRole("button", { name: "A stretch" }));
-    expect(screen.queryByText("Ripe Pear")).not.toBeInTheDocument();
-    expect(screen.getByText("Cottage on the Hill")).toBeInTheDocument();
+    expect(featuredTitle()).toBe("Potted Succulent");
+    await user.click(screen.getAllByRole("button", { name: "A stretch" })[0]!);
+    expect(screen.queryByText("Potted Succulent")).not.toBeInTheDocument();
+    expect(featuredTitle()).toBe("Cottage on the Hill");
   });
 
-  it("shows an empty state for an impossible combination", async () => {
+  /**
+   * Regression for the daily pick collapsing onto the first match. Narrowing a
+   * filter must move to a piece chosen for that filter state, not fall back to
+   * whichever piece happens to lead the filtered catalogue.
+   */
+  it("moves to a different piece when a filter narrows the pool", async () => {
     const user = userEvent.setup();
     renderScreen(Today, { direction: "a" });
-    await user.click(screen.getByRole("button", { name: "5 min" }));
-    await user.click(screen.getByRole("button", { name: "A stretch" }));
+    const before = featuredTitle();
+    await user.click(screen.getAllByRole("button", { name: "Gentle" })[0]!);
+    const after = featuredTitle();
+    expect(after).not.toBe(before);
+    // Not simply the first gentle piece in catalogue order.
+    expect(after).not.toBe("Ripe Pear");
+  });
+
+  it("announces the piece, not just the count, when it changes", async () => {
+    const user = userEvent.setup();
+    renderScreen(Today, { direction: "a" });
+    expect(screen.getByRole("status")).toHaveTextContent("");
+    await user.click(screen.getAllByRole("button", { name: "A stretch" })[0]!);
+    expect(screen.getByRole("status")).toHaveTextContent(/now showing cottage on the hill/i);
+  });
+
+  it("explains the difficulty instead of only labelling it", () => {
+    renderScreen(Today, { direction: "a" });
+    const featured = screen.getByTestId("featured");
+    const piece = REFERENCES.find((r) => r.title === featuredTitle());
+    expect(piece).toBeDefined();
+    // The plain-English note that gives a nervous beginner permission has to be
+    // on screen, not only defined in the data.
+    expect(
+      within(featured).getByText(DIFFICULTY_NOTE[piece!.difficulty]),
+    ).toBeInTheDocument();
+  });
+
+  it("shows an empty state naming the combination that excludes everything", async () => {
+    const user = userEvent.setup();
+    renderScreen(Today, { direction: "a" });
+    await user.click(screen.getAllByRole("button", { name: "5 min" })[0]!);
+    await user.click(screen.getAllByRole("button", { name: "A stretch" })[0]!);
     expect(screen.getByText(/nothing matches just yet/i)).toBeInTheDocument();
+    expect(screen.getByText(/5 min \+ A stretch/)).toBeInTheDocument();
+  });
+
+  it("lets a single filter be dropped from the empty state", async () => {
+    const user = userEvent.setup();
+    renderScreen(Today, { direction: "a" });
+    await user.click(screen.getAllByRole("button", { name: "5 min" })[0]!);
+    await user.click(screen.getAllByRole("button", { name: "A stretch" })[0]!);
+    await user.click(screen.getByRole("button", { name: /drop 5 min/i }));
+    expect(screen.queryByText(/nothing matches just yet/i)).not.toBeInTheDocument();
+    expect(screen.getByTestId("featured")).toBeInTheDocument();
+  });
+
+  it("keeps the controls reachable while the empty state is showing", async () => {
+    const user = userEvent.setup();
+    renderScreen(Today, { direction: "a" });
+    await user.click(screen.getAllByRole("button", { name: "5 min" })[0]!);
+    await user.click(screen.getAllByRole("button", { name: "A stretch" })[0]!);
+    expect(screen.getAllByRole("group", { name: /how long have you got/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("group", { name: /how much energy/i }).length).toBeGreaterThan(0);
   });
 
   it("swaps the featured piece with Deal me another", async () => {
@@ -94,7 +157,7 @@ describe("Browse", () => {
   });
 
   it("respects a filter passed in the URL", () => {
-    renderScreen(Browse, { direction: "b", entry: "/b/browse?subject=landscape" });
+    renderScreen(Browse, { direction: "a", entry: "/a/browse?subject=landscape" });
     expect(screen.getByText("Cottage on the Hill")).toBeInTheDocument();
     expect(screen.queryByText("Ripe Pear")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /matching pieces/i })).toBeInTheDocument();

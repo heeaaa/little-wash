@@ -12,7 +12,8 @@ type IconName =
   | "expand"
   | "palette"
   | "grid"
-  | "today";
+  | "today"
+  | "tag";
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name"> {
   name: IconName;
@@ -82,6 +83,12 @@ const PATHS: Record<IconName, JSX.Element> = {
     </>
   ),
   check: <path d="M5 12.5l4.2 4.2L19 7" />,
+  tag: (
+    <>
+      <path d="M11.2 4H5a1 1 0 0 0-1 1v6.2a2 2 0 0 0 .6 1.4l7 7a1.6 1.6 0 0 0 2.3 0l5.3-5.3a1.6 1.6 0 0 0 0-2.3l-7-7A2 2 0 0 0 11.2 4Z" />
+      <circle cx="8.4" cy="8.4" r="1.3" />
+    </>
+  ),
   brush: (
     <>
       <path d="M15.5 4.5 20 9l-8 8" />

@@ -18,6 +18,10 @@ export default {
         "accent-ink": "rgb(var(--accent-ink) / <alpha-value>)",
         "accent-soft": "rgb(var(--accent-soft) / <alpha-value>)",
         save: "rgb(var(--save) / <alpha-value>)",
+        teal: "rgb(var(--teal) / <alpha-value>)",
+        sage: "rgb(var(--sage) / <alpha-value>)",
+        rose: "rgb(var(--rose) / <alpha-value>)",
+        paper: "rgb(var(--paper) / <alpha-value>)",
       },
       fontFamily: {
         display: "var(--font-display)",

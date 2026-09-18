@@ -1,13 +1,13 @@
-# Little Wash
+# little wash
 
-_A little inspiration. A little paint. Everyday._
+_A little colour, every day._
 
 Little Wash removes the decision that stops people painting. It offers one
 simple, sketchable subject a day, with gentle filters for the time and energy
 you actually have, so you can go from opening the app to brush on paper in under
 a minute. No streaks, no pressure, ever.
 
-> This repository is the design-exploration prototype, not the
+> Working name. This repository is the design-exploration prototype, not the
 > production app.
 
 ## Quick start

@@ -3,93 +3,65 @@
 @tailwind utilities;
 
 /*
-  One editorial "Studio Table" structure (Spectral display, Inter body, plate
-  layout, hairline rules), rendered in two colour treatments:
+  Little Wash brand system (source of truth: assets/branding.png).
 
-    [data-direction="a"] - "Organised Chaos": bold, colour-coded, studio
-      ornaments (washi tape, sticky notes, scattered pigment dabs).
-    [data-direction="b"] - "Scattered Accents": the same structure kept calm,
-      colour arriving through swatches, tags and small painted marks.
+  Palette  Paper #F5F1E8 · Deep teal #25616A · Sage #A8B99B · Rose #D96986 · Ink #2E2D29
+  Type     Libre Baskerville (display / editorial) · Source Sans 3 (body / UI) · Caveat (hand)
 
-  Both are LIGHT by decision (used beside a sketchbook, colour fidelity matters)
-  and both sit artwork on a fixed neutral mat so references read truthfully.
+  Structure is the approved "Studio Table (Organised Chaos)": a strict editorial
+  grid with colour arriving on real elements (washi tags, sticky notes, pigment
+  rings, colour-coded cards). Artwork always sits on a fixed neutral mat so its
+  colours read true. Light by decision (used beside a sketchbook).
 */
 
 :root {
   color-scheme: light;
 
-  /* Shared subject pigments - the colour system that codes the studio. */
-  --pig-fruit: 224 110 63;
-  --pig-botanical: 110 140 74;
-  --pig-still-life: 46 110 120;
-  --pig-creatures: 194 90 110;
-  --pig-landscape: 194 148 54;
-  --pig-objects: 104 106 150;
+  --surface: 245 241 232;
+  --surface-raised: 251 248 241;
+  --surface-sunken: 236 230 217;
+  --art-mat: 242 241 238;
+  --ink: 46 45 41;
+  --ink-soft: 92 88 78;
+  --ink-faint: 131 126 114;
+  --line: 223 216 200;
+  --accent: 37 97 106;
+  --accent-ink: 251 248 241;
+  --accent-soft: 211 224 225;
+  --save: 217 105 134;
 
-  --font-display: "Spectral", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  /* Named brand colours for direct use. */
+  --teal: 37 97 106;
+  --sage: 168 185 155;
+  --rose: 217 105 134;
+  --paper: 245 241 232;
+
+  /*
+    Subject colour-coding, tuned to sit calmly beside the brand palette:
+    still-life anchors on brand teal and creatures on brand rose; the rest are
+    muted watercolour hues in the same family.
+  */
+  --pig-fruit: 200 146 84;
+  --pig-botanical: 110 140 90;
+  --pig-still-life: 37 97 106;
+  --pig-creatures: 217 105 134;
+  --pig-landscape: 124 147 166;
+  --pig-objects: 151 124 147;
+
+  --font-display: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", system-ui, -apple-system, sans-serif;
   --font-hand: "Caveat", "Segoe Script", cursive;
 
   --radius-card: 8px;
   --radius-chip: 7px;
-
-  /* Default to treatment A (Organised Chaos). */
-  --surface: 239 234 224;
-  --surface-raised: 250 247 240;
-  --surface-sunken: 228 221 205;
-  --art-mat: 242 241 238;
-  --ink: 43 42 38;
-  --ink-soft: 90 86 76;
-  --ink-faint: 133 127 114;
-  --line: 221 213 196;
-  --accent: 34 96 107;
-  --accent-ink: 250 247 240;
-  --accent-soft: 205 224 226;
-  --save: 194 90 110;
-  --shadow-plate: 0 1px 0 rgb(255 255 255 / 0.55), 0 22px 44px -28px rgb(40 34 24 / 0.5);
-  --shadow-lift: 0 2px 6px -2px rgb(40 34 24 / 0.3);
-  --grain-opacity: 0.06;
-  --ornament: 1; /* studio ornaments visible */
+  --shadow-plate: 0 1px 0 rgb(255 255 255 / 0.55), 0 22px 44px -28px rgb(40 38 30 / 0.5);
+  --shadow-lift: 0 2px 6px -2px rgb(40 38 30 / 0.3);
+  --grain-opacity: 0.05;
 }
 
+/* Single approved treatment; the selector is retained for scoping stability. */
 [data-direction="a"] {
   color-scheme: light;
-  --surface: 239 234 224;
-  --surface-raised: 250 247 240;
-  --surface-sunken: 228 221 205;
-  --art-mat: 242 241 238;
-  --ink: 43 42 38;
-  --ink-soft: 90 86 76;
-  --ink-faint: 133 127 114;
-  --line: 221 213 196;
-  --accent: 34 96 107;
-  --accent-ink: 250 247 240;
-  --accent-soft: 205 224 226;
-  --save: 194 90 110;
-  --shadow-plate: 0 1px 0 rgb(255 255 255 / 0.55), 0 22px 44px -28px rgb(40 34 24 / 0.5);
-  --shadow-lift: 0 2px 6px -2px rgb(40 34 24 / 0.3);
-  --grain-opacity: 0.06;
-  --ornament: 1;
-}
-
-[data-direction="b"] {
-  color-scheme: light;
-  --surface: 236 238 233;
-  --surface-raised: 246 247 243;
-  --surface-sunken: 224 226 219;
-  --art-mat: 242 241 238;
-  --ink: 33 42 47;
-  --ink-soft: 75 85 92;
-  --ink-faint: 108 117 124;
-  --line: 211 215 207;
-  --accent: 45 85 102;
-  --accent-ink: 246 247 243;
-  --accent-soft: 210 224 226;
-  --save: 176 122 46;
-  --shadow-plate: 0 1px 0 rgb(255 255 255 / 0.6), 0 22px 44px -28px rgb(20 28 34 / 0.42);
-  --shadow-lift: 0 2px 6px -2px rgb(20 28 34 / 0.26);
-  --grain-opacity: 0.045;
-  --ornament: 0; /* ornaments restrained */
 }
 
 @layer base {
@@ -169,7 +141,6 @@
     background-blend-mode: soft-light;
   }
 
-  /* Washi-tape tag: a short strip of translucent tape holding a label. */
   .washi {
     position: relative;
     display: inline-flex;
@@ -179,7 +150,7 @@
     font-weight: 600;
     font-size: 0.8rem;
     color: rgb(var(--ink));
-    background: rgb(var(--tape, 224 110 63) / 0.34);
+    background: rgb(var(--tape, 37 97 106) / 0.32);
     box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
   }
   .washi::before,
@@ -189,7 +160,7 @@
     top: 0;
     bottom: 0;
     width: 8px;
-    background: rgb(var(--tape, 224 110 63) / 0.22);
+    background: rgb(var(--tape, 37 97 106) / 0.2);
   }
   .washi::before {
     left: -6px;
@@ -200,10 +171,71 @@
     transform: skewX(-12deg);
   }
 
-  /* Sticky-note: a small squared note with a soft drop and slight tilt. */
   .sticky {
-    background: rgb(var(--note, 246 216 122));
-    box-shadow: 0 10px 20px -12px rgb(40 34 24 / 0.5);
+    background: rgb(var(--note, 239 231 196));
+    box-shadow: 0 10px 20px -12px rgb(40 38 30 / 0.5);
+  }
+
+  /*
+    Bottom sheet built on the native <dialog>, so focus trapping, Escape and
+    background inertness come from the platform. Anchored to the bottom edge
+    because it is reached by thumb, and capped so a long option list scrolls
+    inside the sheet rather than pushing it off-screen.
+  */
+  .sheet {
+    width: 100%;
+    max-width: 100%;
+    max-height: 85vh;
+    max-height: 85svh;
+    overflow-y: auto;
+    animation: sheet-rise 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes sheet-rise {
+    from {
+      transform: translateY(1.25rem);
+      opacity: 0;
+    }
+  }
+
+  /*
+    The one authored moment: the piece settling in after a filter change or a
+    deal. Starts from the already-visible default so nothing is hidden if the
+    animation never runs.
+  */
+  .piece-settle {
+    animation: piece-settle 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes piece-settle {
+    from {
+      opacity: 0.35;
+      transform: translateY(0.4rem) scale(0.994);
+      filter: blur(1.5px);
+    }
+  }
+
+  /*
+    Caps the featured artwork so the piece, its identity and the primary action
+    all sit within the first viewport on a phone, with the time and energy
+    controls reachable immediately below. Viewport-relative by intent: the
+    budget is the screen, not a fixed pixel height. vh first for browsers
+    without svh; svh wins where supported so a visible URL bar cannot push the
+    controls off-screen.
+  */
+  .art-cap {
+    max-height: 40vh;
+    max-height: 40svh;
+  }
+  @media (min-width: 640px) {
+    .art-cap {
+      max-height: 52vh;
+      max-height: 52svh;
+    }
+  }
+  @media (min-width: 1024px) {
+    .art-cap {
+      max-height: 46vh;
+      max-height: 46svh;
+    }
   }
 }
 
@@ -217,7 +249,6 @@
   .tnum {
     font-variant-numeric: tabular-nums;
   }
-  /* Organic paint-dab shape reused for swatches and scattered marks. */
   .dab {
     border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
   }

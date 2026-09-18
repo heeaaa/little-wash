@@ -1,189 +1,195 @@
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useApp } from "@/state/AppContext";
 import { RefArt } from "@/components/RefArt";
 import { PaletteRow } from "@/components/PaletteRow";
-import { MetaRow } from "@/components/MetaRow";
 import { SaveButton } from "@/components/SaveButton";
 import { SurpriseButton } from "@/components/SurpriseButton";
-import { FilterControls } from "@/components/FilterControls";
+import {
+  ClearFilters,
+  FilterControls,
+  PrimaryFilters,
+  SubjectSheet,
+} from "@/components/FilterControls";
 import { EmptyState } from "@/components/EmptyState";
 import { SubjectTag } from "@/components/SubjectTag";
-import { StickyNote } from "@/components/studio/StickyNote";
+import { DifficultyMark } from "@/components/DifficultyMark";
 import { Icon } from "@/components/Icon";
-import { pigment } from "@/lib/types";
+import { DIFFICULTY_LABEL, DIFFICULTY_NOTE } from "@/lib/types";
 
+/**
+ * Today is a decision surface, not a document: one piece, its identity, the
+ * action, then the two questions the product is positioned on. The catalogue
+ * lives on Browse - offering the rest of it here would hand back the very
+ * deliberation this screen exists to remove.
+ */
 export function Today() {
-  const { direction, treatment, featured, visible } = useApp();
-  const { search } = useLocation();
-  const chaos = treatment === "chaos";
-  const others = visible.filter((r) => r.id !== featured?.id);
+  const { featured, visible } = useApp();
 
   return (
-    <div className="relative mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
-      <div className="relative z-10 mb-8 max-w-reading">
-        <h1 className="text-balance font-display text-[2rem] font-medium leading-tight tracking-tight text-ink sm:text-[2.5rem]">
-          Today&rsquo;s wash
-        </h1>
-        <p className="mt-2 text-pretty text-[1.02rem] leading-relaxed text-ink-soft">
-          One simple subject to start with. Change the mood with the filters, or
-          let us deal you another.
-        </p>
-      </div>
+    <div className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-8 lg:py-12">
+      <h1 className="text-balance font-display text-[1.5rem] font-medium leading-tight tracking-tight text-ink sm:text-[2.1rem] lg:text-[2.5rem]">
+        Today&rsquo;s wash
+      </h1>
 
-      <p aria-live="polite" className="sr-only">
-        {visible.length} {visible.length === 1 ? "idea" : "ideas"} match your filters.
-      </p>
+      <PieceAnnouncer />
 
-      <div className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
+      <div className="mt-4 grid gap-10 sm:mt-5 lg:mt-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
         <div className="min-w-0">
           {featured ? <FeaturedPlate /> : <EmptyState />}
 
-          {others.length > 0 ? (
-            <section className="mt-12">
-              <SectionHeading title="More to try" note={`${others.length} more`} />
-              <ul className="mt-4 grid gap-x-6 gap-y-8 sm:grid-cols-2">
-                {others.map((reference) => (
-                  <li key={reference.id} className="min-w-0">
-                    <div className="relative">
-                      <Link
-                        to={{ pathname: `/${direction}/piece/${reference.id}`, search }}
-                        className="group flex gap-4 rounded-card"
-                      >
-                        <div
-                          className="shrink-0"
-                          style={
-                            chaos
-                              ? { boxShadow: `0 0 0 3px ${pigment(reference.subject, 0.35)}` }
-                              : undefined
-                          }
-                        >
-                          <RefArt
-                            reference={reference}
-                            className="h-24 w-24 rounded-[6px] border border-line"
-                          />
-                        </div>
-                        <div className="min-w-0 flex-1 pt-1">
-                          <p className="truncate font-display text-lg font-medium text-ink underline-offset-4 group-hover:underline">
-                            {reference.title}
-                          </p>
-                          <div className="mt-1">
-                            <SubjectTag subject={reference.subject} rotate={-3} />
-                          </div>
-                          <MetaRow reference={reference} className="mt-2" />
-                        </div>
-                      </Link>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+          {/*
+            Phone and tablet: the controls sit directly under the piece, so
+            changing one is visibly connected to the other. The desktop rail
+            below carries the same hierarchy in a different container.
+          */}
+          <section aria-label="Narrow today's idea" className="mt-5 lg:hidden">
+            <div className="flex flex-col gap-5 rounded-card border border-line bg-surface-raised p-4 shadow-lift">
+              <PrimaryFilters idPrefix="today-m" />
+              <SubjectSheet idPrefix="today-m" />
+              <ClearFilters className="self-start" />
+            </div>
+          </section>
+
+          {/*
+            The palette follows the controls, not the piece. It is what you need
+            once you have committed, so it must not sit between the action and
+            the two questions that change the piece.
+          */}
+          {featured ? (
+            <section className="mt-6 border-t border-line pt-5 lg:mt-8">
+              <h3 className="mb-2 flex items-center gap-1.5 text-[0.8rem] font-semibold uppercase tracking-[0.09em] text-ink-soft">
+                <Icon name="palette" size={15} /> Suggested palette
+              </h3>
+              <PaletteRow palette={featured.palette} variant="dabs" showNames />
             </section>
           ) : null}
         </div>
 
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
           <div className="rounded-card border border-line bg-surface-raised p-5 shadow-lift">
-            <FilterControls layout="stack" idPrefix="today" />
+            <FilterControls idPrefix="today-d" />
           </div>
         </aside>
       </div>
+
+      <p className="sr-only" aria-live="polite">
+        {visible.length} {visible.length === 1 ? "idea matches" : "ideas match"} your
+        filters.
+      </p>
     </div>
   );
 }
 
-function SectionHeading({ title, note }: { title: string; note?: string }) {
+/**
+ * Announces the piece itself, not just how many matched. Without this the one
+ * playful gesture in the product ("Deal me another") is silent: the heading
+ * changes off-screen and nothing tells a screen reader, or a user scrolled past
+ * the artwork, that anything happened.
+ */
+function PieceAnnouncer() {
+  const { featured } = useApp();
+  const [message, setMessage] = useState("");
+  const first = useRef(true);
+
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    setMessage(
+      featured
+        ? `Now showing ${featured.title}, ${featured.minutes} minutes, ${DIFFICULTY_LABEL[featured.difficulty]}.`
+        : "No pieces match your filters.",
+    );
+  }, [featured]);
+
   return (
-    <div className="flex items-baseline gap-3 border-b border-line pb-2">
-      <h2 className="font-display text-xl font-medium tracking-tight text-ink">{title}</h2>
-      {note ? <span className="tnum text-[0.85rem] text-ink-faint">{note}</span> : null}
-    </div>
+    <p className="sr-only" role="status" aria-live="polite">
+      {message}
+    </p>
   );
 }
 
 function FeaturedPlate() {
-  const { direction, treatment, featured } = useApp();
+  const { direction, featured, visible } = useApp();
   const { search } = useLocation();
-  const chaos = treatment === "chaos";
   if (!featured) return null;
 
+  const onlyOne = visible.length <= 1;
+
   return (
-    <article data-testid="featured" className="relative">
-      <div className="relative">
-        <div
-          className="relative rounded-card border border-line bg-surface-raised p-3 shadow-plate sm:p-4"
-          style={
-            chaos
-              ? { boxShadow: `0 0 0 4px ${pigment(featured.subject, 0.28)}, var(--shadow-plate)` }
-              : undefined
-          }
-        >
-          <Link
-            to={{ pathname: `/${direction}/piece/${featured.id}`, search }}
-            aria-label={`Open ${featured.title}`}
-            className="group block"
-          >
-            <RefArt
-              reference={featured}
-              priority
-              inset="roomy"
-              className="aspect-[4/3] w-full rounded-[6px]"
-            />
-          </Link>
-          <div className="absolute right-5 top-5 sm:right-6 sm:top-6">
-            <SaveButton reference={featured} />
-          </div>
-        </div>
-
-        {/* Chaos: a sticky-note prompt pinned to the plate. */}
-        {chaos ? (
-          <StickyNote
-            rotate={-3}
-            className="absolute -bottom-5 left-4 hidden max-w-[15rem] sm:block"
-          >
-            {featured.prompt}
-          </StickyNote>
-        ) : null}
-      </div>
-
-      <div className={`mt-6 ${chaos ? "sm:mt-9" : ""}`}>
-        <div className="mb-2">
-          <SubjectTag subject={featured.subject} rotate={-2} />
-        </div>
-        <h2 className="text-balance font-display text-[1.9rem] font-medium leading-tight tracking-tight text-ink">
-          {featured.title}
-        </h2>
-        {/*
-          Scattered keeps the prompt as quiet italic serif at all sizes.
-          Chaos carries it in the pinned sticky note on sm+, but the sticky is
-          hidden on phones, so show a plain prompt there instead of losing it.
-        */}
-        <p
-          className={`mt-1.5 max-w-reading text-pretty font-display text-[1.1rem] italic leading-relaxed text-ink-soft ${
-            chaos ? "sm:hidden" : ""
-          }`}
-        >
-          {featured.prompt}
-        </p>
-        <MetaRow reference={featured} className="mt-3.5" />
-
-        <div className="mt-4">
-          <p className="mb-2 flex items-center gap-1.5 text-[0.78rem] font-semibold uppercase tracking-[0.09em] text-ink-faint">
-            <Icon name="palette" size={15} /> Suggested palette
-          </p>
-          <PaletteRow palette={featured.palette} variant="dabs" showNames />
-        </div>
-      </div>
-
-      <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line pt-5">
+    <article data-testid="featured" key={featured.id} className="piece-settle">
+      <div className="relative rounded-card border border-line bg-surface-raised p-3 shadow-plate sm:p-4">
         <Link
           to={{ pathname: `/${direction}/piece/${featured.id}`, search }}
-          className="inline-flex min-h-[52px] items-center gap-2 rounded-chip bg-accent px-6 text-[1.02rem] font-semibold text-accent-ink shadow-lift transition-transform hover:-translate-y-0.5"
+          aria-label={`Open ${featured.title}`}
+          className="group block"
+        >
+          {/*
+            snug, not roomy: the mat was the largest object on the screen with
+            the subject floating small inside it. The artwork is what the
+            viewport is for.
+          */}
+          <RefArt
+            reference={featured}
+            priority
+            inset="snug"
+            className="art-cap aspect-[4/3] w-full rounded-[6px]"
+          />
+        </Link>
+        <div className="absolute right-5 top-5 sm:right-6 sm:top-6">
+          <SaveButton reference={featured} />
+        </div>
+      </div>
+
+      <div className="mt-3.5">
+        <SubjectTag subject={featured.subject} rotate={-2} />
+        <h2 className="mt-1.5 text-balance font-display text-[1.45rem] font-medium leading-tight tracking-tight text-ink sm:text-[1.9rem]">
+          {featured.title}
+        </h2>
+        <p className="mt-1 max-w-reading text-pretty font-display text-[1.02rem] italic leading-relaxed text-ink-soft sm:text-[1.1rem]">
+          {featured.prompt}
+        </p>
+
+        {/*
+          Difficulty carries its plain-English note here. It is the moment a
+          nervous beginner decides whether to commit, and "Gentle" on its own
+          does not tell them what they are agreeing to.
+        */}
+        <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5">
+          <span className="inline-flex items-center gap-1.5 text-[0.9rem] font-medium text-ink-soft">
+            <Icon name="clock" size={16} />
+            <span className="tnum">{featured.minutes}</span>&nbsp;min
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-ink-soft">
+            <DifficultyMark difficulty={featured.difficulty} />
+            <span className="text-[0.9rem] font-medium">
+              {DIFFICULTY_LABEL[featured.difficulty]}
+            </span>
+          </span>
+          <span className="text-[0.9rem] text-ink-soft">
+            {DIFFICULTY_NOTE[featured.difficulty]}
+          </span>
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3">
+        <Link
+          to={{ pathname: `/${direction}/piece/${featured.id}`, search }}
+          className="inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-chip bg-accent px-6 text-[1.02rem] font-semibold text-accent-ink shadow-lift transition-transform hover:-translate-y-0.5 sm:flex-none"
         >
           Open this piece
           <Icon name="arrow-left" size={19} className="rotate-180" />
         </Link>
         <SaveButton reference={featured} variant="full" />
-        <SurpriseButton variant="quiet" />
+        <SurpriseButton variant="quiet" describedBy="deal-note" />
       </div>
+      {onlyOne ? (
+        <p id="deal-note" className="mt-2 text-[0.85rem] text-ink-soft">
+          Only one piece matches right now, so there is nothing else to deal.
+        </p>
+      ) : null}
     </article>
   );
 }
