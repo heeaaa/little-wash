@@ -12,7 +12,16 @@ export default [
       "coverage/**",
       "node_modules/**",
       "playwright/**",
+      "playwright-report/**",
+      "test-results/**",
       "scripts/**",
+      // Vendored tooling, not this project's source. It ships its own bundled
+      // scripts and linting them produced ~1,300 errors that had nothing to do
+      // with the app - enough noise to make `npm run lint` useless as a gate.
+      ".claude/**",
+      ".agents/**",
+      ".codex/**",
+      ".impeccable/**",
     ],
   },
   js.configs.recommended,
@@ -57,6 +66,20 @@ export default [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+    },
+  },
+  {
+    // Playwright specs and config run in Node, not the browser.
+    files: ["e2e/**/*.ts", "playwright.config.ts", "vitest.config.ts"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        console: "readonly",
+        window: "readonly",
+        document: "readonly",
+        localStorage: "readonly",
+        __dirname: "readonly",
+      },
     },
   },
   {

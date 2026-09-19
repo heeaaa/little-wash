@@ -21,10 +21,10 @@ export interface Collection {
 export const COLLECTIONS: Collection[] = [
   {
     id: "five-minute-starts",
-    title: "Five-minute starts",
+    title: "Quick starts",
     blurb: "Tiny warm-ups for when you have only a moment.",
     pigmentVar: "--pig-fruit",
-    filter: { time: "5" },
+    filter: { time: "short" },
     coverSubject: "fruit",
   },
   {

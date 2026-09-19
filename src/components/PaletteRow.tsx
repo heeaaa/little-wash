@@ -26,11 +26,9 @@ export function PaletteRow({
         <li key={swatch.name} className="flex items-center gap-2">
           <span
             aria-hidden="true"
-            className={
-              variant === "dabs"
-                ? "block h-7 w-7 rotate-3 rounded-[45%_55%_50%_50%/55%_45%_55%_45%] shadow-lift"
-                : "block h-4 w-4 rotate-3 rounded-[45%_55%_50%_50%/55%_45%_55%_45%]"
-            }
+            className={`dab block rotate-3 ${
+              variant === "dabs" ? "h-7 w-7 shadow-lift" : "h-4 w-4"
+            }`}
             style={{ backgroundColor: swatch.hex }}
           />
           <span

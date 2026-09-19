@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useApp } from "@/state/AppContext";
 import { RefArt } from "@/components/RefArt";
 import { PaletteRow } from "@/components/PaletteRow";
@@ -13,9 +13,11 @@ import {
 } from "@/components/FilterControls";
 import { EmptyState } from "@/components/EmptyState";
 import { SubjectTag } from "@/components/SubjectTag";
-import { DifficultyMark } from "@/components/DifficultyMark";
+import { MetaRow } from "@/components/MetaRow";
 import { Icon } from "@/components/Icon";
-import { DIFFICULTY_LABEL, DIFFICULTY_NOTE } from "@/lib/types";
+import { DIFFICULTY_LABEL } from "@/lib/types";
+import { PIECE_ART } from "@/lib/wash";
+import { WashLink } from "@/components/WashLink";
 
 /**
  * Today is a decision surface, not a document: one piece, its identity, the
@@ -27,14 +29,14 @@ export function Today() {
   const { featured, visible } = useApp();
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-8 lg:py-12">
-      <h1 className="text-balance font-display text-[1.5rem] font-medium leading-tight tracking-tight text-ink sm:text-[2.1rem] lg:text-[2.5rem]">
+    <div className="today-page mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-8 lg:py-12">
+      <h1 className="today-title text-balance font-display text-[1.5rem] font-medium leading-tight tracking-tight text-ink sm:text-[2.1rem] lg:text-[2.5rem]">
         Today&rsquo;s wash
       </h1>
 
       <PieceAnnouncer />
 
-      <div className="mt-4 grid gap-10 sm:mt-5 lg:mt-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
+      <div className="today-grid mt-4 grid gap-10 sm:mt-5 lg:mt-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
         <div className="min-w-0">
           {featured ? <FeaturedPlate /> : <EmptyState />}
 
@@ -112,17 +114,17 @@ function PieceAnnouncer() {
 }
 
 function FeaturedPlate() {
-  const { direction, featured, visible } = useApp();
+  const { featured, visible } = useApp();
   const { search } = useLocation();
   if (!featured) return null;
 
   const onlyOne = visible.length <= 1;
 
   return (
-    <article data-testid="featured" key={featured.id} className="piece-settle">
-      <div className="relative rounded-card border border-line bg-surface-raised p-3 shadow-plate sm:p-4">
-        <Link
-          to={{ pathname: `/${direction}/piece/${featured.id}`, search }}
+    <article data-testid="featured" key={featured.id} className="featured-piece piece-settle">
+      <div className="featured-plate relative rounded-card border border-line bg-surface-raised p-3 shadow-plate sm:p-4">
+        <WashLink
+          to={{ pathname: `/piece/${featured.id}`, search }}
           aria-label={`Open ${featured.title}`}
           className="group block"
         >
@@ -135,15 +137,16 @@ function FeaturedPlate() {
             reference={featured}
             priority
             inset="snug"
+            transitionName={PIECE_ART}
             className="art-cap aspect-[4/3] w-full rounded-[6px]"
           />
-        </Link>
+        </WashLink>
         <div className="absolute right-5 top-5 sm:right-6 sm:top-6">
           <SaveButton reference={featured} />
         </div>
       </div>
 
-      <div className="mt-3.5">
+      <div className="featured-identity mt-3.5">
         <SubjectTag subject={featured.subject} rotate={-2} />
         <h2 className="mt-1.5 text-balance font-display text-[1.45rem] font-medium leading-tight tracking-tight text-ink sm:text-[1.9rem]">
           {featured.title}
@@ -152,36 +155,17 @@ function FeaturedPlate() {
           {featured.prompt}
         </p>
 
-        {/*
-          Difficulty carries its plain-English note here. It is the moment a
-          nervous beginner decides whether to commit, and "Gentle" on its own
-          does not tell them what they are agreeing to.
-        */}
-        <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5">
-          <span className="inline-flex items-center gap-1.5 text-[0.9rem] font-medium text-ink-soft">
-            <Icon name="clock" size={16} />
-            <span className="tnum">{featured.minutes}</span>&nbsp;min
-          </span>
-          <span className="inline-flex items-center gap-1.5 text-ink-soft">
-            <DifficultyMark difficulty={featured.difficulty} />
-            <span className="text-[0.9rem] font-medium">
-              {DIFFICULTY_LABEL[featured.difficulty]}
-            </span>
-          </span>
-          <span className="text-[0.9rem] text-ink-soft">
-            {DIFFICULTY_NOTE[featured.difficulty]}
-          </span>
-        </div>
+        <MetaRow reference={featured} className="mt-2.5" />
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3">
-        <Link
-          to={{ pathname: `/${direction}/piece/${featured.id}`, search }}
+      <div className="featured-actions mt-4 flex flex-wrap items-center gap-x-4 gap-y-3">
+        <WashLink
+          to={{ pathname: `/piece/${featured.id}`, search }}
           className="inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-chip bg-accent px-6 text-[1.02rem] font-semibold text-accent-ink shadow-lift transition-transform hover:-translate-y-0.5 sm:flex-none"
         >
           Open this piece
           <Icon name="arrow-left" size={19} className="rotate-180" />
-        </Link>
+        </WashLink>
         <SaveButton reference={featured} variant="full" />
         <SurpriseButton variant="quiet" describedBy="deal-note" />
       </div>

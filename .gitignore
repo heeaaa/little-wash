@@ -100,3 +100,7 @@ $RECYCLE.BIN/
 # Local agent/tooling configuration (shared config stays tracked)
 .claude/settings.local.json
 .impeccable/config.local.json
+
+# Screenshots and reports produced while working. Useful to look at, not worth
+# carrying in the repository - they are large binaries that change every run.
+Claude outputs/

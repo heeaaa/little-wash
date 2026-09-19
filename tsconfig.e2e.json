@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2023"],
+    // The e2e suite straddles two runtimes: the spec bodies run in Node, and
+    // every `page.evaluate` callback is serialised and run in the browser. It
+    // needs both libraries to be typechecked honestly.
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
     "moduleResolution": "Bundler",
+    "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -14,5 +17,5 @@
     "noUnusedParameters": true,
     "types": ["node"]
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "vite.singlefile.config.ts"]
+  "include": ["playwright.config.ts", "e2e"]
 }

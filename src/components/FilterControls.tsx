@@ -10,7 +10,7 @@ import {
   type TimeBand,
 } from "@/lib/types";
 
-const TIME_OPTIONS: TimeBand[] = ["5", "15", "30"];
+const TIME_OPTIONS: TimeBand[] = ["short", "medium", "long"];
 const DIFFICULTY_OPTIONS: Difficulty[] = ["gentle", "steady", "stretch"];
 const SUBJECT_OPTIONS: Subject[] = [
   "fruit",
@@ -205,7 +205,8 @@ function FilterGroup({
     <div role="group" aria-labelledby={labelId}>
       {/*
         These labels are primary UI now, not meta, so they take ink-soft
-        (6.29:1 on Paper) rather than ink-faint, which fails AA at 3.59:1.
+        (6.3:1 on Paper) rather than ink-faint. ink-faint since cleared AA
+        (5.1:1), so this is a hierarchy decision, not a contrast one.
       */}
       <div
         id={labelId}

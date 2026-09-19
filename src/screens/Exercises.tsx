@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { useApp } from "@/state/AppContext";
 import { EXERCISES, type Exercise, type ExerciseKind } from "@/data/exercises";
 import { ExerciseArt } from "@/components/ExerciseArt";
 import { PaletteRow } from "@/components/PaletteRow";
@@ -41,18 +40,28 @@ export function Exercises() {
       <div role="group" aria-label="Filter warm-ups by kind" className="mb-8 flex flex-wrap gap-2">
         {KIND_TABS.map((tab) => {
           const active = kind === tab.value;
+          /*
+            The same chip rules the filters use, which this group was breaking:
+            teal is reserved for a chip that is actually narrowing, "All" is the
+            default and reads in the quiet sunken style, and every selected chip
+            carries a check so selection never depends on colour alone.
+          */
+          const narrowing = active && tab.value !== "all";
           return (
             <button
               key={tab.value}
               type="button"
               aria-pressed={active}
               onClick={() => setKind(tab.value)}
-              className={`min-h-[44px] rounded-chip border px-4 text-[0.9rem] font-medium transition-colors ${
-                active
+              className={`inline-flex min-h-[44px] items-center gap-1.5 rounded-chip border px-4 text-[0.9rem] font-medium transition-colors ${
+                narrowing
                   ? "border-transparent bg-accent text-accent-ink shadow-lift"
-                  : "border-line bg-surface-raised text-ink-soft hover:border-[rgb(var(--ink)/0.35)] hover:text-ink"
+                  : active
+                    ? "border-[rgb(var(--ink)/0.28)] bg-surface-sunken text-ink"
+                    : "border-line bg-surface-raised text-ink-soft hover:border-[rgb(var(--ink)/0.35)] hover:text-ink"
               }`}
             >
+              {active ? <Icon name="check" size={15} /> : null}
               {tab.label}
             </button>
           );
@@ -71,8 +80,6 @@ export function Exercises() {
 }
 
 function ExerciseCard({ exercise }: { exercise: Exercise }) {
-  const { treatment } = useApp();
-  const chaos = treatment === "chaos";
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface-raised shadow-lift">
       <div
@@ -83,20 +90,9 @@ function ExerciseCard({ exercise }: { exercise: Exercise }) {
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex flex-wrap items-center gap-2">
-          {chaos ? (
-            <WashiTag pigmentVar={exercise.pigmentVar} rotate={-3}>
-              {KIND_LABEL[exercise.kind]}
-            </WashiTag>
-          ) : (
-            <span className="inline-flex items-center gap-1.5 text-[0.82rem] font-semibold text-ink-soft">
-              <span
-                aria-hidden="true"
-                className="dab block h-3 w-3"
-                style={{ background: `rgb(var(${exercise.pigmentVar}))` }}
-              />
-              {KIND_LABEL[exercise.kind]}
-            </span>
-          )}
+          <WashiTag pigmentVar={exercise.pigmentVar} rotate={-3}>
+            {KIND_LABEL[exercise.kind]}
+          </WashiTag>
           <span className="inline-flex items-center gap-1.5 text-[0.85rem] font-medium text-ink-soft">
             <Icon name="clock" size={15} />
             <span className="tnum">{exercise.minutes}</span>&nbsp;min

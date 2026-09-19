@@ -16,7 +16,7 @@ Node 22 (see `.nvmrc`; `engines` allows >=20.11 <23).
 
 ```bash
 npm ci
-npm run dev        # opens straight onto Today (#/a)
+npm run dev        # opens straight onto Today (#/)
 ```
 
 | Command | What it does |
@@ -24,24 +24,50 @@ npm run dev        # opens straight onto Today (#/a)
 | `npm run dev` | Local dev server |
 | `npm run test:unit` | Unit and component tests once (Vitest) |
 | `npm run test:watch` | Tests in watch mode |
-| `npm run test:coverage` | Tests with V8 coverage |
+| `npm run test:coverage` | Tests with V8 coverage and enforced thresholds |
+| `npm run test:e2e` | Builds, then runs the Playwright journeys |
+| `npm run test:e2e:ui` | The same suite in Playwright's UI mode |
+| `npm run test:e2e:report` | Open the last Playwright report |
 | `npm run lint` | Lint |
 | `npm run typecheck` | TypeScript checks, no emit |
 | `npm run build` | Production build |
 | `npm run preview` | Serve the production build |
 
-There is no `test:integration`, `test:e2e` or CI workflow yet - no backend
-exists to integrate against. Both are in the backlog.
+`npm run lint` is clean across the repository. Vendored tooling under
+`.claude/`, `.agents/`, `.codex/` and `.impeccable/` is ignored: it ships its
+own bundled JavaScript, and linting it produced ~1,300 errors that had nothing
+to do with this app - enough noise to make the gate useless.
 
-Known baseline failure: `npm run lint` exits 1 on vendored JavaScript bundled
-inside `.claude/skills/` and `.agents/skills/`. It is unrelated to `src/`;
-`npx eslint src` is clean.
+There is no `test:integration`: no backend exists to integrate against yet. It
+is deliberately absent rather than stubbed, because an empty green job is worse
+than an honest gap.
+
+## CI
+
+`.github/workflows/ci.yml` runs on pull requests and on pushes to `main`, in
+two jobs:
+
+- **verify** - `npm ci`, lint, typecheck, unit/component tests with coverage
+  thresholds, production build. Uploads the coverage report and the build.
+- **e2e** - installs Chromium, runs the Playwright journeys against the
+  production build at phone, propped-phone and desktop viewports. Uploads the
+  HTML report always and failure traces on red.
+
+Actions are pinned to commit SHAs, permissions are `contents: read`, no secrets
+are used, and superseded runs are cancelled except on `main`.
+
+**Branch protection is not configured.** Workflow YAML cannot require its own
+checks - that is a repository setting, and it needs doing by hand: require
+`Lint, types, unit tests, build` and `End-to-end journeys` to pass before
+merging to `main`.
 
 ## What is built
 
-The app opens on **Today** and every other route lives under `#/a`. `#/` and any
-unknown path redirect there - the direction chooser and the second exploratory
-treatment were removed once the direction was approved.
+The app opens on **Today** at `#/`; pieces are `#/piece/<id>`, plus `#/browse`
+`#/exercises` and `#/studio`. The direction chooser, the second exploratory treatment and
+the `/a` URL segment that carried them were all removed once the direction was
+approved. Exploration-era links (`#/a/piece/ripe-pear`) redirect onto the flat
+route with their tail and query intact; anything unrecognised goes to Today.
 
 - **Today** - one piece for the day, then the controls that change it. The order
   is fixed and load-bearing: artwork, identity, primary action, time and energy,
@@ -66,19 +92,28 @@ whole catalogue.
 
 React 18, TypeScript (strict), Vite and Tailwind CSS, routed with `HashRouter`
 so deep links survive a static host with no rewrite rules. Vitest and React
-Testing Library cover the logic and the screens (52 tests). Filtering, saving
-and "deal me another" are all simulated on-device.
+Testing Library cover the logic, the screens and the routing (108 tests),
+and Playwright covers the journeys end to end (31 specs, 93 checks).
+Filtering, saving and "deal me another" are all simulated on-device.
+
+Piece changes are animated with the View Transitions API under one rule - the
+paper is never cut, only moved or re-wet. Navigating morphs the artwork between
+screens; dealing dissolves it through an animated turbulence field. Both degrade
+to an ordinary update where the API is missing or motion is reduced. The rules
+are in [`DESIGN.md`](./DESIGN.md#motion-one-material-two-moments).
 
 ## Layout
 
 ```
 src/
-  screens/       Today, Browse, Detail, Exercises, DirectionShell
+  routes.tsx     One route tree, shared by the app and the tests
+  screens/       Today, Browse, Detail, Exercises, AppShell
   components/    Reusable UI (plus studio/ ornaments)
-  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, types
+  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, types, wash (motion)
   data/          Mock catalogue, collections, exercises
   assets/refs/   Original placeholder watercolour SVGs
   assets/brand/  Generated in-app brand mark
+e2e/             Playwright journeys (discovery, filtering, posture, accessibility)
 public/          Favicons, app icons, site.webmanifest
 assets/          Brand originals (keep intact)
 ```

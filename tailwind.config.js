@@ -39,6 +39,15 @@ export default {
       maxWidth: {
         reading: "68ch",
       },
+      // Every `transition-*` utility inherits the motion scale, so a button
+      // press belongs to the same easing family as the artwork moving. See
+      // "Motion" in DESIGN.md.
+      transitionDuration: {
+        DEFAULT: "var(--t-micro)",
+      },
+      transitionTimingFunction: {
+        DEFAULT: "var(--ease-paper)",
+      },
     },
   },
   plugins: [],

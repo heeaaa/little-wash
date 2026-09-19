@@ -1,5 +1,7 @@
+import { useEffect, useRef } from "react";
 import { useApp } from "@/state/AppContext";
 import { Icon } from "@/components/Icon";
+import { EmptyPanel } from "@/components/EmptyPanel";
 import {
   DIFFICULTY_LABEL,
   SUBJECT_LABEL,
@@ -41,16 +43,37 @@ function activeList(filters: Filters): ActiveFilter[] {
 export function EmptyState() {
   const { filters, setFilter, resetFilters } = useApp();
   const active = activeList(filters);
+  const panel = useRef<HTMLDivElement>(null);
+
+  /*
+    Emptying the catalogue shortens the page, and the browser clamps the scroll
+    wherever it lands. Measured at 390x844 after tapping a chip: this panel's
+    explanation sat at y=31 behind a 121px sticky header, so the user saw three
+    unlabelled buttons in a dashed box and none of the sentence naming what
+    excluded everything.
+
+    Focus deliberately stays where it is: the control that emptied the results
+    is the one they are most likely to reach for next, and it is the way out.
+  */
+  useEffect(() => {
+    const el = panel.current;
+    if (!el) return;
+    const box = el.getBoundingClientRect();
+    if (box.top >= 0 && box.bottom <= window.innerHeight) return;
+
+    const still =
+      typeof matchMedia === "function" &&
+      matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
+  }, []);
 
   return (
-    <div className="flex flex-col items-center gap-4 rounded-card border border-dashed border-line px-6 py-12 text-center">
-      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-surface-sunken text-ink-soft">
-        <Icon name="brush" size={26} />
-      </span>
-
-      <div className="max-w-sm space-y-1.5">
-        <p className="font-display text-xl text-ink">Nothing matches just yet</p>
-        {active.length > 0 ? (
+    <EmptyPanel
+      containerRef={panel}
+      icon="brush"
+      title="Nothing matches just yet"
+      description={
+        active.length > 0 ? (
           <p className="text-pretty text-[0.95rem] text-ink-soft">
             Nothing in the catalogue is{" "}
             <strong className="font-semibold text-ink">
@@ -62,9 +85,9 @@ export function EmptyState() {
           <p className="text-pretty text-[0.95rem] text-ink-soft">
             There is nothing here to show right now.
           </p>
-        )}
-      </div>
-
+        )
+      }
+    >
       {active.length > 0 ? (
         <>
           <ul className="flex flex-wrap justify-center gap-2">
@@ -93,6 +116,6 @@ export function EmptyState() {
           ) : null}
         </>
       ) : null}
-    </div>
+    </EmptyPanel>
   );
 }

@@ -1,3 +1,4 @@
+import type { Ref } from "react";
 import type { PaintReference } from "@/lib/types";
 
 interface RefArtProps {
@@ -6,8 +7,27 @@ interface RefArtProps {
   priority?: boolean;
   className?: string;
   /** Extra padding so the uncropped artwork breathes inside its mat. */
-  inset?: "snug" | "roomy";
+  inset?: "none" | "snug" | "roomy";
+  /**
+   * Draw the neutral mat behind the artwork. Off only where the surrounding
+   * surface already is the mat, so the enlarged view has no plate-in-a-plate.
+   */
+  mat?: boolean;
+  /**
+   * View-transition identity. Exactly one element in the document may carry a
+   * given name, which is what lets this artwork morph between Today, a Browse
+   * card, Detail and the enlarged view instead of being cut and redrawn.
+   */
+  transitionName?: string;
+  /** The mat element, for a caller that claims the transition name imperatively. */
+  containerRef?: Ref<HTMLDivElement>;
 }
+
+const INSET = {
+  none: "",
+  snug: "p-[5%]",
+  roomy: "p-[9%]",
+} as const;
 
 /**
  * A reference shown uncropped on a neutral mat. object-contain guarantees the
@@ -19,9 +39,16 @@ export function RefArt({
   priority = false,
   className = "",
   inset = "snug",
+  mat = true,
+  transitionName,
+  containerRef,
 }: RefArtProps) {
   return (
-    <div className={`art-mat relative overflow-hidden ${className}`}>
+    <div
+      ref={containerRef}
+      className={`relative overflow-hidden ${mat ? "art-mat" : ""} ${className}`}
+      style={transitionName ? { viewTransitionName: transitionName } : undefined}
+    >
       <img
         src={reference.art}
         alt={reference.alt}
@@ -30,9 +57,7 @@ export function RefArt({
         loading={priority ? "eager" : "lazy"}
         decoding="async"
         draggable={false}
-        className={`h-full w-full select-none object-contain ${
-          inset === "roomy" ? "p-[9%]" : "p-[5%]"
-        }`}
+        className={`h-full w-full select-none object-contain ${INSET[inset]}`}
       />
     </div>
   );

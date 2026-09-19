@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { WashLink } from "@/components/WashLink";
 import { useApp } from "@/state/AppContext";
 import { findReference } from "@/lib/catalog";
 import { RefArt } from "@/components/RefArt";
@@ -11,14 +12,28 @@ import { SubjectTag } from "@/components/SubjectTag";
 import { WashiTag } from "@/components/studio/WashiTag";
 import { Icon } from "@/components/Icon";
 import { pigment } from "@/lib/types";
+import { PIECE_ART, move } from "@/lib/wash";
 
 export function Detail() {
   const { id } = useParams();
-  const { direction, treatment, references } = useApp();
-  const { search } = useLocation();
+  const { references } = useApp();
+  const { search, state } = useLocation();
   const [enlarged, setEnlarged] = useState(false);
+
+  /*
+    Back goes where you came from. It always returned to Today, so arriving
+    from Browse or the studio and going back lost your place in the catalogue -
+    and it made a third link to `/` on a page that already had two.
+  */
+  const from = typeof (state as { from?: unknown } | null)?.from === "string"
+    ? (state as { from: string }).from
+    : null;
+  const back = from?.startsWith("/browse")
+    ? { to: from, label: "Browse" }
+    : from?.startsWith("/studio")
+      ? { to: from, label: "Your studio" }
+      : { to: { pathname: "/", search }, label: "Today’s wash" };
   const reference = findReference(references, id);
-  const chaos = treatment === "chaos";
 
   if (!reference) {
     return (
@@ -26,7 +41,7 @@ export function Detail() {
         <p className="font-display text-2xl text-ink">That piece isn&rsquo;t here</p>
         <p className="mt-2 text-ink-soft">It may have been renamed. Head back to today&rsquo;s ideas.</p>
         <Link
-          to={`/${direction}`}
+          to="/"
           className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-chip bg-accent px-5 font-semibold text-accent-ink"
         >
           <Icon name="arrow-left" size={19} /> Back to Today
@@ -36,34 +51,33 @@ export function Detail() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:py-10">
-      <Link
-        to={{ pathname: `/${direction}`, search }}
+    <div className="detail-page mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:py-10">
+      <WashLink
+        to={back.to}
         className="inline-flex min-h-[44px] items-center gap-2 rounded-chip pr-3 text-[0.95rem] font-semibold text-ink-soft hover:text-ink"
       >
-        <Icon name="arrow-left" size={19} /> Today&rsquo;s wash
-      </Link>
+        <Icon name="arrow-left" size={19} /> {back.label}
+      </WashLink>
 
-      <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12">
+      <div className="detail-grid mt-5 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12">
         <div className="min-w-0">
           <div
-            className="relative rounded-card border border-line bg-surface-raised p-3 shadow-plate sm:p-4"
-            style={
-              chaos
-                ? { boxShadow: `0 0 0 4px ${pigment(reference.subject, 0.28)}, var(--shadow-plate)` }
-                : undefined
-            }
+            className="detail-art relative rounded-card border border-line bg-surface-raised p-3 shadow-plate sm:p-4"
+            style={{
+              boxShadow: `0 0 0 4px ${pigment(reference.subject, 0.28)}, var(--shadow-plate)`,
+            }}
           >
             <RefArt
               reference={reference}
               priority
               inset="roomy"
+              transitionName={enlarged ? undefined : PIECE_ART}
               className="aspect-square w-full rounded-[6px]"
             />
             <button
               type="button"
-              onClick={() => setEnlarged(true)}
-              className="absolute bottom-5 right-5 inline-flex min-h-[44px] items-center gap-2 rounded-chip border border-line bg-[rgb(var(--surface-raised)/0.92)] px-3.5 text-[0.9rem] font-semibold text-ink shadow-lift backdrop-blur hover:border-[rgb(var(--ink)/0.35)] sm:bottom-6 sm:right-6"
+              onClick={() => move(() => setEnlarged(true))}
+              className="detail-enlarge absolute bottom-5 right-5 inline-flex min-h-[44px] items-center gap-2 rounded-chip border border-line bg-[rgb(var(--surface-raised)/0.92)] px-3.5 text-[0.9rem] font-semibold text-ink shadow-lift backdrop-blur hover:border-[rgb(var(--ink)/0.35)] sm:bottom-6 sm:right-6"
             >
               <Icon name="expand" size={18} /> Enlarge
             </button>
@@ -95,22 +109,12 @@ export function Detail() {
 
           <section
             className="mt-7 rounded-card p-4"
-            style={{
-              background: chaos
-                ? pigment(reference.subject, 0.12)
-                : "rgb(var(--accent) / 0.07)",
-            }}
+            style={{ background: pigment(reference.subject, 0.12) }}
           >
             <h2 className="flex items-center gap-2 font-display text-[1.05rem] font-semibold text-ink">
-              {chaos ? (
-                <WashiTag pigmentVar="--pig-landscape" rotate={-3}>
-                  <Icon name="brush" size={15} /> Tip
-                </WashiTag>
-              ) : (
-                <>
-                  <Icon name="brush" size={18} /> One small tip
-                </>
-              )}
+              <WashiTag pigmentVar="--pig-landscape" rotate={-3}>
+                <Icon name="brush" size={15} /> Tip
+              </WashiTag>
             </h2>
             <p className="mt-2 text-pretty text-[0.98rem] leading-relaxed text-ink-soft">
               {reference.tip}
@@ -121,7 +125,7 @@ export function Detail() {
             <SaveButton reference={reference} variant="full" />
             <button
               type="button"
-              onClick={() => setEnlarged(true)}
+              onClick={() => move(() => setEnlarged(true))}
               className="inline-flex min-h-[44px] items-center gap-2 rounded-chip border border-line bg-surface-raised px-4 text-[0.95rem] font-semibold text-ink hover:border-[rgb(var(--ink)/0.35)]"
             >
               <Icon name="expand" size={18} /> Paint beside it
@@ -130,7 +134,7 @@ export function Detail() {
         </div>
       </div>
 
-      <EnlargeDialog reference={reference} open={enlarged} onClose={() => setEnlarged(false)} />
+      <EnlargeDialog reference={reference} open={enlarged} onClose={() => move(() => setEnlarged(false))} />
     </div>
   );
 }
