@@ -43,17 +43,40 @@ test.describe("discovery", () => {
   });
 
   test("a filter always visibly acts", async ({ page }) => {
-    await page.goto("/#/");
+    // What Today offers under Steady with nothing dealt. Deterministic for the
+    // day, and the piece releasing a dealt one has to fall back to.
+    await page.goto("/#/?difficulty=steady");
     await ready(page);
+    const fallback = (await featuredTitle(page).textContent())?.trim();
 
-    await page.getByRole("button", { name: /deal me another/i }).click();
-    const dealt = (await featuredTitle(page).textContent())?.trim();
+    // A *different* steady piece, read from the catalogue rather than
+    // hardcoded. Holding this one and then tapping Steady is the case worth
+    // guarding: the held piece already matches the filter, so an
+    // implementation that kept it would play the 520ms wash over an unchanged
+    // screen and teach the user the chips do nothing.
+    await page.goto("/#/browse?difficulty=steady");
+    await ready(page);
+    const link = pieceCards(page)
+      .locator('a[href*="/piece/"]')
+      .filter({ hasNotText: fallback! })
+      .first();
+    const held = (await link.textContent())?.trim();
+    const heldId = (await link.getAttribute("href"))!.match(/\/piece\/([^/?#]+)/)![1];
+
+    // Dealing writes the piece to the URL, so this is the state a deal leaves
+    // behind - set directly, because where a random deal lands is not the
+    // thing under test. `dealing offers a different piece` covers the button.
+    await page.goto(`/#/?piece=${heldId}`);
+    await ready(page);
+    await expect(featuredTitle(page)).toHaveText(held!);
 
     await page.getByRole("button", { name: "Steady" }).first().click();
-    // Changing a filter releases the dealt piece, so the tap cannot look like
+
+    // Changing a filter releases the held piece, so the tap cannot look like
     // a 520ms animation over an unchanged screen.
-    await expect(featuredTitle(page)).not.toHaveText(dealt!);
     await expect(page).not.toHaveURL(/piece=/);
+    await expect(featuredTitle(page)).toHaveText(fallback!);
+    await expect(featuredTitle(page)).not.toHaveText(held!);
   });
 
   test("opening a piece reaches its detail, and back returns to Today", async ({ page }) => {
