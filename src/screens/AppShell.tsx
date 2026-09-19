@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { AppProvider, useApp } from "@/state/AppContext";
+import { savedReferences } from "@/lib/catalog";
 import { REFERENCES } from "@/data/references";
 import { Icon } from "@/components/Icon";
 import { WashFilter } from "@/components/WashFilter";
@@ -70,8 +71,14 @@ function Wordmark() {
 }
 
 function Header() {
-  const { favorites } = useApp();
-  const items = navItems(favorites.length);
+  const { favorites, references } = useApp();
+  /*
+    Count what the studio can actually show, not raw ids. `savedReferences`
+    drops ids whose catalogue entry has gone, so counting the raw array would
+    advertise "Studio" in the nav while the page renders its empty state -
+    the dead end this rule exists to prevent.
+  */
+  const items = navItems(savedReferences(references, favorites).length);
 
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-[rgb(var(--surface-raised)/0.85)] backdrop-blur">

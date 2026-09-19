@@ -27,6 +27,15 @@ export const PIECE_ART = "piece-art";
 /** Set on <html> for the duration of a re-wet so CSS can tell the moments apart. */
 const WASH_ATTR = "data-wash";
 
+/*
+  Which re-wet is current. Two inside 520ms - two filter chips in a row, or a
+  chip then a deal - make the browser skip the first transition, but its
+  `finished` still settles. Without this the skipped one would strip the
+  marker off <html> while the live one was mid-flight, and every
+  `html[data-wash="rewet"]` rule would stop applying part way through.
+*/
+let washSeq = 0;
+
 type Update = () => void;
 
 function prefersReducedMotion(): boolean {
@@ -66,10 +75,17 @@ export function rewet(update: Update): void {
     return;
   }
   const root = document.documentElement;
+  const seq = ++washSeq;
   root.setAttribute(WASH_ATTR, "rewet");
   beginBloom();
   const transition = document.startViewTransition(() => flushSync(update));
-  transition.finished.finally(() => root.removeAttribute(WASH_ATTR));
+  transition.finished
+    // A skipped transition rejects; that is ordinary here and must not surface
+    // as an unhandled rejection.
+    .catch(() => {})
+    .finally(() => {
+      if (seq === washSeq) root.removeAttribute(WASH_ATTR);
+    });
 }
 
 /**

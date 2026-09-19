@@ -10,12 +10,14 @@ import { mulberry32, pickDifferent, type RandomSource } from "./shuffle";
  * a free afternoon could not ask for a long piece, and someone with fifteen
  * minutes was offered a twenty-minute study.
  *
- * The bands tile the catalogue with no overlap and no gap, so every one of them
- * genuinely narrows and the "which filters are active" signal stays honest.
+ * `min` is inclusive and `max` exclusive, so the bands tile the whole number
+ * line rather than only the integers that happen to be in the catalogue -
+ * `minutes` is a number, and two disjoint integer endpoints would let a piece
+ * between them match no band at all while the filter still claimed to narrow.
  */
 const TIME_BAND: Record<TimeBand, { min: number; max: number }> = {
-  short: { min: 0, max: 9 },
-  medium: { min: 10, max: 20 },
+  short: { min: 0, max: 10 },
+  medium: { min: 10, max: 21 },
   long: { min: 21, max: Infinity },
 };
 
@@ -23,7 +25,7 @@ const TIME_BAND: Record<TimeBand, { min: number; max: number }> = {
 export function matchesTime(reference: PaintReference, band: TimeBand | "all"): boolean {
   if (band === "all") return true;
   const { min, max } = TIME_BAND[band];
-  return reference.minutes >= min && reference.minutes <= max;
+  return reference.minutes >= min && reference.minutes < max;
 }
 
 /**

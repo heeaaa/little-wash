@@ -64,7 +64,7 @@ merging to `main`.
 ## What is built
 
 The app opens on **Today** at `#/`; pieces are `#/piece/<id>`, plus `#/browse`
-and `#/exercises`. The direction chooser, the second exploratory treatment and
+`#/exercises` and `#/studio`. The direction chooser, the second exploratory treatment and
 the `/a` URL segment that carried them were all removed once the direction was
 approved. Exploration-era links (`#/a/piece/ripe-pear`) redirect onto the flat
 route with their tail and query intact; anything unrecognised goes to Today.
@@ -92,7 +92,8 @@ whole catalogue.
 
 React 18, TypeScript (strict), Vite and Tailwind CSS, routed with `HashRouter`
 so deep links survive a static host with no rewrite rules. Vitest and React
-Testing Library cover the logic, the screens and the routing (71 tests).
+Testing Library cover the logic, the screens and the routing (108 tests),
+and Playwright covers the journeys end to end (31 specs, 93 checks).
 Filtering, saving and "deal me another" are all simulated on-device.
 
 Piece changes are animated with the View Transitions API under one rule - the

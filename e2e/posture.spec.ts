@@ -92,7 +92,11 @@ test.describe("the propped-phone posture", () => {
     await page.goto("/#/");
     await ready(page);
     await page.getByRole("button", { name: /deal me another/i }).click();
-    await page.waitForTimeout(900); // the wash is 520ms; settle well past it
+    // Wait on the condition, not the clock: `wash.ts` clears this marker when
+    // the transition finishes, so it is the signal that the piece has settled.
+    await page.waitForFunction(() => !document.documentElement.hasAttribute("data-wash"), null, {
+      timeout: 5_000,
+    });
 
     const settled = await page.evaluate(() => {
       const img = document.querySelector('[data-testid="featured"] img')!;

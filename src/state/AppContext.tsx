@@ -129,8 +129,12 @@ export function AppProvider({
   /*
     Which id the user dealt themselves; null follows the daily default. It lives
     in the URL rather than in component state so the piece someone chose to
-    paint survives a reload, a locked phone and a discarded tab - and so it can
-    be shared or reached with Back, which component state could do none of.
+    paint survives a reload, a locked phone and a discarded tab, and can be
+    shared - none of which component state could do.
+
+    Written with `replace`, so dealing repeatedly does not fill the history
+    with pieces the user skipped past. That is the trade: Back leaves the
+    screen rather than stepping through previous deals.
   */
   const pinnedId = searchParams.get("piece");
 

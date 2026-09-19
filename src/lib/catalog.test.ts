@@ -77,8 +77,9 @@ describe("matchesTime", () => {
     expect(long.every((r) => r.minutes > 20)).toBe(true);
   });
 
-  it("tiles the minutes with no overlap and no gap", () => {
-    for (const minutes of [0, 1, 9, 10, 20, 21, 60]) {
+  it("tiles the minutes with no overlap and no gap, integers or not", () => {
+    // 9.5 and 20.5 are the values the old integer endpoints dropped entirely.
+    for (const minutes of [0, 1, 9, 9.5, 10, 20, 20.5, 21, 60]) {
       const bands = (["short", "medium", "long"] as const).filter((band) =>
         matchesTime(make("x", { minutes }), band),
       );

@@ -36,7 +36,22 @@ export function PieceCard({ reference, to }: PieceCardProps) {
     here and the snapshot; the incoming Detail page carries the name afterwards.
   */
   const claimArtwork = () => {
-    if (art.current) art.current.style.viewTransitionName = PIECE_ART;
+    /*
+      Release whatever a previous card claimed first. Nothing clears these -
+      React never set them, so it will not remove them - and clicking one card
+      then another before the first transition captures would leave two live
+      elements holding the name, which the browser rejects by skipping the
+      transition outright. Only imperatively claimed elements are touched; the
+      ones Today and Detail set through React are left alone.
+    */
+    for (const claimed of document.querySelectorAll<HTMLElement>("[data-claimed-art]")) {
+      claimed.style.viewTransitionName = "";
+      claimed.removeAttribute("data-claimed-art");
+    }
+    const el = art.current;
+    if (!el) return;
+    el.style.viewTransitionName = PIECE_ART;
+    el.setAttribute("data-claimed-art", "");
   };
 
   return (

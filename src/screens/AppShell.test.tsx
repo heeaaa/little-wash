@@ -3,6 +3,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { AppShell } from "@/screens/AppShell";
+import { Studio } from "@/screens/Studio";
 
 const STORAGE_KEY = "little-wash:favorites:v1";
 
@@ -15,7 +16,7 @@ function renderShell(entry = "/studio") {
     <MemoryRouter initialEntries={[entry]}>
       <Routes>
         <Route path="/" element={<AppShell />}>
-          <Route path="studio" element={<h1>Your studio</h1>} />
+          <Route path="studio" element={<Studio />} />
           <Route path="browse" element={<h1>Browse the studio</h1>} />
         </Route>
       </Routes>
@@ -56,8 +57,13 @@ describe("AppShell header", () => {
 
     expect(navLinks()).toContain("Studio");
     await user.click(screen.getByRole("link", { name: /your studio/i }));
+    expect(screen.getByRole("heading", { name: "Your studio", level: 1 })).toBeInTheDocument();
 
-    // Simulate the last piece going: the palette still links, the page still renders.
+    // Actually remove the last piece, which is the case this guards: the nav
+    // entry goes, and someone standing on /studio must not be stranded there.
+    await user.click(screen.getByRole("button", { name: /^Saved\. Remove Ripe Pear/ }));
+
+    expect(navLinks()).not.toContain("Studio");
     expect(screen.getByRole("heading", { name: "Your studio", level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /your studio/i })).toHaveAttribute("href", "/studio");
   });

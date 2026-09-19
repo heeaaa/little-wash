@@ -22,7 +22,16 @@ type WashLinkProps = ComponentProps<typeof Link> & {
  * anyway. Where View Transitions are unavailable, `move` falls through to an
  * ordinary navigation.
  */
-export function WashLink({ to, state, onBeforeMove, onClick, ...rest }: WashLinkProps) {
+export function WashLink({
+  to,
+  state,
+  replace,
+  preventScrollReset,
+  relative,
+  onBeforeMove,
+  onClick,
+  ...rest
+}: WashLinkProps) {
   const navigate = useNavigate();
 
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
@@ -38,8 +47,20 @@ export function WashLink({ to, state, onBeforeMove, onClick, ...rest }: WashLink
     if (opensElsewhere) return;
 
     event.preventDefault();
-    move(() => navigate(to, { state }), onBeforeMove);
+    // Forwarded, not just spread onto the anchor: this navigation is ours,
+    // so anything the caller set on the link has to reach `navigate` too.
+    move(() => navigate(to, { state, replace, preventScrollReset, relative }), onBeforeMove);
   }
 
-  return <Link to={to} state={state} onClick={handleClick} {...rest} />;
+  return (
+    <Link
+      to={to}
+      state={state}
+      replace={replace}
+      preventScrollReset={preventScrollReset}
+      relative={relative}
+      onClick={handleClick}
+      {...rest}
+    />
+  );
 }

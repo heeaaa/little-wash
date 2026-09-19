@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { useApp } from "@/state/AppContext";
 import { filterReferences } from "@/lib/catalog";
@@ -35,7 +35,18 @@ export function Browse() {
     into the results instead of back at the collection you just left, and it
     names where you landed. `.jump-target` keeps it clear of the sticky header.
   */
-  const jumpToResults = () => {
+  const jumpToResults = (event: MouseEvent<HTMLAnchorElement>) => {
+    // Ctrl/Cmd/Shift-click and middle-click open the collection elsewhere and
+    // navigate nothing here. Arming the jump would leave the flag set until
+    // some later, unrelated render consumed it and yanked the page.
+    const opensElsewhere =
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey;
+    if (opensElsewhere) return;
     jumpPending.current = true;
   };
 
@@ -145,7 +156,7 @@ function CollectionCard({
   onChosen,
 }: {
   collection: Collection;
-  onChosen: () => void;
+  onChosen: (event: MouseEvent<HTMLAnchorElement>) => void;
 }) {
   const count = filterReferences(REFERENCES, {
     time: "all",

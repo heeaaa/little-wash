@@ -21,13 +21,36 @@ interface EnlargeDialogProps {
  */
 export function EnlargeDialog({ reference, open, onClose }: EnlargeDialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
+  /*
+    True while *we* are closing the dialog in response to `open` going false.
+
+    Without it the close re-enters: Close or the backdrop calls `onClose`, the
+    parent clears `open`, this effect calls `dialog.close()`, the native
+    `close` event fires and calls `onClose` a second time - starting a second
+    view transition, which by spec skips the first. Measured: two
+    `startViewTransition` calls on the button path, one on Escape.
+  */
+  const closingSelf = useRef(false);
 
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
     if (open && !dialog.open) dialog.showModal();
-    if (!open && dialog.open) dialog.close();
+    if (!open && dialog.open) {
+      closingSelf.current = true;
+      dialog.close();
+    }
   }, [open]);
+
+  // Escape and the backdrop close the dialog themselves; those must reach the
+  // parent. A close we initiated must not.
+  const handleNativeClose = () => {
+    if (closingSelf.current) {
+      closingSelf.current = false;
+      return;
+    }
+    onClose();
+  };
 
   return (
     // Backdrop click closes as a progressive enhancement; Escape and the
@@ -35,7 +58,7 @@ export function EnlargeDialog({ reference, open, onClose }: EnlargeDialogProps) 
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
     <dialog
       ref={ref}
-      onClose={onClose}
+      onClose={handleNativeClose}
       onClick={(e) => {
         if (e.target === ref.current) onClose();
       }}
