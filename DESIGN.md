@@ -168,6 +168,13 @@ enlarge view and bottom sheet, colour-coded collection cards, exercise cards
 with painterly demos, and a sticky editorial header (mark + wordmark, nav,
 saved count).
 
+**Closing a dialog must not re-enter.** `<dialog onClose>` fires on the native
+`close` event, which our own `dialog.close()` also triggers - so a close driven
+by React calls the handler a second time and starts a second view transition,
+which by spec skips the first. `EnlargeDialog` flags the closes it initiates so
+only Escape and the backdrop reach the parent. Any future dialog wired to a
+transition needs the same guard.
+
 **Card links (`.card-link`).** A card carries exactly one link. The title is
 that link and its `::after` covers the whole card, so the artwork stays a
 full-card tap target without a second link to the same destination. Browse
@@ -213,7 +220,10 @@ entry goes.
 It carries three things that are easy to re-implement subtly wrong: the
 `.card-link` overlay, the save button raised above it, and the imperative claim
 on `PIECE_ART`. Verified: a grid holds the shared name **zero** times at rest and
-claims it only on the click that navigates, so the one-holder rule holds.
+claims it only on the click that navigates, so the one-holder rule holds. The
+claim also releases whatever a previous card took - React never set those inline
+names, so nothing else would clear them, and two fast clicks would otherwise
+leave two holders and make the browser skip the morph entirely.
 
 **`EmptyPanel`.** The shell every "there is nothing here" moment shares - dashed
 plate, quiet badge, display title, explanation held to a readable measure, room
@@ -359,7 +369,9 @@ it read as a hang.
 
 **Time bands are ranges, not budgets.** "Under 10 min" / "10-20 min" / "Over 20
 min" tile the catalogue with no overlap and no gap, so **every band genuinely
-narrows**. They were upper bounds keyed `"5" | "15" | "30"`, which meant each
+narrows**. `min` is inclusive and `max` exclusive, which matters: two disjoint
+integer endpoints left any non-integer `minutes` matching no band at all while
+the filter still claimed to be narrowing. They were upper bounds keyed `"5" | "15" | "30"`, which meant each
 band also accepted everything shorter: "30 min+" read as a floor, behaved as
 Infinity and returned the whole catalogue, while the chip took the teal fill
 this system reserves for a chip that is actually narrowing. That broke the

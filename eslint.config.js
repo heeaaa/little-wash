@@ -14,7 +14,6 @@ export default [
       "playwright/**",
       "playwright-report/**",
       "test-results/**",
-      "scripts/**",
       // Vendored tooling, not this project's source. It ships its own bundled
       // scripts and linting them produced ~1,300 errors that had nothing to do
       // with the app - enough noise to make `npm run lint` useless as a gate.

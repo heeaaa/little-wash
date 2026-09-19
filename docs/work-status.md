@@ -2,6 +2,67 @@
 
 _Last updated: 19/09/2026_
 
+## Where this stands - 19/09/2026
+
+Open PR: **heeaaa/little-wash#1**, branch `feat/design-pass-and-ci`, four
+commits, **CI green on both jobs**. `main` is untouched.
+
+Gates on the branch: lint clean repo-wide, typecheck clean, 108 unit and
+component tests, 93 end-to-end checks, coverage 94.22 statements / 89.25
+branches with thresholds enforced.
+
+### Decisions taken, so they are not silently revisited
+
+| Decision | Choice | Why |
+| --- | --- | --- |
+| Saved screen shape | "Your studio" at `/studio`, saved pieces as section one of a stack | Room for the roadmap's practice history without a redesign |
+| Its entry points | Header palette always links; "Studio" nav item only once something is saved | An empty destination advertised everywhere is the dead end the screen exists to fix |
+| Unsaving | Immediate, no undo | Matches the palette, where a swatch simply lifts back off |
+| Time bands | Real ranges, inclusive `min` / exclusive `max` | Upper bounds meant "Over 20 min" returned everything while styling itself as narrowing |
+| Dealt piece | Lives in the URL, written with `replace` | Survives reload and is shareable; `replace` keeps skipped deals out of history, so Back leaves the screen rather than stepping through them |
+| Motion | One system, two moments - move and re-wet | "The paper is never cut, only moved or re-wet"; recorded in full in DESIGN.md |
+| Landscape layouts | Side by side, placed with grid, DOM order untouched | The documented control hierarchy must survive the reflow |
+| Evidence images | `Claude outputs/` is gitignored and untracked | 21 MB of binaries that change every run |
+| `test:integration` | Deliberately absent | No backend to integrate against; an empty green job is worse than an honest gap |
+
+### Still open, and deliberately not decided here
+
+1. **A "Painted - coming soon" placeholder in the studio.** The chosen
+   direction's sketch showed one; it was left out because it repeats the
+   entry-point-ahead-of-capability defect the critique flagged twice, and risks
+   reading as a scoreboard against "No pressure, ever". Structural room exists -
+   adding it is one more `StudioSection`.
+2. **"Browse the studio" vs "Your studio".** Two uses of one word. A copy call.
+3. **Branch protection.** Workflow YAML cannot require its own checks. Require
+   *Lint, types, unit tests, build* and *End-to-end journeys* on `main` in
+   repository settings.
+
+### Known and accepted
+
+- At **568x320** - an old phone in landscape - Today's primary action sits below
+  the fold. That viewport leaves 199px under a 121px header while the identity
+  block alone is 190px. Both current landscape phones pass.
+- At **320 CSS px** the four-item nav is wider than the viewport and scrolls
+  within itself. The page does not scroll horizontally, so WCAG 1.4.10 holds.
+- `StickyNote` is built and unused. DESIGN.md keeps it available for other
+  surfaces; it now paints from the `--note` token.
+
+### Code review - 13 findings, all fixed
+
+An independent high-effort review after CI went green found 13 issues, **none of
+which the pipeline could see**. Three mattered: `axe-core` was an undeclared
+dependency, so the WCAG gate rested on a transitive hoist; an `AppShell` test
+claimed to cover "the last piece is removed" and removed nothing; and closing
+the enlarged view started two view transitions, the second cancelling the first
+(measured 2, now 1). The rest were races, a nav/studio count mismatch, a
+modifier-click arming a jump, non-tiling band endpoints, an arbitrary sleep in
+an e2e spec, a comment promising Back navigation `replace` cannot give, and
+stale README numbers. Full list on the PR.
+
+The lesson worth keeping: green CI is not the same as correct. The pipeline
+cannot see an undeclared transitive dependency, a comment that contradicts its
+code, or a test that asserts the wrong thing.
+
 ## Decision / phase
 
 Adopted the official **little wash** brand (`assets/branding.png`) as the visual
@@ -375,9 +436,11 @@ a destination, and the header palette is the way in.
 
 ## Housekeeping
 
-The previously listed dead files (`src/directions/`, `ScatterMarks.tsx`,
-`Chooser.tsx`) are gone. `DirectionShell.tsx` was renamed to `AppShell.tsx`
-via git.
+`src/directions/`, `ScatterMarks.tsx` and `Chooser.tsx` are gone;
+`DirectionShell.tsx` became `AppShell.tsx`. `scripts/screenshots.mjs` has been
+deleted too - it targeted the removed `#/a` routes, hardcoded a Linux Chromium
+path and an output directory from another machine, and the Playwright suite
+replaced it entirely.
 
 ## Roadmap
 
