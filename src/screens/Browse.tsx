@@ -1,12 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useApp } from "@/state/AppContext";
 import { filterReferences } from "@/lib/catalog";
 import { REFERENCES } from "@/data/references";
 import { COLLECTIONS, collectionSearch, type Collection } from "@/data/collections";
 import { RefArt } from "@/components/RefArt";
-import { MetaRow } from "@/components/MetaRow";
-import { SaveButton } from "@/components/SaveButton";
-import { SubjectTag } from "@/components/SubjectTag";
+import { PieceCard } from "@/components/PieceCard";
 import {
   ClearFilters,
   FilterControls,
@@ -14,14 +13,52 @@ import {
   SubjectSheet,
 } from "@/components/FilterControls";
 import { EmptyState } from "@/components/EmptyState";
-import { type PaintReference, pigment, type Subject } from "@/lib/types";
+import { type PaintReference, type Subject } from "@/lib/types";
 
 function coverFor(subject: Subject): PaintReference | undefined {
   return REFERENCES.find((r) => r.subject === subject) ?? REFERENCES[0];
 }
 
 export function Browse() {
-  const { direction, visible, activeFilters } = useApp();
+  const { visible, activeFilters } = useApp();
+  const results = useRef<HTMLHeadingElement>(null);
+  const jumpPending = useRef(false);
+
+  /*
+    Choosing a collection changes the results, which on a phone sit ~1500px
+    below the fold behind five collection cards and the filter panel. The count
+    changed, the live region announced it, and to anyone looking at the screen
+    the tap did nothing.
+
+    So the results come to the user. Focus moves to the results heading rather
+    than only scrolling: it takes the keyboard with it, so tabbing carries on
+    into the results instead of back at the collection you just left, and it
+    names where you landed. `.jump-target` keeps it clear of the sticky header.
+  */
+  const jumpToResults = () => {
+    jumpPending.current = true;
+  };
+
+  useEffect(() => {
+    if (!jumpPending.current) return;
+    jumpPending.current = false;
+
+    const heading = results.current;
+    if (!heading) return;
+
+    // Already comfortably in view (desktop, where nothing is hidden) - moving
+    // the page under someone who can see the change would be the ruder option.
+    const box = heading.getBoundingClientRect();
+    const alreadyVisible = box.top >= 0 && box.bottom <= window.innerHeight;
+
+    heading.focus({ preventScroll: true });
+    if (!alreadyVisible) {
+      const still =
+        typeof matchMedia === "function" &&
+        matchMedia("(prefers-reduced-motion: reduce)").matches;
+      heading.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
+    }
+  });
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
@@ -42,7 +79,7 @@ export function Browse() {
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {COLLECTIONS.map((collection) => (
             <li key={collection.id}>
-              <CollectionCard collection={collection} />
+              <CollectionCard collection={collection} onChosen={jumpToResults} />
             </li>
           ))}
         </ul>
@@ -68,7 +105,11 @@ export function Browse() {
           </section>
 
           <div className="flex items-baseline gap-3 border-b border-line pb-2">
-            <h2 className="font-display text-xl font-medium tracking-tight text-ink">
+            <h2
+              ref={results}
+              tabIndex={-1}
+              className="jump-target font-display text-xl font-medium tracking-tight text-ink"
+            >
               {activeFilters > 0 ? "Matching pieces" : "The whole catalogue"}
             </h2>
             <span className="tnum text-[0.85rem] text-ink-soft">{visible.length}</span>
@@ -82,7 +123,7 @@ export function Browse() {
             <ul className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {visible.map((reference) => (
                 <li key={reference.id}>
-                  <BrowseCard reference={reference} to={`/${direction}/piece/${reference.id}`} />
+                  <PieceCard reference={reference} to={`/piece/${reference.id}`} />
                 </li>
               ))}
             </ul>
@@ -99,8 +140,13 @@ export function Browse() {
   );
 }
 
-function CollectionCard({ collection }: { collection: Collection }) {
-  const { direction } = useApp();
+function CollectionCard({
+  collection,
+  onChosen,
+}: {
+  collection: Collection;
+  onChosen: () => void;
+}) {
   const count = filterReferences(REFERENCES, {
     time: "all",
     difficulty: "all",
@@ -111,7 +157,8 @@ function CollectionCard({ collection }: { collection: Collection }) {
 
   return (
     <Link
-      to={{ pathname: `/${direction}/browse`, search: collectionSearch(collection) }}
+      to={{ pathname: "/browse", search: collectionSearch(collection) }}
+      onClick={onChosen}
       className="group flex h-full items-stretch gap-4 overflow-hidden rounded-card border border-line bg-surface-raised p-3 shadow-lift transition-transform hover:-translate-y-1"
     >
       <div
@@ -135,43 +182,5 @@ function CollectionCard({ collection }: { collection: Collection }) {
         <p className="tnum mt-1.5 text-[0.78rem] text-ink-faint">{count} pieces</p>
       </div>
     </Link>
-  );
-}
-
-function BrowseCard({ reference, to }: { reference: PaintReference; to: string }) {
-  const { treatment } = useApp();
-  const { search } = useLocation();
-  const chaos = treatment === "chaos";
-  return (
-    <div className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface-raised shadow-lift transition-transform hover:-translate-y-1">
-      <div className="relative">
-        <Link to={{ pathname: to, search }} aria-label={`Open ${reference.title}`}>
-          <div
-            style={
-              chaos
-                ? { boxShadow: `inset 0 -4px 0 ${pigment(reference.subject, 0.55)}` }
-                : undefined
-            }
-          >
-            <RefArt reference={reference} className="aspect-[5/4] w-full" />
-          </div>
-        </Link>
-        <div className="absolute right-3 top-3">
-          <SaveButton reference={reference} />
-        </div>
-      </div>
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <div>
-          <SubjectTag subject={reference.subject} rotate={-3} />
-        </div>
-        <Link
-          to={{ pathname: to, search }}
-          className="font-display text-lg font-medium leading-tight text-ink underline-offset-4 group-hover:underline"
-        >
-          {reference.title}
-        </Link>
-        <MetaRow reference={reference} className="mt-auto pt-1" />
-      </div>
-    </div>
   );
 }

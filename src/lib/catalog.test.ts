@@ -11,6 +11,7 @@ import {
 } from "./catalog";
 import { mulberry32 } from "./shuffle";
 import { DEFAULT_FILTERS, type Filters, type PaintReference } from "./types";
+import { REFERENCES } from "@/data/references";
 
 function make(
   id: string,
@@ -55,11 +56,65 @@ describe("matchesTime", () => {
   it("keeps everything for 'all'", () => {
     expect(CATALOG.every((r) => matchesTime(r, "all"))).toBe(true);
   });
-  it("bands by an inclusive upper bound", () => {
-    expect(matchesTime(make("x", { minutes: 5 }), "5")).toBe(true);
-    expect(matchesTime(make("x", { minutes: 15 }), "5")).toBe(false);
-    expect(matchesTime(make("x", { minutes: 20 }), "15")).toBe(true);
-    expect(matchesTime(make("x", { minutes: 35 }), "30")).toBe(true);
+  /*
+    Ranges, not budgets. The bands were upper bounds, so every band accepted
+    everything shorter: "Over 20 min" matched the whole catalogue and a
+    fifteen-minute window was offered a twenty-minute study.
+  */
+  it("bands by a real range, so a band excludes what is too short as well as too long", () => {
+    expect(matchesTime(make("x", { minutes: 6 }), "short")).toBe(true);
+    expect(matchesTime(make("x", { minutes: 15 }), "short")).toBe(false);
+    expect(matchesTime(make("x", { minutes: 15 }), "medium")).toBe(true);
+    expect(matchesTime(make("x", { minutes: 6 }), "medium")).toBe(false);
+    expect(matchesTime(make("x", { minutes: 35 }), "long")).toBe(true);
+    expect(matchesTime(make("x", { minutes: 6 }), "long")).toBe(false);
+  });
+
+  it("asks for a long piece and does not get the whole catalogue", () => {
+    const long = CATALOG.filter((r) => matchesTime(r, "long"));
+    expect(long.length).toBeGreaterThan(0);
+    expect(long.length).toBeLessThan(CATALOG.length);
+    expect(long.every((r) => r.minutes > 20)).toBe(true);
+  });
+
+  it("tiles the minutes with no overlap and no gap", () => {
+    for (const minutes of [0, 1, 9, 10, 20, 21, 60]) {
+      const bands = (["short", "medium", "long"] as const).filter((band) =>
+        matchesTime(make("x", { minutes }), band),
+      );
+      expect(bands).toHaveLength(1);
+    }
+  });
+});
+
+/*
+  The band semantics were a product defect, not just a unit one: against the
+  shipped catalogue, "30 min+" returned all twelve pieces - including a
+  five-minute mug - while the chip styled itself as narrowing and the heading
+  flipped to "Matching pieces". These guard the real data, not a fixture.
+*/
+describe("time bands against the shipped catalogue", () => {
+  const BANDS = ["short", "medium", "long"] as const;
+
+  it("gives every band a non-empty result and never the whole catalogue", () => {
+    for (const band of BANDS) {
+      const matched = REFERENCES.filter((r) => matchesTime(r, band));
+      expect(matched.length, `${band} matched nothing`).toBeGreaterThan(0);
+      expect(matched.length, `${band} matched everything`).toBeLessThan(REFERENCES.length);
+    }
+  });
+
+  it("puts every piece in exactly one band, so the bands add up to the catalogue", () => {
+    const counts = BANDS.map((band) => REFERENCES.filter((r) => matchesTime(r, band)).length);
+    expect(counts.reduce((a, b) => a + b, 0)).toBe(REFERENCES.length);
+  });
+
+  it("never offers a piece that overruns the band the user asked for", () => {
+    expect(REFERENCES.filter((r) => matchesTime(r, "short")).every((r) => r.minutes < 10)).toBe(true);
+    expect(
+      REFERENCES.filter((r) => matchesTime(r, "medium")).every((r) => r.minutes >= 10 && r.minutes <= 20),
+    ).toBe(true);
+    expect(REFERENCES.filter((r) => matchesTime(r, "long")).every((r) => r.minutes > 20)).toBe(true);
   });
 });
 
@@ -84,7 +139,7 @@ describe("filterReferences", () => {
 
   it("combines filters (AND)", () => {
     const result = filterReferences(CATALOG, {
-      time: "15",
+      time: "medium",
       difficulty: "gentle",
       subject: "objects",
     });
@@ -93,7 +148,7 @@ describe("filterReferences", () => {
 
   it("returns an empty array when nothing matches", () => {
     const result = filterReferences(CATALOG, {
-      time: "5",
+      time: "short",
       difficulty: "stretch",
       subject: "fruit",
     });
@@ -104,8 +159,8 @@ describe("filterReferences", () => {
 describe("activeFilterCount", () => {
   it("counts only the narrowed dimensions", () => {
     expect(activeFilterCount(DEFAULT_FILTERS)).toBe(0);
-    expect(activeFilterCount({ time: "5", difficulty: "all", subject: "fruit" })).toBe(2);
-    expect(activeFilterCount({ time: "5", difficulty: "gentle", subject: "fruit" })).toBe(3);
+    expect(activeFilterCount({ time: "short", difficulty: "all", subject: "fruit" })).toBe(2);
+    expect(activeFilterCount({ time: "short", difficulty: "gentle", subject: "fruit" })).toBe(3);
   });
 });
 
@@ -113,7 +168,7 @@ describe("surpriseMe", () => {
   it("returns null when the filtered pool is empty", () => {
     const result = surpriseMe(
       CATALOG,
-      { time: "5", difficulty: "stretch", subject: "fruit" },
+      { time: "short", difficulty: "stretch", subject: "fruit" },
       null,
       mulberry32(1),
     );
@@ -219,7 +274,7 @@ describe("pickDaily", () => {
     const states: Filters[] = [
       DEFAULT_FILTERS,
       { ...DEFAULT_FILTERS, difficulty: "gentle" },
-      { ...DEFAULT_FILTERS, time: "15" },
+      { ...DEFAULT_FILTERS, time: "medium" },
       { ...DEFAULT_FILTERS, subject: "fruit" },
     ];
     const seeds = new Set(states.map((f) => dailySeed(f, DAY)));
@@ -228,7 +283,7 @@ describe("pickDaily", () => {
 
   it("returns null when nothing matches the filters", () => {
     expect(
-      pickDaily(CATALOG, { time: "5", difficulty: "stretch", subject: "fruit" }, DAY),
+      pickDaily(CATALOG, { time: "short", difficulty: "stretch", subject: "fruit" }, DAY),
     ).toBeNull();
   });
 

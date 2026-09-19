@@ -31,13 +31,22 @@ export function SaveButton({
         onClick={() => toggleSave(reference.id)}
         aria-pressed={saved}
         aria-label={label}
-        className={`inline-flex min-h-[44px] items-center gap-2 rounded-chip border px-4 text-[0.95rem] font-semibold transition-colors ${
+        /*
+          Rose carries the mark, never the word. DESIGN.md reserves it for the
+          heart, tags and marks because it fails AA for small text - as the
+          label did here, at 2.57:1 on its own rose tint.
+        */
+        className={`inline-flex min-h-[44px] items-center gap-2 rounded-chip border px-4 text-[0.95rem] font-semibold text-ink transition-colors ${
           saved
-            ? "border-transparent bg-[rgb(var(--save)/0.14)] text-[rgb(var(--save))]"
-            : "border-line bg-surface-raised text-ink hover:border-[rgb(var(--ink)/0.35)]"
+            ? "border-transparent bg-[rgb(var(--save)/0.14)]"
+            : "border-line bg-surface-raised hover:border-[rgb(var(--ink)/0.35)]"
         } ${className}`}
       >
-        <Icon name={saved ? "heart-filled" : "heart"} size={20} />
+        <Icon
+          name={saved ? "heart-filled" : "heart"}
+          size={20}
+          className={saved ? "text-[rgb(var(--save))]" : undefined}
+        />
         <span>{saved ? "Saved" : "Save"}</span>
       </button>
     );

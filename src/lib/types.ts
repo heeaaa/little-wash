@@ -1,5 +1,12 @@
 export type Difficulty = "gentle" | "steady" | "stretch";
-export type TimeBand = "5" | "15" | "30";
+/*
+  Named, not numbered. The bands used to be "5" | "15" | "30" while matching on
+  `minutes <= max`, so "15" accepted a 20-minute study and "30 min+" - which
+  reads as a floor - was an upper bound of Infinity that returned the whole
+  catalogue. The key now says which band it is and `TIME_BAND` in catalog.ts
+  says what it spans.
+*/
+export type TimeBand = "short" | "medium" | "long";
 export type Subject =
   | "fruit"
   | "botanical"
@@ -64,9 +71,9 @@ export const DIFFICULTY_NOTE: Record<Difficulty, string> = {
 };
 
 export const TIME_LABEL: Record<TimeBand, string> = {
-  "5": "5 min",
-  "15": "15 min",
-  "30": "30 min+",
+  short: "Under 10 min",
+  medium: "10-20 min",
+  long: "Over 20 min",
 };
 
 export const SUBJECT_LABEL: Record<Subject, string> = {
@@ -80,8 +87,9 @@ export const SUBJECT_LABEL: Record<Subject, string> = {
 
 /**
  * Each subject maps to a pigment CSS custom property (defined in index.css).
- * This is the colour-coding that organises the studio in both treatments -
- * loud in "Organised Chaos", quiet in "Scattered Accents".
+ * This is the colour-coding that organises the studio: tape tints, plate rings,
+ * card rules and swatch dots. Never small body text - the label carries the
+ * meaning.
  */
 export const SUBJECT_PIGMENT: Record<Subject, string> = {
   fruit: "--pig-fruit",

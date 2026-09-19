@@ -18,6 +18,13 @@ if (typeof window !== "undefined" && !window.matchMedia) {
     }) as unknown as MediaQueryList;
 }
 
+// jsdom implements no scrolling at all, so components that move the viewport
+// would throw here. Scroll position is verified in the browser; these tests
+// assert the behaviour that survives without it - chiefly where focus lands.
+if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = () => {};
+}
+
 afterEach(() => {
   cleanup();
   try {

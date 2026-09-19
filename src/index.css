@@ -23,12 +23,14 @@
   --art-mat: 242 241 238;
   --ink: 46 45 41;
   --ink-soft: 92 88 78;
-  --ink-faint: 131 126 114;
+  --ink-faint: 106 102 92;
   --line: 223 216 200;
   --accent: 37 97 106;
   --accent-ink: 251 248 241;
   --accent-soft: 211 224 225;
   --save: 217 105 134;
+  /* A second paper on the table: Paper carrying Sage, not a highlighter. */
+  --note: 222 224 209;
 
   /* Named brand colours for direct use. */
   --teal: 37 97 106;
@@ -57,11 +59,18 @@
   --shadow-plate: 0 1px 0 rgb(255 255 255 / 0.55), 0 22px 44px -28px rgb(40 38 30 / 0.5);
   --shadow-lift: 0 2px 6px -2px rgb(40 38 30 / 0.3);
   --grain-opacity: 0.05;
-}
 
-/* Single approved treatment; the selector is retained for scoping stability. */
-[data-direction="a"] {
-  color-scheme: light;
+  /*
+    Motion scale. One easing family, four steps, used by every moment in the
+    app so movement reads as one material rather than a set of effects.
+    micro = a control acknowledging a press; rise = a surface arriving;
+    move = the artwork changing place; wash = the artwork being replaced.
+  */
+  --ease-paper: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-micro: 140ms;
+  --t-rise: 240ms;
+  --t-move: 380ms;
+  --t-wash: 520ms;
 }
 
 @layer base {
@@ -87,8 +96,14 @@
     -webkit-tap-highlight-color: rgb(var(--accent) / 0.16);
   }
 
-  :where(a, button, [role="button"], input, select, [tabindex]):focus-visible {
-    outline: 2.5px solid rgb(var(--accent));
+  /*
+    3px, not 2.5: browsers round outline-width down to whole device pixels, so
+    2.5px rendered as 2px at every pixel ratio and the system documented a width
+    it could never have. 3px is also the more useful number in the scene
+    PRODUCT.md describes - glare, bad light, a phone at arm's length.
+  */
+  :where(a, button, [role="button"], input, select, summary, [tabindex]):focus-visible {
+    outline: 3px solid rgb(var(--accent));
     outline-offset: 2px;
     border-radius: 3px;
   }
@@ -171,8 +186,13 @@
     transform: skewX(-12deg);
   }
 
-  .sticky {
-    background: rgb(var(--note, 239 231 196));
+  /*
+    Named for the material, not the CSS position: `.sticky` collided with
+    Tailwind's positioning utility, so the sticky header was picking up this
+    note's drop shadow.
+  */
+  .note-paper {
+    background: rgb(var(--note));
     box-shadow: 0 10px 20px -12px rgb(40 38 30 / 0.5);
   }
 
@@ -188,7 +208,7 @@
     max-height: 85vh;
     max-height: 85svh;
     overflow-y: auto;
-    animation: sheet-rise 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: sheet-rise var(--t-rise) var(--ease-paper);
   }
   @keyframes sheet-rise {
     from {
@@ -198,12 +218,125 @@
   }
 
   /*
+    One card, one tab stop. The title is the card's only link and its ::after
+    covers the whole card, so the artwork stays a full-card tap target without
+    a second link to the same piece: twelve cards used to put twenty-four
+    identical destinations in the tab order and in a screen reader's link list.
+    The card is the positioned ancestor; controls that sit on it (Save) raise
+    themselves above the overlay.
+  */
+  .card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  /*
+    Enlarged reference view, built on the native <dialog>. Sized to the
+    viewport, never to a fixed aspect ratio: this is the view used with the
+    phone propped beside a sketchbook, and a propped phone is usually on its
+    side, where a 4:3 box cropped the subject. The mat is the dialog's own
+    background, so there is no plate inside a plate and everything that is not
+    the title bar is artwork. The inset is a small, fluid margin rather than a
+    percentage of the width, which in a short landscape viewport ate most of
+    the height.
+  */
+  .enlarge {
+    --enlarge-mat: clamp(0.5rem, 2vmin, 1rem);
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    border-radius: 0;
+    overflow: hidden;
+  }
+  /*
+    Inset, backdrop-visible dialog only where there is room on both axes. The
+    guard is height as well as width, because a phone held sideways is a wide
+    viewport and a small screen at the same time, and there the margin comes
+    straight out of the artwork.
+  */
+  @media (min-width: 640px) and (min-height: 540px) {
+    .enlarge {
+      margin: auto;
+      width: min(94vw, 1100px);
+      height: 94vh;
+      height: 94dvh;
+      max-height: 94vh;
+      max-height: 94dvh;
+      border-radius: var(--radius-card);
+    }
+  }
+
+  .enlarge-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    padding: calc(var(--enlarge-mat) + env(safe-area-inset-top))
+      calc(var(--enlarge-mat) + env(safe-area-inset-right))
+      calc(var(--enlarge-mat) + env(safe-area-inset-bottom))
+      calc(var(--enlarge-mat) + env(safe-area-inset-left));
+  }
+
+  .enlarge-bar {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid rgb(var(--line));
+  }
+
+  .enlarge-art {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+    padding-top: var(--enlarge-mat);
+  }
+
+  /*
+    Landscape on a phone is the propped-on-a-stand posture, and there the
+    scarce axis is height. The title bar turns into a side rail so the whole
+    height stays with the artwork instead of being spent on a header.
+  */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .enlarge-shell {
+      flex-direction: row-reverse;
+      align-items: stretch;
+    }
+    .enlarge-bar {
+      flex-direction: column-reverse;
+      align-items: flex-end;
+      justify-content: flex-end;
+      gap: 0.25rem;
+      width: 7.75rem;
+      text-align: right;
+      padding-bottom: 0;
+      padding-left: 0.75rem;
+      border-bottom: 0;
+      border-left: 1px solid rgb(var(--line));
+    }
+    .enlarge-art {
+      padding-top: 0;
+      padding-right: var(--enlarge-mat);
+    }
+  }
+
+  /*
     The one authored moment: the piece settling in after a filter change or a
     deal. Starts from the already-visible default so nothing is hidden if the
     animation never runs.
   */
   .piece-settle {
-    animation: piece-settle 320ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: piece-settle var(--t-move) var(--ease-paper);
   }
   @keyframes piece-settle {
     from {
@@ -237,6 +370,44 @@
       max-height: 46svh;
     }
   }
+
+  /*
+    Today in the propped posture. `.art-cap` promises that "the piece, its
+    identity and the primary action fit the first screen", and stacked in
+    landscape they did not - "Open this piece" sat at y=616 in a 390px viewport.
+
+    The three blocks are placed side by side rather than reordered, so the DOM
+    order the control hierarchy depends on - artwork, identity, primary action -
+    is exactly what a screen reader and the keyboard still get.
+  */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .featured-piece {
+      display: grid;
+      /*
+        The identity column takes the larger share: it holds the prompt, and on
+        a 667px-wide phone an even split wrapped it to a third line and pushed
+        the primary action past the fold. The prompt is the piece's invitation,
+        so it gets the room rather than being clamped.
+      */
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      column-gap: 1.5rem;
+      align-items: start;
+    }
+    .featured-plate {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      max-width: min(100%, 68vh);
+      max-width: min(100%, 68svh);
+    }
+    .featured-identity {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .featured-actions {
+      grid-column: 2;
+      grid-row: 2;
+    }
+  }
 }
 
 @layer utilities {
@@ -249,7 +420,393 @@
   .tnum {
     font-variant-numeric: tabular-nums;
   }
+  /* The organic watercolour blob radius, shared by every painted swatch. */
   .dab {
     border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+  }
+
+  /*
+    A swatch being laid down: it arrives from slightly above and wider than it
+    lands, the way a loaded brush touches paper and draws back. Only a swatch
+    added during this session runs it - see SavedPalette - and the `from`-only
+    keyframe means the resting state is the visible one, so nothing is hidden
+    if the animation never runs.
+  */
+  .dab-settle {
+    animation: dab-settle var(--t-rise) var(--ease-paper);
+  }
+  @keyframes dab-settle {
+    from {
+      opacity: 0;
+      transform: translateY(-3px) scale(1.5) rotate(0deg);
+    }
+  }
+}
+
+/*
+  ─────────────────────────────────────────────────────────────────────────
+  The paper is never cut, only moved or re-wet.
+
+  Both moments run on View Transitions. A navigation pairs the artwork's old
+  and new snapshots and morphs the geometry between them; a deal pairs the
+  same two snapshots but pushes both through one animated turbulence field, so
+  one piece dissolves into the wet paper as the other resolves out of it.
+
+  These pseudo-elements sit outside the document tree, so the global
+  reduced-motion rule in @layer base cannot reach them. They are disabled
+  explicitly at the bottom of this block.
+  ─────────────────────────────────────────────────────────────────────────
+*/
+
+/* Move: the artwork changes place. */
+::view-transition-group(piece-art) {
+  animation-duration: var(--t-move);
+  animation-timing-function: var(--ease-paper);
+}
+
+::view-transition-old(piece-art),
+::view-transition-new(piece-art) {
+  animation-duration: var(--t-move);
+  animation-timing-function: var(--ease-paper);
+  /*
+    The UA cross-fade uses `plus-lighter`, which brightens both snapshots
+    while they overlap. This app's whole premise is that a painter mixes
+    against what is on screen, so the artwork is never allowed to read
+    brighter than it is - not even for 380ms.
+  */
+  mix-blend-mode: normal;
+}
+
+/*
+  The chrome around the artwork is not the subject, so it does not cross-fade
+  with itself: a plain cross-fade leaves two full pages of text legible on top
+  of each other at half opacity, which reads as a double exposure. It clears
+  out first, the artwork flies through the gap, and the new chrome arrives
+  behind it. The interface getting out of the way, made literal.
+*/
+::view-transition-old(root) {
+  animation: chrome-out var(--t-move) linear both;
+}
+
+::view-transition-new(root) {
+  animation: chrome-in var(--t-move) linear both;
+}
+
+@keyframes chrome-out {
+  0% {
+    opacity: 1;
+  }
+  44% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes chrome-in {
+  0% {
+    opacity: 0;
+  }
+  36% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*
+  A re-wet is the same page with a different piece in it, so the chrome does
+  not evacuate the way it does for a move - clearing it left the whole screen
+  pale in the middle of the bloom. Instead the identity text changes over
+  exactly while the paper is wettest, so the title, the note and the artwork
+  all turn together rather than in sequence.
+*/
+html[data-wash="rewet"]::view-transition-old(root) {
+  animation: rewet-chrome-out var(--t-wash) linear both;
+}
+
+html[data-wash="rewet"]::view-transition-new(root) {
+  animation: rewet-chrome-in var(--t-wash) linear both;
+}
+
+@keyframes rewet-chrome-out {
+  0%,
+  34% {
+    opacity: 1;
+  }
+  62% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rewet-chrome-in {
+  0%,
+  38% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Re-wet: the piece is replaced. */
+/*
+  Linear timing on purpose: the shaping lives in the stops, so the hand-off
+  can be placed exactly where the paper is wettest (the displacement peaks at
+  40%). Easing the opacity instead front-loads both curves and the outgoing
+  piece is gone before the bloom has started - which is what the first build
+  did. The project easing still governs what you actually see move: it is
+  splined into the turbulence inside #wash-bloom.
+*/
+html[data-wash="rewet"]::view-transition-old(piece-art) {
+  animation:
+    wash-dissolve var(--t-wash) linear both,
+    wash-paper var(--t-wash) linear both;
+}
+
+html[data-wash="rewet"]::view-transition-new(piece-art) {
+  animation:
+    wash-resolve var(--t-wash) linear both,
+    wash-paper var(--t-wash) linear both;
+}
+
+/* Hold the group still: a deal is a change of pigment, not of place. */
+html[data-wash="rewet"]::view-transition-group(piece-art) {
+  animation-duration: var(--t-wash);
+  animation-timing-function: var(--ease-paper);
+}
+
+/*
+  The paper is wet for the middle of the transition and dry at both ends. The
+  filter is dropped before the last frame so nothing settles as a filtered
+  image - a painter mixes against this artwork, so the frame it comes to rest
+  on has to be the real one.
+*/
+@keyframes wash-paper {
+  0%,
+  90% {
+    filter: url(#wash-bloom);
+  }
+  100% {
+    filter: none;
+  }
+}
+
+/* Holds while the paper wets, lets go while it is wettest. */
+@keyframes wash-dissolve {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  20% {
+    opacity: 0.94;
+  }
+  62% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+}
+
+/* Waits for the paper to be wet, then comes up out of it. */
+@keyframes wash-resolve {
+  0% {
+    opacity: 0;
+    transform: scale(0.988);
+  }
+  30% {
+    opacity: 0;
+  }
+  72% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*
+  Reduced motion: a clean cut. `wash.ts` skips the transition entirely, and
+  these rules stop any router-driven navigation from animating either.
+*/
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+    filter: none !important;
+  }
+}
+
+@layer components {
+  /*
+    ─────────────────────────────────────────────────────────────────────────
+    Detail, and the posture the product is actually used in.
+
+    The plate was `aspect-square w-full` with no viewport budget, while Today
+    had `.art-cap`. On a phone lying on its side - "a device set down at an
+    angle", "propped beside a physical sketchbook", the scene PRODUCT.md names -
+    that made a 762x762 plate inside a 390px viewport: four screens of document,
+    the title 1052px down, and Enlarge (the one view built for landscape) 494px
+    below the fold. The first screen was a header, a back link and the top edge
+    of an empty mat.
+
+    The reference is the whole point of this screen, so the cap is generous;
+    what it must not do is exceed the screen it is being read on.
+    ─────────────────────────────────────────────────────────────────────────
+  */
+  .detail-art {
+    max-width: min(100%, 62vh);
+    max-width: min(100%, 62svh);
+    margin-inline: auto;
+  }
+
+  /*
+    Short and wide is the propped posture. Height is the scarce axis, so the
+    plate and the piece's identity sit side by side rather than stacked - the
+    same move `.enlarge` makes at the same breakpoint, for the same reason.
+  */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .detail-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: start;
+    }
+    /*
+      Sized against the shortest phone landscape, not the roomiest: below `md`
+      the header still spends two rows, so a 667x375 screen has far less room
+      above the fold than an 844x390 one. The plate stays whole on both, and
+      Enlarge - which is built for this posture and fills 96% of it - is one tap
+      away in the first screen either way. The budget leaves room for that
+      button to sit below the plate rather than on top of the artwork, which is
+      the trade this screen should make: Detail is the waypoint, the enlarged
+      view is where the painting actually happens.
+    */
+    .detail-art {
+      max-width: min(100%, 48vh);
+      max-width: min(100%, 48svh);
+    }
+
+  }
+}
+
+@layer utilities {
+  /*
+    Anything the page jumps to has to clear the sticky header, or it lands
+    underneath it and the jump reads as nothing happening - which is the defect
+    the jump exists to fix.
+  */
+  .jump-target {
+    scroll-margin-top: 8.5rem;
+  }
+  @media (min-width: 768px) {
+    .jump-target {
+      scroll-margin-top: 6rem;
+    }
+  }
+
+  /*
+    A sticky header that spends two rows costs 121px - a third of a 375px-tall
+    screen - in the one posture where height is the scarce axis. Above 640px
+    wide there is room to lay the same nav out in a single row, so the propped
+    phone gets that third of the screen back. Narrower than that the row cannot
+    hold wordmark, nav and palette together, so it keeps stacking.
+
+    Doubled class names on purpose: these override Tailwind's own `hidden` and
+    `md:block`, which sit in this layer at equal specificity. A components-layer
+    rule loses to them outright - and did, hiding both navs at once between
+    640px and 768px wide until the measurement caught it.
+  */
+  @media (orientation: landscape) and (max-height: 520px) and (min-width: 640px) {
+    .nav-inline.nav-inline {
+      display: block;
+    }
+    .nav-stacked.nav-stacked {
+      display: none;
+    }
+  }
+
+  /*
+    Today's own chrome in the propped posture. The page padding and the page
+    title are worth ~50px of a 390px screen, which is the difference between
+    the primary action sitting inside the first screen and just below it. The
+    title stays, at the size the narrowest phone already uses.
+  */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .today-page.today-page {
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+    }
+    .today-title.today-title {
+      font-size: 1.35rem;
+    }
+    .today-grid.today-grid {
+      margin-top: 0.5rem;
+    }
+    /*
+      In a narrow column the prompt and the meta row each wrap to a second
+      line, which is the right trade - the prompt is the piece's invitation and
+      the difficulty note is the reassurance a nervous beginner reads. The
+      stacking margins give back the room instead.
+    */
+    .featured-identity.featured-identity {
+      margin-top: 0.25rem;
+    }
+    .featured-actions.featured-actions {
+      margin-top: 0.5rem;
+    }
+  }
+
+  /*
+    Enlarge floats over the mat's corner, which is affordable on a big plate
+    and not on a 192px one - it covered the subject. Here it steps out from
+    under the artwork and sits beneath it, still the first thing below the
+    piece and still inside the first screen. Doubled for the same reason as
+    the nav above: it is overriding `absolute` and `inline-flex`.
+  */
+  /*
+    Reclaiming the chrome above the plate. In this posture the page padding and
+    the gap under the back link are worth 36px of a 375px screen, which is the
+    difference between Enlarge sitting in the first screen with room to spare
+    and missing it by three pixels. The plate's own padding goes the same way,
+    handing ~16px back to the artwork without making the plate taller.
+
+    All doubled: each of these overrides a Tailwind utility (`py-6`, `mt-5`,
+    `p-3 sm:p-4`) that would otherwise win outright. An earlier version of this
+    block sat in the components layer and silently did nothing.
+  */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .detail-page.detail-page {
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+    }
+    .detail-grid.detail-grid {
+      margin-top: 0.5rem;
+      gap: 1.25rem;
+    }
+    .detail-art.detail-art {
+      padding: 0.5rem;
+    }
+  }
+
+  @media (orientation: landscape) and (max-height: 520px) {
+    .detail-enlarge.detail-enlarge {
+      position: static;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.5rem;
+      backdrop-filter: none;
+    }
   }
 }

@@ -1,17 +1,29 @@
 import { DEFAULT_FILTERS, type Filters, type PaintReference, type TimeBand } from "./types";
 import { mulberry32, pickDifferent, type RandomSource } from "./shuffle";
 
-/** Upper bound (inclusive) of minutes that each time band accepts. */
-const TIME_BAND_MAX: Record<TimeBand, number> = {
-  "5": 7,
-  "15": 20,
-  "30": Infinity,
+/**
+ * What each band actually spans, in minutes, inclusive at both ends.
+ *
+ * These are ranges, not budgets. The bands were upper bounds - every band
+ * accepted everything shorter - which made "Over 20 min" (then "30 min+") match
+ * the entire catalogue while the chip styled itself as narrowing. Someone with
+ * a free afternoon could not ask for a long piece, and someone with fifteen
+ * minutes was offered a twenty-minute study.
+ *
+ * The bands tile the catalogue with no overlap and no gap, so every one of them
+ * genuinely narrows and the "which filters are active" signal stays honest.
+ */
+const TIME_BAND: Record<TimeBand, { min: number; max: number }> = {
+  short: { min: 0, max: 9 },
+  medium: { min: 10, max: 20 },
+  long: { min: 21, max: Infinity },
 };
 
 /** Does a reference fall inside the selected time band? */
 export function matchesTime(reference: PaintReference, band: TimeBand | "all"): boolean {
   if (band === "all") return true;
-  return reference.minutes <= TIME_BAND_MAX[band];
+  const { min, max } = TIME_BAND[band];
+  return reference.minutes >= min && reference.minutes <= max;
 }
 
 /**
@@ -32,6 +44,25 @@ export function filterReferences(
     }
     return true;
   });
+}
+
+/**
+ * The saved pieces, newest first.
+ *
+ * `favorites` holds ids in the order they were saved, so the newest is last;
+ * the studio and the header palette both read it the other way round, because
+ * the thing you just set aside is the thing you are most likely to want.
+ * Unknown ids are dropped rather than rendered as holes - a catalogue entry can
+ * disappear while a saved id survives in storage.
+ */
+export function savedReferences(
+  all: readonly PaintReference[],
+  favorites: readonly string[],
+): PaintReference[] {
+  return favorites
+    .map((id) => all.find((reference) => reference.id === id))
+    .filter((reference): reference is PaintReference => Boolean(reference))
+    .reverse();
 }
 
 /** How many filters are narrowing the catalogue right now. */
