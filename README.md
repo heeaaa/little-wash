@@ -93,7 +93,8 @@ whole catalogue.
 React 18, TypeScript (strict), Vite and Tailwind CSS, routed with `HashRouter`
 so deep links survive a static host with no rewrite rules. Vitest and React
 Testing Library cover the logic, the screens and the routing (108 tests),
-and Playwright covers the journeys end to end (31 specs, 93 checks).
+and Playwright covers the journeys end to end (31 tests in 4 spec files,
+93 checks across phone, propped-phone and desktop).
 Filtering, saving and "deal me another" are all simulated on-device.
 
 Piece changes are animated with the View Transitions API under one rule - the
