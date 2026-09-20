@@ -202,11 +202,19 @@ because anything regressed but because this run found the time-band semantics.
 
 The critique's P1s and P2s are closed. Remaining, in order:
 
-1. **PWA / offline.** No service worker is registered although the manifest and
-   full icon set ship, so the install surface is ahead of the capability. A
-   distinct capability per CLAUDE.md, not a fix - it wants its own phase.
-2. **Supabase**, backend reminder scheduling, real licensed imagery with
-   provenance, and CI.
+1. **Real reference imagery with provenance.** Moved to the front on
+   20/09/2026 at the user's direction. The catalogue is twelve AI-generated
+   placeholder SVGs; PRODUCT.md names open-licensed and public-domain
+   collections as the real source, with per-item attribution and provenance as
+   a first-class data requirement. It sets the precache budget, the data model
+   and the storage question, so it should precede the phases that depend on
+   those.
+2. **PWA / offline.** Planned in full and **parked** on 20/09/2026 - see
+   `docs/plans/pwa-offline.md`, which carries the approved decisions, the
+   measured baseline, six workstreams and the two font questions still open.
+   No service worker is registered although the manifest and full icon set
+   ship, so the install surface is ahead of the capability.
+3. **Supabase**, backend reminder scheduling, and CI.
 
 Known and accepted, not defects to chase:
 
