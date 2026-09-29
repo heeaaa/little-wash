@@ -3,7 +3,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { AppProvider } from "@/state/AppContext";
-import { REFERENCES } from "@/data/references";
+import { CATALOGUE } from "@/data/catalogue";
 import { Studio } from "@/screens/Studio";
 
 const STORAGE_KEY = "little-wash:favorites:v1";
@@ -20,7 +20,7 @@ function renderStudio() {
         <Route
           path="/studio"
           element={
-            <AppProvider references={REFERENCES}>
+            <AppProvider references={CATALOGUE}>
               <Studio />
             </AppProvider>
           }
@@ -32,6 +32,17 @@ function renderStudio() {
   );
 }
 
+/*
+  Three pieces, whichever the catalogue leads with. Naming ids and titles tied
+  these tests to twelve placeholder illustrations; the properties they are
+  about - newest first, removal, unknown ids dropped - hold for any catalogue.
+*/
+const [a, b, c] = CATALOGUE as [
+  (typeof CATALOGUE)[number],
+  (typeof CATALOGUE)[number],
+  (typeof CATALOGUE)[number],
+];
+
 const cards = () =>
   screen.queryAllByRole("listitem").filter((li) => li.querySelector('a[href*="/piece/"]'));
 
@@ -42,16 +53,16 @@ beforeEach(() => localStorage.clear());
 
 describe("Studio", () => {
   it("shows the pieces you set aside, most recently saved first", () => {
-    seed(["ripe-pear", "paper-boat", "two-toadstools"]);
+    seed([a.id, b.id, c.id]);
     renderStudio();
 
     expect(screen.getByRole("heading", { name: "Your studio", level: 1 })).toBeInTheDocument();
     expect(cards()).toHaveLength(3);
-    expect(cards().map(titleOf)).toEqual(["Two Toadstools", "Paper Boat", "Ripe Pear"]);
+    expect(cards().map(titleOf)).toEqual([c.title, b.title, a.title]);
   });
 
   it("gives every card exactly one link to its piece, as Browse does", () => {
-    seed(["ripe-pear", "paper-boat"]);
+    seed([a.id, b.id]);
     renderStudio();
 
     for (const card of cards()) {
@@ -67,22 +78,24 @@ describe("Studio", () => {
   */
   it("removes a piece from the list as soon as it is unsaved", async () => {
     const user = userEvent.setup();
-    seed(["ripe-pear", "paper-boat"]);
+    seed([a.id, b.id]);
     renderStudio();
 
     expect(cards()).toHaveLength(2);
-    const pear = cards().find((c) => titleOf(c) === "Ripe Pear")!;
-    await user.click(within(pear).getByRole("button", { name: /^Saved\. Remove Ripe Pear/ }));
+    const first = cards().find((card) => titleOf(card) === a.title)!;
+    await user.click(
+      within(first).getByRole("button", { name: new RegExp(`^Saved[.] Remove ${a.title}`) }),
+    );
 
     expect(cards()).toHaveLength(1);
-    expect(cards().map(titleOf)).toEqual(["Paper Boat"]);
-    expect(screen.getByText("1 piece in your studio.")).toBeInTheDocument();
+    expect(cards().map(titleOf)).toEqual([b.title]);
+    expect(screen.getByText(/1 piece set aside\./)).toBeInTheDocument();
   });
 
   it("announces how many pieces are in view, and keeps the plural honest", () => {
-    seed(["ripe-pear"]);
+    seed([a.id]);
     renderStudio();
-    expect(screen.getByText("1 piece in your studio.")).toBeInTheDocument();
+    expect(screen.getByText(/1 piece set aside\./)).toBeInTheDocument();
   });
 
   describe("when nothing is saved", () => {
@@ -116,10 +129,10 @@ describe("Studio", () => {
   });
 
   it("drops a saved id that is no longer in the catalogue rather than rendering a hole", () => {
-    seed(["ripe-pear", "a-piece-that-was-removed"]);
+    seed([a.id, "a-piece-that-was-removed"]);
     renderStudio();
 
     expect(cards()).toHaveLength(1);
-    expect(cards().map(titleOf)).toEqual(["Ripe Pear"]);
+    expect(cards().map(titleOf)).toEqual([a.title]);
   });
 });

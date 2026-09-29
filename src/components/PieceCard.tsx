@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { RefArt } from "@/components/RefArt";
+import { CreditLine } from "@/components/CreditLine";
 import { MetaRow } from "@/components/MetaRow";
 import { SaveButton } from "@/components/SaveButton";
 import { SubjectTag } from "@/components/SubjectTag";
@@ -12,6 +13,12 @@ interface PieceCardProps {
   reference: PaintReference;
   /** Where the card leads, without the query string - it appends the current one. */
   to: string;
+  /**
+   * A quiet line under the meta row - the day a piece was painted, in the
+   * studio. Inside the card rather than floating beneath it, so the grid stays
+   * a grid of cards.
+   */
+  note?: ReactNode;
 }
 
 /**
@@ -24,7 +31,7 @@ interface PieceCardProps {
  * - the imperative claim on the shared transition name, which is how a grid
  *   takes part in the artwork morph when only one element may hold the name.
  */
-export function PieceCard({ reference, to }: PieceCardProps) {
+export function PieceCard({ reference, to, note }: PieceCardProps) {
   const { pathname, search } = useLocation();
   const art = useRef<HTMLDivElement>(null);
 
@@ -91,6 +98,8 @@ export function PieceCard({ reference, to }: PieceCardProps) {
           {reference.title}
         </WashLink>
         <MetaRow reference={reference} className="mt-auto pt-1" />
+        {note}
+        <CreditLine reference={reference} />
       </div>
     </div>
   );

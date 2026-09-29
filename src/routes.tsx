@@ -5,6 +5,7 @@ import { Detail } from "@/screens/Detail";
 import { Browse } from "@/screens/Browse";
 import { Exercises } from "@/screens/Exercises";
 import { Studio } from "@/screens/Studio";
+import { Sources } from "@/screens/Sources";
 
 /**
  * The exploration-era URLs carried a direction segment (#/a/piece/ripe-pear).
@@ -27,6 +28,7 @@ export const routeElements = (
       <Route path="browse" element={<Browse />} />
       <Route path="exercises" element={<Exercises />} />
       <Route path="studio" element={<Studio />} />
+      <Route path="sources" element={<Sources />} />
     </Route>
     <Route path="/a/*" element={<LegacyDirectionRedirect />} />
     <Route path="/b/*" element={<LegacyDirectionRedirect />} />

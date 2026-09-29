@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { PaintReference } from "@/lib/types";
+import { CreditLine } from "@/components/CreditLine";
+import { PaintedButton } from "@/components/PaintedButton";
 import { RefArt } from "@/components/RefArt";
 import { Icon } from "@/components/Icon";
 import { PIECE_ART } from "@/lib/wash";
@@ -67,9 +69,23 @@ export function EnlargeDialog({ reference, open, onClose }: EnlargeDialogProps) 
     >
       <div className="enlarge-shell">
         <div className="enlarge-bar">
-          <p className="min-w-0 text-pretty font-display text-lg font-medium leading-snug">
-            {reference.title}
-          </p>
+          {/*
+            The credit joins the title bar rather than sitting on the artwork:
+            DESIGN.md keeps everything that is not the bar as artwork, and
+            nothing may sit on the surface a painter mixes colour against.
+          */}
+          <div className="min-w-0">
+            <p className="text-pretty font-display text-lg font-medium leading-snug">
+              {reference.title}
+            </p>
+            <CreditLine reference={reference} variant="inline" className="mt-0.5" />
+          </div>
+          {/*
+            The enlarged view is where the painting actually happens, so
+            finishing and marking it without closing is the natural move. The
+            bar is the only place it can go: everything else here is artwork.
+          */}
+          <PaintedButton reference={reference} className="shrink-0" />
           <button
             type="button"
             onClick={onClose}

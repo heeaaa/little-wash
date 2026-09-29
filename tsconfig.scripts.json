@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    // The ingestion pipeline runs in Node and touches the network, but it
+    // shares the credit and image types with the app, which are written
+    // against the DOM lib. Both are needed to typecheck it honestly.
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noUncheckedIndexedAccess": true,
+
+    // The pipeline reaches into src/ for the credit and image types it shares
+    // with the app, and those files use the alias among themselves.
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "types": ["node", "vitest/globals"]
+  },
+  "include": ["scripts"]
+}

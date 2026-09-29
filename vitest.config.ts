@@ -14,7 +14,7 @@ export default defineConfig({
     environment: "jsdom",
     // Unit and component tests only. `e2e/` holds Playwright specs, which share
     // the `.spec.ts` suffix and must not be collected here.
-    include: ["src/**/*.test.{ts,tsx}"],
+    include: ["src/**/*.test.{ts,tsx}", "scripts/**/*.test.ts"],
     setupFiles: ["./src/test/setup.ts"],
     css: false,
     coverage: {
@@ -25,13 +25,26 @@ export default defineConfig({
         components count too. What is left out is genuinely not logic - the
         bootstrap, static catalogue data, and the tests themselves.
       */
-      include: ["src/**/*.{ts,tsx}"],
+      include: ["src/**/*.{ts,tsx}", "scripts/catalog/**/*.ts"],
       exclude: [
         "src/main.tsx",
         "src/data/**",
         "src/test/**",
         "src/**/*.test.{ts,tsx}",
         "src/vite-env.d.ts",
+        /*
+          Declarations only - interfaces and type aliases that compile away to
+          nothing, so v8 instruments an empty module and reports 0%. Excluded
+          on the same grounds as vite-env.d.ts, not to hide logic: any runtime
+          value in the sources layer lives in registry.ts, attribution.ts,
+          images.ts or preferences, all of which are held to the gate below.
+        */
+        "src/lib/sources/types.ts",
+        // Same grounds: the pipeline's shared shapes compile away to nothing.
+        "scripts/catalog/types.ts",
+        // CLI entry points - argument parsing and file IO around the tested
+        // pure functions. Exercised by running them, not by unit tests.
+        "scripts/catalog/cli/**",
       ],
       /*
         Set just below what the suite actually achieves, so they ratchet rather
@@ -51,6 +64,18 @@ export default defineConfig({
           branches: 88,
           functions: 95,
           lines: 95,
+        },
+        /*
+          New domain logic starts at 80, per the project's floor for a new
+          module. The parts that matter - each provider's normalise, the
+          shortlist heuristics and the licence gates - are tested against real
+          API payloads captured in catalog/fixtures/.
+        */
+        "scripts/catalog/**": {
+          statements: 80,
+          branches: 80,
+          functions: 80,
+          lines: 80,
         },
       },
     },

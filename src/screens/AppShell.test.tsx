@@ -3,6 +3,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { AppShell } from "@/screens/AppShell";
+import { CATALOGUE } from "@/data/catalogue";
 import { Studio } from "@/screens/Studio";
 
 const STORAGE_KEY = "little-wash:favorites:v1";
@@ -39,7 +40,7 @@ describe("AppShell header", () => {
   });
 
   it("adds the studio to the nav once a piece is saved", () => {
-    seed(["ripe-pear"]);
+    seed([CATALOGUE[0]!.id]);
     renderShell();
     expect(navLinks()).toEqual(["Today", "Browse", "Exercises", "Studio"]);
   });
@@ -52,7 +53,7 @@ describe("AppShell header", () => {
   */
   it("keeps the studio reachable after the last piece is removed", async () => {
     const user = userEvent.setup();
-    seed(["ripe-pear"]);
+    seed([CATALOGUE[0]!.id]);
     renderShell();
 
     expect(navLinks()).toContain("Studio");
@@ -61,7 +62,9 @@ describe("AppShell header", () => {
 
     // Actually remove the last piece, which is the case this guards: the nav
     // entry goes, and someone standing on /studio must not be stranded there.
-    await user.click(screen.getByRole("button", { name: /^Saved\. Remove Ripe Pear/ }));
+    await user.click(
+      screen.getByRole("button", { name: new RegExp(`^Saved[.] Remove ${CATALOGUE[0]!.title}`) }),
+    );
 
     expect(navLinks()).not.toContain("Studio");
     expect(screen.getByRole("heading", { name: "Your studio", level: 1 })).toBeInTheDocument();

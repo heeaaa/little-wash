@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { isInFirstScreen, ready } from "./support";
+import { isInFirstScreen, pieceIds, ready } from "./support";
 
 /**
  * The propped phone. PRODUCT.md names this scene - "a device set down at an
@@ -18,7 +18,8 @@ const isShortLandscape = (page: { viewportSize: () => { width: number; height: n
 
 test.describe("the propped-phone posture", () => {
   test("nothing scrolls sideways, at any size", async ({ page }) => {
-    for (const route of ["#/", "#/browse", "#/piece/ripe-pear", "#/exercises", "#/studio"]) {
+    const [id] = await pieceIds(page);
+    for (const route of ["#/", "#/browse", `#/piece/${id}`, "#/exercises", "#/studio"]) {
       await page.goto(`/${route}`);
       await ready(page);
       const overflow = await page.evaluate(() => {
@@ -30,7 +31,8 @@ test.describe("the propped-phone posture", () => {
   });
 
   test("Detail keeps the reference and its way out on the first screen", async ({ page }) => {
-    await page.goto("/#/piece/bowl-of-cherries");
+    const [detailId] = await pieceIds(page);
+    await page.goto(`/#/piece/${detailId}`);
     await ready(page);
 
     const title = await isInFirstScreen(page, "main h1");
@@ -65,7 +67,8 @@ test.describe("the propped-phone posture", () => {
   });
 
   test("the enlarged view fills the short axis whichever way the phone is held", async ({ page }) => {
-    await page.goto("/#/piece/ripe-pear");
+    const [enlargeId] = await pieceIds(page);
+    await page.goto(`/#/piece/${enlargeId}`);
     await ready(page);
     await page.getByRole("button", { name: /^enlarge$/i }).click();
     await expect(page.getByRole("dialog")).toBeVisible();

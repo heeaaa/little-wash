@@ -1,5 +1,13 @@
 import { test, expect } from "@playwright/test";
-import { featuredTitle, pieceCards, ready, seedFavourites } from "./support";
+import {
+  featuredTitle,
+  pieceCards,
+  pieceIds,
+  pieceIdsFrom,
+  readPieces,
+  ready,
+  seedFavourites,
+} from "./support";
 
 /**
  * The journey the product exists for: arrive, find something to paint, open it,
@@ -94,7 +102,8 @@ test.describe("discovery", () => {
   });
 
   test("the enlarged view opens, fills the screen and gives focus back", async ({ page }) => {
-    await page.goto("/#/piece/bowl-of-cherries");
+    const [id] = await pieceIds(page);
+    await page.goto(`/#/piece/${id}`);
     await ready(page);
 
     const enlarge = page.getByRole("button", { name: /^enlarge$/i });
@@ -122,7 +131,10 @@ test.describe("discovery", () => {
     await page.goto("/#/browse");
     await ready(page);
 
-    await expect(pieceCards(page)).toHaveCount(12);
+    // Not a fixed number: what matters is that Browse is the whole library,
+    // so it shows more than the single piece Today offers.
+    await expect(pieceCards(page).first()).toBeVisible();
+    expect(await pieceCards(page).count()).toBeGreaterThan(1);
 
     const first = pieceCards(page).first();
     const name = (await first.locator("a.card-link").textContent())?.trim();
@@ -141,12 +153,13 @@ test.describe("discovery", () => {
     const links = await pieceCards(page).evaluateAll((cards) =>
       cards.map((c) => c.querySelectorAll('a[href*="/piece/"]').length),
     );
-    expect(links.length).toBe(12);
+    expect(links.length).toBeGreaterThan(1);
     expect(links.every((n) => n === 1)).toBe(true);
   });
 
   test("a saved piece reaches the studio and survives a reload", async ({ page, context }) => {
-    await seedFavourites(context, ["ripe-pear", "paper-boat"]);
+    const [first, second] = await pieceIdsFrom(context, 2);
+    await seedFavourites(context, [first!, second!]);
     await page.goto("/#/");
     await ready(page);
 
@@ -155,8 +168,9 @@ test.describe("discovery", () => {
     await expect(page.getByRole("heading", { level: 1, name: "Your studio" })).toBeVisible();
 
     await expect(pieceCards(page)).toHaveCount(2);
-    // Most recently saved sits at the front.
-    await expect(pieceCards(page).first().locator("a.card-link")).toHaveText("Paper Boat");
+    // Most recently saved sits at the front, so it is the second id seeded.
+    const shown = await readPieces(page);
+    expect(shown[0]?.id).toBe(second);
 
     await page.reload();
     await ready(page);
@@ -176,7 +190,8 @@ test.describe("discovery", () => {
   });
 
   test("unsaving removes the piece from the studio", async ({ page, context }) => {
-    await seedFavourites(context, ["ripe-pear", "paper-boat"]);
+    const [first, second] = await pieceIdsFrom(context, 2);
+    await seedFavourites(context, [first!, second!]);
     await page.goto("/#/studio");
     await ready(page);
 

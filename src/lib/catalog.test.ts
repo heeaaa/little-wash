@@ -12,26 +12,9 @@ import {
 import { mulberry32 } from "./shuffle";
 import { DEFAULT_FILTERS, type Filters, type PaintReference } from "./types";
 import { REFERENCES } from "@/data/references";
+import { makeReference } from "@/test/factory";
 
-function make(
-  id: string,
-  over: Partial<PaintReference> = {},
-): PaintReference {
-  return {
-    id,
-    title: id,
-    subject: "fruit",
-    difficulty: "gentle",
-    minutes: 6,
-    prompt: "",
-    alt: "",
-    palette: [],
-    tip: "",
-    source: "",
-    art: "",
-    ...over,
-  };
-}
+const make = makeReference;
 
 const CATALOG: PaintReference[] = [
   make("quick-gentle-fruit", { minutes: 5, difficulty: "gentle", subject: "fruit" }),

@@ -14,13 +14,28 @@ import {
   type Subject,
   type TimeBand,
 } from "@/lib/types";
-import { filterReferences, pickDaily, surpriseMe } from "@/lib/catalog";
+import {
+  enabledReferences,
+  filterReferences,
+  pickDaily,
+  surpriseMe,
+} from "@/lib/catalog";
 import { useFavorites, type FavoritesApi } from "@/hooks/useFavorites";
+import { useSources, type SourcesApi } from "@/hooks/useSources";
+import { usePainted, type PaintedApi } from "@/hooks/usePainted";
 import { rewet } from "@/lib/wash";
 import type { RandomSource } from "@/lib/shuffle";
 
-interface AppContextValue extends FavoritesApi {
+interface AppContextValue extends FavoritesApi, SourcesApi, PaintedApi {
+  /**
+   * Every reference there is, before source preferences are applied.
+   *
+   * Saved pieces resolve against this rather than against `catalogue`, so
+   * switching a source off never empties a shelf someone filled on purpose.
+   */
   references: PaintReference[];
+  /** The catalogue after disabled sources are removed; what discovery draws on. */
+  catalogue: PaintReference[];
   filters: Filters;
   activeFilters: number;
   setFilter: (patch: Partial<Filters>) => void;
@@ -71,6 +86,15 @@ export function AppProvider({
 }: AppProviderProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const favorites = useFavorites();
+  const sources = useSources();
+  // Shares the injected clock with the daily pick, so a marked date is
+  // deterministic under test.
+  const painted = usePainted(today);
+
+  const catalogue = useMemo(
+    () => enabledReferences(references, sources.disabledSources),
+    [references, sources.disabledSources],
+  );
 
   const filters: Filters = useMemo(
     () => ({
@@ -122,8 +146,8 @@ export function AppProvider({
   }, [setFilter]);
 
   const visible = useMemo(
-    () => filterReferences(references, filters),
-    [references, filters],
+    () => filterReferences(catalogue, filters),
+    [catalogue, filters],
   );
 
   /*
@@ -160,18 +184,19 @@ export function AppProvider({
     }
     // Seeded on the day and the filter combination, so narrowing a filter
     // moves to a genuinely different piece instead of the first match.
-    return pickDaily(references, filters, today);
-  }, [visible, pinnedId, references, filters, today]);
+    return pickDaily(catalogue, filters, today);
+  }, [visible, pinnedId, catalogue, filters, today]);
 
   const surprise = useCallback(() => {
-    const next = surpriseMe(references, filters, featured?.id ?? null, random);
+    const next = surpriseMe(catalogue, filters, featured?.id ?? null, random);
     if (next) rewet(() => setPinnedId(next.id));
     return next;
-  }, [references, filters, featured, random, setPinnedId]);
+  }, [catalogue, filters, featured, random, setPinnedId]);
 
   const value = useMemo<AppContextValue>(
     () => ({
       references,
+      catalogue,
       filters,
       activeFilters,
       setFilter,
@@ -180,9 +205,12 @@ export function AppProvider({
       featured,
       surprise,
       ...favorites,
+      ...sources,
+      ...painted,
     }),
     [
       references,
+      catalogue,
       filters,
       activeFilters,
       setFilter,
@@ -191,6 +219,8 @@ export function AppProvider({
       featured,
       surprise,
       favorites,
+      sources,
+      painted,
     ],
   );
 

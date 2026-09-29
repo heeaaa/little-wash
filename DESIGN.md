@@ -139,6 +139,10 @@ Today is a decision surface, not a document. Its order is fixed:
 **artwork -> identity (title, prompt, minutes, difficulty + its plain-English
 note) -> primary action -> time and energy -> subject -> palette.**
 
+A prompt is optional on a reference. When a piece has none the line is left
+out rather than rendered empty, and the identity block closes up around it -
+the order above is unchanged, one rung is simply absent.
+
 - **Time and energy lead.** They are the two questions the product is positioned
   on, so they are the primary control wherever they appear - never a "refine"
   panel reached after the results. Below `lg` they sit in a card directly under
@@ -167,6 +171,12 @@ marks with a text label, palette dab swatches (display only), native `<dialog>`
 enlarge view and bottom sheet, colour-coded collection cards, exercise cards
 with painterly demos, and a sticky editorial header (mark + wordmark, nav,
 saved count).
+
+**Optional content takes its container with it.** A reference may have no
+prompt and no tip. Detail drops the whole tinted Tip panel rather than heading
+an empty one, and Today omits the italic prompt line rather than rendering a
+blank paragraph: a card that promises something and then says nothing reads as
+a loading failure.
 
 **Closing a dialog must not re-enter.** `<dialog onClose>` fires on the native
 `close` event, which our own `dialog.close()` also triggers - so a close driven
@@ -389,7 +399,8 @@ workaround - `ink-faint` clears AA since it was darkened.
 - **No scattered background dabs** (removed - they competed with the artwork).
   Colour lives on real elements only.
 - **No sticky note on Today.** The prompt is the piece's own invitation and is
-  set as italic display type in the identity block at every width. The note was
+  set as italic display type in the identity block at every width, on the
+  pieces that have one. The note was
   duplicating it, was the loudest colour on the screen against a principle that
   the artwork carries the colour, and collided with the control block.
   `StickyNote` remains available for other surfaces and now paints from the
@@ -512,12 +523,116 @@ never repeats, and a transition that does is the thing that reads as canned.
   No decorative motion, no entrance animation per section, no hover
   choreography beyond the existing state changes.
 
+## The painted mark, and the register it must keep
+
+`PRODUCT.md:94` - "No pressure, ever. No streaks, no guilt, no achievement
+language. History is a record to enjoy, never a target to maintain." This is
+the part of the design system that is mostly about words.
+
+**The mark.** A brush glyph, not a tick: a tick reads as a task ticked off a
+list, and this is a record of having painted something. Sage (`--sage`) carries
+the state as a 38% fill, which is neither the rose of Saved nor the teal of a
+primary action - marking something painted is a quiet note to yourself.
+
+**The glyph is ink, not sage.** Measured: ink on the sage-tinted fill is
+**10.23:1**, comfortably past AA. A sage glyph on `--surface-raised` would be
+**1.96:1** and fails 3:1 outright, which is the same reason rose carries the
+heart but never the word.
+
+**Rules for anything that shows practice history:**
+
+1. **Absolute dates only.** "14 September", never "six days ago". A date
+   measured from *now* implies a clock you are falling behind.
+2. **Nothing reads across the dates.** No gaps, frequency, last-painted,
+   longest run or this-month-versus-last. `src/lib/painted.ts` exposes a store
+   and no summary, and a test asserts it stays that way.
+3. **A count is framed as Saved's is** - a plain number beside the section
+   heading. Never "x of y", never "this month", never progress toward anything.
+4. **No achievement vocabulary.** "Mark as painted" and "Painted". Never
+   Complete, Done, Finished, Achievement, Milestone, Goal, Streak.
+5. **The empty state invites, it does not correct.** Saved's register: "Tap
+   the heart on a piece you like the look of and it will wait here for you."
+6. **Nothing in the app chrome.** The header carries a saved count; painted
+   stays inside the studio. A tally of paintings in the furniture is a
+   scoreboard however it is worded.
+
+Rules 1, 3, 4, 5 and 6 are enforced by tests in `src/screens/Painted.test.tsx`
+and `e2e/painted.spec.ts`, because they are the requirement rather than a
+preference.
+
+**Where the control lives.** The detail view's action row, and the enlarged
+view's title bar - both places where someone has actually just painted.
+Deliberately not on cards or on Today: marking something painted from a grid,
+before opening it, is not a thing that happens.
+
 ## Assets and provenance
 
-Reference artwork is original CC0 placeholder watercolour SVG, labelled as
-placeholder. Production imagery must be original or appropriately licensed
-(open-access / CC0) with per-item provenance tracked. Icons are authored SVG in
-one stroke weight; no emoji.
+Reference artwork is currently original CC0 placeholder watercolour SVG,
+labelled as placeholder and carried under the `placeholder` source id so the
+app cannot forget what it is. Icons are authored SVG in one stroke weight; no
+emoji.
+
+### Sources and licences
+
+Every reference carries a structured `credit` - maker, holding institution,
+object URL, date, medium, licence and the date the metadata was captured - not
+a free-text string. The licence allowlist is enforced at build time.
+
+| Source | Licence | Images |
+| --- | --- | --- |
+| Prototype placeholders | CC0 1.0 | Ours, bundled |
+| Pexels | Pexels License (not CC0) | Hotlinked from its CDN |
+| Unsplash | Unsplash License (not CC0) | Hotlinked; its guidelines require it |
+| The Met, Smithsonian, Art Institute, Rijksmuseum | CC0 1.0 | Downloaded at build, served as our own AVIF/WebP |
+
+### The credit line
+
+**Every surface that shows a reference shows who made it.** CC0 requires no
+attribution and neither photo licence does either; the credit is a product
+commitment, not a licence obligation, so `CreditLine` never branches on
+`licence.requiresAttribution`.
+
+- Three densities. `compact` (Browse cards, the featured plate) is the maker
+  and the licence name as plain text. `inline` (the enlarged view) links the
+  maker, the work and the licence. `full` (Detail) adds date and medium.
+- `text-[0.8rem] text-ink-faint`, the same size as the existing plate caption.
+- **Always below the mat, never over the artwork.** The same rule as ornaments:
+  nothing sits on the surface a painter is mixing colour against. In the
+  enlarged view the credit joins the title bar, so everything that is not the
+  bar is still artwork.
+- Outbound links carry `rel="noopener noreferrer"`; Unsplash links carry the
+  UTM parameters its guidelines require.
+- Platform credits ("Photos provided by Pexels") are an application-level
+  obligation and live in the footer, built from the sources actually on screen,
+  so switching a source off removes its line.
+
+### Reference images
+
+Intrinsic size comes from the item, never from the component: `RefArt` used to
+hard-code 1000x1000 against twelve square SVGs, and photographs are not square.
+Each item carries its own width ladder, and a low-quality placeholder is drawn
+as a sibling element that unmounts on load - never a filter on the artwork,
+which must report `filter: none` once settled.
+
+**The plate takes the reference's shape, on the screens where the artwork is
+the point.** Today's featured plate and Detail's plate set `aspect-ratio` from
+the item's intrinsic size (`RefArt ownAspect`, `.art-ratio`), clamped to the
+0.5-2.0 range the ingestion pipeline enforces. The viewport caps still decide
+how large it gets; `max-width` is now the cap multiplied by the ratio, which is
+what keeps a height-capped plate from staying full width and letterboxing
+anyway.
+
+They used to be fixed - `aspect-[4/3]` on Today, `aspect-square` on Detail -
+which was right when every reference was a 400x400 SVG. Measured against the
+first broad harvest (53% square-ish, 22% tall portraits, 14% wide), a fixed
+plate left the artwork filling **45% of the plate at 0.6, and 17% on desktop**,
+the rest empty mat. Verified after the change: 100% at every ratio, with tall
+and square references gaining about 45% more artwork area on a phone.
+
+**Cards keep their fixed ratio.** `PieceCard` stays `aspect-[5/4]` on purpose:
+a grid of differently shaped cards reads as broken rather than as varied. The
+rule is that the plate follows the artwork where the artwork is the subject of
+the screen, and follows the grid where the grid is.
 
 ## Roadmap (future phases, not yet built)
 

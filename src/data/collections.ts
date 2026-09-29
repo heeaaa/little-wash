@@ -9,6 +9,15 @@ export interface Collection {
   pigmentVar: string;
   /** The filter this collection stands for; opening it applies these. */
   filter: Partial<Filters>;
+  /**
+   * An explicit, curated list, for a theme no filter can express.
+   *
+   * Sets like Pexels' "Home from Every Angle" are curated around a mood rather
+   * than a subject, difficulty or duration, so they cannot be written as a
+   * filter. A collection resolves through its list or its filter, never both -
+   * see resolveCollection in lib/collections.ts.
+   */
+  referenceIds?: string[];
   /** Subject used to pick a representative cover from the catalogue. */
   coverSubject: Subject;
 }
@@ -61,8 +70,23 @@ export const COLLECTIONS: Collection[] = [
   },
 ];
 
-/** Build a URLSearchParams string from a collection's filter. */
+/** The query parameter that opens a curated collection on Browse. */
+export const COLLECTION_PARAM = "collection";
+
+/**
+ * The URL that opens a collection.
+ *
+ * A filter-backed collection *is* its filter, so opening it just sets those
+ * parameters and the rest of the app carries on as normal. A curated list
+ * cannot be written as a filter - "Simply Citrus" is a theme, not a subject -
+ * so it travels as its own id instead. Without this, opening a list-backed
+ * collection set no parameters at all and quietly showed the whole catalogue.
+ */
 export function collectionSearch(collection: Collection): string {
+  if (collection.referenceIds) {
+    return `?${new URLSearchParams({ [COLLECTION_PARAM]: collection.id })}`;
+  }
+
   const merged = { ...DEFAULT_FILTERS, ...collection.filter };
   const params = new URLSearchParams();
   if (merged.time !== "all") params.set("time", merged.time);

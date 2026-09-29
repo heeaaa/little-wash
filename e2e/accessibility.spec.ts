@@ -1,16 +1,22 @@
 import { test, expect } from "@playwright/test";
 import { createRequire } from "node:module";
-import { ready, seedFavourites } from "./support";
+import { pieceIdsFrom, ready, seedFavourites, seedPainted } from "./support";
 
 const require = createRequire(import.meta.url);
 const AXE_PATH = require.resolve("axe-core/axe.min.js");
 
+/*
+  Detail needs a real piece, and which piece that is depends on the catalogue,
+  so it is resolved at run time rather than named here. Everything else is a
+  fixed route.
+*/
 const ROUTES = [
   ["Today", "#/"],
   ["Browse", "#/browse"],
-  ["Detail", "#/piece/ripe-pear"],
+  ["Detail", null],
   ["Exercises", "#/exercises"],
   ["Your studio", "#/studio"],
+  ["Sources", "#/sources"],
 ] as const;
 
 /**
@@ -24,8 +30,12 @@ test.describe("accessibility", () => {
     test(`${name} has no axe violations`, async ({ page, context }) => {
       // The studio and the header palette only have anything to show with
       // saved pieces, so seed them rather than testing an empty shell.
-      await seedFavourites(context, ["ripe-pear", "paper-boat", "two-toadstools"]);
-      await page.goto(`/${route}`);
+      const seeds = await pieceIdsFrom(context, 3);
+      await seedFavourites(context, seeds);
+      // Seed the painted record too, so axe sees that section populated
+      // rather than only ever its empty state.
+      await seedPainted(context, seeds.slice(0, 2));
+      await page.goto(`/${route ?? `#/piece/${seeds[0]}`}`);
       await ready(page);
       await page.addScriptTag({ path: AXE_PATH });
 
@@ -47,7 +57,7 @@ test.describe("accessibility", () => {
   }
 
   test("every interactive target meets the 44px floor", async ({ page, context }) => {
-    await seedFavourites(context, ["ripe-pear"]);
+    await seedFavourites(context, await pieceIdsFrom(context, 1));
     await page.goto("/#/browse");
     await ready(page);
 

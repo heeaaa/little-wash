@@ -50,6 +50,16 @@ jobs:
       - name: Unit and component tests, with coverage thresholds
         run: npm run test:coverage
 
+      # The catalogue is generated from committed inputs, so rebuilding it here
+      # must be a no-op. A diff means src/data/catalog.generated.ts or
+      # docs/CREDITS.md was hand-edited, which would let a reference past the
+      # licence, provenance and alt-text gates. No keys needed: it reads only
+      # catalog/approved/.
+      - name: Catalogue is in sync with its approved inputs
+        run: |
+          npm run catalog:build
+          git diff --exit-code -- src/data/catalog.generated.ts docs/CREDITS.md
+
       - name: Production build
         run: npm run build
 

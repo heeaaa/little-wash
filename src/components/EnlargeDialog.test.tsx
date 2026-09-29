@@ -1,10 +1,13 @@
 import { describe, it, expect, beforeAll, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router-dom";
 import { EnlargeDialog } from "@/components/EnlargeDialog";
-import { REFERENCES } from "@/data/references";
+import { AppProvider } from "@/state/AppContext";
+import { CATALOGUE } from "@/data/catalogue";
 
-const reference = REFERENCES.find((r) => r.id === "ripe-pear")!;
+// Any reference will do; naming one ties the test to a catalogue.
+const reference = CATALOGUE[0]!;
 
 // jsdom ships <dialog> without the modal methods, so drive `open` directly.
 beforeAll(() => {
@@ -18,9 +21,24 @@ beforeAll(() => {
   };
 });
 
+/*
+  The dialog carries a "mark as painted" control now, so it needs the app
+  context that control reads from. Everything else about these tests is
+  unchanged.
+*/
+function renderDialog(props: { open: boolean; onClose: () => void }) {
+  return render(
+    <MemoryRouter>
+      <AppProvider references={CATALOGUE}>
+        <EnlargeDialog reference={reference} {...props} />
+      </AppProvider>
+    </MemoryRouter>,
+  );
+}
+
 describe("EnlargeDialog", () => {
   it("opens on demand and shows the reference uncropped with its description", () => {
-    render(<EnlargeDialog reference={reference} open onClose={() => {}} />);
+    renderDialog({ open: true, onClose: () => {} });
 
     const dialog = screen.getByRole("dialog", { hidden: true });
     expect(dialog).toHaveAttribute("open");
@@ -33,7 +51,7 @@ describe("EnlargeDialog", () => {
   it("closes from the close button", async () => {
     const onClose = vi.fn();
     const user = userEvent.setup();
-    render(<EnlargeDialog reference={reference} open onClose={onClose} />);
+    renderDialog({ open: true, onClose: onClose });
 
     await user.click(screen.getByRole("button", { name: /close enlarged view/i }));
     expect(onClose).toHaveBeenCalled();
@@ -48,9 +66,7 @@ describe("EnlargeDialog", () => {
     box from coming back.
   */
   it("pins no aspect ratio or fixed height, and defers sizing to the viewport", () => {
-    const { container } = render(
-      <EnlargeDialog reference={reference} open onClose={() => {}} />,
-    );
+    const { container } = renderDialog({ open: true, onClose: () => {} });
 
     const classes = [...container.querySelectorAll<HTMLElement>("*")]
       .flatMap((el) => [...el.classList])

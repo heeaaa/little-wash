@@ -38,9 +38,15 @@ npm run dev        # opens straight onto Today (#/)
 own bundled JavaScript, and linting it produced ~1,300 errors that had nothing
 to do with this app - enough noise to make the gate useless.
 
-There is no `test:integration`: no backend exists to integrate against yet. It
-is deliberately absent rather than stubbed, because an empty green job is worse
-than an honest gap.
+`test:integration` checks the live provider APIs for schema drift - the unit
+suite runs each adapter against payloads captured in `catalog/fixtures/`, which
+is deterministic but cannot notice a provider changing its response since. It
+needs keys, is not part of CI, and skips any provider whose key is absent with
+the reason printed. A skip is not a pass.
+
+There is still no backend to integrate against. That part is deliberately
+absent rather than stubbed, because an empty green job is worse than an honest
+gap.
 
 ## CI
 
@@ -77,9 +83,17 @@ route with their tail and query intact; anything unrecognised goes to Today.
   one-tap alternative and Browse owns the library.
 - **Browse** - the full catalogue (12 references) with the same control
   hierarchy, plus curated collections.
-- **Detail** - the reference uncropped on a fixed neutral mat, its prompt,
-  palette and an enlarged view for use beside a physical sketchbook.
+- **Detail** - the reference uncropped on a fixed neutral mat, its prompt and
+  tip where it has them, its palette, and an enlarged view for use beside a
+  physical sketchbook.
 - **Exercises** - 6 brushwork and colour warm-ups.
+- **Your studio** (`#/studio`) - two sections: pieces you set aside, and a
+  record of what you have painted. The record is dated and deliberately plain:
+  no streaks, no totals framed as progress, no relative dates. See "The painted
+  mark, and the register it must keep" in `DESIGN.md`.
+- **Sources** (`#/sources`) - which collections ideas are drawn from, with each
+  source's licence and a link to it. A standing preference, not a filter:
+  it shapes the catalogue before filtering, and saved pieces ignore it.
 - **Save** - favourites persist on-device via `localStorage` behind a versioned
   schema, degrading to in-memory when storage is unavailable. A dedicated saved
   list screen is still backlog.
@@ -146,6 +160,90 @@ production.
 
 Brand originals live in `assets/` and are never edited; everything in
 `src/assets/brand/` and `public/` is a regenerable derivative. Reference artwork
-is original CC0 placeholder watercolour SVG, labelled as placeholder.
-Production imagery will be original or appropriately licensed, with provenance
-recorded per item. Full asset mapping is in `DESIGN.md`.
+is original CC0 placeholder watercolour SVG, labelled as placeholder and
+carried under the `placeholder` source id. Full asset mapping is in `DESIGN.md`.
+
+Every reference carries a structured `credit` - maker, institution, object URL,
+licence, capture date - and **every surface that shows a reference shows who
+made it**, whether or not the licence requires it. See "Assets and provenance"
+in `DESIGN.md`.
+
+### Building the catalogue
+
+The catalogue is ingested by build-time scripts in `scripts/catalog/`, never by
+the app. Nothing in `scripts/` is imported from `src/`, so no provider code and
+no API key can reach the browser bundle.
+
+```bash
+npm run catalog:coverage                                      # where the catalogue is thin
+npm run catalog:harvest -- --plan                             # the whole harvest plan
+npm run catalog:harvest -- --plan --subject=botanical         # one subject
+npm run catalog:shortlist -- --source=pexels                  # rank by sketchability
+npm run catalog:review -- --source=pexels --subject=botanical # approve, one subject at a time
+npm run catalog:build                                         # gates, then generate
+```
+
+`docs/curating.md` is the working reference for a curation session: the six
+subject names, the command sequence, the targets, and the known rough edges.
+
+`catalog:coverage` is the command that answers "what next": it prints the 6
+subjects x 3 time bands matrix against the target, says whether the catalogue
+is ready to replace the placeholders in the app, and names the planned queries
+that would fill each gap.
+
+`catalog:harvest --plan` works through `catalog/harvest-plan.json`, which
+exists because the first session harvested a single themed collection and
+produced a catalogue that was 100% fruit with nothing under ten minutes.
+Coverage has to be planned; it does not fall out of one search.
+
+Each candidate is **measured as it arrives** - subject area, how many separate
+things are in the frame, border variance, sharpness and detail load - so the
+queue is ordered by what the images look like rather than by their captions.
+Near-identical images are dropped outright: the same stock photograph turning
+up from three different searches is common in a broad harvest.
+
+`catalog:build` reads only `catalog/approved/` and writes
+`src/data/catalog.generated.ts` and `docs/CREDITS.md`. It needs no keys and is
+deterministic, so CI re-runs it and fails if the generated files have drifted
+from their inputs.
+
+The build refuses an entry that has no licence from the allowlist, no link back
+to the work, no capture date, or alt text that is missing, too short, a repeat
+of the title, or the provider's own caption. Sketchability itself is a human
+judgement: the heuristics only decide what a curator sees first.
+
+**The review tool suggests as you go.** It samples the image in a canvas and
+reads its pixels, then offers three prompts, three tips and a palette matched
+to named watercolour pigments, plus a starting difficulty and duration. Each
+suggested line carries the measurement that makes it true of that image, and
+which of the eligible lines are offered is rotated by the candidate's own id,
+so a session is not handed the same four sentences over and over. A prompt and
+a tip are both optional - plenty of references say all they need to by being
+the image. The
+palette is read from the centre of the image, with anything that reads as bare
+paper removed - a photograph's biggest colour by area is usually its backdrop,
+and white is the paper's job, not a pigment's.
+
+Alt text is offered only as a **scaffold with [blanks]**, never as a finished
+sentence. Nothing in the pipeline can see the subject, so a complete-looking
+description would be a guess - exactly what the build's alt gate exists to
+catch. The blanks are what make a curator look at the image.
+
+**Rejections teach it.** "Set aside" asks why, and both approvals and
+rejections record the phrasing of the candidate they were about in
+`catalog/curation-vocabulary.json`. Phrases that keep landing on one side start
+to carry weight in future shortlists. It is deliberately conservative: a phrase
+needs at least three decisions, at least three quarters agreeing, and the
+learned signal is capped well below the hard proportion and resolution rules,
+so it can reorder a queue but never override a fact about the file.
+
+`npm run test:integration` checks the live APIs for schema drift. It needs keys,
+is not part of CI, and skips any provider whose key is absent with its reason
+printed - a skip is not a pass.
+
+### Ingestion credentials
+
+Copy `.env.example` to `.env` and fill in keys for the sources you ingest from.
+They are read by build-time scripts only and are deliberately **not** `VITE_`
+prefixed, so Vite cannot put them in the browser bundle. `.env` is gitignored,
+and the app itself makes no authenticated request to any provider.
