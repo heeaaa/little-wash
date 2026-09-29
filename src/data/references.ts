@@ -1,3 +1,4 @@
+import { LICENCES } from "@/lib/sources/registry";
 import type { PaintReference } from "@/lib/types";
 
 import pear from "@/assets/refs/pear.svg";
@@ -13,7 +14,45 @@ import teapot from "@/assets/refs/teapot.svg";
 import cottage from "@/assets/refs/cottage.svg";
 import cherries from "@/assets/refs/cherries.svg";
 
-const SOURCE = "Original illustration for Little Wash - CC0 (prototype placeholder art)";
+const PLACEHOLDER_HOME = "https://github.com/heeaaa/little-wash";
+
+/**
+ * Provenance for the prototype's own artwork.
+ *
+ * These twelve are original CC0 illustrations drawn for Little Wash, not real
+ * references, and CLAUDE.md requires temporary assets to be labelled honestly.
+ * They carry the `placeholder` source id so the sources screen can say so and
+ * so retiring them is a data change rather than a code change.
+ */
+function placeholder(
+  id: string,
+  art: string,
+): Pick<PaintReference, "kind" | "credit" | "image"> {
+  return {
+    kind: "artwork",
+    credit: {
+      sourceId: "placeholder",
+      institution: "Little Wash prototype",
+      externalId: id,
+      objectUrl: PLACEHOLDER_HOME,
+      creator: null,
+      creatorUrl: null,
+      dateDisplay: null,
+      medium: "Original placeholder illustration",
+      licence: LICENCES["cc0-1.0"],
+      retrievedAt: "2026-09-20",
+    },
+    image: {
+      delivery: "local",
+      // One width: these are 400x400 SVGs, so a resolution ladder would be
+      // meaningless. Real references arrive with three.
+      widths: [{ width: 400, src: art }],
+      intrinsicWidth: 400,
+      intrinsicHeight: 400,
+      lqip: null,
+    },
+  };
+}
 
 /**
  * Prototype catalogue. Deterministic and hand-authored so filtering, shuffle and
@@ -36,8 +75,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Yellow Ochre", hex: "#c69a52" },
     ],
     tip: "Drop the green into the still-wet yellow and tilt the paper - don't stir the two together.",
-    source: SOURCE,
-    art: pear,
+    ...placeholder("ripe-pear", pear),
   },
   {
     id: "lemon-sprig",
@@ -53,8 +91,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Raw Sienna", hex: "#c98a3c" },
     ],
     tip: "Leave a soft white gap for the highlight rather than painting around it too tightly.",
-    source: SOURCE,
-    art: lemon,
+    ...placeholder("lemon-sprig", lemon),
   },
   {
     id: "autumn-persimmon",
@@ -70,8 +107,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Sap Green", hex: "#8a9a4a" },
     ],
     tip: "Start pale and warm, then charge one side with a stronger orange for the shadow while wet.",
-    source: SOURCE,
-    art: persimmon,
+    ...placeholder("autumn-persimmon", persimmon),
   },
   {
     id: "morning-mug",
@@ -87,8 +123,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Warm Grey", hex: "#c4b2a6" },
     ],
     tip: "Keep the steam almost dry - a nearly clean, barely-there stroke reads better than a solid line.",
-    source: SOURCE,
-    art: mug,
+    ...placeholder("morning-mug", mug),
   },
   {
     id: "potted-succulent",
@@ -104,8 +139,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Burnt Sienna", hex: "#b96b45" },
     ],
     tip: "Vary the green leaf to leaf - a touch more blue on some, more yellow on others - so it doesn't go flat.",
-    source: SOURCE,
-    art: succulent,
+    ...placeholder("potted-succulent", succulent),
   },
   {
     id: "two-toadstools",
@@ -121,8 +155,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Burnt Umber", hex: "#8a5a3c" },
     ],
     tip: "Paint the cap and lift out the spots with a thirsty brush while the red is still damp.",
-    source: SOURCE,
-    art: mushroom,
+    ...placeholder("two-toadstools", mushroom),
   },
   {
     id: "scallop-shell",
@@ -138,8 +171,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Raw Umber", hex: "#b98a6a" },
     ],
     tip: "Let the base wash dry fully, then draw the ridges with a fine damp brush so they don't bleed.",
-    source: SOURCE,
-    art: seashell,
+    ...placeholder("scallop-shell", seashell),
   },
   {
     id: "tulip-in-a-bottle",
@@ -155,8 +187,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Cool Grey", hex: "#cdd8dc" },
     ],
     tip: "Paint the glass with only a few grey edge strokes - the white paper does the rest of the work.",
-    source: SOURCE,
-    art: tulipBottle,
+    ...placeholder("tulip-in-a-bottle", tulipBottle),
   },
   {
     id: "paper-boat",
@@ -172,8 +203,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Payne's Grey", hex: "#6d7d84" },
     ],
     tip: "Keep the fold lines sharp and dark, and let the water beneath stay light and broken.",
-    source: SOURCE,
-    art: paperBoat,
+    ...placeholder("paper-boat", paperBoat),
   },
   {
     id: "little-teapot",
@@ -189,8 +219,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Payne's Grey", hex: "#5f8f87" },
     ],
     tip: "Get the lid and base ellipses agreeing before any colour - it's the drawing that sells a teapot.",
-    source: SOURCE,
-    art: teapot,
+    ...placeholder("little-teapot", teapot),
   },
   {
     id: "cottage-on-the-hill",
@@ -207,8 +236,7 @@ export const REFERENCES: PaintReference[] = [
       { name: "Raw Sienna", hex: "#c69a52" },
     ],
     tip: "Lay the sky and hill as one wet wash first, then let it dry before the roof and walls go on.",
-    source: SOURCE,
-    art: cottage,
+    ...placeholder("cottage-on-the-hill", cottage),
   },
   {
     id: "bowl-of-cherries",
@@ -225,7 +253,6 @@ export const REFERENCES: PaintReference[] = [
       { name: "Warm Grey", hex: "#d9cdbb" },
     ],
     tip: "Leave a small white dot on each cherry and keep the shadowed ones cooler and darker for depth.",
-    source: SOURCE,
-    art: cherries,
+    ...placeholder("bowl-of-cherries", cherries),
   },
 ];

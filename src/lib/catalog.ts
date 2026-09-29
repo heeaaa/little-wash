@@ -1,5 +1,7 @@
 import { DEFAULT_FILTERS, type Filters, type PaintReference, type TimeBand } from "./types";
 import { mulberry32, pickDifferent, type RandomSource } from "./shuffle";
+import type { SourceId } from "./sources/types";
+import type { PaintedEntry } from "./painted";
 
 /**
  * What each band actually spans, in minutes, inclusive at both ends.
@@ -64,6 +66,47 @@ export function savedReferences(
   return favorites
     .map((id) => all.find((reference) => reference.id === id))
     .filter((reference): reference is PaintReference => Boolean(reference))
+    .reverse();
+}
+
+/**
+ * The catalogue a painter has chosen to draw ideas from.
+ *
+ * Applied before filtering rather than as a fourth filter: time, difficulty
+ * and subject are things you change while looking for today's piece, whereas
+ * this is a standing preference about what the catalogue is made of. Saved
+ * pieces deliberately bypass it - see the studio - because turning a source
+ * off should not empty a shelf you filled on purpose.
+ */
+export function enabledReferences(
+  all: readonly PaintReference[],
+  disabledSources: readonly SourceId[],
+): PaintReference[] {
+  if (disabledSources.length === 0) return [...all];
+  return all.filter(
+    (reference) => !disabledSources.includes(reference.credit.sourceId),
+  );
+}
+
+/**
+ * The pieces you have painted, newest first, each with the day you marked it.
+ *
+ * Newest first for the same reason savedReferences reverses: the thing you did
+ * most recently is the thing you most want to see. Unknown ids are dropped
+ * rather than rendered as holes - a curated catalogue can lose a piece while a
+ * local record of having painted it survives, and that record should fade
+ * quietly rather than break the screen.
+ */
+export function paintedReferences(
+  all: readonly PaintReference[],
+  entries: readonly PaintedEntry[],
+): Array<{ reference: PaintReference; on: string }> {
+  return entries
+    .map((entry) => {
+      const reference = all.find((candidate) => candidate.id === entry.id);
+      return reference ? { reference, on: entry.on } : null;
+    })
+    .filter((found): found is { reference: PaintReference; on: string } => found !== null)
     .reverse();
 }
 

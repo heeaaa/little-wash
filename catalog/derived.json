@@ -1,0 +1,482 @@
+{
+  "apple-blossom-vase-0737": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/20737-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/20737-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/20737-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3046,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#d8d8d8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/ad/original/DP255665.jpg"
+  },
+  "bird-shaped-vessel-9496": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/39496-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/39496-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/39496-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 2978,
+    "intrinsicHeight": 3722,
+    "dominantColour": "#585858",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/DT4131.jpg"
+  },
+  "bronze-cat-0749": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/570749-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/570749-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/570749-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3000,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#484848",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/eg/original/66.99.145_EGDP021821.jpg"
+  },
+  "carnelian-falcon-5577": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/555577-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/555577-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/555577-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 4000,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#e8e8f8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/eg/original/LC-59_103_15_EGDP036718.jpg"
+  },
+  "copper-pheasant-6105": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/56105-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/56105-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/56105-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3792,
+    "intrinsicHeight": 2698,
+    "dominantColour": "#e8d8b8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/DP123621.jpg"
+  },
+  "coral-red-bottle-vase-2237": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/42237-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/42237-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/42237-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3002,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#383838",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-14605-017.jpg"
+  },
+  "cream-stoneware-dish-2390": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/42390-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/42390-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/42390-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3919,
+    "intrinsicHeight": 2940,
+    "dominantColour": "#b8b8a8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/DP342523.jpg"
+  },
+  "dogwood-vase-9317": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/9317-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/9317-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/9317-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 2991,
+    "intrinsicHeight": 3722,
+    "dominantColour": "#989898",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/ad/original/DT161.jpg"
+  },
+  "faience-jar-2835": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/552835-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/552835-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/552835-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3000,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#e8e8e8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP-31822-002.jpg"
+  },
+  "falcon-with-spread-wings-8439": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/548439-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/548439-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/548439-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 4000,
+    "intrinsicHeight": 3000,
+    "dominantColour": "#d8d8d8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP243445.jpg"
+  },
+  "greek-bronze-horse-1050": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/251050-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/251050-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/251050-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 4000,
+    "intrinsicHeight": 3660,
+    "dominantColour": "#d8d8d8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/gr/original/DP-44413-001.jpg"
+  },
+  "lapis-fish-4787": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/554787-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/554787-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/554787-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 2000,
+    "intrinsicHeight": 1096,
+    "dominantColour": "#f8f8f8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/eg/original/1975.35.jpg"
+  },
+  "peach-bloom-box-0925": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/50925-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/50925-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/50925-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 2238,
+    "intrinsicHeight": 1939,
+    "dominantColour": "#c8c8b8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/LC-29_100_358ab-001.jpg"
+  },
+  "persimmon-wood-box-0280": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/930280-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/930280-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/930280-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 4000,
+    "intrinsicHeight": 3000,
+    "dominantColour": "#787878",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-45702-001.jpg"
+  },
+  "red-clay-amphora-0926": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/240926-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/240926-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/240926-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 4000,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#c8c8c8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/gr/original/DP121310.jpg"
+  },
+  "red-jasper-hippo-3447": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/573447-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/573447-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/573447-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3361,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#e8e8e8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP-14246-001.jpg"
+  },
+  "resting-pigeon-6043": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/36043-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/36043-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/36043-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 4000,
+    "intrinsicHeight": 2803,
+    "dominantColour": "#c8b898",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-15190-001.jpg"
+  },
+  "roses-in-a-dark-vase-2485": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/362485-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/362485-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/362485-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 2920,
+    "intrinsicHeight": 3867,
+    "dominantColour": "#988868",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP210824.jpg"
+  },
+  "silver-jar-0897": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/550897-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/550897-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/550897-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3691,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#787878",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP-15342-001.jpg"
+  },
+  "small-plant-study-2554": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/362554-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/362554-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/362554-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 2385,
+    "intrinsicHeight": 3706,
+    "dominantColour": "#f8e8c8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP823473.jpg"
+  },
+  "turquoise-glass-vase-3835": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/53835-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/53835-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/53835-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 3000,
+    "intrinsicHeight": 4000,
+    "dominantColour": "#787878",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-15452-070.jpg"
+  },
+  "william-the-hippo-4227": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/544227-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/544227-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/544227-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 2899,
+    "intrinsicHeight": 3870,
+    "dominantColour": "#e8e8e8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP248993.jpg"
+  },
+  "woodland-plant-study-2547": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/362547-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/362547-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/362547-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 2417,
+    "intrinsicHeight": 3722,
+    "dominantColour": "#f8e8c8",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP823475.jpg"
+  },
+  "yellow-bowl-2552": {
+    "widths": [
+      {
+        "width": 400,
+        "src": "references/met/42552-400.webp"
+      },
+      {
+        "width": 800,
+        "src": "references/met/42552-800.webp"
+      },
+      {
+        "width": 1600,
+        "src": "references/met/42552-1600.webp"
+      }
+    ],
+    "intrinsicWidth": 4000,
+    "intrinsicHeight": 3002,
+    "dominantColour": "#282828",
+    "sourceUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-14609-091.jpg"
+  }
+}

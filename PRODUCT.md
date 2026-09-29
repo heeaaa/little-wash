@@ -80,7 +80,11 @@ Open decisions, not yet made:
 
 ## Evidence on Hand
 
-- **Reference imagery:** open-licensed and public-domain collections (for example Rijksmuseum, the Met's open access, Smithsonian Open Access, and CC0 photo libraries). This requires per-item attribution and provenance tracking as a first-class data requirement, and a curation pipeline that filters those large collections down to genuinely sketchable subjects.
+- **Reference imagery:** two kinds of source, both free to use, not both public domain.
+  - **Public-domain museum collections** under CC0: the Met's open access, Smithsonian Open Access, the Art Institute of Chicago, the Rijksmuseum.
+  - **Free photography platforms** under their own custom licences: **Pexels** and **Unsplash**. Neither is CC0 or public domain. Both grant free commercial use with attribution appreciated rather than required, and both forbid selling unaltered copies or using their photos to build a service that competes with them. Little Wash curates a small set as painting references: each one is chosen by hand for sketchability, then given a written description, a suggested palette matched to named pigments, a difficulty and a realistic duration, plus a prompt or a brushwork tip where one adds something (both are optional, because some references say all they need to by being the image). It offers no in-app photo search and no download, so it stays clearly outside that. If a photo-browsing or download feature is ever proposed, these terms must be re-read first.
+- Per-item attribution and provenance tracking is a first-class data requirement, and a curation pipeline filters these large collections down to genuinely sketchable subjects.
+- **Attribution is always shown**, on every surface a reference appears, whether or not the licence requires it. Four of the five allowed licences require nothing. The credit is given because the person who made the work deserves it. Pexels and Unsplash additionally require a platform credit, which the footer carries.
 - No existing codebase, design system, brand assets, logo, or copy exist yet. The repository currently contains only project instructions and tooling configuration.
 - No users, testimonials, usage data, press or case studies exist. Future work must not fabricate any of these, or imply a catalogue size, user count or partnership that has not been established.
 

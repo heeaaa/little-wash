@@ -1,0 +1,3608 @@
+{
+  "proposedBy": "Claude",
+  "proposedAt": "2026-09-28",
+  "proposals": [
+    {
+      "candidateId": "pexels:37764589",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject with a simple shape, sharp from wick to base. Good for practising darks and a soft glow.",
+      "notes": [
+        "The one candle on black kept out of eight in this queue; the rest are proposed as duplicates.",
+        "Black background, which you have said there are a lot of elsewhere. Still life has none yet."
+      ],
+      "fields": {
+        "title": "Candle Flame",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "A single cream pillar candle, its top softened with melted wax, with a tall bright flame against a completely black background.",
+        "palette": [
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          }
+        ],
+        "prompt": "Build the dark in two passes rather than one heavy one.",
+        "tip": "Leave the flame as bare paper and drop a pale naples yellow halo round it while the paper is wet."
+      }
+    },
+    {
+      "candidateId": "pexels:29684991",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "Simple focus subject on a plain white background. White on white practice: the rice stays as paper against the dark pot.",
+      "notes": [
+        "Sap Green added by eye for the herbs; the pixels read only the pot and the rice.",
+        "Unsure because it is food, which you have not decided on before."
+      ],
+      "fields": {
+        "title": "Curd Rice Bowl",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A round black clay pot of creamy white curd rice, topped with chopped coriander and a few dark fried chillies, on a plain white ground.",
+        "palette": [
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Leave the rice as paper and let the black pot do the work.",
+        "tip": "Leave the lightest area as bare paper - it is easier to keep than to recover."
+      }
+    },
+    {
+      "candidateId": "pexels:38559758",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain background with a clear cast shadow. Interesting texture without being busy.",
+      "notes": [
+        "Rose Madder and Ultramarine Blue added by eye for the lilac shell; the pixels read mostly the peach ground."
+      ],
+      "fields": {
+        "title": "Purple Scallop Shell",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A lilac scallop shell with fanned ridges and pale, crusty barnacle patches, lying on a flat peach surface with a soft shadow to the right.",
+        "palette": [
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Ultramarine Blue",
+            "hex": "#2f4a9c"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Paint the fan of ridges as one shape first; the barnacles go on last.",
+        "tip": "Mix the lilac from rose madder with a touch of ultramarine, and use the same mix, only stronger, for the shadow."
+      }
+    },
+    {
+      "candidateId": "pexels:38746784",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "The simplest of the four shells in this queue: one smooth shape, a plain ground and a soft shadow. A quick warm-up.",
+      "fields": {
+        "title": "White Cockle Shell",
+        "subject": "still-life",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A smooth white cockle shell with fine ridges and a blush of pink near the hinge, resting on a plain peach surface with a soft shadow beneath.",
+        "palette": [
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Chinese White",
+            "hex": "#f0ece2"
+          }
+        ],
+        "prompt": "Wash the peach ground round the shell and let the paper be the shell.",
+        "tip": "Grey the warm grey with a little burnt sienna instead of black, and it will stay alive as it dries."
+      }
+    },
+    {
+      "candidateId": "pexels:16956413",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Clear focus subject on a plain white background. The leaves are good brushstroke practice and the vase pattern can be simplified.",
+      "notes": [
+        "Alizarin Crimson added by eye; the pixels missed the rose entirely and read Sap Green and Warm Grey."
+      ],
+      "fields": {
+        "title": "Rose in a Bud Vase",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A single deep pink rose on a long stem with a few serrated leaves, in a slim white porcelain vase painted with small flowers and a blue butterfly, on plain white.",
+        "palette": [
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Paint the rose and the leaves, and let the vase stay mostly paper.",
+        "tip": "Suggest the vase's pattern with a few dabs of colour rather than copying each flower."
+      }
+    },
+    {
+      "candidateId": "pexels:5538164",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple object with a strong cast shadow and different tones. Not busy.",
+      "notes": [
+        "Burnt Sienna added by eye for the amber glass and the light in the shadow."
+      ],
+      "fields": {
+        "title": "Amber Bottle and Shadow",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A brown glass bottle with a gold cap standing on pale grey concrete in low sunlight, casting a long dark shadow with a glow of amber light inside it.",
+        "palette": [
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "The shadow is half the picture, so give it as much care as the bottle.",
+        "tip": "Get the darkest dark in early, while you still have the nerve. Everything else reads against it."
+      }
+    },
+    {
+      "candidateId": "pexels:6387856",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "A single simple shape with no fiddly detail. Good for a quick wet-in-wet warm-up.",
+      "notes": [
+        "Lemon Yellow in place of the measured Naples Yellow, by eye: the light is a cool lime yellow.",
+        "Unsure because the subject is a shadow rather than an object."
+      ],
+      "fields": {
+        "title": "Bottle Shadow",
+        "subject": "still-life",
+        "difficulty": "gentle",
+        "minutes": 8,
+        "alt": "The shadow of a flat bottle cast on a white wall, with a patch of lime-yellow light shining through its middle and spilling across the tabletop.",
+        "palette": [
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "One shape, soft light. Paint the shadow in a single wash and drop the yellow in while it is wet.",
+        "tip": "Wet the shape first and drop colour in, so the edges stay soft where they meet the paper."
+      }
+    },
+    {
+      "candidateId": "pexels:7291706",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain white background, sharp throughout. The veins are a nice detail on a simple shape.",
+      "notes": [
+        "Rose Madder and Cadmium Orange added by eye for the coral bloom; the pixels read mostly the white linen."
+      ],
+      "fields": {
+        "title": "Anthurium in Glass",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "One coral anthurium with a heart-shaped, heavily veined bloom and a dark spadix, on a long stem in a small round glass vase, against soft white linen.",
+        "palette": [
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Get the heart shape down in one wash, then add the veins while it is still damp.",
+        "tip": "Use a bigger brush than the shape seems to need. It holds enough water to finish the wash in one go."
+      }
+    },
+    {
+      "candidateId": "pexels:5043066",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple focus subject on a plain background. White petals are good practice for leaving the paper.",
+      "notes": [
+        "Sap Green added by eye for the stem and leaf."
+      ],
+      "fields": {
+        "title": "White Tulip",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A single white tulip with one long green leaf, in a round frosted glass vase wrapped in a dark pewter floral pattern, on a pale grey gradient.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Leave the petals as paper and shape them with the grey around them.",
+        "tip": "Grey the cool grey with a little terre verte instead of black, and it will stay alive as it dries."
+      }
+    },
+    {
+      "candidateId": "pexels:7552740",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple subject on a white background, and the stems are good brushstroke practice. A quick warm-up.",
+      "notes": [
+        "Sap Green added by eye for the stems."
+      ],
+      "fields": {
+        "title": "Buds in a White Vase",
+        "subject": "still-life",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A small white pear-shaped ceramic vase holding two slender green freesia stems with closed buds, on a white sill with the soft shadow of a window frame behind.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Everything sits close in tone here, so let small shifts carry it.",
+        "tip": "Paint each stem in one stroke with the tip of the brush, and keep the vase to two greys."
+      }
+    },
+    {
+      "candidateId": "pexels:8533228",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "The simplest possible shape on a plain ground: a negative painting exercise.",
+      "notes": [
+        "Cool Grey added by eye for the shading on the tube.",
+        "Unsure because it is a product shot with little to look at."
+      ],
+      "fields": {
+        "title": "White Tube on Pink",
+        "subject": "still-life",
+        "difficulty": "gentle",
+        "minutes": 8,
+        "alt": "A plain white squeeze tube with a clear flip cap lying flat on a smooth pink background, with only the faintest shadow.",
+        "palette": [
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint the pink around the tube and leave the tube as paper.",
+        "tip": "It is nearly all rose madder, so let the water do the work: strongest in the shadow, barely tinted where the light lands."
+      }
+    },
+    {
+      "candidateId": "pexels:2611817",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "White on white: a quiet exercise in the palest greys.",
+      "notes": [
+        "Unsure because there is very little subject."
+      ],
+      "fields": {
+        "title": "Empty White Bowl",
+        "subject": "still-life",
+        "difficulty": "gentle",
+        "minutes": 8,
+        "alt": "An empty white porcelain bowl seen from directly above, on a white marble surface with faint grey veins, the inside shaded softly on one side.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Keep every wash weaker than feels right. It dries lighter, but not by much.",
+        "tip": "Test each wash on scrap first. At this lightness, one step too strong cannot be taken back."
+      }
+    },
+    {
+      "candidateId": "pexels:3767748",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple subject on a plain white background. Branches are good practice for brushstrokes.",
+      "notes": [
+        "There is faint label text on the bottle; it can be left out."
+      ],
+      "fields": {
+        "title": "Budding Twigs",
+        "subject": "still-life",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "Two bare brown twigs with small pale buds rising from the neck of a frosted glass bottle, on a plain off-white background.",
+        "palette": [
+          {
+            "name": "Chinese White",
+            "hex": "#f0ece2"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Two twigs, two strokes each. Let the brush wobble.",
+        "tip": "Paint each twig in one movement with the tip of a round brush, then add the buds with a dot."
+      }
+    },
+    {
+      "candidateId": "pexels:38948013",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject, sharp, in a narrow cool range with one warm accent.",
+      "notes": [
+        "Rose Madder added by eye for the petals, and Ivory Black dropped from the measured palette.",
+        "Unsure because the photograph has a strong blue colour cast."
+      ],
+      "fields": {
+        "title": "Dried Bloom in a Dish",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A faded pink and white dried flower head lying in a rough white wax dish, seen from above in cool blue-grey light.",
+        "palette": [
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          }
+        ],
+        "prompt": "A cool arrangement. Keep the warm notes small and late.",
+        "tip": "Keep the cool washes thin. Blues settle heavier than they look while wet."
+      }
+    },
+    {
+      "candidateId": "pexels:11961902",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain white background, clear and sharp. Glass and water are good practice.",
+      "notes": [
+        "Palette chosen by eye apart from Cool Grey; the pixels missed the tulip."
+      ],
+      "fields": {
+        "title": "Purple Tulip",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A single purple tulip on a curving stem in a tall clear glass vase with a spiral ridge, backlit by a white curtain, on a dark table that reflects it.",
+        "palette": [
+          {
+            "name": "Dioxazine Violet",
+            "hex": "#5b3b78"
+          },
+          {
+            "name": "Permanent Magenta",
+            "hex": "#9c3f78"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint the tulip strong and the glass barely there.",
+        "tip": "Leave the glass as paper and describe it with a few grey lines where it bends the light."
+      }
+    },
+    {
+      "candidateId": "pexels:8015276",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "A tiny, simple subject on white, the light counterpart to the candle on black. Good for a quick warm-up.",
+      "notes": [
+        "Palette chosen by eye: the pixels read only the white background.",
+        "Unsure because it is a second candle."
+      ],
+      "fields": {
+        "title": "Birthday Candle",
+        "subject": "still-life",
+        "difficulty": "gentle",
+        "minutes": 8,
+        "alt": "The top of a thin twisted gold birthday candle with a small soft flame, against a plain white background.",
+        "palette": [
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          }
+        ],
+        "prompt": "A flame and a twist of gold. Five minutes, then stop.",
+        "tip": "Paint the flame by dropping pale yellow into a damp patch, and leave its centre as paper."
+      }
+    },
+    {
+      "candidateId": "pexels:6069724",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain white background, sharp throughout. The simplest of the four gerberas in this queue.",
+      "notes": [
+        "Palette chosen by eye apart from Cool Grey; the pixels missed the flower."
+      ],
+      "fields": {
+        "title": "Red Gerbera",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "A single red gerbera with a dark centre and a yellow ring on a long green stem, in a tall clear glass on white linen, with soft window light across it.",
+        "palette": [
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "An arrangement and almost nothing else. A good one to start cold on.",
+        "tip": "Paint the petals as one red ring first, then break the edge with a few strokes."
+      }
+    },
+    {
+      "candidateId": "pexels:7303127",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Clear focus subject, sharp, with a plain warm backdrop. The white flower stays as paper against the orange.",
+      "notes": [
+        "Sap Green added by eye for the stem and centre."
+      ],
+      "fields": {
+        "title": "Scabiosa on Orange",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A single white scabiosa flower with a green pincushion centre, drooping on a curved stem from a small ribbed glass vase, in front of a soft orange curtain.",
+        "palette": [
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "A warm arrangement. Let one cool note in for the rest to push against.",
+        "tip": "Rinse between the warm washes. One dip of cool into a warm well turns the lot to khaki."
+      }
+    },
+    {
+      "candidateId": "pexels:8054435",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "A simple object with strong light and shadow.",
+      "notes": [
+        "Unsure: the black band across the top and the hard shadow stripes make it busier than it first looks."
+      ],
+      "fields": {
+        "title": "Blue Bottle in Sunlight",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "A rounded blue bottle with a white screw cap and a blank white label, standing in hard sunlight with bands of shadow across the white surface behind it.",
+        "palette": [
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Cobalt Blue",
+            "hex": "#3a6bb5"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          }
+        ],
+        "prompt": "Light to dark, in that order. The darks are the last five minutes.",
+        "tip": "Drop the cobalt blue into the still-wet cerulean blue and tilt the paper rather than stirring them together."
+      }
+    },
+    {
+      "candidateId": "pexels:11563515",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "Focus subject on a plain white background, sharp. More to hold together than the single gerbera, so it makes the stretch version.",
+      "notes": [
+        "Scarlet and Alizarin Crimson added by eye; the pixels missed the flowers.",
+        "Unsure because it is a second gerbera, after 'Red Gerbera'."
+      ],
+      "fields": {
+        "title": "Gerberas in a Bottle",
+        "subject": "still-life",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "Three red gerberas crossing at the neck of a tall clear bubbled-glass bottle, their green stems visible through the water, on white cloth.",
+        "palette": [
+          {
+            "name": "Scarlet",
+            "hex": "#d43d2f"
+          },
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Treat the three flowers as one red shape first, then separate them.",
+        "tip": "Paint the stems inside the glass a little paler and bluer than above it."
+      }
+    },
+    {
+      "candidateId": "pexels:7291908",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple objects on a plain background, not too busy, with three different flowers to hold together. A stretch.",
+      "notes": [
+        "Palette chosen by eye apart from Warm Grey; the pixels read the wall and the table."
+      ],
+      "fields": {
+        "title": "Three Stems in Glass",
+        "subject": "still-life",
+        "difficulty": "stretch",
+        "minutes": 35,
+        "alt": "Three stems in a small glass vase: a coral anthurium, a round red ranunculus and a pink gerbera hanging upside down, on white against a beige wall.",
+        "palette": [
+          {
+            "name": "Scarlet",
+            "hex": "#d43d2f"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Three flowers, three reds. Mix each one separately and keep them apart.",
+        "tip": "Let each flower dry before painting the one next to it, so the reds do not run together."
+      }
+    },
+    {
+      "candidateId": "pexels:6612349",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Two simple objects on a plain background, sharp. Good practice for clear glass.",
+      "notes": [
+        "Raw Sienna and Rose Madder added by eye for the peach wall."
+      ],
+      "fields": {
+        "title": "Bottle and Glass",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "A clear glass bottle with a blank white label and a white cap beside an empty faceted tumbler, on a light wooden shelf against a plain peach wall.",
+        "palette": [
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Glass is mostly the colour behind it. Paint the peach first, then the few darks.",
+        "tip": "Keep the highlights on the glass as bare paper from the start."
+      }
+    },
+    {
+      "candidateId": "pexels:7486965",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple objects on a plain background, not too busy. Three different textures to practise.",
+      "notes": [
+        "Raw Sienna and Burnt Umber added by eye for the driftwood and the stone."
+      ],
+      "fields": {
+        "title": "Bottle, Driftwood and Stone",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A pale blue glass bottle with a twisted piece of driftwood hooked over its neck, beside a dark porous lava stone, on a plain light blue background.",
+        "palette": [
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          }
+        ],
+        "prompt": "Three objects, three textures: glass, wood and stone.",
+        "tip": "Keep the cool washes thin. Blues settle heavier than they look while wet."
+      }
+    },
+    {
+      "candidateId": "pexels:4389637",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject with lots of plain space around it, sharp throughout.",
+      "notes": [
+        "Palette chosen by eye: the pixels read only the white table and wall."
+      ],
+      "fields": {
+        "title": "Muffin with a Candle",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "A chocolate muffin in a brown paper case on a small white plate, with a curly orange birthday candle alight on top, at the corner of a white table against a grey wall.",
+        "palette": [
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Lots of quiet space here. Keep it, and let the candle be the only bright note.",
+        "tip": "Paint the muffin top wet-in-wet with two browns and let them mix on the paper."
+      }
+    },
+    {
+      "candidateId": "pexels:22815314",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject, sharp, with a plain background. Glass and water to practise.",
+      "notes": [
+        "Palette chosen by eye apart from Cool Grey; the pixels missed the flower.",
+        "The spotted tablecloth at the bottom is soft and can be left out."
+      ],
+      "fields": {
+        "title": "Ranunculus in a Glass",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A yellow ranunculus with layered petals leaning over the rim of a drinking glass half full of water, its stem visible through the glass, against a pale background.",
+        "palette": [
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint the flower in two yellows and let the glass be mostly paper.",
+        "tip": "Shift the stem slightly where it meets the water line; that break is what makes it read as water."
+      }
+    },
+    {
+      "candidateId": "pexels:16181886",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Lots of ruffled petals to hold together, and a fingertip pokes into the top-left corner."
+    },
+    {
+      "candidateId": "pexels:38746783",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a similar shell from the same shoot. The smooth white cockle is the simpler one."
+    },
+    {
+      "candidateId": "pexels:15360877",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too many small pieces, the bowl is cut off at the edge, and it is on a black background."
+    },
+    {
+      "candidateId": "pexels:10907855",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "One earring is cut off at the edge and the photo has a filter frame round it."
+    },
+    {
+      "candidateId": "pexels:35133653",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Parts of the candle are out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:35410294",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "We already have a candle flame on a black background."
+    },
+    {
+      "candidateId": "pexels:8656236",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy: a necklace, a feather, a shell and earrings on two mirrors. No focus subject."
+    },
+    {
+      "candidateId": "pexels:8015825",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A hand in the picture, holding the bottle."
+    },
+    {
+      "candidateId": "pexels:3807050",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The bowl is small in the frame, and the woven mat and chopped salad are a lot of fiddly detail."
+    },
+    {
+      "candidateId": "pexels:38776352",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "It is the same shell as another one in this queue, from a different angle."
+    },
+    {
+      "candidateId": "pexels:4272604",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Several other glasses in the picture, and the ones at the back and the right edge are out of focus."
+    },
+    {
+      "candidateId": "pexels:17669508",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Black background again, and the flower spike is hundreds of tiny buds. Hard to watercolour."
+    },
+    {
+      "candidateId": "pexels:12486665",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy with jewellery and shells. No focus subject."
+    },
+    {
+      "candidateId": "pexels:9256274",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "We already have a candle flame on a dark background, and the candle itself is lost in the dark."
+    },
+    {
+      "candidateId": "pexels:772518",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy with lots of mixed ingredients, and the red background is too bright."
+    },
+    {
+      "candidateId": "pexels:32986463",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "A brown mass with little shape, and a third bowl after the curd rice and the empty white bowl."
+    },
+    {
+      "candidateId": "pexels:8947553",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Does not have a plain background: textured plaster with a window frame across the top."
+    },
+    {
+      "candidateId": "pexels:32996933",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A hand in the picture, and the hand is out of focus."
+    },
+    {
+      "candidateId": "pexels:26341205",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy salad, and the neon green background is too bright."
+    },
+    {
+      "candidateId": "pexels:32986469",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The plate sits small in a lot of white, and it is another top-down dish."
+    },
+    {
+      "candidateId": "pexels:4586869",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A hand in the picture, holding the candle."
+    },
+    {
+      "candidateId": "pexels:11560715",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Parts of the subject are out of focus: the lower half of the bottle and everything behind it."
+    },
+    {
+      "candidateId": "pexels:7364096",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A brand name across the bottle. It reads as a product shot."
+    },
+    {
+      "candidateId": "pexels:33986491",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "We already have a candle flame on a black background."
+    },
+    {
+      "candidateId": "pexels:9787800",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The foreground and the scattered crumbs are out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:14516250",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The candle and the background are out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:38154991",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The vase is out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:7814941",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dark veined marble behind it, and it reads as a product shot."
+    },
+    {
+      "candidateId": "pexels:8148641",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Almost black and white, and the black stool takes up half the frame."
+    },
+    {
+      "candidateId": "pexels:4586868",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A hand in the picture, holding the candle."
+    },
+    {
+      "candidateId": "pexels:26341206",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy salad, and the neon green background is too bright. Same shoot as another salad here."
+    },
+    {
+      "candidateId": "pexels:32986486",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The bowl is too small in the frame."
+    },
+    {
+      "candidateId": "pexels:13344056",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy: three bowls, gold birds, a flower and a patterned tile wall."
+    },
+    {
+      "candidateId": "pexels:13969215",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The leaves in the foreground are out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:8032476",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Grainy sand all round, so not a plain background, and another shell."
+    },
+    {
+      "candidateId": "pexels:8564608",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "We already have a candle flame on a black background."
+    },
+    {
+      "candidateId": "pexels:16038073",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A brand label with lots of text on the candle."
+    },
+    {
+      "candidateId": "pexels:20431429",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a similar one: the single red gerbera in a tall glass is the same idea, simpler."
+    },
+    {
+      "candidateId": "pexels:30762211",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A branded drink bottle on a busy concrete background."
+    },
+    {
+      "candidateId": "pexels:22757118",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Most of the picture is out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:8049841",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The diagonal twill fabric is a busy background. The white tube on pink is the cleaner version."
+    },
+    {
+      "candidateId": "pexels:6735518",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "A fan of fine palm fronds is a lot of thin strokes, and we already have gerberas."
+    },
+    {
+      "candidateId": "pexels:11255287",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A fabric texture, with no subject."
+    },
+    {
+      "candidateId": "pexels:129731",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A wood texture, with no subject."
+    },
+    {
+      "candidateId": "pexels:26954372",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A person in the picture, and too busy with sandals and a border of shells."
+    },
+    {
+      "candidateId": "pexels:38054095",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy with jewellery, and most of the picture is out of focus."
+    },
+    {
+      "candidateId": "pexels:34375061",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple object on a plain white background, sharp throughout, with a soft cast shadow. A quick warm-up.",
+      "notes": [
+        "Burnt Sienna added by eye for the shaded side of the seat."
+      ],
+      "fields": {
+        "title": "Orange Chair",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A single orange moulded chair on thin chrome legs, facing forward in a bright white studio, with a soft shadow falling to the right.",
+        "palette": [
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "One chair, one bright colour. Leave the white studio as paper.",
+        "tip": "Paint each chrome leg as one grey line and leave a sliver of paper down it for the shine."
+      }
+    },
+    {
+      "candidateId": "pexels:8346248",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject with lots of plain space around it, sharp throughout. Good for practising thin dark lines.",
+      "notes": [
+        "Ivory Black and Payne's Grey added by eye for the chair; the pixels read only the wall."
+      ],
+      "fields": {
+        "title": "Black Wire Chair",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A black wire-framed armchair with a slatted back and a folded black cloth on the seat, small against a bare white wall and reflected faintly in a pale grey floor.",
+        "palette": [
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Mostly empty space. Paint the chair in thin dark lines and let the wall stay paper.",
+        "tip": "Paint the reflection into a damp floor wash, so it softens as it dries."
+      }
+    },
+    {
+      "candidateId": "pexels:7193704",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain white background, sharp. The curved wood is good brushstroke practice.",
+      "notes": [
+        "Burnt Umber added by eye for the warmer wood on the seat."
+      ],
+      "fields": {
+        "title": "Bentwood Chair",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A dark brown bentwood cafe chair with a round seat and a looped back, standing on a pale grey floor beside a white wall and a sheer white curtain.",
+        "palette": [
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Every part of this chair is a curve. Follow each bend with one stroke.",
+        "tip": "Pull each leg with the tip of a round brush in one go, pressing a little harder where it thickens at the top."
+      }
+    },
+    {
+      "candidateId": "pexels:7602872",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "Simple objects on a plain background with one bright accent. Not busy.",
+      "notes": [
+        "Naples Yellow, Cadmium Orange and Cool Grey added by eye; the pixels read only warm grey.",
+        "Unsure because the chair's front leg touches the bottom edge."
+      ],
+      "fields": {
+        "title": "Chair and Anthurium",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A beige upholstered dining chair seen from above at an angle, beside a small wavy ceramic vase holding one orange anthurium, against a white wall on grey concrete.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Keep the chair quiet and let the orange flower be the one bright note.",
+        "tip": "Paint the seat and the back as two flat washes, then darken only where they meet."
+      }
+    },
+    {
+      "candidateId": "pexels:10500711",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple shape centred on a plain wall. A quick warm-up.",
+      "notes": [
+        "Raw Umber and Warm Grey added by eye for the weathered frame; Chinese White dropped, since the paper does that job."
+      ],
+      "fields": {
+        "title": "Window in a Cream Wall",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A narrow weathered wooden window with two closed white shutters behind its panes, centred in a plain cream wall between two painted bands.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Raw Umber",
+            "hex": "#7a6244"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Wash the whole wall first, then the small window is all the detail there is.",
+        "tip": "Leave the white shutters as paper and paint only the frame around them."
+      }
+    },
+    {
+      "candidateId": "pexels:38240995",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "White on white: a quiet exercise in one soft shadow.",
+      "notes": [
+        "Ultramarine Blue added by eye for the cool shadow.",
+        "Unsure because there is very little subject, like the Empty White Bowl you approved."
+      ],
+      "fields": {
+        "title": "Niche in a White Wall",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 8,
+        "alt": "A small round-topped niche set into a rough whitewashed wall, its inside in soft blue-grey shadow.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Ultramarine Blue",
+            "hex": "#2f4a9c"
+          }
+        ],
+        "prompt": "White on white. The whole picture is one shadow.",
+        "tip": "Mix the shadow grey pale, test it on scrap, and put it down in one go."
+      }
+    },
+    {
+      "candidateId": "pexels:4868968",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject with a plain background and a simple shape.",
+      "notes": [
+        "Burnt Sienna, Naples Yellow and Sap Green added by eye; the pixels read only the white wall."
+      ],
+      "fields": {
+        "title": "Shutters in a Red Frame",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "Cream louvred shutters with a small padlock, set in a terracotta-red frame in a deep recess of a white wall, with a pierced vent above and small green weeds along the base.",
+        "palette": [
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Paint the red frame first. Everything else is pale.",
+        "tip": "Paint the louvres as a row of short strokes from the same brush load, so they stay even."
+      }
+    },
+    {
+      "candidateId": "pexels:8984302",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain white wall, sharp. The louvres are good line practice.",
+      "notes": [
+        "Cerulean Blue and Burnt Sienna added by eye for the teal and the rust; Ivory Black dropped."
+      ],
+      "fields": {
+        "title": "Teal Shutters",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "Four folding louvred shutters in peeling pale teal paint with rusty hinges, filling a square recess in a smooth white wall.",
+        "palette": [
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          },
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Wash the teal first, then lift out the peeling paint.",
+        "tip": "Drag a nearly dry brush sideways for the peeling edges; the broken marks read as flaking paint."
+      }
+    },
+    {
+      "candidateId": "pexels:14254722",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject that fills the frame, with a plain wall around it. Lots of texture, so it makes a stretch.",
+      "notes": [
+        "Yellow Ochre added by eye for the wall; the pixels read the centre, which is the bars."
+      ],
+      "fields": {
+        "title": "Barred Window",
+        "subject": "objects",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "A square window with a grid of black iron bars, set in a thick rough granite surround on a warm yellow plastered wall.",
+        "palette": [
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          }
+        ],
+        "prompt": "Paint the granite with a speckled wash, then lay the bars over it once it is dry.",
+        "tip": "Spatter a little grey onto the dry stone wash with a toothbrush for the granite speckle."
+      }
+    },
+    {
+      "candidateId": "pexels:37201015",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "Simple flat shapes and plain colours. Good for practising clean edges.",
+      "notes": [
+        "Unsure because it is a flat graphic facade rather than one object."
+      ],
+      "fields": {
+        "title": "Teal and Yellow Facade",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A flat building front in blocks of colour: two tall teal window frames with half-open black panes on a white upper wall, and two square dark windows in a yellow band below.",
+        "palette": [
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Viridian",
+            "hex": "#2e7a63"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Flat shapes, flat washes. Let each one dry before the next.",
+        "tip": "Paint the black panes last, in one stroke each, so their edges stay crisp."
+      }
+    },
+    {
+      "candidateId": "pexels:35525173",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject on a plain white wall, sharp throughout.",
+      "notes": [
+        "Palette chosen by eye: the pixels read Terre Verte and Ivory Black, which are too dull for this green."
+      ],
+      "fields": {
+        "title": "Green Door",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A tall glossy green panelled double door with two brass knobs, framed by green mouldings in a white wall, above a step of coloured stone paving.",
+        "palette": [
+          {
+            "name": "Hooker's Green",
+            "hex": "#3f6b45"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "One colour, many panels. Keep the lightest green for the edges the sun catches.",
+        "tip": "Paint each panel's shadow side as one darker stroke rather than outlining the whole panel."
+      }
+    },
+    {
+      "candidateId": "pexels:30538865",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject framed by a plain stone doorway. Plenty of detail to hold together, so it makes a stretch.",
+      "notes": [
+        "Yellow Ochre and Warm Grey added by eye for the granite; Ivory Black dropped."
+      ],
+      "fields": {
+        "title": "Panelled Oak Door",
+        "subject": "objects",
+        "difficulty": "stretch",
+        "minutes": 35,
+        "alt": "A tall weathered oak door divided into square carved panels with small rosettes where they meet, set deep in a speckled granite doorway above a worn step.",
+        "palette": [
+          {
+            "name": "Raw Umber",
+            "hex": "#7a6244"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Paint all the panels as one brown shape first, then add the shadows.",
+        "tip": "Mix one big well of the brown and darken a little of it for the recessed panel edges."
+      }
+    },
+    {
+      "candidateId": "pexels:5877654",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject filling the frame, sharp. The repeated carving is a stretch.",
+      "notes": [
+        "Yellow Ochre and Burnt Sienna added by eye for the plaster.",
+        "Unsure: a lot of repeated carving, and a third door after the green one and the oak one."
+      ],
+      "fields": {
+        "title": "Carved Door",
+        "subject": "objects",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "A weathered wooden double door carved with rows of arched panels and diamonds, closed with an iron bolt and a small brass padlock, in cracked ochre plaster.",
+        "palette": [
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          }
+        ],
+        "prompt": "Twelve carved panels. Suggest the pattern rather than drawing every line.",
+        "tip": "Draw the carved lines with a fine brush in one pale grey, then leave them alone."
+      }
+    },
+    {
+      "candidateId": "pexels:34969871",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject on a plain background with a simple table line. Good for practising metal.",
+      "fields": {
+        "title": "Pewter Coffee Pot",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A tall tarnished pewter coffee pot with a curved spout, an angular handle and a pointed finial, on a light wooden table against a plain mauve-brown wall.",
+        "palette": [
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          }
+        ],
+        "prompt": "Metal is mostly reflections. Paint the dark streaks and leave the highlights as paper.",
+        "tip": "Work the tarnish wet-in-wet with two greys so the patches blur into each other."
+      }
+    },
+    {
+      "candidateId": "pexels:29378867",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple focus subject on a plain white background, sharp. White on white practice.",
+      "notes": [
+        "Burnt Umber added by eye for the twigs."
+      ],
+      "fields": {
+        "title": "White Teapot",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 12,
+        "alt": "A matte white ceramic teapot with a square handle on a round white tray, beside sprigs of cotton bolls and pussy willow, with a fold of cream cloth in the corner.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          }
+        ],
+        "prompt": "White on white. Paint only the shadows and the twigs.",
+        "tip": "Keep the shadows very pale: warmer on the cloth, cooler on the tray."
+      }
+    },
+    {
+      "candidateId": "pexels:39199677",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One simple object, sharp, with a clear light and shadow side. Good for practising darks.",
+      "notes": [
+        "Payne's Grey added by eye for the shading on the jug.",
+        "Unsure: black background, which you have said there are a lot of."
+      ],
+      "fields": {
+        "title": "White Jug on Black",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "A small white ceramic cream jug with a fluted neck and a grey embossed scroll on its belly, standing on black velvet against a black background.",
+        "palette": [
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint the black around the jug and let the paper be the jug.",
+        "tip": "Build the black in two layers; one heavy layer dries patchy."
+      }
+    },
+    {
+      "candidateId": "pexels:6858632",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple objects on a plain white background with lovely cast shadows, sharp throughout.",
+      "notes": [
+        "Filed as still life: it is an arrangement rather than one object.",
+        "Alizarin Crimson and Cadmium Yellow added by eye for the cherries."
+      ],
+      "fields": {
+        "title": "Cherries, Milk and Coffee",
+        "subject": "still-life",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "Seen from above on a white tablecloth: a white plate of red and yellow cherries with long stems, a white milk jug, and a cup of milky coffee on a gold-rimmed saucer, in long soft window shadows.",
+        "palette": [
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Three white shapes and a handful of cherries. Paint the shadows before the fruit.",
+        "tip": "Leave a dot of paper on each cherry for its highlight before you drop the red in."
+      }
+    },
+    {
+      "candidateId": "pexels:4618517",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "Clear focus subject on a plain background, sharp. A single-colour study.",
+      "notes": [
+        "Filed as still life: an arrangement of flowers.",
+        "Unsure: yellow on yellow, and a lot of tulips to hold together."
+      ],
+      "fields": {
+        "title": "Yellow Tulips in a Jug",
+        "subject": "still-life",
+        "difficulty": "stretch",
+        "minutes": 35,
+        "alt": "A bunch of yellow tulips leaning out of a glossy yellow ceramic jug, with a few fallen petals on the table, all against a plain yellow background.",
+        "palette": [
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Olive Green",
+            "hex": "#6b6f36"
+          }
+        ],
+        "prompt": "Yellow on yellow. Let the green leaves and the shadows do the separating.",
+        "tip": "Mix the jug a little more orange than the tulips, so the two yellows stay apart."
+      }
+    },
+    {
+      "candidateId": "pexels:9016162",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A hand in the picture, holding the lantern."
+    },
+    {
+      "candidateId": "pexels:20206663",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The wood-panelled wall and patterned rug are too busy behind the chair."
+    },
+    {
+      "candidateId": "pexels:31890195",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The photo has a heavy painterly filter, and we already have several windows."
+    },
+    {
+      "candidateId": "pexels:34868969",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "An abstract piece of building facade rather than one object."
+    },
+    {
+      "candidateId": "pexels:10900909",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy: gas stove grates and a tiled wall, in low light."
+    },
+    {
+      "candidateId": "pexels:11016870",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy with berries and dried flowers, cut off at the edges, on a black background."
+    },
+    {
+      "candidateId": "pexels:11016862",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Same shoot as another bouquet here: busy, on black and burlap."
+    },
+    {
+      "candidateId": "pexels:11016869",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Same shoot as another bouquet here: busy, on black and burlap."
+    },
+    {
+      "candidateId": "pexels:10864447",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The photo has a hazy soft filter and a mirror reflection, so the chair's edges are hard to see."
+    },
+    {
+      "candidateId": "pexels:6833437",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have several windows; this pair has dark shutters and bars, busier than the others."
+    },
+    {
+      "candidateId": "pexels:37164453",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a graphic facade in flat colour blocks."
+    },
+    {
+      "candidateId": "pexels:12120347",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Mostly out of focus, and dark."
+    },
+    {
+      "candidateId": "pexels:406199",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Hands in the picture, and a dark background."
+    },
+    {
+      "candidateId": "pexels:9839457",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy: a pumpkin, a jug, daisies, an apple and persimmons on lace."
+    },
+    {
+      "candidateId": "pexels:34013378",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Lots of detail: broken panes and crumbling plaster. Hard to watercolour."
+    },
+    {
+      "candidateId": "pexels:19378972",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The teapot and the background are out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:12027268",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Several objects on a dark mottled background."
+    },
+    {
+      "candidateId": "pexels:27756304",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have four chairs, and this one sits in dim light on grey."
+    },
+    {
+      "candidateId": "pexels:5484046",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have three doors. This one has a lot of stone and a barred window above."
+    },
+    {
+      "candidateId": "pexels:6504012",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "A name plate with text, and a newspaper in the letterbox."
+    },
+    {
+      "candidateId": "pexels:2633404",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Printed text on the teapot, and too busy with berries and cord."
+    },
+    {
+      "candidateId": "pexels:8987430",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have four chairs, and the stripes of window light make this one busy."
+    },
+    {
+      "candidateId": "pexels:930698",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Lots of moulded stonework and curtains blowing out. No single focus."
+    },
+    {
+      "candidateId": "pexels:35059647",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy with carved roof detail and characters."
+    },
+    {
+      "candidateId": "pexels:7364064",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Lanterns covered in printed characters and pictures, on a black background."
+    },
+    {
+      "candidateId": "pexels:11016874",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Same shoot as another bouquet here: busy, and cut off at the edges."
+    },
+    {
+      "candidateId": "pexels:8737344",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too many objects: sunflowers, a gourd, books, twine and scissors."
+    },
+    {
+      "candidateId": "pexels:17603675",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have three doors, and the lamps are cut off at the edges."
+    },
+    {
+      "candidateId": "pexels:15554384",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy: a hat, flowers, books with a title, lemons and a string bag."
+    },
+    {
+      "candidateId": "pexels:30387388",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Four windows and a street lamp. No single focus."
+    },
+    {
+      "candidateId": "pexels:9421438",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The chair is small in the frame over a busy tiled marble floor."
+    },
+    {
+      "candidateId": "pexels:34422178",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A wood texture, with no subject."
+    },
+    {
+      "candidateId": "pexels:29241290",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Lanterns with printed text and logos, on a black background."
+    },
+    {
+      "candidateId": "pexels:8408557",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The zigzag weave of the basket is busy, and we already have four chairs."
+    },
+    {
+      "candidateId": "pexels:32562036",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The chair is cut off at the left and bottom edges."
+    },
+    {
+      "candidateId": "pexels:3139478",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy: a slatted wooden wall, a papered glass door and a bin."
+    },
+    {
+      "candidateId": "pexels:28445615",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The lace curtains are a lot of fine detail."
+    },
+    {
+      "candidateId": "pexels:5987088",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dense printed patterns on both pieces, and a dark background with a colour cast."
+    },
+    {
+      "candidateId": "pexels:30704394",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dozens of lanterns. No focus subject."
+    },
+    {
+      "candidateId": "pexels:11104110",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy and dark: bread, a lamp chimney and a checked cloth at a dirty window."
+    },
+    {
+      "candidateId": "pexels:36010450",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Printed characters on the lanterns, and the lower ones are out of focus."
+    },
+    {
+      "candidateId": "pexels:33708396",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Printed pictures on the lanterns, on a black background."
+    },
+    {
+      "candidateId": "pexels:13066137",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have four chairs, and the tiled floor and barred window make this one busier."
+    },
+    {
+      "candidateId": "pexels:34318763",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The teapot and the cushions behind are out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:34318766",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The candle and the background are out of focus and blurred."
+    },
+    {
+      "candidateId": "pexels:34041368",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A hand in the picture, pouring from the kettle."
+    },
+    {
+      "candidateId": "pexels:13197753",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Painted characters on the lantern, and the second lantern is out of focus."
+    },
+    {
+      "candidateId": "pexels:6707629",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The palm-frond mural behind the chair is too busy."
+    },
+    {
+      "candidateId": "pexels:11231039",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Almost black and white, which is not good for watercolour."
+    },
+    {
+      "candidateId": "pexels:7821425",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Too busy: a whole house front with a canopy, roof, windows and flower pots."
+    },
+    {
+      "candidateId": "pexels:13013514",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dark, with heavily textured crumbling plaster all round."
+    },
+    {
+      "candidateId": "pexels:7553787",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A dark open doorway, and a mop cut off at the edge."
+    },
+    {
+      "candidateId": "pexels:9920652",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A stepladder in a dark room. No clear subject to paint."
+    },
+    {
+      "candidateId": "pexels:15302988",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Tangled in fairy lights and branches, with other lanterns cut off."
+    },
+    {
+      "candidateId": "pexels:36399098",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, which is not good for watercolour."
+    },
+    {
+      "candidateId": "pexels:19880782",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, and the window behind is busy."
+    },
+    {
+      "candidateId": "pexels:11593574",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too dark, and the lace curtain is a lot of fine detail."
+    },
+    {
+      "candidateId": "pexels:18325304",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Two carved doors in a crumbling stone corner, with a security camera. A lot of detail."
+    },
+    {
+      "candidateId": "pexels:9716417",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too dark: a pale chair in near darkness."
+    },
+    {
+      "candidateId": "pexels:7559497",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The background is out of focus, and the photo has a heavy colour filter."
+    },
+    {
+      "candidateId": "pexels:36214674",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dozens of lanterns on a steel frame. No focus subject."
+    },
+    {
+      "candidateId": "pexels:6998048",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dozens of lanterns, most of them out of focus."
+    },
+    {
+      "candidateId": "pexels:13107591",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a green door, and this wall is busier."
+    },
+    {
+      "candidateId": "pexels:34206929",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A broken door with a chain, rubble and a plaque with text. Too busy."
+    },
+    {
+      "candidateId": "pexels:27168425",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A person in the picture, and the background is out of focus."
+    },
+    {
+      "candidateId": "pexels:36253922",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dozens of lanterns. No focus subject."
+    },
+    {
+      "candidateId": "pexels:37307501",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A close crop of door handles, with no whole subject."
+    },
+    {
+      "candidateId": "pexels:20954387",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject, sharp throughout, on a plain dark background. The spiral shell is lovely to paint.",
+      "notes": [
+        "Sap Green and Hooker's Green added by eye; the pixels read Olive Green, Cadmium Orange and Burnt Sienna."
+      ],
+      "fields": {
+        "title": "Snail on a Stem",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A snail with a glossy orange-red spiral shell and a brown body climbing a thin green stem, its eye stalks reaching down, against a plain dark green background.",
+        "palette": [
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Hooker's Green",
+            "hex": "#3f6b45"
+          }
+        ],
+        "prompt": "Paint the shell as one orange wash, then drop the darker spiral in while it is damp.",
+        "tip": "Leave a thin line of paper along the shell's edge for the shine."
+      }
+    },
+    {
+      "candidateId": "pexels:6906402",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject, sharp, on a soft plain background. White wings are good practice for leaving the paper.",
+      "notes": [
+        "Burnt Sienna, Dioxazine Violet and Cool Grey added by eye; the pixels read Olive Green, Warm Grey and Ivory Black."
+      ],
+      "fields": {
+        "title": "White Butterfly on Verbena",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A white butterfly with brown-veined wings and a thin yellow stripe, perched on purple verbena flower heads, against a soft olive-green background.",
+        "palette": [
+          {
+            "name": "Olive Green",
+            "hex": "#6b6f36"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Dioxazine Violet",
+            "hex": "#5b3b78"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Leave the wings as paper and draw the veins in with a fine brown line.",
+        "tip": "Paint the olive background first and let it dry before the veins, so they stay crisp."
+      }
+    },
+    {
+      "candidateId": "pexels:103651",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on plain white bedding, seen from above. Simple shapes.",
+      "notes": [
+        "Raw Sienna, Burnt Sienna and Cool Grey added by eye; the pixels read Warm Grey and Ivory Black."
+      ],
+      "fields": {
+        "title": "Cat Under a Blanket",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A ginger cat asleep on white bedding, seen from above, tucked under a grey woven blanket with a white band and a knotted fringe.",
+        "palette": [
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "The blanket is one big grey shape. Save your detail for the cat's face and paws.",
+        "tip": "Paint the ginger fur wet-in-wet with two oranges, then add a few stripes once it has dried a little."
+      }
+    },
+    {
+      "candidateId": "pexels:8479660",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain background, sharp. A quick warm-up.",
+      "notes": [
+        "Filed as botanical: it is a leaf, not a creature.",
+        "The yellow background is very bright.",
+        "Hooker's Green, Dioxazine Violet and Rose Madder added by eye; the pixels read Lemon Yellow and Ivory Black."
+      ],
+      "fields": {
+        "title": "Striped Calathea Leaf",
+        "subject": "botanical",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A single dark purple-green calathea leaf with fine pink stripes either side of the midrib, on a short stem, lying on a plain bright yellow background.",
+        "palette": [
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Hooker's Green",
+            "hex": "#3f6b45"
+          },
+          {
+            "name": "Dioxazine Violet",
+            "hex": "#5b3b78"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          }
+        ],
+        "prompt": "One leaf on a plain ground. Paint the dark leaf in one wash and leave the stripes as gaps.",
+        "tip": "Mix the leaf dark but not black: Hooker's green with a touch of violet."
+      }
+    },
+    {
+      "candidateId": "pexels:20364192",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject on a plain grey background, sharp throughout.",
+      "notes": [
+        "Burnt Sienna, Payne's Grey and Yellow Ochre added by eye; the pixels read Cool Grey and Ivory Black."
+      ],
+      "fields": {
+        "title": "Stonechat on a Twig",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A small round stonechat with a black head, white collar and orange breast, perched on the tip of a forked twig crusted with yellow lichen, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          }
+        ],
+        "prompt": "One bird on a plain grey ground. Wash the background first and leave the bird as a paper shape.",
+        "tip": "Dab the lichen on with the side of the brush while the twig is still damp."
+      }
+    },
+    {
+      "candidateId": "pexels:11928245",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain pale background, sharp. Bold simple wing shapes.",
+      "notes": [
+        "Cadmium Orange, Cadmium Yellow and Sap Green added by eye; the pixels read Cool Grey, Chinese White, Ivory Black and Olive Green."
+      ],
+      "fields": {
+        "title": "Longwing on an Orange Flower",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A tiger longwing butterfly in black, orange and yellow, hanging from a small orange flower at the end of a green stem, against a plain pale grey background.",
+        "palette": [
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Paint the yellow and orange first, then the black, so nothing muddies.",
+        "tip": "Leave the white dots along the wing edge as paper."
+      }
+    },
+    {
+      "candidateId": "pexels:31027008",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject on a plain soft background, sharp.",
+      "notes": [
+        "Ultramarine Blue and Cadmium Orange added by eye; the pixels read Olive Green, Sap Green and Cerulean Blue."
+      ],
+      "fields": {
+        "title": "Kingfisher from Behind",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A kingfisher seen from behind on the end of a broken stick, looking up and to the right, its back bright blue and its sides orange, against a plain soft green background.",
+        "palette": [
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Ultramarine Blue",
+            "hex": "#2f4a9c"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Let the blue be the one strong note against the soft green.",
+        "tip": "Drop cerulean into still-wet ultramarine on the back so the feathers shimmer."
+      }
+    },
+    {
+      "candidateId": "pexels:38692714",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "A clear silhouette against a smooth gradient sky. Good for big-brush practice.",
+      "notes": [
+        "Unsure: the bird is small and caught mid-wingbeat. The sky is the main event, like the Gradient Sky you approved.",
+        "Palette chosen by eye: the pixels read Burnt Sienna and Burnt Umber, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Roller Against a Sunset",
+        "subject": "creatures",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "A bird with bright turquoise and deep blue wings taking off from a bare thorny branch, small against a smooth sunset sky that fades from peach at the top to plum at the bottom.",
+        "palette": [
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Permanent Magenta",
+            "hex": "#9c3f78"
+          },
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          }
+        ],
+        "prompt": "Paint the sky in one graded wash, let it dry, then add the branch and the bird.",
+        "tip": "Tilt the board and let the peach run down into the plum while both are wet."
+      }
+    },
+    {
+      "candidateId": "pexels:32589751",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple subject on a plain grey surface, sharp throughout. A quick warm-up.",
+      "notes": [
+        "Warm Grey and Payne's Grey added by eye; the pixels read Cool Grey."
+      ],
+      "fields": {
+        "title": "Grey Feather",
+        "subject": "creatures",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A single grey pigeon feather with a pale quill, lying flat on a plain grey surface, fading from almost white near the quill to darker grey at the tip.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          }
+        ],
+        "prompt": "One feather, two greys. A good one to start cold on.",
+        "tip": "Paint the feather wet and drop the darker grey in at the tip, so it fades on its own."
+      }
+    },
+    {
+      "candidateId": "pexels:38424426",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject, sharp, on a plain beige background. Lots of wing pattern, so it makes a stretch.",
+      "notes": [
+        "Cadmium Orange, Yellow Ochre and Rose Madder added by eye; the pixels read Naples Yellow, Raw Umber, Warm Grey and Cadmium Yellow."
+      ],
+      "fields": {
+        "title": "Fritillary on a Zinnia",
+        "subject": "creatures",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "A gulf fritillary butterfly with orange wings and silver-white spots edged in black, feeding on the yellow centre of a pink zinnia, against a plain beige background.",
+        "palette": [
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          }
+        ],
+        "prompt": "Paint the silver spots as paper and build the orange around them.",
+        "tip": "Leave the spots first; there are too many to lift out later."
+      }
+    },
+    {
+      "candidateId": "pexels:17009818",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One small subject, sharp, on a soft plain green background.",
+      "notes": [
+        "Cool Grey and Cadmium Orange added by eye; the pixels read Sap Green and Lemon Yellow."
+      ],
+      "fields": {
+        "title": "Blue Butterfly on Grass",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "A small common blue butterfly with grey-blue wings dotted with black and orange spots, resting on a green grass seed head, against a soft bright green background.",
+        "palette": [
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          }
+        ],
+        "prompt": "A quiet little one. Paint the soft green first, then the butterfly on dry paper.",
+        "tip": "Dot the spots with the tip of a small brush and leave them alone."
+      }
+    },
+    {
+      "candidateId": "pexels:7901787",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject, sharp, on a soft background.",
+      "notes": [
+        "Palette chosen by eye: the pixels read Cool Grey, Raw Umber and Naples Yellow, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Blue Tit on a Twig",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A blue tit with a yellow breast, white cheeks and a blue cap, perched on a thin bare twig between two upright stems, against a soft blue and amber background.",
+        "palette": [
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Cobalt Blue",
+            "hex": "#3a6bb5"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          }
+        ],
+        "prompt": "Wet the whole background and drop in blue and amber; paint the bird once it dries.",
+        "tip": "Keep the white cheeks as paper from the start."
+      }
+    },
+    {
+      "candidateId": "pexels:11926761",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain background, sharp. Bold simple wing shapes.",
+      "notes": [
+        "The same side-on pose as Longwing on an Orange Flower, in different colours.",
+        "Burnt Sienna, Naples Yellow and Scarlet added by eye; the pixels read Sap Green, Warm Grey, Ivory Black and Olive Green."
+      ],
+      "fields": {
+        "title": "Longwing on Red Flowers",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A longwing butterfly with black, orange and cream wings, seen side on, feeding from a cluster of small red flowers, against a plain background fading from grey to soft green.",
+        "palette": [
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Scarlet",
+            "hex": "#d43d2f"
+          }
+        ],
+        "prompt": "Wash the background grey into green, then paint the butterfly on dry paper.",
+        "tip": "Paint the black last, and leave thin gaps between it and the orange."
+      }
+    },
+    {
+      "candidateId": "pexels:8186166",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject, sharp, on a soft plain background.",
+      "notes": [
+        "Palette chosen by eye: the pixels read Terre Verte, Cool Grey, Ivory Black and Olive Green, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Young Iora",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A fluffy young yellow-green iora with dark barred wings, calling with its beak open from a thin brown twig with two new leaves, against a soft grey-green background.",
+        "palette": [
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          }
+        ],
+        "prompt": "Keep the bird soft and fluffy; the twig and leaves are the crisp lines.",
+        "tip": "Paint the yellow breast first and let it dry before the dark wing bars."
+      }
+    },
+    {
+      "candidateId": "pexels:4599761",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject, sharp, on a soft background, with a strong curving branch.",
+      "notes": [
+        "Raw Sienna and Naples Yellow added by eye; the pixels read Warm Grey, Cool Grey, Ivory Black and Chinese White."
+      ],
+      "fields": {
+        "title": "Waxwing on a Snowy Branch",
+        "subject": "creatures",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "A crested cedar waxwing with a black mask and pale yellow belly, perched on a curving branch lined with snow, with a few red berry stems, against a soft grey and beige background.",
+        "palette": [
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          }
+        ],
+        "prompt": "The snow on the branch is bare paper. Paint the shadow under it and leave the top alone.",
+        "tip": "Soften the crest's edge with a damp brush so it does not look cut out."
+      }
+    },
+    {
+      "candidateId": "pexels:19500831",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject, seen from above. White on white practice.",
+      "notes": [
+        "Unsure: white on white with a quilted pattern behind, like the white bowl and teapot you approved.",
+        "Cool Grey and Payne's Grey added by eye; the pixels read Vandyke Brown, Ivory Black, Warm Grey and Chinese White."
+      ],
+      "fields": {
+        "title": "White Cat Asleep",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A long-haired white and grey cat curled up asleep, seen from above, with its tail wrapped round its paws, on a white quilted bedspread.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          }
+        ],
+        "prompt": "White on white. Paint only the shadows and the grey patches.",
+        "tip": "Keep the shadows cool on the fur and warmer on the bedspread."
+      }
+    },
+    {
+      "candidateId": "pexels:16902411",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple focus subjects on a plain green background, sharp.",
+      "notes": [
+        "Burnt Sienna and Raw Umber added by eye; the pixels read Sap Green and Cadmium Yellow."
+      ],
+      "fields": {
+        "title": "Snail and Dandelion",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A garden snail with a brown striped spiral shell stretching along a weathered wooden rail towards a yellow dandelion flower, against a plain bright green background.",
+        "palette": [
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Raw Umber",
+            "hex": "#7a6244"
+          },
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Paint the green background loose and wet; the snail and flower go on once it dries.",
+        "tip": "Follow the spiral of the shell with one stroke, from the centre out."
+      }
+    },
+    {
+      "candidateId": "pexels:13032215",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, and most of the kittens are out of focus."
+    },
+    {
+      "candidateId": "pexels:30975795",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Cut off at the bottom edge, with glare patches on the backdrop."
+    },
+    {
+      "candidateId": "pexels:30975796",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Overexposed and cut off at the bottom edge. Same shoot as the blue plume."
+    },
+    {
+      "candidateId": "pexels:21273793",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Same shoot as the red-shelled snail on a stem, which shows its spiral better."
+    },
+    {
+      "candidateId": "pexels:5901921",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Almost black and white, on black, and the top of the feather is out of focus."
+    },
+    {
+      "candidateId": "pexels:30975805",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Near duplicate of the other blue plume from the same shoot."
+    },
+    {
+      "candidateId": "pexels:30975793",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Cut off at the edge, and the near end is out of focus."
+    },
+    {
+      "candidateId": "pexels:39518395",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, and the feather is tiny in the frame."
+    },
+    {
+      "candidateId": "pexels:17719593",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, with a textured wall beside the bird."
+    },
+    {
+      "candidateId": "pexels:30389394",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The cat's back legs and the background are out of focus."
+    },
+    {
+      "candidateId": "pexels:10190600",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Busy speckled ground with orange flecks all round the feather."
+    },
+    {
+      "candidateId": "pexels:17829635",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The flowers in the foreground are out of focus, and we already have an orange butterfly on flowers."
+    },
+    {
+      "candidateId": "pexels:29944288",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The bird is small and far away in a tangle of thorny branches."
+    },
+    {
+      "candidateId": "pexels:35251758",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Heavy red colour grade, and a dark textured wall behind."
+    },
+    {
+      "candidateId": "pexels:20810654",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a sleeping tabby kitten."
+    },
+    {
+      "candidateId": "pexels:32588195",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Same feather and surface as another here; that one is the cleaner shot."
+    },
+    {
+      "candidateId": "pexels:6432575",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The bottom of the feather and the background are out of focus."
+    },
+    {
+      "candidateId": "pexels:37202919",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, and the kitten's body is out of focus."
+    },
+    {
+      "candidateId": "pexels:18732997",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The left end of the feather is out of focus, on a black background."
+    },
+    {
+      "candidateId": "pexels:35349116",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A wing edge and the flowers at the bottom left are out of focus, and it is dark."
+    },
+    {
+      "candidateId": "pexels:189861",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Most of the leaf is out of focus, on gritty soil."
+    },
+    {
+      "candidateId": "pexels:3581062",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Busy brick and plaster background behind the cat."
+    },
+    {
+      "candidateId": "pexels:36518294",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have several birds on branches; this one is plain brown against busy bright green."
+    },
+    {
+      "candidateId": "pexels:6277594",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The stem and the background are out of focus, with a heavy colour grade."
+    },
+    {
+      "candidateId": "pexels:6630573",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The slug is cut off at the edge, and the moss in front is out of focus."
+    },
+    {
+      "candidateId": "pexels:32587243",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A fern rather than a creature, and the lower stem is out of focus."
+    },
+    {
+      "candidateId": "pexels:38004712",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, which is not good for watercolour."
+    },
+    {
+      "candidateId": "pexels:38612685",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The flowers at the bottom are out of focus, on a dark mottled background."
+    },
+    {
+      "candidateId": "pexels:18414753",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a sleeping tabby kitten, and this one's body is out of focus."
+    },
+    {
+      "candidateId": "pexels:2646483",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A person's arm and hand in the picture."
+    },
+    {
+      "candidateId": "pexels:18419766",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, and the feather is out of focus."
+    },
+    {
+      "candidateId": "pexels:33997368",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The cat is among chair slats and frames. Busy and dark."
+    },
+    {
+      "candidateId": "pexels:9202699",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The top butterfly and the bottom of the flower are out of focus."
+    },
+    {
+      "candidateId": "pexels:17814360",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The butterfly is tiny in a dark frame of fronds."
+    },
+    {
+      "candidateId": "pexels:34025066",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Busy mottled pink and green background, and we already have a blue butterfly on grass."
+    },
+    {
+      "candidateId": "pexels:37992714",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A blurred band across the bottom third, and a dark background."
+    },
+    {
+      "candidateId": "pexels:31983798",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Busy gravel with a blue paint stain, and the back of the shell is soft."
+    },
+    {
+      "candidateId": "pexels:38402221",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A silhouette among busy fronds and branches."
+    },
+    {
+      "candidateId": "pexels:6402543",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a kingfisher, and this one is small in a lot of empty space."
+    },
+    {
+      "candidateId": "pexels:30975794",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Cut off at the edges on a mottled backdrop, from the same shoot as the other plumes."
+    },
+    {
+      "candidateId": "pexels:39407407",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Behind rusty bars, with a busy park and a person in the background."
+    },
+    {
+      "candidateId": "pexels:32400651",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The bottom of the shell and the background are out of focus."
+    },
+    {
+      "candidateId": "pexels:1788929",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Busy bright yellow background with a heavy colour grade."
+    },
+    {
+      "candidateId": "pexels:31443124",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Busy marble tiles, wooden floor and a door around the cat."
+    },
+    {
+      "candidateId": "pexels:34508901",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The serrated leaves round the slug are busy, and the plant is cannabis."
+    },
+    {
+      "candidateId": "pexels:36331944",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo of leaf veins: a texture with no creature."
+    },
+    {
+      "candidateId": "pexels:6331030",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The feather is cut off at the edge."
+    },
+    {
+      "candidateId": "pexels:102104",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple subject on a plain white background, sharp, with a soft shadow. A quick warm-up.",
+      "notes": [
+        "Yellow Ochre and Cool Grey added by eye; the pixels read Burnt Sienna, Cadmium Red and Rose Madder."
+      ],
+      "fields": {
+        "title": "Red Apple on White",
+        "subject": "fruit",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A single round apple, red flushed over golden yellow and speckled with pale dots, with a thin stalk, sitting on a plain white surface with a soft shadow below.",
+        "palette": [
+          {
+            "name": "Cadmium Red",
+            "hex": "#c8322c"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "One apple, one wash. Drop the red into the gold while it is wet.",
+        "tip": "Leave the tiny pale speckles as dots of paper, or lift a few with a damp brush tip."
+      }
+    },
+    {
+      "candidateId": "pexels:914911",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple subject on a plain white background, sharp. Two colours meeting down the middle.",
+      "notes": [
+        "Sap Green added by eye; the pixels read Naples Yellow, Cadmium Orange, Scarlet and Cadmium Red."
+      ],
+      "fields": {
+        "title": "Half-Blushed Apple",
+        "subject": "fruit",
+        "difficulty": "gentle",
+        "minutes": 8,
+        "alt": "A single apple, pale cream on its left side and bright red on its right, with a thin green stalk, on a plain white background.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Cadmium Red",
+            "hex": "#c8322c"
+          },
+          {
+            "name": "Scarlet",
+            "hex": "#d43d2f"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Paint the cream and the red wet-in-wet and let them meet on their own.",
+        "tip": "Keep the cream very pale; most of it is the paper."
+      }
+    },
+    {
+      "candidateId": "pexels:11663128",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple shape on a plain background, sharp. Colour on colour practice.",
+      "notes": [
+        "Warm Grey added by eye; the pixels read Cadmium Orange, Scarlet and Burnt Sienna."
+      ],
+      "fields": {
+        "title": "Pumpkin on Orange",
+        "subject": "fruit",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A small squat orange pumpkin with shallow ribs and a dry grey-brown stalk, sitting on a plain orange background with a soft shadow.",
+        "palette": [
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Scarlet",
+            "hex": "#d43d2f"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Orange on orange. Let the shadow side and the stalk do the separating.",
+        "tip": "Mix the shadow with a touch of burnt sienna rather than black."
+      }
+    },
+    {
+      "candidateId": "pexels:14454162",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple focus subjects on a plain background, sharp throughout.",
+      "notes": [
+        "Cadmium Orange added by eye; the pixels read Cerulean Blue, Lemon Yellow, Naples Yellow and Sap Green."
+      ],
+      "fields": {
+        "title": "Three Green Pears",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "Three green pears with a yellow and orange blush, two standing and one lying on its side in front, on a plain turquoise background.",
+        "palette": [
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          }
+        ],
+        "prompt": "Paint the three pear shapes first, then the blush while they are still damp.",
+        "tip": "Keep the turquoise background loose and let it touch the pears in a few places."
+      }
+    },
+    {
+      "candidateId": "pexels:3746517",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple focus subjects on a plain surface, sharp. Good for practising reds.",
+      "notes": [
+        "Cadmium Red and Alizarin Crimson added by eye; the pixels read Burnt Sienna, Yellow Ochre, Burnt Umber and Cadmium Yellow."
+      ],
+      "fields": {
+        "title": "Three Apples on Wood",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "Three red apples streaked with yellow and green, grouped in a triangle on a light pale wooden board, seen from slightly above.",
+        "palette": [
+          {
+            "name": "Cadmium Red",
+            "hex": "#c8322c"
+          },
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          }
+        ],
+        "prompt": "Three apples, three reds. Leave the yellow streaks as the lightest wash.",
+        "tip": "Paint the yellow first and let it dry before the reds go over it."
+      }
+    },
+    {
+      "candidateId": "pexels:17840024",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain white background, sharp, with a strong cast shadow.",
+      "notes": [
+        "Sap Green and Cool Grey added by eye; the pixels read Naples Yellow, Cadmium Orange, Yellow Ochre and Raw Umber."
+      ],
+      "fields": {
+        "title": "Mandarin with Leaves",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A single mandarin with three long green leaves on its stalk, on a plain white surface in hard sunlight, casting a crisp shadow to the left.",
+        "palette": [
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "The shadow is as important as the fruit. Paint it in one cool grey.",
+        "tip": "Pull each long leaf in one stroke from stalk to tip."
+      }
+    },
+    {
+      "candidateId": "pexels:8086137",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple focus subjects on a plain background, sharp, with soft window light.",
+      "notes": [
+        "Naples Yellow and Rose Madder added by eye; the pixels read Raw Sienna, Warm Grey and Burnt Umber."
+      ],
+      "fields": {
+        "title": "Pears on Linen",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "Three yellow pears with a rosy blush and dark stalks, grouped on a ruffled white linen napkin, in soft window light against a pale wall.",
+        "palette": [
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Paint the pears warm and the linen cool. The ruffles only need a few strokes.",
+        "tip": "Suggest the ruffled edge with broken strokes rather than drawing every fold."
+      }
+    },
+    {
+      "candidateId": "pexels:36906437",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject, sharp, with strong light and shadow. Good for practising darks.",
+      "notes": [
+        "Unsure: a dark background, which you have said there are a lot of.",
+        "Indigo and Burnt Umber added by eye; the pixels read Ivory Black, Cadmium Red and Alizarin Crimson."
+      ],
+      "fields": {
+        "title": "Red Apple in Low Light",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A single glossy red apple on a worn wooden table, lit from the right so its left side falls into shadow, against a dark blue-black wall.",
+        "palette": [
+          {
+            "name": "Cadmium Red",
+            "hex": "#c8322c"
+          },
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Indigo",
+            "hex": "#2e3f55"
+          },
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          }
+        ],
+        "prompt": "Build the dark wall in two passes, and leave the highlight on the apple as paper.",
+        "tip": "Paint the shadow side of the apple with alizarin, not black, so it stays red."
+      }
+    },
+    {
+      "candidateId": "pexels:5945911",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject, sharp, with patterned light across a plain ground.",
+      "notes": [
+        "Unsure: the blurred frond at the right edge. Leave it out of the painting.",
+        "Sap Green, Rose Madder and Warm Grey added by eye; the pixels read Naples Yellow, Raw Umber, Burnt Umber and Lemon Yellow."
+      ],
+      "fields": {
+        "title": "Pear in Palm Shadow",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A single green pear with a red blush, seen from above on a peach surface, crossed by stripes of palm-leaf shadow, with a blurred green frond at the right edge.",
+        "palette": [
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Paint the pear first, then lay the shadow stripes over everything in one pale grey.",
+        "tip": "Keep the stripes the same grey over the pear and the ground; that is what makes them read as shadow."
+      }
+    },
+    {
+      "candidateId": "pexels:13768925",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject, sharp, with glass to practise.",
+      "notes": [
+        "Unsure: the marble veins are a little busy.",
+        "Cadmium Yellow added by eye; the pixels read Cool Grey and Yellow Ochre."
+      ],
+      "fields": {
+        "title": "Lemon in a Glass",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A whole lemon sitting in the bowl of an empty long-stemmed wine glass, against white marble with soft grey veins.",
+        "palette": [
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "The glass is barely there. Paint the lemon, then a few grey lines for the rim and stem.",
+        "tip": "Leave the marble mostly white and add only two or three veins."
+      }
+    },
+    {
+      "candidateId": "pexels:34969870",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject, sharp, on a plain wall and surface.",
+      "notes": [
+        "Unsure: the whole photo has a fine crackle texture filter. The shapes are still clear.",
+        "Warm Grey added by eye; the pixels read Vandyke Brown, Raw Umber and Burnt Umber."
+      ],
+      "fields": {
+        "title": "Pear on a Wooden Spoon",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A single brown pear with a curved stalk standing on a long curved wooden spoon, on a pale table against a plain grey wall.",
+        "palette": [
+          {
+            "name": "Raw Umber",
+            "hex": "#7a6244"
+          },
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Warm browns against cool grey. Keep the wall to one flat wash.",
+        "tip": "Glaze a little green into the pear once the brown is dry."
+      }
+    },
+    {
+      "candidateId": "pexels:5973583",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One simple subject on a plain grey background, sharp. Good for pale shading.",
+      "notes": [
+        "Filed as still life: garlic is a vegetable, not a fruit.",
+        "Unsure because it is the first vegetable."
+      ],
+      "fields": {
+        "title": "Garlic Bulb",
+        "subject": "still-life",
+        "difficulty": "gentle",
+        "minutes": 12,
+        "alt": "A single bulb of garlic with plump cream cloves under papery skin and a short cut stem, standing on a plain pale grey background with a soft shadow.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Raw Umber",
+            "hex": "#7a6244"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Cream on grey. Paint the shadows between the cloves and leave the rest as paper.",
+        "tip": "Keep the shadows warm between the cloves and cool on the ground."
+      }
+    },
+    {
+      "candidateId": "pexels:33651543",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Blueberries splashed with water on black: dark and busy."
+    },
+    {
+      "candidateId": "pexels:13546344",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy with juice, a straw and slices, and they are cross-sections."
+    },
+    {
+      "candidateId": "pexels:10513273",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Floating pear slices, a knife, fork and board: busy, and cut fruit."
+    },
+    {
+      "candidateId": "pexels:5946095",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Fruit laid out as a face: a joke rather than a reference."
+    },
+    {
+      "candidateId": "pexels:39130125",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A ladybug on black, not fruit, and the open wing is soft."
+    },
+    {
+      "candidateId": "pexels:39130129",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "A ladybug on black: a creature, not fruit."
+    },
+    {
+      "candidateId": "pexels:33337713",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A pear on the tree among busy leaves, and the lower pear is out of focus."
+    },
+    {
+      "candidateId": "pexels:31833143",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Cut avocado halves on dark slate. No more cross-sections."
+    },
+    {
+      "candidateId": "pexels:8970749",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "An apple dipped in paint with a letter candle: a joke rather than a reference."
+    },
+    {
+      "candidateId": "pexels:8591046",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, which is not good for watercolour."
+    },
+    {
+      "candidateId": "pexels:11663121",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "A cut apple half beside the whole one. No more cross-sections."
+    },
+    {
+      "candidateId": "pexels:39334658",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Many pears among busy leaves, some out of focus."
+    },
+    {
+      "candidateId": "pexels:28882152",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded blackberries cut off at the edges."
+    },
+    {
+      "candidateId": "pexels:34949146",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A heavy painterly filter, and the background leaves are blurred."
+    },
+    {
+      "candidateId": "pexels:14456110",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded apples; the ones round the edges are out of focus."
+    },
+    {
+      "candidateId": "pexels:17975549",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Pears in paper with shop stickers, crowded and soft."
+    },
+    {
+      "candidateId": "pexels:18353266",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A heap of pink ranunculus: flowers, not fruit, and too many to hold together."
+    },
+    {
+      "candidateId": "pexels:19121887",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Apple halves. No more cross-sections."
+    },
+    {
+      "candidateId": "pexels:34949143",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The same heavy painterly filter as the other apple on a branch."
+    },
+    {
+      "candidateId": "pexels:33843874",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Too busy: a teapot, cup, cookies, grapes and cheese in a kitchen."
+    },
+    {
+      "candidateId": "pexels:7190357",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A fruit salad with a hand and a spoon: too busy."
+    },
+    {
+      "candidateId": "pexels:17975557",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded market apples, and the edges are out of focus."
+    },
+    {
+      "candidateId": "pexels:18353267",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A heap of pink ranunculus: flowers, not fruit. Same shoot as another here."
+    },
+    {
+      "candidateId": "pexels:30414993",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A city street scene with people: not fruit."
+    },
+    {
+      "candidateId": "pexels:7467236",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A person holding a bouquet of dried flowers: not fruit."
+    },
+    {
+      "candidateId": "pexels:19249511",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Rowan berry clusters all over a dark tree: busy, with no focus."
+    },
+    {
+      "candidateId": "pexels:7190356",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A fruit salad in a tub with cut fruit: too busy."
+    },
+    {
+      "candidateId": "pexels:8598321",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A crate full of pears: no focus subject."
+    }
+  ]
+}

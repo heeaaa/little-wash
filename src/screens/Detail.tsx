@@ -3,6 +3,8 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { WashLink } from "@/components/WashLink";
 import { useApp } from "@/state/AppContext";
 import { findReference } from "@/lib/catalog";
+import { CreditLine } from "@/components/CreditLine";
+import { PaintedButton } from "@/components/PaintedButton";
 import { RefArt } from "@/components/RefArt";
 import { PaletteRow } from "@/components/PaletteRow";
 import { MetaRow } from "@/components/MetaRow";
@@ -72,6 +74,7 @@ export function Detail() {
               priority
               inset="roomy"
               transitionName={enlarged ? undefined : PIECE_ART}
+              ownAspect
               className="aspect-square w-full rounded-[6px]"
             />
             <button
@@ -83,9 +86,9 @@ export function Detail() {
             </button>
           </div>
           <p className="mt-3 text-[0.8rem] text-ink-faint">
-            Shown uncropped on a neutral mat so the colours read true. Source:{" "}
-            {reference.source}.
+            Shown uncropped on a neutral mat so the colours read true.
           </p>
+          <CreditLine reference={reference} variant="full" className="mt-1.5" />
         </div>
 
         <div className="min-w-0">
@@ -95,9 +98,11 @@ export function Detail() {
           <h1 className="text-balance font-display text-[2.1rem] font-medium leading-tight tracking-tight text-ink">
             {reference.title}
           </h1>
-          <p className="mt-2 max-w-reading text-pretty font-display text-[1.15rem] italic leading-relaxed text-ink-soft">
-            {reference.prompt}
-          </p>
+          {reference.prompt ? (
+            <p className="mt-2 max-w-reading text-pretty font-display text-[1.15rem] italic leading-relaxed text-ink-soft">
+              {reference.prompt}
+            </p>
+          ) : null}
           <MetaRow reference={reference} className="mt-4" />
 
           <section className="mt-7">
@@ -107,22 +112,29 @@ export function Detail() {
             <PaletteRow palette={reference.palette} variant="dabs" showNames />
           </section>
 
-          <section
-            className="mt-7 rounded-card p-4"
-            style={{ background: pigment(reference.subject, 0.12) }}
-          >
-            <h2 className="flex items-center gap-2 font-display text-[1.05rem] font-semibold text-ink">
-              <WashiTag pigmentVar="--pig-landscape" rotate={-3}>
-                <Icon name="brush" size={15} /> Tip
-              </WashiTag>
-            </h2>
-            <p className="mt-2 text-pretty text-[0.98rem] leading-relaxed text-ink-soft">
-              {reference.tip}
-            </p>
-          </section>
+          {/*
+            The whole panel goes, not just its text. An empty tinted card
+            headed "Tip" promises something and then says nothing.
+          */}
+          {reference.tip ? (
+            <section
+              className="mt-7 rounded-card p-4"
+              style={{ background: pigment(reference.subject, 0.12) }}
+            >
+              <h2 className="flex items-center gap-2 font-display text-[1.05rem] font-semibold text-ink">
+                <WashiTag pigmentVar="--pig-landscape" rotate={-3}>
+                  <Icon name="brush" size={15} /> Tip
+                </WashiTag>
+              </h2>
+              <p className="mt-2 text-pretty text-[0.98rem] leading-relaxed text-ink-soft">
+                {reference.tip}
+              </p>
+            </section>
+          ) : null}
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <SaveButton reference={reference} variant="full" />
+            <PaintedButton reference={reference} variant="full" />
             <button
               type="button"
               onClick={() => move(() => setEnlarged(true))}

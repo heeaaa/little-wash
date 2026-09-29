@@ -1,0 +1,44 @@
+{
+  "_comment": "Searches for the Met's open-access collection, used with --plan=catalog/harvest-plan-met.json --source=met. A museum is searched differently from a photo library: these favour watercolour studies, botanical and natural-history drawings, and single objects photographed on plain grounds. No landscape: the catalogue already holds 47.",
+  "target": 72,
+  "subjects": {
+    "fruit": {
+      "target": 12,
+      "queries": [
+        { "query": "pear watercolor" },
+        { "query": "peaches still life" }
+      ]
+    },
+    "botanical": {
+      "target": 12,
+      "queries": [
+        { "query": "botanical watercolor" },
+        { "query": "flower study watercolor" },
+        { "query": "tulip drawing" }
+      ]
+    },
+    "creatures": {
+      "target": 12,
+      "queries": [
+        { "query": "bird watercolor" },
+        { "query": "butterfly watercolor" },
+        { "query": "shell drawing" }
+      ]
+    },
+    "still-life": {
+      "target": 12,
+      "queries": [
+        { "query": "still life watercolor" },
+        { "query": "vase of flowers watercolor" }
+      ]
+    },
+    "objects": {
+      "target": 12,
+      "queries": [
+        { "query": "teapot" },
+        { "query": "pitcher" },
+        { "query": "stoneware jar" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,2204 @@
+{
+  "proposedBy": "Claude",
+  "proposedAt": "2026-09-28",
+  "proposals": [
+    {
+      "candidateId": "met:9317",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear object on a plain grey ground, painted with bold simple flowers. Good for warm yellows.",
+      "notes": [
+        "A painted vase from 1882 by John Bennett, photographed by the Met on a plain studio ground.",
+        "Alizarin Crimson and Cerulean Blue added by eye; the pixels read Cadmium Yellow, Yellow Ochre, Burnt Sienna and Burnt Umber."
+      ],
+      "fields": {
+        "title": "Dogwood Vase",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 30,
+        "alt": "A round, wide-shouldered yellow earthenware vase painted with large deep-pink dogwood flowers on thin brown branches, with a speckled turquoise rim, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          },
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          }
+        ],
+        "prompt": "Paint the yellow vase as one round shape first, then drop the flowers onto it once it is dry.",
+        "tip": "Keep the flowers loose: four petals and a dot of green for each is enough."
+      }
+    },
+    {
+      "candidateId": "met:20737",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One clear object on a plain grey ground. Deep blue with pale blossom is good practice for leaving the paper.",
+      "notes": [
+        "Unsure: a second painted vase by the same maker as the Dogwood Vase.",
+        "Ultramarine Blue, Olive Green and Rose Madder added by eye; the pixels read Cool Grey, Indigo, Dioxazine Violet and Ivory Black."
+      ],
+      "fields": {
+        "title": "Apple Blossom Vase",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A tall cylindrical cobalt blue earthenware vase painted with a branch of white and pink apple blossom and olive-green leaves, with a thin gold rim, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Ultramarine Blue",
+            "hex": "#2f4a9c"
+          },
+          {
+            "name": "Indigo",
+            "hex": "#2e3f55"
+          },
+          {
+            "name": "Olive Green",
+            "hex": "#6b6f36"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          }
+        ],
+        "prompt": "Leave the blossom as paper and paint the deep blue round it.",
+        "tip": "Build the blue in two layers; one heavy layer dries patchy."
+      }
+    },
+    {
+      "candidateId": "met:362547",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on plain paper, already a watercolour. A lovely study to copy stroke for stroke.",
+      "notes": [
+        "A French botanical watercolour from about 1820.",
+        "Sap Green, Rose Madder and Raw Sienna added by eye; the pixels read Chinese White, Naples Yellow and Olive Green."
+      ],
+      "fields": {
+        "title": "Woodland Plant Study",
+        "subject": "botanical",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A watercolour study of a small woodland plant with fuzzy olive-green heart-shaped leaves, tiny pink flowers on a thin reddish stem and fine roots, beside a separate bare sprig, on plain cream paper.",
+        "palette": [
+          {
+            "name": "Olive Green",
+            "hex": "#6b6f36"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          }
+        ],
+        "prompt": "This is already a watercolour. Match its washes: one pale green per leaf, darkened at the edge.",
+        "tip": "Pull the roots and the stem with the very tip of a small brush, in one movement each."
+      }
+    },
+    {
+      "candidateId": "met:51678",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "A soft, simple spray of flowers and leaves on a plain round ground. Muted colours.",
+      "notes": [
+        "Unsure: the patterned silk mount round the painting is busy; paint the round part only.",
+        "A Chinese fan painting on silk.",
+        "Raw Sienna, Cadmium Red and Terre Verte added by eye; the pixels read Raw Umber."
+      ],
+      "fields": {
+        "title": "Crape Myrtle Fan",
+        "subject": "botanical",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A round painting on tan silk of a flowering crape myrtle branch, with clusters of soft red blossoms and a few rounded green leaves, set in a pale patterned silk mount.",
+        "palette": [
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Cadmium Red",
+            "hex": "#c8322c"
+          },
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          },
+          {
+            "name": "Raw Umber",
+            "hex": "#7a6244"
+          }
+        ],
+        "prompt": "Wash the round ground in one warm tan, let it dry, then add the flowers and leaves on top.",
+        "tip": "Keep the reds and greens muted; a touch of the tan in each will do it."
+      }
+    },
+    {
+      "candidateId": "met:207551",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black marble panel inlaid with a crowded vase of flowers: intricate detail on black."
+    },
+    {
+      "candidateId": "met:9315",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The relief rooster and the dribbled glaze are a lot of fine detail."
+    },
+    {
+      "candidateId": "met:816519",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Grapes and peaches in a glass tazza, painted on a dark background: many small grapes and dark."
+    },
+    {
+      "candidateId": "met:207157",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Two porcelain figurines with faces and painted patterns: two figures and fussy detail."
+    },
+    {
+      "candidateId": "met:194191",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Gilded clock watch covered in engraving: intricate detail."
+    },
+    {
+      "candidateId": "met:448959",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Carved stone head with a beaded headdress: a face and a lot of carved detail."
+    },
+    {
+      "candidateId": "met:10997",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Violin, sheet music, hinges and a horseshoe on a door: too many objects."
+    },
+    {
+      "candidateId": "met:435904",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Skull, book, quill, lamp and a toppled glass on a dark ground: too many objects and dark."
+    },
+    {
+      "candidateId": "met:20758",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Tall vase covered in intricate gold and coloured pattern: intricate detail."
+    },
+    {
+      "candidateId": "met:13349",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Bowl of peaches with grapes, a knife and peel, dark background: too busy."
+    },
+    {
+      "candidateId": "met:435882",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Many apples on a cloth with a pot of primroses: too many objects."
+    },
+    {
+      "candidateId": "met:898372",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Violets and ferns on a dark brown ground: dark, and many small flowers."
+    },
+    {
+      "candidateId": "met:436305",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Jug, glass, bread, bird and walnuts on a dark ground: too busy."
+    },
+    {
+      "candidateId": "met:17732",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The painted hummingbirds, vines and ornate gold handles are a lot of intricate detail."
+    },
+    {
+      "candidateId": "met:9386",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "White porcelain vase with relief figures: white on white, but the relief is a lot of intricate detail."
+    },
+    {
+      "candidateId": "met:200668",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Marble bust of a child: a portrait rather than an object to paint."
+    },
+    {
+      "candidateId": "met:437429",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Bowl of peaches in front of a busy patterned tapestry."
+    },
+    {
+      "candidateId": "met:816624",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Basket of fruit and leaves on a dark ground: too busy and dark."
+    },
+    {
+      "candidateId": "met:437999",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Teapot, fruit and a figure in a busy painted interior: too busy."
+    },
+    {
+      "candidateId": "met:208181",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Blue and white tulip vase covered in intricate painted detail."
+    },
+    {
+      "candidateId": "met:1029",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Silver presentation vase covered in intricate relief."
+    },
+    {
+      "candidateId": "met:437428",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Many small grapes and peaches to hold together on a white cloth."
+    },
+    {
+      "candidateId": "met:13350",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of the painting."
+    },
+    {
+      "candidateId": "met:888924",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Flowers, melon, peaches and grapes on a dark ground: too busy."
+    },
+    {
+      "candidateId": "met:436976",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Poppy with snails, insects and reptiles on a dark ground: too busy and dark."
+    },
+    {
+      "candidateId": "met:11734",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Cabbages, squash, peppers and okra: too many objects."
+    },
+    {
+      "candidateId": "met:438376",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Oysters, glasses and a toppled tazza on a dark ground: too busy and dark."
+    },
+    {
+      "candidateId": "met:9484",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Tiffany glass flower vase spotlit on a black background: dark background."
+    },
+    {
+      "candidateId": "met:457788",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Cactus painting photographed in its frame with glass glare and a storeroom label with text."
+    },
+    {
+      "candidateId": "met:457020",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Carved wooden doors covered in repeated floral carving: intricate detail."
+    },
+    {
+      "candidateId": "met:839041",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Riverbank painting with dense plants and reflections: busy, and landscape already has plenty."
+    },
+    {
+      "candidateId": "met:436947",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Two people in a boat: figures, not a subject to paint here."
+    },
+    {
+      "candidateId": "met:823979",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Raspberry painting shown as an open book with a blank page on black."
+    },
+    {
+      "candidateId": "met:39901",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Horse drawing covered in seals and calligraphy."
+    },
+    {
+      "candidateId": "met:816523",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Heaped fruit and flowers on a dark ground: too busy."
+    },
+    {
+      "candidateId": "met:395536",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dense tangle of wildflowers, moss and leaves: too busy."
+    },
+    {
+      "candidateId": "met:437261",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Altarpiece triptych with figures and a detailed landscape: far too busy."
+    },
+    {
+      "candidateId": "met:436607",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Allegorical figures, animals and objects: far too busy."
+    },
+    {
+      "candidateId": "met:437202",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowd scene with many figures: far too busy."
+    },
+    {
+      "candidateId": "met:436102",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Virgin and Child with angels in an architectural setting: far too busy."
+    },
+    {
+      "candidateId": "met:438821",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Figures in a dense tropical scene: far too busy."
+    },
+    {
+      "candidateId": "met:824771",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Chalk drawing of a figure in an elaborate dress: a figure, and grey chalk rather than colour."
+    },
+    {
+      "candidateId": "met:453895",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Manuscript page with two figures and a decorated border."
+    },
+    {
+      "candidateId": "met:436121",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Huge bouquet with a seated woman: too busy, and a figure."
+    },
+    {
+      "candidateId": "met:435621",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A figure in a dense garden: too busy."
+    },
+    {
+      "candidateId": "met:437508",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Self-portrait on a dark ground: a figure, and dark."
+    },
+    {
+      "candidateId": "met:451726",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Manuscript page with figures, architecture and calligraphy: far too busy."
+    },
+    {
+      "candidateId": "met:451287",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Calligraphy page with a gilded border: text, not a subject to paint."
+    },
+    {
+      "candidateId": "met:436099",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Nativity triptych with many figures: far too busy."
+    },
+    {
+      "candidateId": "met:437216",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Panel of many small scenes: far too busy."
+    },
+    {
+      "candidateId": "met:544320",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Carved stela covered in hieroglyphs and figures: too busy."
+    },
+    {
+      "candidateId": "met:451725",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Manuscript page with a crowd of birds and calligraphy: far too busy."
+    },
+    {
+      "candidateId": "met:816522",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded vase of many flowers with a butterfly on a dark ground: too busy."
+    },
+    {
+      "candidateId": "met:453385",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Calligraphy page with a patterned border: text, not a subject to paint."
+    },
+    {
+      "candidateId": "met:437368",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Holy Family with an angel in an architectural setting: figures and too busy."
+    },
+    {
+      "candidateId": "met:435848",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded architectural scene with many figures: far too busy."
+    },
+    {
+      "candidateId": "met:701293",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Calligraphy album with a colour chart in the photo: text."
+    },
+    {
+      "candidateId": "met:228990",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Embroidered panel crowded with figures, animals and flowers: far too busy."
+    },
+    {
+      "candidateId": "met:544227",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject on a plain grey ground, sharp, with one strong colour. The Met's best-loved object.",
+      "notes": [
+        "Cerulean Blue, Cobalt Blue and Payne's Grey added by eye; the pixels read Cool Grey and Prussian Blue."
+      ],
+      "fields": {
+        "title": "William the Hippo",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "The Met's blue faience hippopotamus, nicknamed William, standing on four short legs, painted with dark outlines of lotus flowers and leaves, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Cobalt Blue",
+            "hex": "#3a6bb5"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint the whole hippo in one blue wash, then draw the lotus plants on it once it is dry.",
+        "tip": "Keep the blue a touch paler on the back, where the light lands."
+      }
+    },
+    {
+      "candidateId": "met:570749",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject on a plain grey ground, sharp. A simple upright silhouette.",
+      "notes": [
+        "Burnt Umber and Burnt Sienna added by eye; the pixels read Ivory Black, Cool Grey, Vandyke Brown and Warm Grey."
+      ],
+      "fields": {
+        "title": "Bronze Cat",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A slender Egyptian bronze cat sitting upright with its tail curled round its front feet and its ears pricked, on a pale block against a plain grey background.",
+        "palette": [
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Get the silhouette right first: ears, long neck, round haunch. The rest is shading.",
+        "tip": "Mix the bronze from burnt umber and a little burnt sienna, and leave a thin light edge down the back."
+      }
+    },
+    {
+      "candidateId": "met:251050",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple, stylised shape on a plain grey ground, sharp throughout.",
+      "notes": [
+        "Viridian and Payne's Grey added by eye; the pixels read Chinese White, Cool Grey, Terre Verte and Ivory Black."
+      ],
+      "fields": {
+        "title": "Greek Bronze Horse",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A small stylised Greek bronze horse with a long thin body, tall straight legs and a tube-like muzzle, standing on an openwork base, with a green patina, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          },
+          {
+            "name": "Viridian",
+            "hex": "#2e7a63"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "This horse is nearly all straight lines. Paint each leg in one stroke.",
+        "tip": "Drop a little viridian into the wet grey-green so the patina looks mottled rather than flat."
+      }
+    },
+    {
+      "candidateId": "met:39496",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple object on a plain grey ground, sharp. A pale shape with soft shadows.",
+      "notes": [
+        "Naples Yellow added by eye; the pixels read Cool Grey, Ivory Black, Warm Grey and Raw Umber."
+      ],
+      "fields": {
+        "title": "Bird-Shaped Vessel",
+        "subject": "creatures",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A pale earthenware jug shaped like a bird, with a tall fan-shaped crest, a long beak and a spout rising from its back, standing on a round foot against a plain grey background.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Raw Umber",
+            "hex": "#7a6244"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Pale on grey. Paint the background round the bird and keep the bird itself to two soft greys.",
+        "tip": "Soften the shadow side into the paper while it is damp, so the body looks round."
+      }
+    },
+    {
+      "candidateId": "met:573447",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One small, simple shape on a plain ground, sharp. A quick warm-up in one colour.",
+      "notes": [
+        "Unsure: a second hippo after William, though a different colour and pose.",
+        "Cadmium Red, Alizarin Crimson and Cool Grey added by eye; the pixels read Burnt Sienna, Warm Grey and Burnt Umber."
+      ],
+      "fields": {
+        "title": "Red Jasper Hippo",
+        "subject": "creatures",
+        "difficulty": "gentle",
+        "minutes": 12,
+        "alt": "A small hippopotamus carved from polished red jasper, lying down with its head raised, against a plain white to grey background.",
+        "palette": [
+          {
+            "name": "Cadmium Red",
+            "hex": "#c8322c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "One red shape. Wet it, drop in a darker red underneath, and stop.",
+        "tip": "Leave a sliver of paper along the back for the polish."
+      }
+    },
+    {
+      "candidateId": "met:548439",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One clear subject on a plain pale ground, sharp, with a bold, graphic shape.",
+      "notes": [
+        "Unsure: the wing feathers are finely patterned.",
+        "Palette chosen by eye: the pixels read Chinese White, Warm Grey, Vandyke Brown and Raw Umber, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Falcon with Spread Wings",
+        "subject": "creatures",
+        "difficulty": "stretch",
+        "minutes": 35,
+        "alt": "An Egyptian faience inlay of a falcon with its wings spread wide and its head turned, holding a ring in its claws, in faded blue-green, red and cream, on a plain pale background.",
+        "palette": [
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          },
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          }
+        ],
+        "prompt": "Paint the wing shapes as two big washes first; the feathers can be suggested on top.",
+        "tip": "A few dry-brush strokes across each wing will read as feathers without painting every one."
+      }
+    },
+    {
+      "candidateId": "met:555577",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One tiny, simple shape on a plain white ground. A quick warm-up in one glowing colour.",
+      "notes": [
+        "Unsure: very small in the frame.",
+        "Cadmium Orange and Naples Yellow added by eye; the pixels read Burnt Sienna."
+      ],
+      "fields": {
+        "title": "Carnelian Falcon",
+        "subject": "creatures",
+        "difficulty": "gentle",
+        "minutes": 10,
+        "alt": "A tiny falcon amulet carved in translucent orange carnelian, with a drilled hole for hanging, on a plain white background.",
+        "palette": [
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          }
+        ],
+        "prompt": "One orange shape. Let the colour pool darker at the base.",
+        "tip": "Leave the lightest part of the stone as bare paper so it glows."
+      }
+    },
+    {
+      "candidateId": "met:554787",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One small, simple shape on a plain ground. A quick warm-up.",
+      "notes": [
+        "Unsure: a little small in the frame.",
+        "Ultramarine Blue and Cool Grey added by eye; the pixels read Payne's Grey, Indigo and Dioxazine Violet."
+      ],
+      "fields": {
+        "title": "Lapis Fish",
+        "subject": "creatures",
+        "difficulty": "gentle",
+        "minutes": 10,
+        "alt": "A small fish amulet carved in violet-blue lapis lazuli with pale flecks and a forked tail, lying on its side on a plain white background.",
+        "palette": [
+          {
+            "name": "Ultramarine Blue",
+            "hex": "#2f4a9c"
+          },
+          {
+            "name": "Dioxazine Violet",
+            "hex": "#5b3b78"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "One blue fish. Wet it, drop in violet, and dab out a few pale flecks.",
+        "tip": "Lift the pale flecks with a damp brush while the blue is still wet."
+      }
+    },
+    {
+      "candidateId": "met:56105",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One clear subject on plain paper. Already a print in soft colours, so it translates well.",
+      "notes": [
+        "Unsure: a lot of feather detail on the body.",
+        "By Hakusanjin Hokui.",
+        "Burnt Sienna, Rose Madder and Payne's Grey added by eye; the pixels read Warm Grey, Naples Yellow and Raw Umber."
+      ],
+      "fields": {
+        "title": "Copper Pheasant",
+        "subject": "creatures",
+        "difficulty": "stretch",
+        "minutes": 35,
+        "alt": "A Japanese woodblock print of a copper pheasant walking with its head lowered, a long barred tail sweeping behind it, a red face patch and dark body feathers, on plain cream paper with a brushed signature.",
+        "palette": [
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          }
+        ],
+        "prompt": "Paint the long tail in one confident sweep, then build the dark body on top.",
+        "tip": "Keep the tail's bars loose: a few broken strokes along its length are enough."
+      }
+    },
+    {
+      "candidateId": "met:36043",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One clear subject on plain paper. White feathers are good practice for leaving the paper.",
+      "notes": [
+        "Unsure: the feathers are finely drawn.",
+        "By Ogawa Haritsu, 18th century.",
+        "Palette chosen by eye: the pixels read Warm Grey, Raw Umber and Chinese White, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Resting Pigeon",
+        "subject": "creatures",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "A painting of a single plump pigeon resting, its white feathers edged in pale grey, rust-red patches across its back, an iridescent grey-green neck and pink feet, on plain pale tan paper.",
+        "palette": [
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          }
+        ],
+        "prompt": "Leave the white feathers as paper and paint only their grey edges and the red patches.",
+        "tip": "Glaze the neck with a thin wash of terre verte over dry grey for the sheen."
+      }
+    },
+    {
+      "candidateId": "met:42237",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple object on a plain grey ground, sharp, in one bold colour.",
+      "notes": [
+        "Alizarin Crimson added by eye; the pixels read Ivory Black, Scarlet, Cadmium Red and Cool Grey."
+      ],
+      "fields": {
+        "title": "Coral-Red Bottle Vase",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A glossy coral-red porcelain bottle vase with a round body and a long thin neck, with bright highlights on its shoulder, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Cadmium Red",
+            "hex": "#c8322c"
+          },
+          {
+            "name": "Scarlet",
+            "hex": "#d43d2f"
+          },
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "One red shape. Save the highlights as paper before the colour goes on.",
+        "tip": "Deepen the red toward the bottom and the far side while it is still wet."
+      }
+    },
+    {
+      "candidateId": "met:53835",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple object on a plain grey ground, sharp, in one bright colour.",
+      "notes": [
+        "Cobalt Blue and Viridian added by eye; the pixels read Cool Grey and Cerulean Blue."
+      ],
+      "fields": {
+        "title": "Turquoise Glass Vase",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 12,
+        "alt": "A faceted opaque turquoise glass vase with a round, many-sided body, a tall straight neck and a flared foot, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Cobalt Blue",
+            "hex": "#3a6bb5"
+          },
+          {
+            "name": "Viridian",
+            "hex": "#2e7a63"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint each facet as its own flat wash, a little lighter or darker than its neighbour.",
+        "tip": "Leave a hairline gap between facets so they stay crisp."
+      }
+    },
+    {
+      "candidateId": "met:42552",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple object on a plain grey ground, sharp. A quick warm-up.",
+      "notes": [
+        "Dioxazine Violet and Cool Grey added by eye; the pixels read Ivory Black, Cadmium Yellow, Raw Umber and Yellow Ochre."
+      ],
+      "fields": {
+        "title": "Yellow Bowl",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 10,
+        "alt": "A plain porcelain bowl in a smooth, bright yellow glaze with a pale foot ring, seen from the side against a plain grey background.",
+        "palette": [
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Dioxazine Violet",
+            "hex": "#5b3b78"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "One yellow curve. Paint the bowl in one wash and add the inside shadow once it dries.",
+        "tip": "Grey the yellow for the shadow with a touch of violet rather than black."
+      }
+    },
+    {
+      "candidateId": "met:42390",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple object on a plain grey ground. White on grey, a quick warm-up.",
+      "notes": [
+        "Naples Yellow and Cool Grey added by eye; the pixels read Ivory Black, Warm Grey and Chinese White."
+      ],
+      "fields": {
+        "title": "Cream Stoneware Dish",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 10,
+        "alt": "A shallow cream-glazed stoneware dish with gently flared sides on a small foot, seen from the side against a plain grey background.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint the grey background round the dish and leave the dish almost as paper.",
+        "tip": "One pale warm grey for the inside curve is all the shading it needs."
+      }
+    },
+    {
+      "candidateId": "met:552835",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One small, simple object on a plain grey ground, sharp. A quick warm-up.",
+      "notes": [
+        "Cerulean Blue and Viridian added by eye; the pixels read Cool Grey, Terre Verte and Chinese White."
+      ],
+      "fields": {
+        "title": "Faience Jar",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 12,
+        "alt": "A small squat Egyptian faience jar with a flared rim and base, in mottled turquoise and blue-green with darker speckles, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Viridian",
+            "hex": "#2e7a63"
+          },
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Wet the jar, drop in turquoise and green, and let them mottle on their own.",
+        "tip": "Spatter a few darker specks once the wash is nearly dry."
+      }
+    },
+    {
+      "candidateId": "met:240926",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear object on a plain grey ground, sharp. A simple round shape with a weathered surface.",
+      "notes": [
+        "Cadmium Red, Raw Sienna and Cool Grey added by eye; the pixels read Vandyke Brown, Burnt Sienna, Chinese White and Burnt Umber."
+      ],
+      "fields": {
+        "title": "Red Clay Amphora",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A weathered red terracotta storage jar with a round body, a flared mouth and two small loop handles, its surface flecked with pale patches, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Cadmium Red",
+            "hex": "#c8322c"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint the round body first in one warm wash, then add the pale patches by lifting.",
+        "tip": "Lift the pale patches with a damp tissue while the red is still wet."
+      }
+    },
+    {
+      "candidateId": "met:550897",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One simple object on a plain grey ground, sharp. Good practice for metal.",
+      "notes": [
+        "Unsure: grey on grey, with little colour to hold on to.",
+        "Payne's Grey, Yellow Ochre and Warm Grey added by eye; the pixels read Cool Grey and Ivory Black."
+      ],
+      "fields": {
+        "title": "Silver Jar",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A small Egyptian silver jar with a round body, a tall straight neck and a gold rim, softly mottled and dull, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Silver is mostly reflected grey. Paint the dark streaks and leave the highlights as paper.",
+        "tip": "Keep the gold rim for last, as one thin warm line."
+      }
+    },
+    {
+      "candidateId": "met:50925",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One small, simple shape on a plain grey ground. Soft colour changes to practise.",
+      "notes": [
+        "Unsure: the glossy highlights are strong.",
+        "Palette chosen by eye: the pixels read Vandyke Brown, Raw Umber, Warm Grey and Burnt Umber, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Peach-Bloom Box",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 12,
+        "alt": "A small round lidded porcelain box in a glossy peach-bloom glaze, pink across the top fading to mottled green at the edge, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Wet the whole box and let the pink run into the green.",
+        "tip": "Leave the two bright highlights as bare paper from the start."
+      }
+    },
+    {
+      "candidateId": "met:930280",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple object on a plain grey ground, sharp. A clean box shape with bold wood grain.",
+      "notes": [
+        "Cadmium Orange and Yellow Ochre added by eye; the pixels read Cool Grey, Burnt Sienna, Vandyke Brown and Raw Umber."
+      ],
+      "fields": {
+        "title": "Persimmon-Wood Box",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A long rectangular lidded box in persimmon wood, its orange grain streaked with black, with a small brass hasp on the front, against a plain grey background.",
+        "palette": [
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          }
+        ],
+        "prompt": "Paint the three faces as three different values of the same orange, then add the dark streaks.",
+        "tip": "Pull the dark grain streaks along the length in one stroke each, into damp paint."
+      }
+    },
+    {
+      "candidateId": "met:362554",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on plain paper, already a watercolour. A lovely study to copy stroke for stroke.",
+      "notes": [
+        "A French botanical watercolour from about 1820, from the same series as the Woodland Plant Study.",
+        "Palette chosen by eye: the pixels read Chinese White, Naples Yellow and Raw Umber, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Small Plant Study",
+        "subject": "botanical",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A watercolour of one small upright plant with narrow toothed leaves, a few small pink flowers near the top and fine pale roots, on plain cream paper.",
+        "palette": [
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Olive Green",
+            "hex": "#6b6f36"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          }
+        ],
+        "prompt": "This is already a watercolour. Match its washes: one pale green per leaf.",
+        "tip": "Pull the roots with the very tip of a small brush, in one movement each."
+      }
+    },
+    {
+      "candidateId": "met:362627",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "Simple focus subjects on plain paper, already a watercolour.",
+      "notes": [
+        "Unsure: two plants and a ruled border rather than one subject.",
+        "Palette chosen by eye: the pixels read Chinese White and Naples Yellow, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Two Wild Plant Studies",
+        "subject": "botanical",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A watercolour of two wild plants side by side, one with small violet bell flowers on thin stems and one with fluffy yellow flower heads and roots, on cream paper with a thin ruled border and pencil names.",
+        "palette": [
+          {
+            "name": "Dioxazine Violet",
+            "hex": "#5b3b78"
+          },
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          }
+        ],
+        "prompt": "Two plants, two colours. Paint the stems in one stroke each, then dot the flowers.",
+        "tip": "Dab the fluffy yellow heads with the tip of the brush rather than outlining them."
+      }
+    },
+    {
+      "candidateId": "met:49076",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One simple subject of long leaves and a few flowers on pale silk. Good for brushstrokes.",
+      "notes": [
+        "Unsure: the patterned mount round the painting is busy; paint the orchid only.",
+        "By Kakutei, mid-18th century.",
+        "Sap Green, Hooker's Green and Rose Madder added by eye; the pixels read Naples Yellow and Raw Umber."
+      ],
+      "fields": {
+        "title": "Orchid Scroll",
+        "subject": "botanical",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A hanging scroll painted with a single orchid, long thin leaves sweeping out from the base and a few small pink flowers on a slender stem, on pale silk inside a blue patterned mount with a small inscription and seal.",
+        "palette": [
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Hooker's Green",
+            "hex": "#3f6b45"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          }
+        ],
+        "prompt": "Every leaf is one stroke: press, lift, and let it thin to a point.",
+        "tip": "Paint the leaves with the tip and the body of the brush in one movement, pressing to widen."
+      }
+    },
+    {
+      "candidateId": "met:362485",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "A simple arrangement on a plain toned ground. A study rather than a finished painting, which suits practice.",
+      "notes": [
+        "Unsure: a toned brown ground and unfinished pencil lines.",
+        "Palette chosen by eye: the pixels read Warm Grey and Ivory Black, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Roses in a Dark Vase",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A gouache study of pink roses and grey-green leaves spilling from a dark red and black urn-shaped vase, on toned brown paper with faint pencil lines left unpainted.",
+        "palette": [
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Permanent Magenta",
+            "hex": "#9c3f78"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          }
+        ],
+        "prompt": "Paint the roses first while the paper is fresh, then the dark vase last.",
+        "tip": "Keep the vase's black warm by mixing it from burnt umber and ultramarine."
+      }
+    },
+    {
+      "candidateId": "met:248644",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Marble oil flask carved with a relief of figures."
+    },
+    {
+      "candidateId": "met:851819",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Persimmon-wood cabinet on a stand; the plain document box from the same collection is the simpler shape."
+    },
+    {
+      "candidateId": "met:546919",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Plain clay jar photographed with a scale bar and a handwritten accession label."
+    },
+    {
+      "candidateId": "met:254896",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Red-figure amphora painted with a figure."
+    },
+    {
+      "candidateId": "met:247960",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black-figure amphora with a chariot and horses: a lot of fine detail."
+    },
+    {
+      "candidateId": "met:240281",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Banded Cypriot amphora with cracks and pattern; the plain red amphora is the simpler vessel."
+    },
+    {
+      "candidateId": "met:255949",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "White-ground oil flask painted with a figure."
+    },
+    {
+      "candidateId": "met:253351",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Oil flask painted with a battle of figures."
+    },
+    {
+      "candidateId": "met:254321",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Small oil flask painted with a figure."
+    },
+    {
+      "candidateId": "met:56205",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "White jade bowl on a black background."
+    },
+    {
+      "candidateId": "met:48450",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The original image is only 1183px across, below the 1200px the enlarged view needs."
+    },
+    {
+      "candidateId": "met:39617",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Bronze vase with raised calligraphy."
+    },
+    {
+      "candidateId": "met:58569",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Lacquer case with dragonflies, tangled cords and a netsuke: busy."
+    },
+    {
+      "candidateId": "met:551563",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Small glass fish fragment, tiny in the frame."
+    },
+    {
+      "candidateId": "met:545954",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Pale fish dish on a dark grey background."
+    },
+    {
+      "candidateId": "met:552344",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze fish on a wooden block with an accession number painted on it."
+    },
+    {
+      "candidateId": "met:251268",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dark bronze horse; the green Greek horse is kept."
+    },
+    {
+      "candidateId": "met:546689",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Weathered faience hippo lying down, hard to read as a shape; the hippo William is kept."
+    },
+    {
+      "candidateId": "met:546220",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Weathered white faience hippo; the hippo William is kept."
+    },
+    {
+      "candidateId": "met:549350",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Pale green glass jar, pale on pale with a weathered surface."
+    },
+    {
+      "candidateId": "met:250551",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Amphora painted with figures, horses and a chariot."
+    },
+    {
+      "candidateId": "met:248902",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Prize amphora painted with runners."
+    },
+    {
+      "candidateId": "met:253348",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Oil flask painted with a row of figures."
+    },
+    {
+      "candidateId": "met:254843",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Oil flask painted with a chariot and figures."
+    },
+    {
+      "candidateId": "met:50519",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Blue and white bowl covered in painted pattern, on a creased cloth backdrop."
+    },
+    {
+      "candidateId": "met:42208",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Black bottle vase; we already have several bottle vases here, and black on grey is dark."
+    },
+    {
+      "candidateId": "met:547556",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Perched faience falcon with finely patterned feathers; the spread-winged falcon is kept."
+    },
+    {
+      "candidateId": "met:569292",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Stone fish dish on a dark grey background."
+    },
+    {
+      "candidateId": "met:251187",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Badly worn amphora with dark blotches: hard to read."
+    },
+    {
+      "candidateId": "met:255361",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze horse on a dark grey ground; the green Greek horse is the clearer one."
+    },
+    {
+      "candidateId": "met:254991",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of a horse figure."
+    },
+    {
+      "candidateId": "met:547775",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Stone hippo head, a fragment on a dark ground."
+    },
+    {
+      "candidateId": "met:546695",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Weathered white hippo with an accession number painted on it."
+    },
+    {
+      "candidateId": "met:324038",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of a flask."
+    },
+    {
+      "candidateId": "met:326462",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of a flask."
+    },
+    {
+      "candidateId": "met:42195",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Blue and white bowl with ornate gold handles: intricate detail."
+    },
+    {
+      "candidateId": "met:42229",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Smooth pink vase on a darker ground; the red vase beside it is lighter and livelier."
+    },
+    {
+      "candidateId": "met:52049",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Slender red vase; the coral-red bottle vase is the livelier red."
+    },
+    {
+      "candidateId": "met:38546",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "White vase photographed in a display case against red fabric."
+    },
+    {
+      "candidateId": "met:42238",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Yellow glazed vase; we already have a yellow vase, and the ground is dark at the top."
+    },
+    {
+      "candidateId": "met:54727",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Print of cut fruit with calligraphy."
+    },
+    {
+      "candidateId": "met:53774",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Vase painted with a peach tree in fine detail: intricate."
+    },
+    {
+      "candidateId": "met:337889",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dark carved woodblock, hard to read."
+    },
+    {
+      "candidateId": "met:557141",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Tiny crumpled gold falcon, no clear shape."
+    },
+    {
+      "candidateId": "met:558135",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Corroded fish hook, no clear subject."
+    },
+    {
+      "candidateId": "met:255362",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dark Geometric bronze horse; the green Greek horse is kept."
+    },
+    {
+      "candidateId": "met:255293",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Speckled Geometric bronze horse; the green Greek horse is kept."
+    },
+    {
+      "candidateId": "met:44759",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Album pages of calligraphy with a small painting."
+    },
+    {
+      "candidateId": "met:546643",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Standing hippo in the same pose as the hippo William, who is kept."
+    },
+    {
+      "candidateId": "met:570744",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dark bronze cat; we already have a bronze cat."
+    },
+    {
+      "candidateId": "met:570721",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dark bronze cat; we already have a bronze cat."
+    },
+    {
+      "candidateId": "met:570737",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Green bronze cat; we already have a bronze cat."
+    },
+    {
+      "candidateId": "met:572105",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Green bronze cat; the seated bronze cat is kept."
+    },
+    {
+      "candidateId": "met:549523",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Pink pottery jar on a brass stand, dark background."
+    },
+    {
+      "candidateId": "met:549521",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Red pottery jar on a brass stand, dark background; we already have a red amphora."
+    },
+    {
+      "candidateId": "met:255154",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Amphora painted with figures."
+    },
+    {
+      "candidateId": "met:248578",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Amphora covered in painted figures and pattern."
+    },
+    {
+      "candidateId": "met:254781",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Tall weathered wine amphora; we already have an amphora."
+    },
+    {
+      "candidateId": "met:247303",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of two oil flasks."
+    },
+    {
+      "candidateId": "met:323237",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Broken flask fragment on a blue cloth."
+    },
+    {
+      "candidateId": "met:324317",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of a flask."
+    },
+    {
+      "candidateId": "met:324316",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Head-shaped glass flask, a face, on a dark ground."
+    },
+    {
+      "candidateId": "met:42549",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Jar covered in painted fish and pattern: intricate."
+    },
+    {
+      "candidateId": "met:42317",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Vase painted with peach branches in fine detail."
+    },
+    {
+      "candidateId": "met:42098",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Pale jade carving of monkeys on peaches: intricate and pale on pale."
+    },
+    {
+      "candidateId": "met:436293",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Basket of fruit, cut pear, knife and a vase of flowers on a table: many objects."
+    },
+    {
+      "candidateId": "met:828589",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white etching of a crowded bouquet."
+    },
+    {
+      "candidateId": "met:37516",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of a bird vessel."
+    },
+    {
+      "candidateId": "met:546688",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Weathered white hippo lying down; William is kept."
+    },
+    {
+      "candidateId": "met:545564",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Patchy weathered hippo; William is kept."
+    },
+    {
+      "candidateId": "met:554512",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Grey striped jar on a yellow backdrop with a scale bar."
+    },
+    {
+      "candidateId": "met:554826",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Cream jug on a purple backdrop, colour cast."
+    },
+    {
+      "candidateId": "met:548733",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Alabaster jar on a black background."
+    },
+    {
+      "candidateId": "met:247924",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Oil flask painted with a figure."
+    },
+    {
+      "candidateId": "met:254291",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Oil flask painted with a figure."
+    },
+    {
+      "candidateId": "met:254397",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Oil flask painted with a horse and rider."
+    },
+    {
+      "candidateId": "met:326384",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Pale pilgrim flask with a background that fades to black at the top."
+    },
+    {
+      "candidateId": "met:42103",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of a bowl with a number on it."
+    },
+    {
+      "candidateId": "met:52970",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Striped three-colour bowl with moulded pattern, dark background."
+    },
+    {
+      "candidateId": "met:44346",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Cream water pot with a background that fades to black at the top."
+    },
+    {
+      "candidateId": "met:51153",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Black vase with a label sticker on the foot."
+    },
+    {
+      "candidateId": "met:41482",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Folding fan with fine repeated netting pattern."
+    },
+    {
+      "candidateId": "met:51387",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bamboo painting on a dark brown silk roundel with seals and calligraphy; you set aside the fan painting for its dark ground."
+    },
+    {
+      "candidateId": "met:50663",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Handscroll of dense bamboo with calligraphy and seals."
+    },
+    {
+      "candidateId": "met:360446",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Cut-paper plant on a black background."
+    },
+    {
+      "candidateId": "met:48741",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Vase painted with a crowded figure scene."
+    },
+    {
+      "candidateId": "met:393728",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white engraving of ornament."
+    },
+    {
+      "candidateId": "met:436634",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded bouquet on a dark ground."
+    },
+    {
+      "candidateId": "met:570292",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dark stone falcon on a dark gradient, accession number painted on the base."
+    },
+    {
+      "candidateId": "met:548516",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze falcon coffin, dark."
+    },
+    {
+      "candidateId": "met:329777",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Tiny lapis falcon on a black block."
+    },
+    {
+      "candidateId": "met:329778",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Tiny dark falcon on a dark gradient."
+    },
+    {
+      "candidateId": "met:552062",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Carnelian falcon, same as the other one."
+    },
+    {
+      "candidateId": "met:254825",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Bronze statuette of a figure."
+    },
+    {
+      "candidateId": "met:255291",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Green Geometric horse; the green Greek horse is kept."
+    },
+    {
+      "candidateId": "met:40257",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Lacquer tray with fine inlaid blossom and border pattern: intricate."
+    },
+    {
+      "candidateId": "met:56479",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph."
+    },
+    {
+      "candidateId": "met:552027",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze cat on a dark blue gradient; we already have a bronze cat."
+    },
+    {
+      "candidateId": "met:570722",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze cat on a dark gradient; we already have a bronze cat."
+    },
+    {
+      "candidateId": "met:570720",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze cat on a dark gradient; we already have a bronze cat."
+    },
+    {
+      "candidateId": "met:570740",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze cat on a dark gradient; we already have a bronze cat."
+    },
+    {
+      "candidateId": "met:255624",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Broken lid fragment painted with animals."
+    },
+    {
+      "candidateId": "met:76453",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Brush pot carved with a crowded scene: intricate."
+    },
+    {
+      "candidateId": "met:58608",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Lacquer case of bamboo and sparrows in fine detail on dark gold."
+    },
+    {
+      "candidateId": "met:42058",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Jade brush pot carved with a crowded scene: intricate."
+    },
+    {
+      "candidateId": "met:54973",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Print of a cut fruit, knife and dish with calligraphy."
+    },
+    {
+      "candidateId": "met:830252",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Pineapple print on a dark brown ground; lovely but dark."
+    },
+    {
+      "candidateId": "met:437382",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded bouquet of many flowers."
+    },
+    {
+      "candidateId": "met:437379",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded bouquet of many flowers."
+    },
+    {
+      "candidateId": "met:825681",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white engraving."
+    },
+    {
+      "candidateId": "met:546629",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Weathered white hippo; William is kept."
+    },
+    {
+      "candidateId": "met:325826",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of a ring flask."
+    },
+    {
+      "candidateId": "met:51742",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Lotus painting on dark brown silk; you set aside the fan painting for its dark ground."
+    },
+    {
+      "candidateId": "met:42526",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Yellow dish with a blue painted pattern, dark background."
+    },
+    {
+      "candidateId": "met:39532",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dish painted with peach branches and bats in fine detail."
+    },
+    {
+      "candidateId": "met:372579",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Etching of a market stall with figures."
+    },
+    {
+      "candidateId": "met:437148",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Thick bouquet on a dark background."
+    },
+    {
+      "candidateId": "met:356507",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Engraving of a crowded bouquet with birds."
+    },
+    {
+      "candidateId": "met:550156",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Faience fish on a dark grey background."
+    },
+    {
+      "candidateId": "met:551767",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Corroded fish hook, no clear subject."
+    },
+    {
+      "candidateId": "met:568377",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Corroded fish hook, no clear subject."
+    },
+    {
+      "candidateId": "met:550109",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Gold bead girdle, a chain of tiny repeated beads."
+    },
+    {
+      "candidateId": "met:51438",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze bird on a branch against a brown backdrop."
+    },
+    {
+      "candidateId": "met:39895",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Handscroll of figures and calligraphy."
+    },
+    {
+      "candidateId": "met:552028",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze cat on a dark gradient; we already have a bronze cat."
+    },
+    {
+      "candidateId": "met:42216",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Blue bottle vase, the same shape as the coral-red one kept here."
+    },
+    {
+      "candidateId": "met:48932",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Orchid and rock painting under a column of calligraphy."
+    },
+    {
+      "candidateId": "met:37280",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Print crowded with figures picking persimmons."
+    },
+    {
+      "candidateId": "met:40458",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Dish painted with peaches on a dense pattern of blossom, dark background."
+    },
+    {
+      "candidateId": "met:570747",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Bronze falcon on a dark gradient; the spread-winged falcon is kept."
+    },
+    {
+      "candidateId": "met:247066",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Corroded horse bit, no clear subject."
+    },
+    {
+      "candidateId": "met:40133",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Orchid painting on dark tan silk with seals; you set aside the fan painting for its dark ground."
+    },
+    {
+      "candidateId": "met:49244",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Orchids and bamboo with calligraphy and seals."
+    },
+    {
+      "candidateId": "met:362545",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Three small plants from the same 1820s botanical series as two others kept here."
+    },
+    {
+      "candidateId": "met:830401",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white etching of figures."
+    },
+    {
+      "candidateId": "met:393333",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white engraving of ornament."
+    },
+    {
+      "candidateId": "met:827660",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded bouquet on a dark ground."
+    },
+    {
+      "candidateId": "met:352641",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Grey wash drawing of a crowded bouquet in an archway."
+    },
+    {
+      "candidateId": "met:325072",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photograph of a flask."
+    },
+    {
+      "candidateId": "met:57203",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Persimmons and a wasp nest over a fence, on crinkled gold leaf."
+    },
+    {
+      "candidateId": "met:389647",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Rough pen sketch of an ornate urn."
+    },
+    {
+      "candidateId": "met:49459",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Fan painting with a bird, a gourd and calligraphy."
+    },
+    {
+      "candidateId": "met:436175",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Flowers and a basket in a dense garden."
+    },
+    {
+      "candidateId": "met:51497",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Bamboo grove painting on tan silk, busy and muted."
+    },
+    {
+      "candidateId": "met:53456",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Folding screen crowded with a landscape and figures."
+    }
+  ]
+}

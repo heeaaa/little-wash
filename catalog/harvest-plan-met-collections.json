@@ -1,0 +1,52 @@
+{
+  "_comment": "Second Met plan, 28/09/2026, after the curator asked for paintings not of people, sculpture and ancient artifacts. Each search is narrowed to one department (the Met's departmentId), because a plain search is dominated by figure paintings. Departments: 3 Ancient West Asian, 6 Asian, 9 Drawings and Prints, 10 Egyptian, 11 European Paintings, 12 European Sculpture and Decorative Arts, 13 Greek and Roman. No landscape: the catalogue already holds 47.",
+  "target": 72,
+  "subjects": {
+    "creatures": {
+      "target": 12,
+      "queries": [
+        { "query": "hippopotamus", "department": 10 },
+        { "query": "cat", "department": 10 },
+        { "query": "falcon", "department": 10 },
+        { "query": "fish", "department": 10 },
+        { "query": "horse", "department": 13 },
+        { "query": "bird", "department": 6 }
+      ]
+    },
+    "objects": {
+      "target": 12,
+      "queries": [
+        { "query": "jar", "department": 10 },
+        { "query": "amphora", "department": 13 },
+        { "query": "lekythos", "department": 13 },
+        { "query": "flask", "department": 3 },
+        { "query": "bowl", "department": 6 },
+        { "query": "vase", "department": 6 }
+      ]
+    },
+    "botanical": {
+      "target": 12,
+      "queries": [
+        { "query": "bamboo", "department": 6 },
+        { "query": "orchid", "department": 6 },
+        { "query": "lotus", "department": 6 },
+        { "query": "botanical", "department": 9 }
+      ]
+    },
+    "fruit": {
+      "target": 12,
+      "queries": [
+        { "query": "persimmons", "department": 6 },
+        { "query": "peaches", "department": 6 },
+        { "query": "fruit", "department": 9 }
+      ]
+    },
+    "still-life": {
+      "target": 12,
+      "queries": [
+        { "query": "flowers", "department": 11 },
+        { "query": "vase of flowers", "department": 9 }
+      ]
+    }
+  }
+}

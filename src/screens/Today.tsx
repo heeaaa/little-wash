@@ -13,6 +13,7 @@ import {
 } from "@/components/FilterControls";
 import { EmptyState } from "@/components/EmptyState";
 import { SubjectTag } from "@/components/SubjectTag";
+import { CreditLine } from "@/components/CreditLine";
 import { MetaRow } from "@/components/MetaRow";
 import { Icon } from "@/components/Icon";
 import { DIFFICULTY_LABEL } from "@/lib/types";
@@ -138,6 +139,7 @@ function FeaturedPlate() {
             priority
             inset="snug"
             transitionName={PIECE_ART}
+            ownAspect
             className="art-cap aspect-[4/3] w-full rounded-[6px]"
           />
         </WashLink>
@@ -151,11 +153,14 @@ function FeaturedPlate() {
         <h2 className="mt-1.5 text-balance font-display text-[1.45rem] font-medium leading-tight tracking-tight text-ink sm:text-[1.9rem]">
           {featured.title}
         </h2>
-        <p className="mt-1 max-w-reading text-pretty font-display text-[1.02rem] italic leading-relaxed text-ink-soft sm:text-[1.1rem]">
-          {featured.prompt}
-        </p>
+        {featured.prompt ? (
+          <p className="mt-1 max-w-reading text-pretty font-display text-[1.02rem] italic leading-relaxed text-ink-soft sm:text-[1.1rem]">
+            {featured.prompt}
+          </p>
+        ) : null}
 
         <MetaRow reference={featured} className="mt-2.5" />
+        <CreditLine reference={featured} className="mt-2" />
       </div>
 
       <div className="featured-actions mt-4 flex flex-wrap items-center gap-x-4 gap-y-3">

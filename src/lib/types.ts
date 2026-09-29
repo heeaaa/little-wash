@@ -1,3 +1,5 @@
+import type { Credit, ImageSet, ReferenceKind } from "@/lib/sources/types";
+
 export type Difficulty = "gentle" | "steady" | "stretch";
 /*
   Named, not numbered. The bands used to be "5" | "15" | "30" while matching on
@@ -29,8 +31,14 @@ export interface PaintReference {
   difficulty: Difficulty;
   /** Realistic minutes to complete; drives the time filter via bands. */
   minutes: number;
-  /** One-line invitation shown under the title. */
-  prompt: string;
+  /**
+   * One-line invitation shown under the title, where the piece has one.
+   *
+   * Optional. A reference whose subject speaks for itself does not need a
+   * sentence of encouragement bolted to it, and the curation tool stores no
+   * prompt rather than an empty one. Today and Detail simply omit the line.
+   */
+  prompt?: string;
   /**
    * Describes the subject usefully for someone deciding whether to paint it,
    * not just the file name (per PRODUCT.md accessibility requirement).
@@ -38,12 +46,25 @@ export interface PaintReference {
   alt: string;
   /** Suggested limited palette to mix from. */
   palette: Swatch[];
-  /** A concrete brushwork tip tied to this subject. */
-  tip: string;
-  /** Provenance of the reference artwork. */
-  source: string;
-  /** Imported SVG asset URL. */
-  art: string;
+  /**
+   * A concrete brushwork tip tied to this subject, where there is one worth
+   * making. Optional on the same terms as `prompt`; Detail drops the whole
+   * Tip panel when it is absent.
+   */
+  tip?: string;
+  /** A painting to study, or a photograph to paint from. Changes how it is credited. */
+  kind: ReferenceKind;
+  /**
+   * Who made it, who holds it and under what terms.
+   *
+   * This replaced a single free-text `source` string shared by every item.
+   * PRODUCT.md:83 calls per-item attribution and provenance a first-class data
+   * requirement, which one string could not carry and a build step could not
+   * check.
+   */
+  credit: Credit;
+  /** Intrinsic size, the width ladder, and how those widths are delivered. */
+  image: ImageSet;
 }
 
 export interface Filters {

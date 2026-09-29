@@ -1,0 +1,70 @@
+{
+  "photos": [
+    {
+      "id": 34969870,
+      "width": 4048,
+      "height": 4048,
+      "url": "https://www.pexels.com/photo/vintage-still-life-of-pear-on-wooden-spoon-34969870/",
+      "photographer": "Angie Dutton",
+      "photographer_url": "https://www.pexels.com/@angie-dutton-2157560337",
+      "photographer_id": 2157560337,
+      "avg_color": "#685342",
+      "src": {
+        "original": "https://images.pexels.com/photos/34969870/pexels-photo-34969870.jpeg",
+        "large2x": "https://images.pexels.com/photos/34969870/pexels-photo-34969870.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/34969870/pexels-photo-34969870.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/34969870/pexels-photo-34969870.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/34969870/pexels-photo-34969870.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/34969870/pexels-photo-34969870.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/34969870/pexels-photo-34969870.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/34969870/pexels-photo-34969870.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+      },
+      "liked": false,
+      "alt": "Artistic still life featuring a pear on a wooden spoon, exuding vintage charm."
+    },
+    {
+      "id": 5973583,
+      "width": 2048,
+      "height": 2048,
+      "url": "https://www.pexels.com/photo/close-up-shot-of-a-garlic-5973583/",
+      "photographer": "Татьяна  Довгополик",
+      "photographer_url": "https://www.pexels.com/@6692177",
+      "photographer_id": 6692177,
+      "avg_color": "#B3B5B6",
+      "src": {
+        "original": "https://images.pexels.com/photos/5973583/pexels-photo-5973583.jpeg",
+        "large2x": "https://images.pexels.com/photos/5973583/pexels-photo-5973583.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/5973583/pexels-photo-5973583.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/5973583/pexels-photo-5973583.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/5973583/pexels-photo-5973583.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/5973583/pexels-photo-5973583.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/5973583/pexels-photo-5973583.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/5973583/pexels-photo-5973583.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+      },
+      "liked": false,
+      "alt": "A detailed close-up of a fresh garlic bulb on a neutral background, perfect for culinary themes."
+    },
+    {
+      "id": 14454162,
+      "width": 3456,
+      "height": 3456,
+      "url": "https://www.pexels.com/photo/close-up-shot-of-pears-14454162/",
+      "photographer": "Sam  Divita",
+      "photographer_url": "https://www.pexels.com/@sam-divita-3629517",
+      "photographer_id": 3629517,
+      "avg_color": "#3FA790",
+      "src": {
+        "original": "https://images.pexels.com/photos/14454162/pexels-photo-14454162.jpeg",
+        "large2x": "https://images.pexels.com/photos/14454162/pexels-photo-14454162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/14454162/pexels-photo-14454162.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/14454162/pexels-photo-14454162.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/14454162/pexels-photo-14454162.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/14454162/pexels-photo-14454162.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/14454162/pexels-photo-14454162.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/14454162/pexels-photo-14454162.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+      },
+      "liked": false,
+      "alt": "Close-up of three ripe pears against a vivid blue background, perfect for food-related content."
+    }
+  ]
+}

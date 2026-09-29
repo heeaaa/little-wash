@@ -1,7 +1,8 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { AppProvider, useApp } from "@/state/AppContext";
-import { savedReferences } from "@/lib/catalog";
-import { REFERENCES } from "@/data/references";
+import { paintedReferences, savedReferences } from "@/lib/catalog";
+import { platformAttributions } from "@/lib/sources/attribution";
+import { CATALOGUE } from "@/data/catalogue";
 import { Icon } from "@/components/Icon";
 import { WashFilter } from "@/components/WashFilter";
 import { SavedPalette } from "@/components/SavedPalette";
@@ -9,7 +10,7 @@ import markUrl from "@/assets/brand/mark.png";
 
 export function AppShell() {
   return (
-    <AppProvider references={REFERENCES}>
+    <AppProvider references={CATALOGUE}>
       <div className="paper-grain relative flex min-h-dvh flex-col">
         <WashFilter />
         <a
@@ -71,14 +72,22 @@ function Wordmark() {
 }
 
 function Header() {
-  const { favorites, references } = useApp();
+  const { favorites, painted, references } = useApp();
   /*
     Count what the studio can actually show, not raw ids. `savedReferences`
     drops ids whose catalogue entry has gone, so counting the raw array would
     advertise "Studio" in the nav while the page renders its empty state -
     the dead end this rule exists to prevent.
   */
-  const items = navItems(savedReferences(references, favorites).length);
+  /*
+    Either list makes the studio worth opening. Counting only saved pieces
+    would strand someone who has painted things but set none aside - the same
+    dead end this rule was written to prevent, from the other direction.
+  */
+  const items = navItems(
+    savedReferences(references, favorites).length +
+      paintedReferences(references, painted).length,
+  );
 
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-[rgb(var(--surface-raised)/0.85)] backdrop-blur">
@@ -139,6 +148,40 @@ function Header() {
   );
 }
 
+/**
+ * Credits the application owes its providers, as distinct from the credit each
+ * reference carries.
+ *
+ * Pexels asks for a prominent "Photos provided by Pexels" link wherever its
+ * photos appear; Unsplash asks to be named alongside the photographer. Built
+ * from the sources actually on screen, so the footer only ever claims what is
+ * true: switch a source off and its line goes with it.
+ */
+function PlatformCredits() {
+  const { catalogue } = useApp();
+  const credits = platformAttributions(
+    catalogue.map((reference) => reference.credit.sourceId),
+  );
+
+  if (credits.length === 0) return null;
+
+  return (
+    <p className="flex flex-wrap gap-x-3 gap-y-1">
+      {credits.map((credit) => (
+        <a
+          key={credit.url}
+          href={credit.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-[rgb(var(--ink)/0.25)] underline-offset-2 hover:decoration-[rgb(var(--ink)/0.6)]"
+        >
+          {credit.label}
+        </a>
+      ))}
+    </p>
+  );
+}
+
 function Footer() {
   return (
     <footer className="relative z-10 border-t border-line px-4 py-6 sm:px-6">
@@ -148,7 +191,16 @@ function Footer() {
           artwork is original placeholder illustration (CC0). Saving, filtering,
           Surprise me and exercises are simulated on-device - no account or network.
         </p>
-        <p>little wash - a little colour, every day. Working name.</p>
+        <PlatformCredits />
+        <p>
+          little wash - a little colour, every day. Working name.{" "}
+          <Link
+            to="/sources"
+            className="underline decoration-[rgb(var(--ink)/0.25)] underline-offset-2 hover:decoration-[rgb(var(--ink)/0.6)]"
+          >
+            Where ideas come from
+          </Link>
+        </p>
       </div>
     </footer>
   );

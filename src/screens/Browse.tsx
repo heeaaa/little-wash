@@ -1,9 +1,14 @@
 import { useEffect, useRef, type MouseEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useApp } from "@/state/AppContext";
 import { filterReferences } from "@/lib/catalog";
-import { REFERENCES } from "@/data/references";
-import { COLLECTIONS, collectionSearch, type Collection } from "@/data/collections";
+import { resolveCollection, visibleCollections } from "@/lib/collections";
+import {
+  COLLECTIONS,
+  COLLECTION_PARAM,
+  collectionSearch,
+  type Collection,
+} from "@/data/collections";
 import { RefArt } from "@/components/RefArt";
 import { PieceCard } from "@/components/PieceCard";
 import {
@@ -15,12 +20,60 @@ import {
 import { EmptyState } from "@/components/EmptyState";
 import { type PaintReference, type Subject } from "@/lib/types";
 
-function coverFor(subject: Subject): PaintReference | undefined {
-  return REFERENCES.find((r) => r.subject === subject) ?? REFERENCES[0];
+/**
+ * A representative piece for a collection card.
+ *
+ * Drawn from the pieces actually in that collection, and from the catalogue
+ * the painter has switched on - a cover from a source they turned off would
+ * advertise work the collection can no longer show.
+ */
+function coverFor(
+  pieces: readonly PaintReference[],
+  subject: Subject,
+): PaintReference | undefined {
+  return pieces.find((r) => r.subject === subject) ?? pieces[0];
 }
 
 export function Browse() {
-  const { visible, activeFilters } = useApp();
+  const { catalogue, filters, visible, activeFilters } = useApp();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  /*
+    A curated collection travels as its own id, because a theme is not
+    expressible as a filter. Opening one narrows the catalogue to its list; the
+    filter controls then narrow within it, the same way they narrow within a
+    filter-backed collection's results.
+
+    An id that no longer matches anything is ignored rather than showing an
+    empty screen: a collection can lose its last piece when a source is
+    switched off, and a stale link should land somewhere useful.
+  */
+  const openCollection =
+    COLLECTIONS.find((c) => c.id === searchParams.get(COLLECTION_PARAM)) ?? null;
+  const openPieces = openCollection
+    ? resolveCollection(openCollection, catalogue)
+    : null;
+  const themed = openPieces && openPieces.length > 0 ? openCollection : null;
+
+  const shown = themed && openPieces ? filterReferences(openPieces, filters) : visible;
+
+  const leaveCollection = () => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.delete(COLLECTION_PARAM);
+        return next;
+      },
+      { replace: true },
+    );
+  };
+  /*
+    Resolved against the enabled catalogue rather than the raw import this
+    screen used to reach for. A collection whose source is switched off shrinks
+    honestly, and one with nothing left in it leaves rather than sitting there
+    as a dead end.
+  */
+  const collections = visibleCollections(COLLECTIONS, catalogue);
   const results = useRef<HTMLHeadingElement>(null);
   const jumpPending = useRef(false);
 
@@ -88,16 +141,20 @@ export function Browse() {
           Collections
         </h2>
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {COLLECTIONS.map((collection) => (
+          {collections.map(({ collection, pieces }) => (
             <li key={collection.id}>
-              <CollectionCard collection={collection} onChosen={jumpToResults} />
+              <CollectionCard
+                collection={collection}
+                pieces={pieces}
+                onChosen={jumpToResults}
+              />
             </li>
           ))}
         </ul>
       </section>
 
       <p aria-live="polite" className="sr-only">
-        {visible.length} {visible.length === 1 ? "piece" : "pieces"} in view.
+        {shown.length} {shown.length === 1 ? "piece" : "pieces"} in view.
       </p>
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
@@ -121,18 +178,31 @@ export function Browse() {
               tabIndex={-1}
               className="jump-target font-display text-xl font-medium tracking-tight text-ink"
             >
-              {activeFilters > 0 ? "Matching pieces" : "The whole catalogue"}
+              {themed
+                ? themed.title
+                : activeFilters > 0
+                  ? "Matching pieces"
+                  : "The whole catalogue"}
             </h2>
-            <span className="tnum text-[0.85rem] text-ink-soft">{visible.length}</span>
+            <span className="tnum text-[0.85rem] text-ink-soft">{shown.length}</span>
+            {themed ? (
+              <button
+                type="button"
+                onClick={leaveCollection}
+                className="ml-auto min-h-[44px] text-[0.85rem] font-semibold text-teal underline decoration-[rgb(var(--teal)/0.35)] underline-offset-4 hover:decoration-[rgb(var(--teal))]"
+              >
+                Show everything
+              </button>
+            ) : null}
           </div>
 
-          {visible.length === 0 ? (
+          {shown.length === 0 ? (
             <div className="mt-6">
               <EmptyState />
             </div>
           ) : (
             <ul className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {visible.map((reference) => (
+              {shown.map((reference) => (
                 <li key={reference.id}>
                   <PieceCard reference={reference} to={`/piece/${reference.id}`} />
                 </li>
@@ -153,18 +223,15 @@ export function Browse() {
 
 function CollectionCard({
   collection,
+  pieces,
   onChosen,
 }: {
   collection: Collection;
+  pieces: readonly PaintReference[];
   onChosen: (event: MouseEvent<HTMLAnchorElement>) => void;
 }) {
-  const count = filterReferences(REFERENCES, {
-    time: "all",
-    difficulty: "all",
-    subject: "all",
-    ...collection.filter,
-  }).length;
-  const cover = coverFor(collection.coverSubject);
+  const count = pieces.length;
+  const cover = coverFor(pieces, collection.coverSubject);
 
   return (
     <Link

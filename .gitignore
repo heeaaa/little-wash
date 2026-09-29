@@ -101,6 +101,11 @@ $RECYCLE.BIN/
 .claude/settings.local.json
 .impeccable/config.local.json
 
+# Per-image measurements cached by catalog:harvest, keyed by image URL. A
+# harvest regenerates them, and the results that matter are already copied
+# into catalog/candidates and catalog/shortlist, which are committed.
+catalog/.measurements/
+
 # Screenshots and reports produced while working. Useful to look at, not worth
 # carrying in the repository - they are large binaries that change every run.
 Claude outputs/

@@ -3,7 +3,7 @@ import { render, screen, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { AppProvider } from "@/state/AppContext";
-import { REFERENCES } from "@/data/references";
+import { CATALOGUE } from "@/data/catalogue";
 import { SavedPalette } from "@/components/SavedPalette";
 import { SaveButton } from "@/components/SaveButton";
 
@@ -16,7 +16,7 @@ function seed(ids: string[]) {
 function renderPalette(extra?: React.ReactNode) {
   return render(
     <MemoryRouter>
-      <AppProvider references={REFERENCES}>
+      <AppProvider references={CATALOGUE}>
         <SavedPalette />
         {extra}
       </AppProvider>
@@ -27,7 +27,19 @@ function renderPalette(extra?: React.ReactNode) {
 const palette = () => screen.getByRole("link", { name: /your studio/i });
 const swatches = () =>
   [...palette().querySelectorAll<HTMLElement>("span[style*='background-color']")];
-const firstHex = (id: string) => REFERENCES.find((r) => r.id === id)!.palette[0]!.hex;
+const firstHex = (id: string) => CATALOGUE.find((r) => r.id === id)!.palette[0]!.hex;
+
+/*
+  Two pieces, whichever the catalogue leads with. Naming ids and hex values
+  tied these assertions to twelve placeholder illustrations; what they are
+  really about is that a saved piece's dot carries that piece's own first
+  swatch, which holds for any catalogue.
+*/
+const [alpha, beta] = CATALOGUE as [typeof CATALOGUE[number], typeof CATALOGUE[number]];
+const rgbOf = (hex: string) => {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
+};
 
 beforeEach(() => localStorage.clear());
 
@@ -41,27 +53,27 @@ describe("SavedPalette", () => {
   });
 
   it("lays a swatch in the saved piece's own first pigment", () => {
-    seed(["ripe-pear"]);
+    seed([alpha.id]);
     renderPalette();
 
     const [dab] = swatches();
     expect(swatches()).toHaveLength(1);
-    expect(dab!.style.backgroundColor).toBe("rgb(220, 215, 126)"); // #dcd77e
-    expect(firstHex("ripe-pear")).toBe("#dcd77e");
+    expect(dab!.style.backgroundColor).toBe(rgbOf(alpha.palette[0]!.hex));
+    expect(firstHex(alpha.id)).toBe(alpha.palette[0]!.hex);
     expect(palette()).toHaveAccessibleName("Your studio: 1 saved piece");
   });
 
   it("puts the most recently saved colour at the front", () => {
-    seed(["ripe-pear", "paper-boat"]);
+    seed([alpha.id, beta.id]);
     renderPalette();
 
     const [first, second] = swatches();
-    expect(first!.style.backgroundColor).toBe("rgb(159, 178, 187)"); // paper-boat, saved last
-    expect(second!.style.backgroundColor).toBe("rgb(220, 215, 126)"); // ripe-pear
+    expect(first!.style.backgroundColor).toBe(rgbOf(beta.palette[0]!.hex)); // saved last
+    expect(second!.style.backgroundColor).toBe(rgbOf(alpha.palette[0]!.hex));
   });
 
   it("caps the row and lets the count carry the rest", () => {
-    const ids = REFERENCES.slice(0, 8).map((r) => r.id);
+    const ids = CATALOGUE.slice(0, 8).map((r) => r.id);
     seed(ids);
     renderPalette();
 
@@ -77,8 +89,8 @@ describe("SavedPalette", () => {
   */
   it("lifts the swatch back off when a piece is unsaved, with no loss language", async () => {
     const user = userEvent.setup();
-    seed(["paper-boat"]);
-    renderPalette(<SaveButton reference={REFERENCES.find((r) => r.id === "paper-boat")!} />);
+    seed([beta.id]);
+    renderPalette(<SaveButton reference={beta} />);
 
     expect(swatches()).toHaveLength(1);
     await user.click(screen.getByRole("button", { name: /^Saved\. Remove/ }));
@@ -97,24 +109,24 @@ describe("SavedPalette", () => {
     expect(palette()).toHaveAttribute("href", "/studio");
 
     cleanup();
-    seed(["ripe-pear"]);
+    seed([alpha.id]);
     renderPalette();
     expect(palette()).toHaveAttribute("href", "/studio");
   });
 
   it("settles only the swatch added this session, not the whole row on load", async () => {
     const user = userEvent.setup();
-    seed(["ripe-pear"]);
-    renderPalette(<SaveButton reference={REFERENCES.find((r) => r.id === "paper-boat")!} />);
+    seed([alpha.id]);
+    renderPalette(<SaveButton reference={beta} />);
 
     // Nothing animates on first paint: a quiet record, not a fanfare.
     expect(swatches().filter((d) => d.classList.contains("dab-settle"))).toHaveLength(0);
 
-    await user.click(screen.getByRole("button", { name: /^Save Paper Boat/ }));
+    await user.click(screen.getByRole("button", { name: new RegExp(`^Save ${beta.title}`) }));
 
     const settling = swatches().filter((d) => d.classList.contains("dab-settle"));
     expect(swatches()).toHaveLength(2);
     expect(settling).toHaveLength(1);
-    expect(settling[0]!.style.backgroundColor).toBe("rgb(159, 178, 187)"); // the new one
+    expect(settling[0]!.style.backgroundColor).toBe(rgbOf(beta.palette[0]!.hex));
   });
 });

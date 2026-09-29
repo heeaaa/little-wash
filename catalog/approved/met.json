@@ -1,0 +1,1598 @@
+[
+  {
+    "id": "dogwood-vase-9317",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "9317",
+      "providerTitle": "Vase",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/9317",
+      "creator": "John Bennett",
+      "creatorUrl": "http://vocab.getty.edu/page/ulan/500022400",
+      "dateDisplay": "1882",
+      "medium": "Painted and glazed earthenware",
+      "classification": "Vase",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ad/original/DT161.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/ad/web-large/DT161.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.5014919704861112,
+        "subjectCentrality": 0.07350101367498448,
+        "subjectRegions": 1,
+        "subjectSharpness": 6708.370255763426,
+        "detailLoad": 0.2801108033240997,
+        "borderVariance": 3.7066693079456443,
+        "distinctColours": 7,
+        "meanLightness": 58.696569440254834,
+        "valueRange": 39.48896484890652,
+        "meanChroma": 25.907600432738047,
+        "warmth": 17.469699419679127,
+        "hash": "013968590c4c143c",
+        "hue": 85.64756835107272,
+        "sampledAt": 192
+      }
+    },
+    "title": "Dogwood Vase",
+    "subject": "objects",
+    "difficulty": "stretch",
+    "minutes": 35,
+    "alt": "A round, wide-shouldered yellow earthenware vase painted with large deep-pink dogwood flowers on thin brown branches, with a speckled turquoise rim, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Cadmium Yellow",
+        "hex": "#f7c531"
+      },
+      {
+        "name": "Alizarin Crimson",
+        "hex": "#9e2b3f"
+      },
+      {
+        "name": "Burnt Umber",
+        "hex": "#6b432a"
+      },
+      {
+        "name": "Cerulean Blue",
+        "hex": "#4f93bd"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the yellow vase as one round shape first, then drop the flowers onto it once it is dry.",
+    "tip": "Keep the flowers loose: four petals and a dot of green for each is enough.",
+    "curationNote": "One clear object on a plain grey ground, painted with bold simple flowers. Good for warm yellows."
+  },
+  {
+    "id": "woodland-plant-study-2547",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "362547",
+      "providerTitle": "Flower Study",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/362547",
+      "creator": "Anonymous, French, 19th century",
+      "creatorUrl": "http://vocab.getty.edu/page/ulan/500397994",
+      "dateDisplay": "ca. 1820",
+      "medium": "Watercolor",
+      "classification": "Drawings",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP823475.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP823475.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "botanical",
+      "measurements": {
+        "subjectArea": 0.142333984375,
+        "subjectCentrality": 0.40856482686824613,
+        "subjectRegions": 2,
+        "subjectSharpness": 5182.136217938254,
+        "detailLoad": 0.12556786703601108,
+        "borderVariance": 3.6463119213444,
+        "distinctColours": 4,
+        "meanLightness": 86.51942882540015,
+        "valueRange": 35.53132587999437,
+        "meanChroma": 17.72292993864415,
+        "warmth": 12.080283300784682,
+        "hash": "9dccf8fdf5f4f5e5",
+        "hue": 93.06330022629061,
+        "sampledAt": 192
+      }
+    },
+    "title": "Woodland Plant Study",
+    "subject": "botanical",
+    "difficulty": "steady",
+    "minutes": 20,
+    "alt": "A watercolour study of a small woodland plant with fuzzy olive-green heart-shaped leaves, tiny pink flowers on a thin reddish stem and fine roots, beside a separate bare sprig, on plain cream paper.",
+    "palette": [
+      {
+        "name": "Olive Green",
+        "hex": "#6b6f36"
+      },
+      {
+        "name": "Sap Green",
+        "hex": "#6f8f3a"
+      },
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Raw Sienna",
+        "hex": "#b57e3c"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "This is already a watercolour. Match its washes: one pale green per leaf, darkened at the edge.",
+    "tip": "Pull the roots and the stem with the very tip of a small brush, in one movement each.",
+    "curationNote": "One focus subject on plain paper, already a watercolour. A lovely study to copy stroke for stroke."
+  },
+  {
+    "id": "apple-blossom-vase-0737",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "20737",
+      "providerTitle": "Vase",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/20737",
+      "creator": "John Bennett",
+      "creatorUrl": "http://vocab.getty.edu/page/ulan/500022400",
+      "dateDisplay": "1877",
+      "medium": "White earthenware",
+      "classification": "Vase",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/ad/original/DP255665.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/ad/web-large/DP255665.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.3333875868055556,
+        "subjectCentrality": 0.15463204409272452,
+        "subjectRegions": 1,
+        "subjectSharpness": 3584.427964854671,
+        "detailLoad": 0.12916897506925207,
+        "borderVariance": 3.5031692866984527,
+        "distinctColours": 7,
+        "meanLightness": 54.68023792239542,
+        "valueRange": 75.33425371687737,
+        "meanChroma": 5.86958126757244,
+        "warmth": -0.51129254178853,
+        "hash": "0f6969696968f071",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Apple Blossom Vase",
+    "subject": "objects",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "A tall cylindrical cobalt blue earthenware vase painted with a branch of white and pink apple blossom and olive-green leaves, with a thin gold rim, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Ultramarine Blue",
+        "hex": "#2f4a9c"
+      },
+      {
+        "name": "Indigo",
+        "hex": "#2e3f55"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#6b6f36"
+      },
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Leave the blossom as paper and paint the deep blue round it.",
+    "tip": "Build the blue in two layers; one heavy layer dries patchy.",
+    "curationNote": "One clear object on a plain grey ground. Deep blue with pale blossom is good practice for leaving the paper."
+  },
+  {
+    "id": "bird-shaped-vessel-9496",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "39496",
+      "providerTitle": "Bird-shaped vessel",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/39496",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "3rd century",
+      "medium": "Earthenware",
+      "classification": "Ceramics",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DT4131.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DT4131.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.2905002170138889,
+        "subjectCentrality": 0.25403387915221043,
+        "subjectRegions": 1,
+        "subjectSharpness": 840.9703731464541,
+        "detailLoad": 0.056398891966759006,
+        "borderVariance": 4.097686377537218,
+        "distinctColours": 4,
+        "meanLightness": 42.65026446091123,
+        "valueRange": 37.17700987424503,
+        "meanChroma": 3.1210912019672756,
+        "warmth": 2.259783836424212,
+        "hash": "7f3f3f3b9f9dfecc",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Bird-Shaped Vessel",
+    "subject": "creatures",
+    "difficulty": "steady",
+    "minutes": 30,
+    "alt": "A pale earthenware jug shaped like a bird, with a tall fan-shaped crest, a long beak and a spout rising from its back, standing on a round foot against a plain grey background.",
+    "palette": [
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      },
+      {
+        "name": "Raw Umber",
+        "hex": "#7a6244"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Pale on grey. Paint the background round the bird and keep the bird itself to two soft greys.",
+    "tip": "Soften the shadow side into the paper while it is damp, so the body looks round.",
+    "curationNote": "One simple object on a plain grey ground, sharp. A pale shape with soft shadows."
+  },
+  {
+    "id": "faience-jar-2835",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "552835",
+      "providerTitle": "Jar",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/552835",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "664–332 BCE",
+      "medium": "Faience",
+      "classification": "Jar",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP-31822-002.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/eg/web-large/DP-31822-002.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.2788899739583333,
+        "subjectCentrality": 0.2403118392253132,
+        "subjectRegions": 1,
+        "subjectSharpness": 1229.636361296834,
+        "detailLoad": 0.0777562326869806,
+        "borderVariance": 4.042951586409768,
+        "distinctColours": 4,
+        "meanLightness": 66.2429937600134,
+        "valueRange": 50.408287057968124,
+        "meanChroma": 2.450894188651599,
+        "warmth": 0.4738092389649242,
+        "hash": "ffffedf9f9f8f8ff",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Faience Jar",
+    "subject": "objects",
+    "difficulty": "gentle",
+    "minutes": 15,
+    "alt": "A small squat Egyptian faience jar with a flared rim and base, in mottled turquoise and blue-green with darker speckles, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Cerulean Blue",
+        "hex": "#4f93bd"
+      },
+      {
+        "name": "Viridian",
+        "hex": "#2e7a63"
+      },
+      {
+        "name": "Terre Verte",
+        "hex": "#6f8272"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Wet the jar, drop in turquoise and green, and let them mottle on their own.",
+    "tip": "Spatter a few darker specks once the wash is nearly dry.",
+    "curationNote": "One small, simple object on a plain grey ground, sharp. A quick warm-up."
+  },
+  {
+    "id": "red-clay-amphora-0926",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "240926",
+      "providerTitle": "Terracotta amphora",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/240926",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "ca. 1900–1600 BCE",
+      "medium": "Terracotta",
+      "classification": "Vases",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/gr/original/DP121310.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/gr/web-large/DP121310.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.3628472222222222,
+        "subjectCentrality": 0.09089083161348063,
+        "subjectRegions": 1,
+        "subjectSharpness": 1162.5253218662756,
+        "detailLoad": 0.10099722991689751,
+        "borderVariance": 2.526621517928474,
+        "distinctColours": 6,
+        "meanLightness": 67.18566574855888,
+        "valueRange": 56.07914262540217,
+        "meanChroma": 9.725975795671173,
+        "warmth": 6.895648741531379,
+        "hash": "2b317179f9f9f0f8",
+        "hue": 42.76523581053954,
+        "sampledAt": 192
+      }
+    },
+    "title": "Red Clay Amphora",
+    "subject": "objects",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "A weathered red terracotta storage jar with a round body, a flared mouth and two small loop handles, its surface flecked with pale patches, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Cadmium Red",
+        "hex": "#c8322c"
+      },
+      {
+        "name": "Raw Sienna",
+        "hex": "#b57e3c"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the round body first in one warm wash, then add the pale patches by lifting.",
+    "tip": "Lift the pale patches with a damp tissue while the red is still wet.",
+    "curationNote": "One clear object on a plain grey ground, sharp. A simple round shape with a weathered surface."
+  },
+  {
+    "id": "greek-bronze-horse-1050",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "251050",
+      "providerTitle": "Bronze horse",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/251050",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "8th century BCE",
+      "medium": "Bronze",
+      "classification": "Bronzes",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/gr/original/DP-44413-001.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/gr/web-large/DP-44413-001.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.2823621961805556,
+        "subjectCentrality": 0.23444253799071155,
+        "subjectRegions": 1,
+        "subjectSharpness": 1885.4324323602639,
+        "detailLoad": 0.09421052631578947,
+        "borderVariance": 4.856258780112147,
+        "distinctColours": 4,
+        "meanLightness": 74.58720508931815,
+        "valueRange": 51.916665924335035,
+        "meanChroma": 1.1725343405121693,
+        "warmth": 0.08535375034027652,
+        "hash": "9fcfcd694d4ce000",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Greek Bronze Horse",
+    "subject": "creatures",
+    "difficulty": "steady",
+    "minutes": 30,
+    "alt": "A small stylised Greek bronze horse with a long thin body, tall straight legs and a tube-like muzzle, standing on an openwork base, with a green patina, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Terre Verte",
+        "hex": "#6f8272"
+      },
+      {
+        "name": "Viridian",
+        "hex": "#2e7a63"
+      },
+      {
+        "name": "Payne's Grey",
+        "hex": "#4a5a66"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "This horse is nearly all straight lines. Paint each leg in one stroke.",
+    "tip": "Drop a little viridian into the wet grey-green so the patina looks mottled rather than flat.",
+    "curationNote": "One simple, stylised shape on a plain grey ground, sharp throughout."
+  },
+  {
+    "id": "bronze-cat-0749",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "570749",
+      "providerTitle": "Cat",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/570749",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "664–30 BCE",
+      "medium": "Cupreous metal",
+      "classification": "Statuette, cat",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/eg/original/66.99.145_EGDP021821.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/eg/web-large/66.99.145_EGDP021821.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.3148057725694444,
+        "subjectCentrality": 0.3806534588602569,
+        "subjectRegions": 1,
+        "subjectSharpness": 687.6669103630154,
+        "detailLoad": 0.055069252077562324,
+        "borderVariance": 5.716415831733727,
+        "distinctColours": 4,
+        "meanLightness": 42.715807320142915,
+        "valueRange": 45.47651904449895,
+        "meanChroma": 4.854090299364234,
+        "warmth": 2.9432877222572884,
+        "hash": "0008183030622227",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Bronze Cat",
+    "subject": "creatures",
+    "difficulty": "stretch",
+    "minutes": 30,
+    "alt": "A slender Egyptian bronze cat sitting upright with its tail curled round its front feet and its ears pricked, on a pale block against a plain grey background.",
+    "palette": [
+      {
+        "name": "Burnt Umber",
+        "hex": "#6b432a"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Vandyke Brown",
+        "hex": "#4a3527"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Get the silhouette right first: ears, long neck, round haunch. The rest is shading.",
+    "tip": "Mix the bronze from burnt umber and a little burnt sienna, and leave a thin light edge down the back.",
+    "curationNote": "One clear subject on a plain grey ground, sharp. A simple upright silhouette."
+  },
+  {
+    "id": "turquoise-glass-vase-3835",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "53835",
+      "providerTitle": "Vase",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/53835",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "mid-18th century",
+      "medium": "Glass",
+      "classification": "Glass",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-15452-070.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-15452-070.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.21202256944444445,
+        "subjectCentrality": 0.19642269609295018,
+        "subjectRegions": 1,
+        "subjectSharpness": 110.27192893821818,
+        "detailLoad": 0.009833795013850415,
+        "borderVariance": 4.613048306178292,
+        "distinctColours": 6,
+        "meanLightness": 52.06512538365273,
+        "valueRange": 24.72741882596945,
+        "meanChroma": 9.255517768151941,
+        "warmth": -5.438320055222947,
+        "hash": "ffefeffbcbc9f8f8",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Turquoise Glass Vase",
+    "subject": "objects",
+    "difficulty": "steady",
+    "minutes": 20,
+    "alt": "A faceted opaque turquoise glass vase with a round, many-sided body, a tall straight neck and a flared foot, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Cerulean Blue",
+        "hex": "#4f93bd"
+      },
+      {
+        "name": "Cobalt Blue",
+        "hex": "#3a6bb5"
+      },
+      {
+        "name": "Viridian",
+        "hex": "#2e7a63"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint each facet as its own flat wash, a little lighter or darker than its neighbour.",
+    "tip": "Leave a hairline gap between facets so they stay crisp.",
+    "curationNote": "One simple object on a plain grey ground, sharp, in one bright colour."
+  },
+  {
+    "id": "persimmon-wood-box-0280",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "930280",
+      "providerTitle": "Document box with brass fitting",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/930280",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "ca. 1850",
+      "medium": "Persimmon wood and brass",
+      "classification": "Wood",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-45702-001.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-45702-001.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "fruit",
+      "measurements": {
+        "subjectArea": 0.6010199652777778,
+        "subjectCentrality": 0.2716816047466016,
+        "subjectRegions": 1,
+        "subjectSharpness": 727.2467621967976,
+        "detailLoad": 0.08030470914127424,
+        "borderVariance": 9.23509081540269,
+        "distinctColours": 5,
+        "meanLightness": 58.56631034611067,
+        "valueRange": 55.21259668675968,
+        "meanChroma": 9.478204686405059,
+        "warmth": 6.834799301550451,
+        "hash": "4f1f8f09cfff3fff",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Persimmon-Wood Box",
+    "subject": "objects",
+    "difficulty": "steady",
+    "minutes": 30,
+    "alt": "A long rectangular lidded box in persimmon wood, its orange grain streaked with black, with a small brass hasp on the front, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Cadmium Orange",
+        "hex": "#e2702c"
+      },
+      {
+        "name": "Vandyke Brown",
+        "hex": "#4a3527"
+      },
+      {
+        "name": "Yellow Ochre",
+        "hex": "#c69a52"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the three faces as three different values of the same orange, then add the dark streaks.",
+    "tip": "Pull the dark grain streaks along the length in one stroke each, into damp paint.",
+    "curationNote": "One simple object on a plain grey ground, sharp. A clean box shape with bold wood grain."
+  },
+  {
+    "id": "small-plant-study-2554",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "362554",
+      "providerTitle": "Botanical Study",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/362554",
+      "creator": "Anonymous, French, 19th century",
+      "creatorUrl": "http://vocab.getty.edu/page/ulan/500397994",
+      "dateDisplay": "ca. 1820",
+      "medium": "Watercolor",
+      "classification": "Drawings",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP823473.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP823473.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "botanical",
+      "measurements": {
+        "subjectArea": 0.091064453125,
+        "subjectCentrality": 0.21177304517772544,
+        "subjectRegions": 3,
+        "subjectSharpness": 9636.53752573554,
+        "detailLoad": 0.12645429362880886,
+        "borderVariance": 2.517819316037962,
+        "distinctColours": 3,
+        "meanLightness": 90.31142453931076,
+        "valueRange": 12.925539739505481,
+        "meanChroma": 16.565808609862422,
+        "warmth": 11.247016353278498,
+        "hash": "e1e0f9f0f0d2e4e2",
+        "hue": 91.36614078528794,
+        "sampledAt": 192
+      }
+    },
+    "title": "Small Plant Study",
+    "subject": "botanical",
+    "difficulty": "steady",
+    "minutes": 30,
+    "alt": "A watercolour of one small upright plant with narrow toothed leaves, a few small pink flowers near the top and fine pale roots, on plain cream paper.",
+    "palette": [
+      {
+        "name": "Sap Green",
+        "hex": "#6f8f3a"
+      },
+      {
+        "name": "Olive Green",
+        "hex": "#6b6f36"
+      },
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Raw Sienna",
+        "hex": "#b57e3c"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "This is already a watercolour. Match its washes: one pale green per leaf.",
+    "tip": "Pull the roots with the very tip of a small brush, in one movement each.",
+    "curationNote": "One focus subject on plain paper, already a watercolour. A lovely study to copy stroke for stroke."
+  },
+  {
+    "id": "william-the-hippo-4227",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "544227",
+      "providerTitle": "Hippopotamus (\"William\")",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/544227",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "ca. 1961–1878 B.C.",
+      "medium": "Faience",
+      "classification": "Figurine, Hippopotamus (\"William\"); Dendur-decoded",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP248993.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/eg/web-large/DP248993.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.7217881944444444,
+        "subjectCentrality": 0.02799368237108878,
+        "subjectRegions": 1,
+        "subjectSharpness": 932.6595624543075,
+        "detailLoad": 0.11415512465373961,
+        "borderVariance": 6.985461094516179,
+        "distinctColours": 6,
+        "meanLightness": 62.74948721453359,
+        "valueRange": 56.85729122940201,
+        "meanChroma": 6.5990612607173444,
+        "warmth": -3.7714810844953623,
+        "hash": "0000cbc8f0f0f0f0",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "William the Hippo",
+    "subject": "creatures",
+    "difficulty": "stretch",
+    "minutes": 30,
+    "alt": "The Met's blue faience hippopotamus, nicknamed William, standing on four short legs, painted with dark outlines of lotus flowers and leaves, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Cerulean Blue",
+        "hex": "#4f93bd"
+      },
+      {
+        "name": "Cobalt Blue",
+        "hex": "#3a6bb5"
+      },
+      {
+        "name": "Payne's Grey",
+        "hex": "#4a5a66"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the whole hippo in one blue wash, then draw the lotus plants on it once it is dry.",
+    "tip": "Keep the blue a touch paler on the back, where the light lands.",
+    "curationNote": "One clear subject on a plain grey ground, sharp, with one strong colour. The Met's best-loved object."
+  },
+  {
+    "id": "yellow-bowl-2552",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "42552",
+      "providerTitle": "Bowl",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/42552",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "mid-16th century",
+      "medium": "Porcelain with yellow glaze (Jingdezhen ware)",
+      "classification": "Ceramics",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-14609-091.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-14609-091.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.5947265625,
+        "subjectCentrality": 0.15089220991408767,
+        "subjectRegions": 2,
+        "subjectSharpness": 243.25078140550013,
+        "detailLoad": 0.02811634349030471,
+        "borderVariance": 7.529697345329982,
+        "distinctColours": 7,
+        "meanLightness": 41.055472662269764,
+        "valueRange": 53.72426049424689,
+        "meanChroma": 14.744230315213578,
+        "warmth": 10.219579790625465,
+        "hash": "fffffe0f3c3c5cff",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Yellow Bowl",
+    "subject": "objects",
+    "difficulty": "gentle",
+    "minutes": 20,
+    "alt": "A plain porcelain bowl in a smooth, bright yellow glaze with a pale foot ring, seen from the side against a plain grey background.",
+    "palette": [
+      {
+        "name": "Cadmium Yellow",
+        "hex": "#f7c531"
+      },
+      {
+        "name": "Yellow Ochre",
+        "hex": "#c69a52"
+      },
+      {
+        "name": "Dioxazine Violet",
+        "hex": "#5b3b78"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "One yellow curve. Paint the bowl in one wash and add the inside shadow once it dries.",
+    "tip": "Grey the yellow for the shadow with a touch of violet rather than black.",
+    "curationNote": "One simple object on a plain grey ground, sharp. A quick warm-up."
+  },
+  {
+    "id": "coral-red-bottle-vase-2237",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "42237",
+      "providerTitle": "Vase",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/42237",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "19th century",
+      "medium": "Porcelain with coral red glaze (Jingdezhen ware)",
+      "classification": "Ceramics",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-14605-017.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-14605-017.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.3744032118055556,
+        "subjectCentrality": 0.3341852570914562,
+        "subjectRegions": 2,
+        "subjectSharpness": 188.12725538512387,
+        "detailLoad": 0.02407202216066482,
+        "borderVariance": 7.91920500651328,
+        "distinctColours": 6,
+        "meanLightness": 35.734286903577036,
+        "valueRange": 33.71923251602182,
+        "meanChroma": 17.712436499424616,
+        "warmth": 11.863245133821332,
+        "hash": "cbcbdbf3ebd9d8fc",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Coral-Red Bottle Vase",
+    "subject": "objects",
+    "difficulty": "steady",
+    "minutes": 20,
+    "alt": "A glossy coral-red porcelain bottle vase with a round body and a long thin neck, with bright highlights on its shoulder, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Cadmium Red",
+        "hex": "#c8322c"
+      },
+      {
+        "name": "Scarlet",
+        "hex": "#d43d2f"
+      },
+      {
+        "name": "Alizarin Crimson",
+        "hex": "#9e2b3f"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "One red shape. Save the highlights as paper before the colour goes on.",
+    "tip": "Deepen the red toward the bottom and the far side while it is still wet.",
+    "curationNote": "One simple object on a plain grey ground, sharp, in one bold colour."
+  },
+  {
+    "id": "cream-stoneware-dish-2390",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "42390",
+      "providerTitle": "Bowl",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/42390",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "9th century",
+      "medium": "Stoneware with white slip and glaze",
+      "classification": "Ceramics",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP342523.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP342523.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.6932508680555556,
+        "subjectCentrality": 0.04299288893346372,
+        "subjectRegions": 3,
+        "subjectSharpness": 39.34629445097562,
+        "detailLoad": 0.016121883656509694,
+        "borderVariance": 8.896217538106095,
+        "distinctColours": 5,
+        "meanLightness": 46.21382407810769,
+        "valueRange": 60.41741385305405,
+        "meanChroma": 5.310311396863442,
+        "warmth": 3.5336354087251385,
+        "hash": "000000071ffc3cff",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Cream Stoneware Dish",
+    "subject": "objects",
+    "difficulty": "gentle",
+    "minutes": 15,
+    "alt": "A shallow cream-glazed stoneware dish with gently flared sides on a small foot, seen from the side against a plain grey background.",
+    "palette": [
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the grey background round the dish and leave the dish almost as paper.",
+    "tip": "One pale warm grey for the inside curve is all the shading it needs.",
+    "curationNote": "One simple object on a plain grey ground. White on grey, a quick warm-up."
+  },
+  {
+    "id": "peach-bloom-box-0925",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "50925",
+      "providerTitle": "Seal-Paste Box",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/50925",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": null,
+      "medium": "Porcelain with peach-bloom glaze",
+      "classification": "Ceramics",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/LC-29_100_358ab-001.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/LC-29_100_358ab-001.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "fruit",
+      "measurements": {
+        "subjectArea": 0.3459743923611111,
+        "subjectCentrality": 0.10460274172768232,
+        "subjectRegions": 1,
+        "subjectSharpness": 554.7718516658734,
+        "detailLoad": 0.04584487534626039,
+        "borderVariance": 1.4495866879656392,
+        "distinctColours": 7,
+        "meanLightness": 62.338039877780346,
+        "valueRange": 45.5706678472874,
+        "meanChroma": 8.076018093212788,
+        "warmth": 5.283121577560314,
+        "hash": "0100e0ecccf0f0f0",
+        "hue": 73.53120816986029,
+        "sampledAt": 192
+      }
+    },
+    "title": "Peach-Bloom Box",
+    "subject": "objects",
+    "difficulty": "gentle",
+    "minutes": 20,
+    "alt": "A small round lidded porcelain box in a glossy peach-bloom glaze, pink across the top fading to mottled green at the edge, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Terre Verte",
+        "hex": "#6f8272"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Wet the whole box and let the pink run into the green.",
+    "tip": "Leave the two bright highlights as bare paper from the start.",
+    "curationNote": "One small, simple shape on a plain grey ground. Soft colour changes to practise."
+  },
+  {
+    "id": "lapis-fish-4787",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "554787",
+      "providerTitle": "Fish amulet",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/554787",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "ca. 1550–1300 BCE",
+      "medium": "Lapis lazuli",
+      "classification": "Amulet, fish",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/eg/original/1975.35.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/eg/web-large/1975.35.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.3296983506944444,
+        "subjectCentrality": 0.05835503460089146,
+        "subjectRegions": 1,
+        "subjectSharpness": 2526.3633981953813,
+        "detailLoad": 0.1581163434903047,
+        "borderVariance": 2.975606567975351,
+        "distinctColours": 4,
+        "meanLightness": 79.45477669896408,
+        "valueRange": 54.99212317737361,
+        "meanChroma": 6.226140089935305,
+        "warmth": -2.786399487188095,
+        "hash": "006cf2a894f83000",
+        "hue": 297.46883562091364,
+        "sampledAt": 192
+      }
+    },
+    "title": "Lapis Fish",
+    "subject": "creatures",
+    "difficulty": "steady",
+    "minutes": 20,
+    "alt": "A small fish amulet carved in violet-blue lapis lazuli with pale flecks and a forked tail, lying on its side on a plain white background.",
+    "palette": [
+      {
+        "name": "Ultramarine Blue",
+        "hex": "#2f4a9c"
+      },
+      {
+        "name": "Dioxazine Violet",
+        "hex": "#5b3b78"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "One blue fish. Wet it, drop in violet, and dab out a few pale flecks.",
+    "tip": "Lift the pale flecks with a damp brush while the blue is still wet.",
+    "curationNote": "One small, simple shape on a plain ground. A quick warm-up."
+  },
+  {
+    "id": "copper-pheasant-6105",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "56105",
+      "providerTitle": "Bird",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/56105",
+      "creator": "Hakusanjin Hokui",
+      "creatorUrl": null,
+      "dateDisplay": null,
+      "medium": "Woodblock print; ink and color on paper",
+      "classification": "Prints",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP123621.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP123621.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.2428656684027778,
+        "subjectCentrality": 0.16106133614243312,
+        "subjectRegions": 2,
+        "subjectSharpness": 3455.187764641469,
+        "detailLoad": 0.16421052631578947,
+        "borderVariance": 4.032888330144732,
+        "distinctColours": 6,
+        "meanLightness": 76.58638146051231,
+        "valueRange": 42.06024147028318,
+        "meanChroma": 16.211784731461393,
+        "warmth": 12.100380401314846,
+        "hash": "0f5e1f6fec880407",
+        "hue": 73.20664183208265,
+        "sampledAt": 192
+      }
+    },
+    "title": "Copper Pheasant",
+    "subject": "creatures",
+    "difficulty": "stretch",
+    "minutes": 35,
+    "alt": "A Japanese woodblock print of a copper pheasant walking with its head lowered, a long barred tail sweeping behind it, a red face patch and dark body feathers, on plain cream paper with a brushed signature.",
+    "palette": [
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Payne's Grey",
+        "hex": "#4a5a66"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the long tail in one confident sweep, then build the dark body on top.",
+    "tip": "Keep the tail's bars loose: a few broken strokes along its length are enough.",
+    "curationNote": "One clear subject on plain paper. Already a print in soft colours, so it translates well."
+  },
+  {
+    "id": "red-jasper-hippo-3447",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "573447",
+      "providerTitle": "Hippopotamus",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/573447",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "ca. 1550–1080 BCE",
+      "medium": "Red jasper",
+      "classification": "Figurine, hippopotamus",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP-14246-001.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/eg/web-large/DP-14246-001.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.2800021701388889,
+        "subjectCentrality": 0.2701434071356253,
+        "subjectRegions": 2,
+        "subjectSharpness": 928.2114915147088,
+        "detailLoad": 0.054182825484764545,
+        "borderVariance": 5.6187507766333304,
+        "distinctColours": 4,
+        "meanLightness": 80.03147571194538,
+        "valueRange": 47.50429767126104,
+        "meanChroma": 4.375772714661229,
+        "warmth": 2.8551921370983466,
+        "hash": "0f0f0f68ccf80100",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Red Jasper Hippo",
+    "subject": "creatures",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "A small hippopotamus carved from polished red jasper, lying down with its head raised, against a plain white to grey background.",
+    "palette": [
+      {
+        "name": "Cadmium Red",
+        "hex": "#c8322c"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Alizarin Crimson",
+        "hex": "#9e2b3f"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "One red shape. Wet it, drop in a darker red underneath, and stop.",
+    "tip": "Leave a sliver of paper along the back for the polish.",
+    "curationNote": "One small, simple shape on a plain ground, sharp. A quick warm-up in one colour."
+  },
+  {
+    "id": "silver-jar-0897",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "550897",
+      "providerTitle": "Jar",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/550897",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "ca. 1290–1224 BCE",
+      "medium": "Silver",
+      "classification": "Jar",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP-15342-001.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/eg/web-large/DP-15342-001.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.191650390625,
+        "subjectCentrality": 0.3194907512958398,
+        "subjectRegions": 2,
+        "subjectSharpness": 936.6015423960321,
+        "detailLoad": 0.05587257617728532,
+        "borderVariance": 3.4505175128430197,
+        "distinctColours": 3,
+        "meanLightness": 56.05128976070048,
+        "valueRange": 33.222901820754274,
+        "meanChroma": 2.1384730960245038,
+        "warmth": 0.7888818201733129,
+        "hash": "232b2b696969f01f",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Silver Jar",
+    "subject": "objects",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "A small Egyptian silver jar with a round body, a tall straight neck and a gold rim, softly mottled and dull, against a plain grey background.",
+    "palette": [
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      },
+      {
+        "name": "Payne's Grey",
+        "hex": "#4a5a66"
+      },
+      {
+        "name": "Yellow Ochre",
+        "hex": "#c69a52"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Silver is mostly reflected grey. Paint the dark streaks and leave the highlights as paper.",
+    "tip": "Keep the gold rim for last, as one thin warm line.",
+    "curationNote": "One simple object on a plain grey ground, sharp. Good practice for metal."
+  },
+  {
+    "id": "falcon-with-spread-wings-8439",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "548439",
+      "providerTitle": "Inlay Depicting a Falcon with Spread Wings",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/548439",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "4th century BCE",
+      "medium": "Faience",
+      "classification": "Inlay, Falcon",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/eg/original/DP243445.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/eg/web-large/DP243445.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.23399522569444445,
+        "subjectCentrality": 0.16860792303481548,
+        "subjectRegions": 2,
+        "subjectSharpness": 5579.054799593265,
+        "detailLoad": 0.16939058171745153,
+        "borderVariance": 4.320780784683602,
+        "distinctColours": 3,
+        "meanLightness": 75.83028218978637,
+        "valueRange": 45.05579398198074,
+        "meanChroma": 4.691912227336652,
+        "warmth": 3.033487696335448,
+        "hash": "90e0e784082c7cff",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Falcon with Spread Wings",
+    "subject": "creatures",
+    "difficulty": "stretch",
+    "minutes": 35,
+    "alt": "An Egyptian faience inlay of a falcon with its wings spread wide and its head turned, holding a ring in its claws, in faded blue-green, red and cream, on a plain pale background.",
+    "palette": [
+      {
+        "name": "Terre Verte",
+        "hex": "#6f8272"
+      },
+      {
+        "name": "Cerulean Blue",
+        "hex": "#4f93bd"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the wing shapes as two big washes first; the feathers can be suggested on top.",
+    "tip": "A few dry-brush strokes across each wing will read as feathers without painting every one.",
+    "curationNote": "One clear subject on a plain pale ground, sharp, with a bold, graphic shape."
+  },
+  {
+    "id": "roses-in-a-dark-vase-2485",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "362485",
+      "providerTitle": "Vase of Flowers",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/362485",
+      "creator": "Anonymous, French, 19th century",
+      "creatorUrl": "http://vocab.getty.edu/page/ulan/500397994",
+      "dateDisplay": "19th century",
+      "medium": "Graphite and gouache on brown paper",
+      "classification": "Drawings",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/dp/original/DP210824.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/dp/web-large/DP210824.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.1183810763888889,
+        "subjectCentrality": 0.26921505865348505,
+        "subjectRegions": 3,
+        "subjectSharpness": 2415.8190461448426,
+        "detailLoad": 0.07041551246537396,
+        "borderVariance": 1.7432545050454624,
+        "distinctColours": 2,
+        "meanLightness": 52.84885991674629,
+        "valueRange": 12.264317190641442,
+        "meanChroma": 14.111381424927416,
+        "warmth": 9.89357292189609,
+        "hash": "f2e0e8eee8e4f0f0",
+        "hue": 79.5871226752904,
+        "sampledAt": 192
+      }
+    },
+    "title": "Roses in a Dark Vase",
+    "subject": "still-life",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "A gouache study of pink roses and grey-green leaves spilling from a dark red and black urn-shaped vase, on toned brown paper with faint pencil lines left unpainted.",
+    "palette": [
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Permanent Magenta",
+        "hex": "#9c3f78"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Terre Verte",
+        "hex": "#6f8272"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the roses first while the paper is fresh, then the dark vase last.",
+    "tip": "Keep the vase's black warm by mixing it from burnt umber and ultramarine.",
+    "curationNote": "A simple arrangement on a plain toned ground. A study rather than a finished painting, which suits practice."
+  },
+  {
+    "id": "carnelian-falcon-5577",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "555577",
+      "providerTitle": "Falcon Amulet",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/555577",
+      "creator": null,
+      "creatorUrl": null,
+      "dateDisplay": "ca. 2150–1950 B.C.",
+      "medium": "Carnelian",
+      "classification": "Amulet, falcon",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/eg/original/LC-59_103_15_EGDP036718.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/eg/web-large/LC-59_103_15_EGDP036718.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.0639919704861111,
+        "subjectCentrality": 0.02369034380135468,
+        "subjectRegions": 1,
+        "subjectSharpness": 1525.7319511212731,
+        "detailLoad": 0.028282548476454294,
+        "borderVariance": 0.17198685217481788,
+        "distinctColours": 1,
+        "meanLightness": 92.11489996000064,
+        "valueRange": 3.120429271092206,
+        "meanChroma": 5.437631565450681,
+        "warmth": 1.292655678301349,
+        "hash": "7171617070f0fa70",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Carnelian Falcon",
+    "subject": "creatures",
+    "difficulty": "gentle",
+    "minutes": 15,
+    "alt": "A tiny falcon amulet carved in translucent orange carnelian, with a drilled hole for hanging, on a plain white background.",
+    "palette": [
+      {
+        "name": "Cadmium Orange",
+        "hex": "#e2702c"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "One orange shape. Let the colour pool darker at the base.",
+    "tip": "Leave the lightest part of the stone as bare paper so it glows.",
+    "curationNote": "One tiny, simple shape on a plain white ground. A quick warm-up in one glowing colour."
+  },
+  {
+    "id": "resting-pigeon-6043",
+    "candidate": {
+      "sourceId": "met",
+      "externalId": "36043",
+      "providerTitle": "Bird",
+      "providerAlt": null,
+      "objectUrl": "https://www.metmuseum.org/art/collection/search/36043",
+      "creator": "Ogawa Haritsu (Ritsuō)",
+      "creatorUrl": "http://vocab.getty.edu/page/ulan/500336156",
+      "dateDisplay": "18th century",
+      "medium": "Watercolor on paper",
+      "classification": "Paintings",
+      "intrinsicWidth": null,
+      "intrinsicHeight": null,
+      "dominantColour": null,
+      "imageUrl": "https://images.metmuseum.org/CRDImages/as/original/DP-15190-001.jpg",
+      "previewUrl": "https://images.metmuseum.org/CRDImages/as/web-large/DP-15190-001.jpg",
+      "licenceId": "cc0-1.0",
+      "retrievedAt": "2026-09-28",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.10175238715277778,
+        "subjectCentrality": 0.2213944558160209,
+        "subjectRegions": 3,
+        "subjectSharpness": 3294.8469754981247,
+        "detailLoad": 0.21653739612188366,
+        "borderVariance": 2.603661024883125,
+        "distinctColours": 5,
+        "meanLightness": 72.85839290344663,
+        "valueRange": 22.02398272303938,
+        "meanChroma": 15.353830289311373,
+        "warmth": 10.977212353167896,
+        "hash": "1ec0e07237c18893",
+        "hue": 82.25906961487863,
+        "sampledAt": 192
+      }
+    },
+    "title": "Resting Pigeon",
+    "subject": "creatures",
+    "difficulty": "stretch",
+    "minutes": 30,
+    "alt": "A painting of a single plump pigeon resting, its white feathers edged in pale grey, rust-red patches across its back, an iridescent grey-green neck and pink feet, on plain pale tan paper.",
+    "palette": [
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      },
+      {
+        "name": "Terre Verte",
+        "hex": "#6f8272"
+      }
+    ],
+    "kind": "artwork",
+    "approvedAt": "2026-09-28",
+    "prompt": "Leave the white feathers as paper and paint only their grey edges and the red patches.",
+    "tip": "Glaze the neck with a thin wash of terre verte over dry grey for the sheen.",
+    "curationNote": "One clear subject on plain paper. White feathers are good practice for leaving the paper."
+  }
+]

@@ -17,7 +17,17 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "npm run build && playwright test",
     "test:e2e:ui": "npm run build && playwright test --ui",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "catalog:collections": "tsx scripts/catalog/cli/collections.ts",
+    "catalog:harvest": "tsx scripts/catalog/cli/harvest.ts",
+    "catalog:shortlist": "tsx scripts/catalog/cli/shortlist.ts",
+    "catalog:build": "tsx scripts/catalog/cli/build.ts",
+    "catalog:derive": "tsx scripts/catalog/cli/derive.ts",
+    "catalog:review": "tsx scripts/catalog/cli/review.ts",
+    "catalog:proposals": "tsx scripts/catalog/cli/proposals.ts",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "catalog:calibrate": "tsx scripts/catalog/cli/calibrate.ts",
+    "catalog:coverage": "tsx scripts/catalog/cli/coverage.ts"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -46,10 +56,13 @@
     "jsdom": "^25.0.1",
     "playwright": "^1.63.0",
     "postcss": "^8.4.49",
+    "sharp": "^0.35.4",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.23.13",
     "typescript": "^5.6.3",
     "vite": "^5.4.11",
     "vite-plugin-singlefile": "^2.3.3",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "zod": "^4.6.5"
   }
 }

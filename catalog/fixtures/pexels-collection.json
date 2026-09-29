@@ -1,0 +1,73 @@
+{
+  "media": [
+    {
+      "type": "Photo",
+      "id": 1414126,
+      "width": 4928,
+      "height": 3264,
+      "url": "https://www.pexels.com/photo/photo-of-sliced-kiwi-lemon-and-orange-fruits-1414126/",
+      "photographer": "Lukas Blazek",
+      "photographer_url": "https://www.pexels.com/@goumbik",
+      "photographer_id": 89898,
+      "avg_color": "#D2C646",
+      "src": {
+        "original": "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg",
+        "large2x": "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/1414126/pexels-photo-1414126.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+      },
+      "liked": false,
+      "alt": "Vibrant close-up of sliced citrus and kiwi fruits showcasing fresh and juicy textures."
+    },
+    {
+      "type": "Photo",
+      "id": 2611810,
+      "width": 2936,
+      "height": 3670,
+      "url": "https://www.pexels.com/photo/cut-oranges-2611810/",
+      "photographer": "Anna Tukhfatullina Food Photographer/Stylist",
+      "photographer_url": "https://www.pexels.com/@myfoodie",
+      "photographer_id": 1325768,
+      "avg_color": "#C1B893",
+      "src": {
+        "original": "https://images.pexels.com/photos/2611810/pexels-photo-2611810.jpeg",
+        "large2x": "https://images.pexels.com/photos/2611810/pexels-photo-2611810.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/2611810/pexels-photo-2611810.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/2611810/pexels-photo-2611810.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/2611810/pexels-photo-2611810.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/2611810/pexels-photo-2611810.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/2611810/pexels-photo-2611810.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/2611810/pexels-photo-2611810.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+      },
+      "liked": false,
+      "alt": "Colorful assortment of fresh citrus fruits including grapefruits and lemons on a vibrant blue background."
+    },
+    {
+      "type": "Photo",
+      "id": 3943208,
+      "width": 4000,
+      "height": 6000,
+      "url": "https://www.pexels.com/photo/sliced-lemon-on-white-table-3943208/",
+      "photographer": "cottonbro studio",
+      "photographer_url": "https://www.pexels.com/@cottonbro",
+      "photographer_id": 1437723,
+      "avg_color": "#CAC3B4",
+      "src": {
+        "original": "https://images.pexels.com/photos/3943208/pexels-photo-3943208.jpeg",
+        "large2x": "https://images.pexels.com/photos/3943208/pexels-photo-3943208.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "large": "https://images.pexels.com/photos/3943208/pexels-photo-3943208.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+        "medium": "https://images.pexels.com/photos/3943208/pexels-photo-3943208.jpeg?auto=compress&cs=tinysrgb&h=350",
+        "small": "https://images.pexels.com/photos/3943208/pexels-photo-3943208.jpeg?auto=compress&cs=tinysrgb&h=130",
+        "portrait": "https://images.pexels.com/photos/3943208/pexels-photo-3943208.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+        "landscape": "https://images.pexels.com/photos/3943208/pexels-photo-3943208.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        "tiny": "https://images.pexels.com/photos/3943208/pexels-photo-3943208.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+      },
+      "liked": false,
+      "alt": "Fresh citrus slices arranged on marble, highlighting vibrant colors and textures for healthy food themes."
+    }
+  ]
+}

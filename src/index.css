@@ -355,20 +355,48 @@
     controls off-screen.
   */
   .art-cap {
-    max-height: 40vh;
-    max-height: 40svh;
+    --plate-cap: 40vh;
+    --plate-cap: 40svh;
+    max-height: var(--plate-cap);
   }
   @media (min-width: 640px) {
     .art-cap {
-      max-height: 52vh;
-      max-height: 52svh;
+      --plate-cap: 52vh;
+      --plate-cap: 52svh;
     }
   }
   @media (min-width: 1024px) {
     .art-cap {
-      max-height: 46vh;
-      max-height: 46svh;
+      --plate-cap: 46vh;
+      --plate-cap: 46svh;
     }
+  }
+
+  /*
+    ─────────────────────────────────────────────────────────────────────────
+    A plate shaped like the reference inside it.
+    ─────────────────────────────────────────────────────────────────────────
+    Every plate used to carry a fixed ratio, because every reference was a
+    400x400 SVG. Real references are not: of the first broad harvest, 53% are
+    roughly square, 22% are tall portraits and 14% are wide. A 0.6-ratio
+    portrait in a 4/3 plate renders at 45% of the plate's width, with the rest
+    left as empty mat - the artwork made small to fit a box that was never
+    about the artwork.
+
+    So the plate takes the reference's own ratio, and the viewport cap still
+    decides how big it gets. `--ar` comes from the item's intrinsic size.
+    `max-width` is the cap multiplied by the ratio, which is what stops a
+    height-capped plate from staying full width and letterboxing anyway.
+
+    Cards keep their fixed ratio on purpose: a grid of differently shaped
+    cards reads as broken rather than as varied.
+  */
+  .art-ratio {
+    aspect-ratio: var(--ar);
+    margin-inline: auto;
+  }
+  .art-cap.art-ratio {
+    max-width: min(100%, calc(var(--plate-cap) * var(--ar)));
   }
 
   /*
@@ -667,8 +695,15 @@ html[data-wash="rewet"]::view-transition-group(piece-art) {
     ─────────────────────────────────────────────────────────────────────────
   */
   .detail-art {
-    max-width: min(100%, 62vh);
-    max-width: min(100%, 62svh);
+    --detail-cap: 62vh;
+    --detail-cap: 62svh;
+    /*
+      The cap is on height, expressed as a width, because a square plate's
+      width is its height. `--ar` generalises that to any shape: a wide
+      reference is allowed to be wider than a tall one is, and both stay
+      inside the same height budget.
+    */
+    max-width: min(100%, calc(var(--detail-cap) * var(--ar, 1)));
     margin-inline: auto;
   }
 
@@ -693,8 +728,8 @@ html[data-wash="rewet"]::view-transition-group(piece-art) {
       view is where the painting actually happens.
     */
     .detail-art {
-      max-width: min(100%, 48vh);
-      max-width: min(100%, 48svh);
+      --detail-cap: 48vh;
+      --detail-cap: 48svh;
     }
 
   }

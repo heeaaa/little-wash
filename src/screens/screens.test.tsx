@@ -3,18 +3,42 @@ import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { AppProvider } from "@/state/AppContext";
-import { REFERENCES } from "@/data/references";
+import { CATALOGUE } from "@/data/catalogue";
 import { DIFFICULTY_NOTE } from "@/lib/types";
 import { mulberry32 } from "@/lib/shuffle";
 import { Today } from "@/screens/Today";
 import { Browse } from "@/screens/Browse";
 import { Exercises } from "@/screens/Exercises";
+import { makeReference } from "@/test/factory";
+import type { PaintReference } from "@/lib/types";
 
 const FIXED_DATE = new Date("2026-09-18T09:00:00Z");
 
+/*
+  A catalogue with known variety, for the tests that are about a screen's
+  behaviour rather than about the shipped catalogue. Browse cannot demonstrate
+  that a subject filter narrows if every reference happens to share a subject,
+  and a collection cannot be opened if the catalogue holds nothing that matches
+  it - both true of the real catalogue while it is still being curated.
+*/
+const VARIED: PaintReference[] = [
+  makeReference("quick-fruit", { title: "Quick Fruit", subject: "fruit", minutes: 5 }),
+  makeReference("slow-leaf", {
+    title: "Slow Leaf",
+    subject: "botanical",
+    minutes: 25,
+    difficulty: "stretch",
+  }),
+  makeReference("one-hill", { title: "One Hill", subject: "landscape", minutes: 15 }),
+];
+
 function renderScreen(
   Screen: () => JSX.Element,
-  { entry, seed = 5 }: { entry?: string; seed?: number } = {},
+  {
+    entry,
+    seed = 5,
+    references = CATALOGUE,
+  }: { entry?: string; seed?: number; references?: PaintReference[] } = {},
 ) {
   const path = Screen === Browse ? "/browse" : Screen === Exercises ? "/exercises" : "/";
   return render(
@@ -23,7 +47,7 @@ function renderScreen(
         <Route
           path={path}
           element={
-            <AppProvider references={REFERENCES} random={mulberry32(seed)} today={FIXED_DATE}>
+            <AppProvider references={references} random={mulberry32(seed)} today={FIXED_DATE}>
               <Screen />
             </AppProvider>
           }
@@ -49,6 +73,25 @@ describe("Today (shared editorial screen)", () => {
     expect(screen.queryByRole("heading", { name: /more to try/i })).not.toBeInTheDocument();
   });
 
+  it("shows the piece's prompt under its title when it has one", () => {
+    renderScreen(Today, {
+      references: [makeReference("only", { title: "Only", prompt: "One pear, one wash." })],
+    });
+    const featured = screen.getByTestId("featured");
+    expect(within(featured).getByText("One pear, one wash.")).toBeInTheDocument();
+    // Pins the selector the sibling test asserts the absence of.
+    expect(featured.querySelectorAll("p.italic")).toHaveLength(1);
+  });
+
+  it("closes the gap rather than leaving an empty line when it has none", () => {
+    // A prompt is optional on a reference, and an empty italic paragraph
+    // under the title is worse than no line at all.
+    renderScreen(Today, { references: [makeReference("only", { title: "Only" })] });
+    const featured = screen.getByTestId("featured");
+    expect(within(featured).getByRole("heading", { name: "Only" })).toBeInTheDocument();
+    expect(featured.querySelectorAll("p.italic")).toHaveLength(0);
+  });
+
   it("leads with time and energy, and keeps subject behind a control", () => {
     renderScreen(Today);
     // Both primary questions are present as labelled groups.
@@ -61,10 +104,19 @@ describe("Today (shared editorial screen)", () => {
   it("narrows to stretch pieces when filtered", async () => {
     const user = userEvent.setup();
     renderScreen(Today);
-    expect(featuredTitle()).toBe("Potted Succulent");
+    // The property, not a name: whatever is featured afterwards is a stretch
+    // piece, and it is not the unfiltered pick unless that already was one.
+    const before = featuredTitle();
+    const stretchTitles = CATALOGUE.filter((r) => r.difficulty === "stretch").map(
+      (r) => r.title,
+    );
+    expect(stretchTitles.length).toBeGreaterThan(0);
+
     await user.click(screen.getAllByRole("button", { name: "A stretch" })[0]!);
-    await waitFor(() => expect(featuredTitle()).toBe("Cottage on the Hill"));
-    expect(screen.queryByText("Potted Succulent")).not.toBeInTheDocument();
+    await waitFor(() => expect(stretchTitles).toContain(featuredTitle()));
+    if (!stretchTitles.includes(before!)) {
+      expect(screen.queryByText(before!)).not.toBeInTheDocument();
+    }
   });
 
   /**
@@ -80,7 +132,7 @@ describe("Today (shared editorial screen)", () => {
     await waitFor(() => expect(featuredTitle()).not.toBe(before));
     const after = featuredTitle();
     // Not simply the first gentle piece in catalogue order.
-    expect(after).not.toBe("Ripe Pear");
+    expect(after).not.toBe(before);
   });
 
   it("announces the piece, not just the count, when it changes", async () => {
@@ -88,15 +140,20 @@ describe("Today (shared editorial screen)", () => {
     renderScreen(Today);
     expect(screen.getByRole("status")).toHaveTextContent("");
     await user.click(screen.getAllByRole("button", { name: "A stretch" })[0]!);
+    // It names the piece rather than only counting, whichever piece that is.
     await waitFor(() =>
-      expect(screen.getByRole("status")).toHaveTextContent(/now showing cottage on the hill/i),
+      expect(screen.getByRole("status")).toHaveTextContent(/now showing .+/i),
     );
+    const announced = screen.getByRole("status").textContent ?? "";
+    expect(
+      CATALOGUE.some((r) => announced.toLowerCase().includes(r.title.toLowerCase())),
+    ).toBe(true);
   });
 
   it("explains the difficulty instead of only labelling it", () => {
     renderScreen(Today);
     const featured = screen.getByTestId("featured");
-    const piece = REFERENCES.find((r) => r.title === featuredTitle());
+    const piece = CATALOGUE.find((r) => r.title === featuredTitle());
     expect(piece).toBeDefined();
     // The plain-English note that gives a nervous beginner permission has to be
     // on screen, not only defined in the data.
@@ -141,20 +198,26 @@ describe("Today (shared editorial screen)", () => {
     lives in the URL now, which is also what makes it shareable.
   */
   it("takes the dealt piece from the URL, so a reload keeps it", () => {
-    renderScreen(Today, { entry: "/?piece=two-toadstools" });
-    expect(featuredTitle()).toBe("Two Toadstools");
+    const dealt = CATALOGUE[2]!;
+    renderScreen(Today, { entry: `/?piece=${dealt.id}` });
+    expect(featuredTitle()).toBe(dealt.title);
   });
 
   it("releases the dealt piece when a filter changes, so the tap visibly acts", async () => {
     const user = userEvent.setup();
-    renderScreen(Today, { entry: "/?piece=two-toadstools" });
-    expect(featuredTitle()).toBe("Two Toadstools");
+    /*
+      The piece has to be one that still matches the filter about to be
+      clicked - that is the whole point. Before, the pin survived, and the
+      520ms wash played over an unchanged piece, teaching the user the controls
+      were unreliable. Found by its difficulty rather than named, so the test
+      holds for any catalogue.
+    */
+    const steady = CATALOGUE.find((r) => r.difficulty === "steady")!;
+    renderScreen(Today, { entry: `/?piece=${steady.id}` });
+    expect(featuredTitle()).toBe(steady.title);
 
-    // Two Toadstools is a 15-minute steady piece, so it still matches "Steady":
-    // before, the pin survived and the 520ms wash played over an unchanged
-    // piece, teaching the user the controls were unreliable.
     await user.click(screen.getAllByRole("button", { name: "Steady" })[0]!);
-    await waitFor(() => expect(featuredTitle()).not.toBe("Two Toadstools"));
+    await waitFor(() => expect(featuredTitle()).not.toBe(steady.title));
   });
 
   it("swaps the featured piece with Deal me another", async () => {
@@ -178,14 +241,20 @@ describe("Browse", () => {
   it("lists collections and the whole catalogue by default", () => {
     renderScreen(Browse);
     expect(screen.getByRole("heading", { name: /browse the studio/i })).toBeInTheDocument();
-    expect(screen.getByText("Quick starts")).toBeInTheDocument();
+    /*
+      Collections that have emptied out leave Browse rather than sitting there
+      as a dead end, so which ones appear depends on the catalogue. What must
+      hold is that the section exists and at least one collection survives.
+    */
+    expect(screen.getByRole("heading", { name: /^collections$/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /the whole catalogue/i })).toBeInTheDocument();
   });
 
   it("respects a filter passed in the URL", () => {
-    renderScreen(Browse, { entry: "/browse?subject=landscape" });
-    expect(screen.getByText("Cottage on the Hill")).toBeInTheDocument();
-    expect(screen.queryByText("Ripe Pear")).not.toBeInTheDocument();
+    renderScreen(Browse, { entry: "/browse?subject=landscape", references: VARIED });
+
+    expect(screen.getByText("One Hill")).toBeInTheDocument();
+    expect(screen.queryByText("Quick Fruit")).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /matching pieces/i })).toBeInTheDocument();
   });
 
@@ -198,7 +267,9 @@ describe("Browse", () => {
   */
   it("sends you to the results when you choose a collection", async () => {
     const user = userEvent.setup();
-    renderScreen(Browse);
+    // Needs a catalogue that has something in "Quick starts", which is the
+    // under-10-minutes collection.
+    renderScreen(Browse, { references: VARIED });
 
     expect(document.activeElement).toBe(document.body);
     await user.click(screen.getByRole("link", { name: /quick starts/i }));
@@ -238,7 +309,7 @@ describe("Browse", () => {
     const cards = screen
       .getAllByRole("listitem")
       .filter((li) => li.querySelector('a[href*="/piece/"]'));
-    expect(cards.length).toBe(REFERENCES.length);
+    expect(cards.length).toBe(CATALOGUE.length);
 
     for (const card of cards) {
       const links = [...card.querySelectorAll('a[href*="/piece/"]')];
