@@ -1,0 +1,1294 @@
+{
+  "proposedBy": "Claude",
+  "proposedAt": "2026-09-28",
+  "proposals": [
+    {
+      "candidateId": "unsplash:KfX5c9TxYPg",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple focus subject on a plain white background, sharp throughout. Whole fruit, and the first grapes.",
+      "notes": [
+        "Lemon Yellow, Alizarin Crimson and Burnt Umber added by eye; the pixels read Yellow Ochre, Burnt Sienna, Cadmium Yellow and Raw Sienna."
+      ],
+      "fields": {
+        "title": "Red and Gold Grapes",
+        "subject": "fruit",
+        "difficulty": "stretch",
+        "minutes": 35,
+        "alt": "A small bunch of grapes seen from above on plain white, some pale gold and some flushed rosy red, joined by thin brown stems, with a soft shadow beneath.",
+        "palette": [
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Alizarin Crimson",
+            "hex": "#9e2b3f"
+          },
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          }
+        ],
+        "prompt": "Paint every grape as a round wash, gold first, and drop the red into the ones that blush.",
+        "tip": "Leave a tiny dot of paper on each grape for its shine before the colour goes on."
+      }
+    },
+    {
+      "candidateId": "unsplash:4Rr9qIKapbE",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One clear subject on a plain background, sharp throughout.",
+      "notes": [
+        "Cadmium Yellow and Payne's Grey added by eye; the pixels read Chinese White, Ivory Black, Cadmium Orange and Burnt Sienna."
+      ],
+      "fields": {
+        "title": "Russet Pear",
+        "subject": "fruit",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "A single russet pear, orange speckled over yellow, with a curved dark stalk, standing on a black table against a plain pale lilac wall.",
+        "palette": [
+          {
+            "name": "Cadmium Yellow",
+            "hex": "#f7c531"
+          },
+          {
+            "name": "Cadmium Orange",
+            "hex": "#e2702c"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          }
+        ],
+        "prompt": "Paint the pear yellow first, then speckle the orange over it while it is still damp.",
+        "tip": "Keep the table one flat dark wash and let the pear's edge stay crisp against it."
+      }
+    },
+    {
+      "candidateId": "unsplash:ARRVgDJEKFI",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject on a plain background, sharp. Crinkled petals and dry leaves to practise.",
+      "notes": [
+        "Naples Yellow and Yellow Ochre added by eye; the pixels read Chinese White, Warm Grey, Ivory Black and Terre Verte."
+      ],
+      "fields": {
+        "title": "Dried Yellow Rose",
+        "subject": "botanical",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "A single dried yellow rose with crinkled, papery petals on a long thin stem with a few curled grey-green leaves, against a plain beige background.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Terre Verte",
+            "hex": "#6f8272"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Dried petals are all edges. Paint the rose as one pale shape, then pick out a few folds.",
+        "tip": "Grey the leaves with a touch of their opposite so they read as dry, not fresh."
+      }
+    },
+    {
+      "candidateId": "unsplash:CbkfoQZOibw",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple shape on a plain background, sharp. A quick warm-up.",
+      "notes": [
+        "Palette chosen by eye: the pixels read Chinese White, Warm Grey and Naples Yellow, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Pale Heart-Shaped Leaf",
+        "subject": "botanical",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A single pale green heart-shaped leaf with fine veins, on a long thin curving stem, lying on a plain light grey background.",
+        "palette": [
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          },
+          {
+            "name": "Lemon Yellow",
+            "hex": "#f2e55c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "One leaf, one stroke of stem. A good one to start cold on.",
+        "tip": "Paint the leaf very pale and wet, then draw the midrib in with the tip of the brush while it is damp."
+      }
+    },
+    {
+      "candidateId": "unsplash:hbzoxyHYIvo",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One small shape on a plain ground: colour against colour.",
+      "notes": [
+        "Unsure: the ground is textured concrete rather than a plain backdrop.",
+        "Rose Madder, Burnt Sienna and Viridian added by eye; the pixels read Payne's Grey."
+      ],
+      "fields": {
+        "title": "Pink Leaf on Teal",
+        "subject": "botanical",
+        "difficulty": "gentle",
+        "minutes": 10,
+        "alt": "A single faded pink leaf with a pale stalk lying on cracked, dusty teal-green concrete, seen from directly above.",
+        "palette": [
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          },
+          {
+            "name": "Viridian",
+            "hex": "#2e7a63"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          }
+        ],
+        "prompt": "Wash the teal ground first, leave a leaf-shaped gap, then fill it pink.",
+        "tip": "A little spatter on the dry ground wash is all the cracked concrete needs."
+      }
+    },
+    {
+      "candidateId": "unsplash:reYY53ou0oA",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "Simple shapes on a plain white background, sharp. Good for brushstrokes.",
+      "notes": [
+        "Unsure: very pale, with little colour to hold on to.",
+        "Naples Yellow, Raw Sienna and Burnt Umber added by eye; the pixels read Warm Grey."
+      ],
+      "fields": {
+        "title": "Four Dried Stems",
+        "subject": "botanical",
+        "difficulty": "gentle",
+        "minutes": 12,
+        "alt": "Four dried plant stems taped side by side on a white wall: a pale leafy sprig, an oat stem, a brown grass plume and a fluffy bunny-tail grass.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Four stems, four strokes. Paint each one in a single movement from the base up.",
+        "tip": "The tape is a pale grey rectangle; leave it mostly paper."
+      }
+    },
+    {
+      "candidateId": "unsplash:nbTn0tq5bKs",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject on a plain pale background, sharp. White petals to leave as paper, and water in the glass.",
+      "notes": [
+        "Unsure: a second rose after the peach rose here, and you already have a red one.",
+        "Naples Yellow, Hooker's Green and Sap Green added by eye; the pixels read Cool Grey."
+      ],
+      "fields": {
+        "title": "White Rose in Water",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A single white rose with two small buds and a few serrated leaves, in a tall straight glass half full of water, against a plain pale grey wall.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Hooker's Green",
+            "hex": "#3f6b45"
+          },
+          {
+            "name": "Sap Green",
+            "hex": "#6f8f3a"
+          }
+        ],
+        "prompt": "Leave the rose as paper and shape it with the grey around it.",
+        "tip": "Shift the stem slightly where it enters the water; that break is what makes it read as water."
+      }
+    },
+    {
+      "candidateId": "unsplash:cNGUw-CEsp0",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One focus subject, sharp, on a plain wall with a bold band of sunlight.",
+      "notes": [
+        "Rose Madder, Naples Yellow and Hooker's Green added by eye; the pixels read Warm Grey, Vandyke Brown, Ivory Black and Raw Umber."
+      ],
+      "fields": {
+        "title": "Peach Rose in Sunlight",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 25,
+        "alt": "A single peach-pink rose on a long stem with glossy leaves, in a small clear glass bottle, lit by a diagonal band of sunlight across a dusty pink wall.",
+        "palette": [
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Hooker's Green",
+            "hex": "#3f6b45"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Paint the wall's light and shadow first; the rose sits across the line between them.",
+        "tip": "Keep the stem inside the bottle a little paler than above it."
+      }
+    },
+    {
+      "candidateId": "unsplash:O73aKjPjheo",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple objects on a plain background, sharp. A lot of small florets to hold together, so it makes a stretch.",
+      "notes": [
+        "Palette chosen by eye: the pixels read Warm Grey, Yellow Ochre and Raw Umber, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Dried Hydrangeas in Wood",
+        "subject": "still-life",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "Two dried hydrangea heads, pale green-yellow with pink-edged florets, on long thin stems in a tall carved wooden vase, against a plain pale grey background.",
+        "palette": [
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Rose Madder",
+            "hex": "#c86b82"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "Paint each flower head as one round pale wash, then dab in a few pink edges.",
+        "tip": "Do not paint every floret: a scalloped edge and three or four inside are enough."
+      }
+    },
+    {
+      "candidateId": "unsplash:71EoX-X3LNU",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Simple focus subject on a plain white background, sharp. White on white practice.",
+      "notes": [
+        "Naples Yellow, Raw Sienna and Cool Grey added by eye; the pixels read Chinese White and Warm Grey."
+      ],
+      "fields": {
+        "title": "Grass Heads in a Stoneware Vase",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "Two fluffy dried bunny-tail grass heads on thin stems in a cream stoneware vase with a round base, on crumpled linen against a plain white wall.",
+        "palette": [
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Raw Sienna",
+            "hex": "#b57e3c"
+          },
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          }
+        ],
+        "prompt": "White on white. Paint only the shadows, and let the two grass heads be the one warm note.",
+        "tip": "Keep the linen's folds to a few soft greys, painted wet so they blur."
+      }
+    },
+    {
+      "candidateId": "unsplash:oszfWeeW6Qo",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "Two simple objects on a plain background with bold flat colour. Good practice for clear glass.",
+      "notes": [
+        "Unsure: fine film grain over the photo, and you already have several bottles.",
+        "Palette chosen by eye: the pixels read Terre Verte, which is mostly the background."
+      ],
+      "fields": {
+        "title": "Two Glass Bottles on Teal",
+        "subject": "still-life",
+        "difficulty": "steady",
+        "minutes": 20,
+        "alt": "Two faceted glass bottles with ridged wooden stoppers standing apart on a golden wooden shelf, in the corner of two plain teal walls.",
+        "palette": [
+          {
+            "name": "Viridian",
+            "hex": "#2e7a63"
+          },
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Burnt Sienna",
+            "hex": "#9c4c2b"
+          }
+        ],
+        "prompt": "Glass is mostly the colour behind it. Paint the teal and the gold, then the few darks.",
+        "tip": "Leave the highlights on the glass as bare paper from the start."
+      }
+    },
+    {
+      "candidateId": "unsplash:IX8qqKgPKuE",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "One simple subject on a plain background, sharp throughout. A quick warm-up.",
+      "notes": [
+        "Raw Umber and Naples Yellow added by eye; the pixels read Warm Grey and Vandyke Brown."
+      ],
+      "fields": {
+        "title": "Striped Brown Feather",
+        "subject": "creatures",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A single brown feather with dark bands across a pale cream base and a long pale quill, lying on a plain off-white background.",
+        "palette": [
+          {
+            "name": "Vandyke Brown",
+            "hex": "#4a3527"
+          },
+          {
+            "name": "Raw Umber",
+            "hex": "#7a6244"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "One feather, three browns. Lay the pale base, then drop the bands in.",
+        "tip": "Soften the feather's edge with a damp brush so it does not look cut out."
+      }
+    },
+    {
+      "candidateId": "unsplash:0WzWKpVcJVA",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One simple shape on plain white: a quick white-on-white warm-up.",
+      "notes": [
+        "Unsure: the bauble sits small in a lot of empty space.",
+        "Cool Grey and Payne's Grey added by eye; the pixels read Chinese White and Warm Grey."
+      ],
+      "fields": {
+        "title": "White Bauble",
+        "subject": "objects",
+        "difficulty": "gentle",
+        "minutes": 9,
+        "alt": "A single matte white Christmas bauble with a small silver cap and wire loop, lying on a plain white surface with a soft grey shadow.",
+        "palette": [
+          {
+            "name": "Cool Grey",
+            "hex": "#8e9699"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          },
+          {
+            "name": "Payne's Grey",
+            "hex": "#4a5a66"
+          }
+        ],
+        "prompt": "A white ball on white. Paint the shadow side and the cast shadow, and nothing else.",
+        "tip": "Soften the shadow's edge into the paper while it is wet so the ball looks round."
+      }
+    },
+    {
+      "candidateId": "unsplash:v0O7hwqbgZc",
+      "decision": "approve",
+      "confidence": "high",
+      "reason": "Flat, simple shapes and plain colours, sharp. Good for clean edges.",
+      "notes": [
+        "Ultramarine Blue and Warm Grey added by eye; the pixels read Chinese White, Naples Yellow, Cerulean Blue and Cool Grey."
+      ],
+      "fields": {
+        "title": "Window to the Sea",
+        "subject": "objects",
+        "difficulty": "steady",
+        "minutes": 15,
+        "alt": "A low whitewashed wall with a square gap cut in its top, framing deep blue sea under a plain clear sky, above worn pale stone paving.",
+        "palette": [
+          {
+            "name": "Cerulean Blue",
+            "hex": "#4f93bd"
+          },
+          {
+            "name": "Ultramarine Blue",
+            "hex": "#2f4a9c"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          },
+          {
+            "name": "Warm Grey",
+            "hex": "#a89c8c"
+          }
+        ],
+        "prompt": "Three bands: sky, wall and paving. The little square of sea is the only dark.",
+        "tip": "Paint the sky in one graded wash from deeper blue at the top to pale at the wall."
+      }
+    },
+    {
+      "candidateId": "unsplash:pmSWkYHb1dY",
+      "decision": "approve",
+      "confidence": "low",
+      "reason": "One focus subject on a plain wall with a strong cast shadow.",
+      "notes": [
+        "Unsure: a dark band of shade crosses the bottom-left corner; it can be left out.",
+        "Burnt Umber and Yellow Ochre added by eye; the pixels read Ivory Black, Vandyke Brown, Warm Grey and Naples Yellow."
+      ],
+      "fields": {
+        "title": "Wall Lantern and Shadow",
+        "subject": "objects",
+        "difficulty": "stretch",
+        "minutes": 30,
+        "alt": "A copper and glass wall lantern with a round filament bulb inside, on a cream wall in hard sunlight, casting a long dark shadow of itself below.",
+        "palette": [
+          {
+            "name": "Burnt Umber",
+            "hex": "#6b432a"
+          },
+          {
+            "name": "Ivory Black",
+            "hex": "#33312c"
+          },
+          {
+            "name": "Yellow Ochre",
+            "hex": "#c69a52"
+          },
+          {
+            "name": "Naples Yellow",
+            "hex": "#e8d6a0"
+          }
+        ],
+        "prompt": "The shadow is half the picture, so give it as much care as the lantern.",
+        "tip": "Paint the dark frame last, in thin strokes, over dry washes."
+      }
+    },
+    {
+      "candidateId": "unsplash:Cp3hn6MkNgw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "We already have two daisies."
+    },
+    {
+      "candidateId": "unsplash:rHNQy3EgotY",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Near black and white, grainy, on black."
+    },
+    {
+      "candidateId": "unsplash:8KQrxn_9xAo",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, which is not good for watercolour."
+    },
+    {
+      "candidateId": "unsplash:Vx5LdRWCvhE",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Ribbed shell on peach, same shoot as the shells already approved from Pexels."
+    },
+    {
+      "candidateId": "unsplash:vA8KwWjsNXA",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Ribbed shell on peach, same shoot again."
+    },
+    {
+      "candidateId": "unsplash:Iq-VB_bOvUs",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Almost black and white, and we already have many snowy and misty landscapes."
+    },
+    {
+      "candidateId": "unsplash:DxulfudYc4c",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "A red calla in a dark vase on dark blue: too dark, and we already have two calla lilies."
+    },
+    {
+      "candidateId": "unsplash:crrLhycUMMY",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have two calla lilies, and the background falls away into near black."
+    },
+    {
+      "candidateId": "unsplash:sCPaDPf_2ps",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have several lone trees in a field."
+    },
+    {
+      "candidateId": "unsplash:qgnfv7D50X4",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "One pear with drops on dark felt: we already have several single pears."
+    },
+    {
+      "candidateId": "unsplash:0J7EnmF1Bzk",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Misty hills with trees: we already have several misty landscapes."
+    },
+    {
+      "candidateId": "unsplash:QePx6QFfdDk",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Conch shell on peach, same shoot as the shells already approved."
+    },
+    {
+      "candidateId": "unsplash:eFo-R2-oQHw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Ribbed shell on peach, same shoot again."
+    },
+    {
+      "candidateId": "unsplash:_d1Z_wEq0Rg",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Ribbed shell on peach, same shoot again."
+    },
+    {
+      "candidateId": "unsplash:iTYShprNeRE",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Layered snowy mountains: we already have several mountain ranges."
+    },
+    {
+      "candidateId": "unsplash:caLZjNiAHrU",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "The chair and picture frame behind the carafe are out of focus."
+    },
+    {
+      "candidateId": "unsplash:ppyBGaT7v08",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Grape hyacinth close-up cut off at the top and right edges."
+    },
+    {
+      "candidateId": "unsplash:ni4JmBVSeAA",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A 3D render, black and white, not a photograph of a real object."
+    },
+    {
+      "candidateId": "unsplash:MA4cr7qqv7c",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "One pear on linen against a dark wall: we already have several single pears."
+    },
+    {
+      "candidateId": "unsplash:ZaKM-2mLGxE",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Pear cross-section."
+    },
+    {
+      "candidateId": "unsplash:A2UYxqcDLUM",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white dahlia on black."
+    },
+    {
+      "candidateId": "unsplash:KudClUWIZzw",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Trees floating in thick fog; landscape already has many misty scenes."
+    },
+    {
+      "candidateId": "unsplash:DSGP650z8rM",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "White feather on black; we already have a grey feather, and black backgrounds."
+    },
+    {
+      "candidateId": "unsplash:Nns_Ketfe4U",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo of a black feather."
+    },
+    {
+      "candidateId": "unsplash:goxVXByT5EU",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "White feather on busy dark leaves."
+    },
+    {
+      "candidateId": "unsplash:OUgtS1fv03k",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A 3D render of a metal bowl, not a photograph."
+    },
+    {
+      "candidateId": "unsplash:fP9vAQuhffU",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A 3D render of a wooden bowl, not a photograph."
+    },
+    {
+      "candidateId": "unsplash:tXtKq9E_yrU",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Tiny snail shell on dark wood, the background and a pebble out of focus."
+    },
+    {
+      "candidateId": "unsplash:N1P2gsFO7x0",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Candle on black: we already have a candle flame on black."
+    },
+    {
+      "candidateId": "unsplash:jB4COI2yrCE",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "White flower cut off at the edge, the back petals out of focus."
+    },
+    {
+      "candidateId": "unsplash:0oLs7Ulvb6c",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "The lower petal is soft, and parts of the background are blurred."
+    },
+    {
+      "candidateId": "unsplash:yj4Jjl2sCL0",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dark misty forest; we already have several misty forests."
+    },
+    {
+      "candidateId": "unsplash:pVV39dmFCEE",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "A lone tree in a ploughed field: we already have several lone trees."
+    },
+    {
+      "candidateId": "unsplash:IAgU4TtGOKM",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Lone fir in snow: almost black and white, and another lone tree."
+    },
+    {
+      "candidateId": "unsplash:z3vyTk9Cr44",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Mostly dark wall with a sliver of window."
+    },
+    {
+      "candidateId": "unsplash:f8y8aHZUqek",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Grey window in yellow wall: we already have five windows, and there is text on the glass."
+    },
+    {
+      "candidateId": "unsplash:sXkmdTKhad0",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Window in a dark room, soft and grainy, colour cast at the edges."
+    },
+    {
+      "candidateId": "unsplash:xdOypVTzEdM",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo of a wall lamp and its shadow."
+    },
+    {
+      "candidateId": "unsplash:kc1rdId28is",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Bird on a dead branch against busy apartment blocks."
+    },
+    {
+      "candidateId": "unsplash:uscciPpiMY4",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Twisted twigs in a cream vase on black, vase cut off by the frame."
+    },
+    {
+      "candidateId": "unsplash:gTGYg2P83kk",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A 3D render of a bowl, not a photograph."
+    },
+    {
+      "candidateId": "unsplash:TEfSnhbPL-g",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Blue and white bowl covered in tiny printed blossoms: too much fine pattern."
+    },
+    {
+      "candidateId": "unsplash:YtemF0o4HlY",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo of drink packs with printed text."
+    },
+    {
+      "candidateId": "unsplash:OMrQDG7HnN4",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "One pear on a scored chopping board: we already have several single pears."
+    },
+    {
+      "candidateId": "unsplash:crIvJvxuD_s",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have two fern fronds."
+    },
+    {
+      "candidateId": "unsplash:p_gmESo9Fco",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dried flower bunch cut off at the right edge, most of it out of focus."
+    },
+    {
+      "candidateId": "unsplash:Y8W7j4ETCsc",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Crowded dark ferns, most of them out of focus."
+    },
+    {
+      "candidateId": "unsplash:yIWXizbj7dM",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Misty pine forest: we already have several misty forests."
+    },
+    {
+      "candidateId": "unsplash:QbWCItZGraY",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Lone tree in a field: we already have one."
+    },
+    {
+      "candidateId": "unsplash:PXXtq6bp6cs",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Misty forest again."
+    },
+    {
+      "candidateId": "unsplash:bj8j_rr0ibA",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Misty hills at dawn: we already have several."
+    },
+    {
+      "candidateId": "unsplash:xJ2tjuUHD9M",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Layered blue ridges: a lovely value study, but we already have misty mountain layers."
+    },
+    {
+      "candidateId": "unsplash:U2AwijfUNS4",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Misty pine forest again."
+    },
+    {
+      "candidateId": "unsplash:d5wgXVNQv_M",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dark room with a sliver of window."
+    },
+    {
+      "candidateId": "unsplash:8nds8aZd9yE",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Three pink tulips in a carafe with a shadow: we already have three tulip pieces."
+    },
+    {
+      "candidateId": "unsplash:gU_FhzOYTDw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black bowl on dark stone: too dark."
+    },
+    {
+      "candidateId": "unsplash:Zr5QZu6N-BM",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Pear under strong red and orange coloured light, which alters its colour; another pear."
+    },
+    {
+      "candidateId": "unsplash:oZVIiR2prCA",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Grapes on the vine, most of the frame out of focus."
+    },
+    {
+      "candidateId": "unsplash:7oa5sa6aQEA",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white plant on black."
+    },
+    {
+      "candidateId": "unsplash:fsdWYNTymjI",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a dried rose, and these flowers sit small in the frame."
+    },
+    {
+      "candidateId": "unsplash:EbFgMgDuCBc",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Weeping willow in a field: another lone tree."
+    },
+    {
+      "candidateId": "unsplash:cfR-V1QuEKw",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Calm sea to the horizon: we already have calm ocean scenes."
+    },
+    {
+      "candidateId": "unsplash:D3VBxHF3n6Q",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Branded camera with lens text in a ring of eucalyptus leaves: a product flat lay."
+    },
+    {
+      "candidateId": "unsplash:R5RwetGXJxw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo, busy patterned rug."
+    },
+    {
+      "candidateId": "unsplash:6Lz8Vd8Y7II",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Top of a white chair back against a white wall: the chair is cut off."
+    },
+    {
+      "candidateId": "unsplash:0jbt27z3tS4",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo of a small bird."
+    },
+    {
+      "candidateId": "unsplash:jn6-MmrITac",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white silhouette in busy leaves."
+    },
+    {
+      "candidateId": "unsplash:5FrxTmzzc3s",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Sleeping tabby: we already have two sleeping cats, and the back half is out of focus."
+    },
+    {
+      "candidateId": "unsplash:7IRUF3chZdw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Open sea under grey sky: we already have calm ocean scenes."
+    },
+    {
+      "candidateId": "unsplash:PdGBci-4jR8",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Layered blue mountains: we already have misty mountain layers."
+    },
+    {
+      "candidateId": "unsplash:V1NVvXmO_dk",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Aerial mountains at sunrise: we already have several mountain ranges."
+    },
+    {
+      "candidateId": "unsplash:4bRIJgnZyBE",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Sleeping cat close-up, most of it out of focus."
+    },
+    {
+      "candidateId": "unsplash:DoYblDHJmf8",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo of two vases in the dark."
+    },
+    {
+      "candidateId": "unsplash:9MCOmhLsh-w",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Bottles out of focus behind wet glass."
+    },
+    {
+      "candidateId": "unsplash:GVSu8u6NAAw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Broken bottle with a printed label, busy blurred background."
+    },
+    {
+      "candidateId": "unsplash:GSIzNfR9GLE",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Stylus tip on white: a product shot of almost nothing."
+    },
+    {
+      "candidateId": "unsplash:Vd6zdDbcqu4",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Grapes on the vine, dark and out-of-focus background, a watermark in the corner."
+    },
+    {
+      "candidateId": "unsplash:Shn2XvMc-HU",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Green bubbles that look rendered, and mostly out of focus."
+    },
+    {
+      "candidateId": "unsplash:QKtsI6RdLGg",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A 3D render of petal shapes, not a photograph."
+    },
+    {
+      "candidateId": "unsplash:vyA8gFNzwXw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Yellow leaf against busy green leaves."
+    },
+    {
+      "candidateId": "unsplash:58WNi4P_11o",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Eucalyptus wreath laid in a heart: a flat lay with a lot of small leaves."
+    },
+    {
+      "candidateId": "unsplash:3pR7d-tIRx8",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Pampas plumes, sharp in front but soft behind and cut at the right; fluffy fine detail."
+    },
+    {
+      "candidateId": "unsplash:4CDdd1RCt6w",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dark misty forest path: we already have misty forests."
+    },
+    {
+      "candidateId": "unsplash:J2jtcRbiL-4",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dark misty pines: we already have misty forests."
+    },
+    {
+      "candidateId": "unsplash:LtoRS1xOBXY",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo of a window in a textured wall."
+    },
+    {
+      "candidateId": "unsplash:_veirRXwPOQ",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Green leather armchair, the background and the table in front out of focus."
+    },
+    {
+      "candidateId": "unsplash:48E0SRFRNLA",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Banded snail against busy leaf litter, background out of focus."
+    },
+    {
+      "candidateId": "unsplash:mmLEOIyqCZU",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Feather on black with blurred feathers all round."
+    },
+    {
+      "candidateId": "unsplash:7Zlds3gm7NU",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have a clear bottle beside a glass of water."
+    },
+    {
+      "candidateId": "unsplash:0QPlZDwmz8A",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Candles on black: we already have a candle, and two of these are out of focus."
+    },
+    {
+      "candidateId": "unsplash:BzXNdPFg4zg",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Grapes in rippling water: busy reflections."
+    },
+    {
+      "candidateId": "unsplash:nAOeR7DBd54",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Tiny flower cluster on black with busy blurred flowers round it."
+    },
+    {
+      "candidateId": "unsplash:_7ZAxA3Ti50",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Close crop of a leaf: a texture with no whole subject."
+    },
+    {
+      "candidateId": "unsplash:LPiGdDTjn_c",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Ferns, most of the frame out of focus."
+    },
+    {
+      "candidateId": "unsplash:zo7-ZyvplAI",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dried flowers cut off at the edge, most out of focus."
+    },
+    {
+      "candidateId": "unsplash:LfRxSi1o6hw",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Weathered blue double door in a crumbling wall: we already have three doors, and a lot of peeling plaster."
+    },
+    {
+      "candidateId": "unsplash:PWjA3zA497I",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Wooden door in a pink arched wall with a bougainvillea: we already have three doors, and a house number plaque."
+    },
+    {
+      "candidateId": "unsplash:y4U7i9_Kumk",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Ornate carved church door: too much intricate carving, which you set aside before."
+    },
+    {
+      "candidateId": "unsplash:aEMpxS5KDG4",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Yellow tub chair in a room with a clock, a lamp and a cushion with printed text: busy."
+    },
+    {
+      "candidateId": "unsplash:6Ttvlr-VzsI",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white photo of a sleeping cat."
+    },
+    {
+      "candidateId": "unsplash:sYXfkinti94",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Burning match, the flame and the lower stick out of focus."
+    },
+    {
+      "candidateId": "unsplash:k_AXt3VPSrw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Unfurling fern crozier, the background and other croziers out of focus."
+    },
+    {
+      "candidateId": "unsplash:kbKEuU-YEIw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Misty pine hills: we already have misty forests."
+    },
+    {
+      "candidateId": "unsplash:Ln9wvXBDqr0",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Misty pines again."
+    },
+    {
+      "candidateId": "unsplash:n7a2OJDSZns",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "We already have calm ocean scenes, and landscape has far more than its share."
+    },
+    {
+      "candidateId": "unsplash:uhfZpNz2_HI",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Wicker chair in grainy filtered light, a blanket and bedspread cut off in front."
+    },
+    {
+      "candidateId": "unsplash:vL6N7ekscE0",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A 3D render of a room with grass and a tree, not a photograph."
+    },
+    {
+      "candidateId": "unsplash:7i6wd0Bf1uk",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Plain tiger butterfly: sharp, but we already have five butterflies, and the flowers above are soft."
+    },
+    {
+      "candidateId": "unsplash:jxYBtmmeSgA",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Sleeping cat on concrete in low light: we already have two sleeping cats."
+    },
+    {
+      "candidateId": "unsplash:QH14RHM_QYg",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Sepia photo of a sleeping cat, mostly out of focus."
+    },
+    {
+      "candidateId": "unsplash:h43VqtlnV7U",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Hand holding a feather, the background out of focus."
+    },
+    {
+      "candidateId": "unsplash:Of6Fj6n2Q4c",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Close crop of a leaf: a texture with no whole subject."
+    },
+    {
+      "candidateId": "unsplash:r0M9HrfJMBM",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A hand holding a fern frond."
+    },
+    {
+      "candidateId": "unsplash:sLGfG-pOBeY",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Fern frond cut off at the right and bottom, busy blurred ferns behind."
+    },
+    {
+      "candidateId": "unsplash:EVnw-Y1Bxyg",
+      "decision": "set-aside",
+      "confidence": "low",
+      "reason": "Arched oak double door in brick and stone: we already have three doors, and a number plaque."
+    },
+    {
+      "candidateId": "unsplash:YG6_GmDm2W0",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Bird small in a tangle of branches with a colour-splash filter."
+    },
+    {
+      "candidateId": "unsplash:cAGVFnEn3Ok",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Cat face close-up, colour-graded and mostly out of focus."
+    },
+    {
+      "candidateId": "unsplash:Y89JWTAhXGs",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Dark leaf close-up: a texture with no whole subject."
+    },
+    {
+      "candidateId": "unsplash:dTSaC-S-7fs",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Misty rolling hills: we already have several misty landscapes."
+    },
+    {
+      "candidateId": "unsplash:wZ1_k-bsw7c",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Black and white silhouette of a bird in thorny branches."
+    },
+    {
+      "candidateId": "unsplash:aowQrZc8_UQ",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Small snail shell among busy clover and dry grass."
+    },
+    {
+      "candidateId": "unsplash:8jXwVmmSBBI",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "A crowded heap of black grapes filling the frame, no focus."
+    },
+    {
+      "candidateId": "unsplash:k6GpdsPJSZw",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Misty blue mountains: we already have misty mountain layers."
+    },
+    {
+      "candidateId": "unsplash:ng-jV5Etz3c",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Weathered door in a patchwork brick wall with scratched writing: busy, and we already have three doors."
+    },
+    {
+      "candidateId": "unsplash:nZjrN_uE89M",
+      "decision": "set-aside",
+      "confidence": "high",
+      "reason": "Arched studded plank door: we already have three doors, and a lot of repeated studs and patches."
+    }
+  ]
+}

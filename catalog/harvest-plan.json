@@ -1,0 +1,81 @@
+{
+  "_comment": [
+    "What to harvest, by subject. Run with: npm run catalog:harvest -- --plan",
+    "",
+    "The first session harvested one themed Pexels collection and produced a",
+    "catalogue that was 100% fruit, with nothing at all under 10 minutes. This",
+    "file exists so that never happens by accident again: coverage is planned,",
+    "not whatever a single search happened to return.",
+    "",
+    "Queries lean on words that predict a paintable subject - single, one,",
+    "close up, plain background, minimal - because the sketchability gate wants",
+    "one clear shape and a quiet backdrop. Every query below was checked",
+    "against the live Pexels API on 20/09/2026 and returns thousands of results.",
+    "",
+    "target is the number of approved references wanted for that subject."
+  ],
+  "target": 72,
+  "subjects": {
+    "botanical": {
+      "target": 12,
+      "queries": [
+        { "query": "single flower close up plain background", "orientation": "square" },
+        { "query": "petal macro white background", "orientation": "square" },
+        { "query": "single leaf plain background", "orientation": "square" },
+        { "query": "fern frond minimal", "orientation": "portrait" },
+        { "query": "eucalyptus sprig white background", "orientation": "square" },
+        { "query": "dried flower stem minimal", "orientation": "portrait" }
+      ]
+    },
+    "landscape": {
+      "target": 12,
+      "queries": [
+        { "query": "misty trees fog forest", "orientation": "landscape" },
+        { "query": "lone tree field minimal", "orientation": "landscape" },
+        { "query": "foggy hills simple", "orientation": "landscape" },
+        { "query": "calm sea horizon minimal", "orientation": "landscape" },
+        { "query": "misty mountain layers", "orientation": "landscape" }
+      ]
+    },
+    "objects": {
+      "target": 12,
+      "queries": [
+        { "query": "old wooden door", "orientation": "portrait" },
+        { "query": "window with light plain wall", "orientation": "square" },
+        { "query": "single teapot plain background", "orientation": "square" },
+        { "query": "lantern plain background", "orientation": "portrait" },
+        { "query": "enamel jug still life simple", "orientation": "square" },
+        { "query": "single chair minimal room", "orientation": "portrait" }
+      ]
+    },
+    "creatures": {
+      "target": 12,
+      "queries": [
+        { "query": "one bird branch minimal", "orientation": "square" },
+        { "query": "snail leaf macro", "orientation": "square" },
+        { "query": "butterfly plain background", "orientation": "square" },
+        { "query": "sleeping cat simple background", "orientation": "square" },
+        { "query": "single feather plain background", "orientation": "portrait" }
+      ]
+    },
+    "still-life": {
+      "target": 12,
+      "queries": [
+        { "query": "vase with one stem", "orientation": "portrait" },
+        { "query": "single bowl plain background", "orientation": "square" },
+        { "query": "bottle on plain surface minimal", "orientation": "portrait" },
+        { "query": "seashell plain background", "orientation": "square" },
+        { "query": "single candle simple background", "orientation": "portrait" }
+      ]
+    },
+    "fruit": {
+      "_note": "Deliberately small - there are already 8, all citrus. No more cross-sections; the curator asked for that explicitly.",
+      "target": 12,
+      "queries": [
+        { "query": "single pear plain background whole", "orientation": "square" },
+        { "query": "one apple on plain surface", "orientation": "square" },
+        { "query": "bunch of grapes simple background", "orientation": "square" }
+      ]
+    }
+  }
+}

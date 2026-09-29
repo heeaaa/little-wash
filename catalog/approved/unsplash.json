@@ -1,0 +1,999 @@
+[
+  {
+    "id": "red-and-gold-grapes-xYPg",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "KfX5c9TxYPg",
+      "providerTitle": "Isolated grapes on white background",
+      "providerAlt": "yellow and orange round fruits",
+      "objectUrl": "https://unsplash.com/photos/yellow-and-orange-round-fruits-KfX5c9TxYPg?utm_source=little_wash&utm_medium=referral",
+      "creator": "Mockup Graphics",
+      "creatorUrl": "https://unsplash.com/@mockupgraphics?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2021",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3995,
+      "intrinsicHeight": 3996,
+      "dominantColour": "#f3f3f3",
+      "imageUrl": "https://images.unsplash.com/photo-1615485925763-86786288908a?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8MXx8YnVuY2glMjBvZiUyMGdyYXBlcyUyMHNpbXBsZSUyMGJhY2tncm91bmR8ZW58MHwyfHx8MTc5MDU3OTk1M3ww&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/KfX5c9TxYPg/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8MXx8YnVuY2glMjBvZiUyMGdyYXBlcyUyMHNpbXBsZSUyMGJhY2tncm91bmR8ZW58MHwyfHx8MTc5MDU3OTk1M3ww",
+      "plannedSubject": "fruit",
+      "measurements": {
+        "subjectArea": 0.2672526041666667,
+        "subjectCentrality": 0.029178185427280248,
+        "subjectRegions": 1,
+        "subjectSharpness": 1606.7588284283793,
+        "detailLoad": 0.07551246537396122,
+        "borderVariance": 0.06697524272766014,
+        "distinctColours": 4,
+        "meanLightness": 89.14465386281262,
+        "valueRange": 43.16497603874444,
+        "meanChroma": 12.75026842511652,
+        "warmth": 9.222993795331018,
+        "hash": "4971f1f0f0f87871",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Red and Gold Grapes",
+    "subject": "fruit",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "A small bunch of grapes seen from above on plain white, some pale gold and some flushed rosy red, joined by thin brown stems, with a soft shadow beneath.",
+    "palette": [
+      {
+        "name": "Lemon Yellow",
+        "hex": "#f2e55c"
+      },
+      {
+        "name": "Yellow Ochre",
+        "hex": "#c69a52"
+      },
+      {
+        "name": "Alizarin Crimson",
+        "hex": "#9e2b3f"
+      },
+      {
+        "name": "Burnt Umber",
+        "hex": "#6b432a"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint every grape as a round wash, gold first, and drop the red into the ones that blush.",
+    "tip": "Leave a tiny dot of paper on each grape for its shine before the colour goes on.",
+    "curationNote": "Simple focus subject on a plain white background, sharp throughout. Whole fruit, and the first grapes."
+  },
+  {
+    "id": "dried-yellow-rose-EKFI",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "ARRVgDJEKFI",
+      "providerTitle": "Dried yellow rose.",
+      "providerAlt": "yellow rose in white background",
+      "objectUrl": "https://unsplash.com/photos/yellow-rose-in-white-background-ARRVgDJEKFI?utm_source=little_wash&utm_medium=referral",
+      "creator": "feey",
+      "creatorUrl": "https://unsplash.com/@feeypflanzen?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2020",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 2453,
+      "intrinsicHeight": 3680,
+      "dominantColour": "#c0c0c0",
+      "imageUrl": "https://images.unsplash.com/photo-1607500105153-2da3f8c83050?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8NHx8ZHJpZWQlMjBmbG93ZXIlMjBzdGVtJTIwbWluaW1hbHxlbnwwfDF8fHwxNzkwNTc5OTQwfDA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/ARRVgDJEKFI/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8NHx8ZHJpZWQlMjBmbG93ZXIlMjBzdGVtJTIwbWluaW1hbHxlbnwwfDF8fHwxNzkwNTc5OTQwfDA",
+      "plannedSubject": "botanical",
+      "measurements": {
+        "subjectArea": 0.1696234809027778,
+        "subjectCentrality": 0.22591347360033445,
+        "subjectRegions": 2,
+        "subjectSharpness": 4580.978062434311,
+        "detailLoad": 0.12761772853185596,
+        "borderVariance": 3.0986640864478883,
+        "distinctColours": 4,
+        "meanLightness": 74.82737076967823,
+        "valueRange": 28.106552188160677,
+        "meanChroma": 5.5737574194150445,
+        "warmth": 3.278498613747205,
+        "hash": "f1f1f8f8f8d9fbfb",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Dried Yellow Rose",
+    "subject": "botanical",
+    "difficulty": "stretch",
+    "minutes": 35,
+    "alt": "A single dried yellow rose with crinkled, papery petals on a long thin stem with a few curled grey-green leaves, against a plain beige background.",
+    "palette": [
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Yellow Ochre",
+        "hex": "#c69a52"
+      },
+      {
+        "name": "Terre Verte",
+        "hex": "#6f8272"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Dried petals are all edges. Paint the rose as one pale shape, then pick out a few folds.",
+    "tip": "Grey the leaves with a touch of their opposite so they read as dry, not fresh.",
+    "curationNote": "One focus subject on a plain background, sharp. Crinkled petals and dry leaves to practise."
+  },
+  {
+    "id": "pale-heart-shaped-leaf-Oibw",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "CbkfoQZOibw",
+      "providerTitle": "peace lily flower",
+      "providerAlt": "peace lily flower",
+      "objectUrl": "https://unsplash.com/photos/peace-lily-flower-CbkfoQZOibw?utm_source=little_wash&utm_medium=referral",
+      "creator": "Annie Spratt",
+      "creatorUrl": "https://unsplash.com/@anniespratt?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2019",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 5333,
+      "intrinsicHeight": 5333,
+      "dominantColour": "#d9d9d9",
+      "imageUrl": "https://images.unsplash.com/photo-1547816999-d99671865dcf?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Mnx8c2luZ2xlJTIwbGVhZiUyMHBsYWluJTIwYmFja2dyb3VuZHxlbnwwfDJ8fHwxNzkwNTc5OTM4fDA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/CbkfoQZOibw/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Mnx8c2luZ2xlJTIwbGVhZiUyMHBsYWluJTIwYmFja2dyb3VuZHxlbnwwfDJ8fHwxNzkwNTc5OTM4fDA",
+      "plannedSubject": "botanical",
+      "measurements": {
+        "subjectArea": 0.019585503472222224,
+        "subjectCentrality": 0.16411112928021837,
+        "subjectRegions": 1,
+        "subjectSharpness": 9005.82846207975,
+        "detailLoad": 0.010609418282548477,
+        "borderVariance": 5.792866186737911e-13,
+        "distinctColours": 1,
+        "meanLightness": 90.97710473804808,
+        "valueRange": 0,
+        "meanChroma": 1.4521612183302428,
+        "warmth": 0.03481198370828878,
+        "hash": "242238383064d424",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Pale Heart-Shaped Leaf",
+    "subject": "botanical",
+    "difficulty": "gentle",
+    "minutes": 9,
+    "alt": "A single pale green heart-shaped leaf with fine veins, on a long thin curving stem, lying on a plain light grey background.",
+    "palette": [
+      {
+        "name": "Sap Green",
+        "hex": "#6f8f3a"
+      },
+      {
+        "name": "Lemon Yellow",
+        "hex": "#f2e55c"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "One leaf, one stroke of stem. A good one to start cold on.",
+    "tip": "Paint the leaf very pale and wet, then draw the midrib in with the tip of the brush while it is damp.",
+    "curationNote": "One simple shape on a plain background, sharp. A quick warm-up."
+  },
+  {
+    "id": "dried-hydrangeas-in-wood-jheo",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "O73aKjPjheo",
+      "providerTitle": "a couple of yellow flowers in a vase",
+      "providerAlt": "a couple of yellow flowers in a vase",
+      "objectUrl": "https://unsplash.com/photos/a-couple-of-yellow-flowers-in-a-vase-O73aKjPjheo?utm_source=little_wash&utm_medium=referral",
+      "creator": "James Trenda",
+      "creatorUrl": "https://unsplash.com/@trendagraphy?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2022",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3167,
+      "intrinsicHeight": 4748,
+      "dominantColour": "#d9d9d9",
+      "imageUrl": "https://images.unsplash.com/photo-1660142532964-9ffa8fa0f927?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8M3x8dmFzZSUyMHdpdGglMjBvbmUlMjBzdGVtfGVufDB8MXx8fDE3OTA1Nzk5NDl8MA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/O73aKjPjheo/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8M3x8dmFzZSUyMHdpdGglMjBvbmUlMjBzdGVtfGVufDB8MXx8fDE3OTA1Nzk5NDl8MA",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.1494411892361111,
+        "subjectCentrality": 0.10894208911314973,
+        "subjectRegions": 2,
+        "subjectSharpness": 2485.3482640754373,
+        "detailLoad": 0.0793628808864266,
+        "borderVariance": 3.950251054913126,
+        "distinctColours": 5,
+        "meanLightness": 82.55328894859473,
+        "valueRange": 14.169374199710347,
+        "meanChroma": 6.009782517819656,
+        "warmth": 4.38935241085542,
+        "hash": "2860601030303133",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Dried Hydrangeas in Wood",
+    "subject": "still-life",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "Two dried hydrangea heads, pale green-yellow with pink-edged florets, on long thin stems in a tall carved wooden vase, against a plain pale grey background.",
+    "palette": [
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Raw Sienna",
+        "hex": "#b57e3c"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint each flower head as one round pale wash, then dab in a few pink edges.",
+    "tip": "Do not paint every floret: a scalloped edge and three or four inside are enough.",
+    "curationNote": "Simple objects on a plain background, sharp. A lot of small florets to hold together, so it makes a stretch."
+  },
+  {
+    "id": "window-to-the-sea-bgZc",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "v0O7hwqbgZc",
+      "providerTitle": "a white wall with a blue ocean in the background",
+      "providerAlt": "a white wall with a blue ocean in the background",
+      "objectUrl": "https://unsplash.com/photos/a-white-wall-with-a-blue-ocean-in-the-background-v0O7hwqbgZc?utm_source=little_wash&utm_medium=referral",
+      "creator": "Paal Ultra",
+      "creatorUrl": "https://unsplash.com/@paalultra?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2023",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3024,
+      "intrinsicHeight": 3138,
+      "dominantColour": "#d9c0a6",
+      "imageUrl": "https://images.unsplash.com/photo-1692118064471-d465513f9dfb?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8M3x8d2luZG93JTIwd2l0aCUyMGxpZ2h0JTIwcGxhaW4lMjB3YWxsfGVufDB8Mnx8fDE3OTA1Nzk5NDN8MA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/v0O7hwqbgZc/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8M3x8d2luZG93JTIwd2l0aCUyMGxpZ2h0JTIwcGxhaW4lMjB3YWxsfGVufDB8Mnx8fDE3OTA1Nzk5NDN8MA",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.4272732204861111,
+        "subjectCentrality": 0.3982034807608343,
+        "subjectRegions": 1,
+        "subjectSharpness": 263.2112469452966,
+        "detailLoad": 0.10229916897506926,
+        "borderVariance": 13.971385929775138,
+        "distinctColours": 6,
+        "meanLightness": 71.03115170129864,
+        "valueRange": 38.19825527863297,
+        "meanChroma": 21.60037740927363,
+        "warmth": -0.15009133090194382,
+        "hash": "f0f0f0707179f6af",
+        "hue": 76.14100730898144,
+        "sampledAt": 192
+      }
+    },
+    "title": "Window to the Sea",
+    "subject": "objects",
+    "difficulty": "steady",
+    "minutes": 15,
+    "alt": "A low whitewashed wall with a square gap cut in its top, framing deep blue sea under a plain clear sky, above worn pale stone paving.",
+    "palette": [
+      {
+        "name": "Cerulean Blue",
+        "hex": "#4f93bd"
+      },
+      {
+        "name": "Ultramarine Blue",
+        "hex": "#2f4a9c"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Three bands: sky, wall and paving. The little square of sea is the only dark.",
+    "tip": "Paint the sky in one graded wash from deeper blue at the top to pale at the wall.",
+    "curationNote": "Flat, simple shapes and plain colours, sharp. Good for clean edges."
+  },
+  {
+    "id": "striped-brown-feather-PKuE",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "IX8qqKgPKuE",
+      "providerTitle": "striped brown feather on off-white background",
+      "providerAlt": "a feather on a white background",
+      "objectUrl": "https://unsplash.com/photos/a-feather-on-a-white-background-IX8qqKgPKuE?utm_source=little_wash&utm_medium=referral",
+      "creator": "Linus Belanger",
+      "creatorUrl": "https://unsplash.com/@linusbelanger?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2022",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 2790,
+      "intrinsicHeight": 3840,
+      "dominantColour": "#d9d9d9",
+      "imageUrl": "https://images.unsplash.com/photo-1658805562906-a96153c6893c?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8M3x8c2luZ2xlJTIwZmVhdGhlciUyMHBsYWluJTIwYmFja2dyb3VuZHxlbnwwfDF8fHwxNzkwNTc5OTQ5fDA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/IX8qqKgPKuE/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8M3x8c2luZ2xlJTIwZmVhdGhlciUyMHBsYWluJTIwYmFja2dyb3VuZHxlbnwwfDF8fHwxNzkwNTc5OTQ5fDA",
+      "plannedSubject": "creatures",
+      "measurements": {
+        "subjectArea": 0.05626085069444445,
+        "subjectCentrality": 0.15045823584827242,
+        "subjectRegions": 1,
+        "subjectSharpness": 2026.4482108974773,
+        "detailLoad": 0.03656509695290859,
+        "borderVariance": 0.1973581450383298,
+        "distinctColours": 1,
+        "meanLightness": 87.9618667001524,
+        "valueRange": 2.8233023842489757,
+        "meanChroma": 0.7705169033248648,
+        "warmth": 0.565518836333402,
+        "hash": "333270f0f0f0f0f0",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Striped Brown Feather",
+    "subject": "objects",
+    "difficulty": "gentle",
+    "minutes": 9,
+    "alt": "A single brown feather with dark bands across a pale cream base and a long pale quill, lying on a plain off-white background.",
+    "palette": [
+      {
+        "name": "Vandyke Brown",
+        "hex": "#4a3527"
+      },
+      {
+        "name": "Raw Umber",
+        "hex": "#7a6244"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "One feather, three browns. Lay the pale base, then drop the bands in.",
+    "tip": "Soften the feather's edge with a damp brush so it does not look cut out.",
+    "curationNote": "One simple subject on a plain background, sharp throughout. A quick warm-up."
+  },
+  {
+    "id": "russet-pear-apbE",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "4Rr9qIKapbE",
+      "providerTitle": "A nice pear",
+      "providerAlt": "pear on table",
+      "objectUrl": "https://unsplash.com/photos/pear-on-table-4Rr9qIKapbE?utm_source=little_wash&utm_medium=referral",
+      "creator": "charlesdeluvio",
+      "creatorUrl": "https://unsplash.com/@charlesdeluvio?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2018",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3307,
+      "intrinsicHeight": 3307,
+      "dominantColour": "#d9d9d9",
+      "imageUrl": "https://images.unsplash.com/photo-1531171756984-969f6a9d783f?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Mnx8c2luZ2xlJTIwcGVhciUyMHBsYWluJTIwYmFja2dyb3VuZCUyMHdob2xlfGVufDB8Mnx8fDE3OTA1Nzk5NTJ8MA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/4Rr9qIKapbE/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Mnx8c2luZ2xlJTIwcGVhciUyMHBsYWluJTIwYmFja2dyb3VuZCUyMHdob2xlfGVufDB8Mnx8fDE3OTA1Nzk5NTJ8MA",
+      "plannedSubject": "fruit",
+      "measurements": {
+        "subjectArea": 0.6364474826388888,
+        "subjectCentrality": 0.21863998624990838,
+        "subjectRegions": 1,
+        "subjectSharpness": 576.4204192061504,
+        "detailLoad": 0.09321329639889196,
+        "borderVariance": 13.245386825467746,
+        "distinctColours": 4,
+        "meanLightness": 52.35123752533113,
+        "valueRange": 70.19726505057488,
+        "meanChroma": 15.263229708759335,
+        "warmth": 7.113096481366177,
+        "hash": "071713330f0745f1",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Russet Pear",
+    "subject": "fruit",
+    "difficulty": "steady",
+    "minutes": 20,
+    "alt": "A single russet pear, orange speckled over yellow, with a curved dark stalk, standing on a black table against a plain pale lilac wall.",
+    "palette": [
+      {
+        "name": "Cadmium Yellow",
+        "hex": "#f7c531"
+      },
+      {
+        "name": "Cadmium Orange",
+        "hex": "#e2702c"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Payne's Grey",
+        "hex": "#4a5a66"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the pear yellow first, then speckle the orange over it while it is still damp.",
+    "tip": "Keep the table one flat dark wash and let the pear's edge stay crisp against it.",
+    "curationNote": "One clear subject on a plain background, sharp throughout."
+  },
+  {
+    "id": "peach-rose-in-sunlight-Esp0",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "cNGUw-CEsp0",
+      "providerTitle": "For our first valentine together my boyfriend gifted me one of the most beautiful roses that I’ve ever seen. The color was a great match for our wallpaper, which you can see in the background.",
+      "providerAlt": "pink flower",
+      "objectUrl": "https://unsplash.com/photos/pink-flower-cNGUw-CEsp0?utm_source=little_wash&utm_medium=referral",
+      "creator": "Tirza van Dijk",
+      "creatorUrl": "https://unsplash.com/@tirzavandijk?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2018",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 2973,
+      "intrinsicHeight": 4451,
+      "dominantColour": "#402626",
+      "imageUrl": "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Mnx8dmFzZSUyMHdpdGglMjBvbmUlMjBzdGVtfGVufDB8MXx8fDE3OTA1Nzk5NDl8MA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/cNGUw-CEsp0/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Mnx8dmFzZSUyMHdpdGglMjBvbmUlMjBzdGVtfGVufDB8MXx8fDE3OTA1Nzk5NDl8MA",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.6311577690972222,
+        "subjectCentrality": 0.1568463894974655,
+        "subjectRegions": 2,
+        "subjectSharpness": 935.9207723999278,
+        "detailLoad": 0.1046814404432133,
+        "borderVariance": 8.266194877628262,
+        "distinctColours": 4,
+        "meanLightness": 45.33685590287689,
+        "valueRange": 52.7680071950601,
+        "meanChroma": 19.014885255489077,
+        "warmth": 11.547872135051271,
+        "hash": "ef67efffbd3bcfdf",
+        "hue": 39.21591329850611,
+        "sampledAt": 192
+      }
+    },
+    "title": "Peach Rose in Sunlight",
+    "subject": "still-life",
+    "difficulty": "stretch",
+    "minutes": 30,
+    "alt": "A single peach-pink rose on a long stem with glossy leaves, in a small clear glass bottle, lit by a diagonal band of sunlight across a dusty pink wall.",
+    "palette": [
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Hooker's Green",
+        "hex": "#3f6b45"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Paint the wall's light and shadow first; the rose sits across the line between them.",
+    "tip": "Keep the stem inside the bottle a little paler than above it.",
+    "curationNote": "One focus subject, sharp, on a plain wall with a bold band of sunlight."
+  },
+  {
+    "id": "grass-heads-in-a-stoneware-vase-3LNU",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "71EoX-X3LNU",
+      "providerTitle": "a white vase sitting on top of a white table",
+      "providerAlt": "a white vase sitting on top of a white table",
+      "objectUrl": "https://unsplash.com/photos/a-white-vase-sitting-on-top-of-a-white-table-71EoX-X3LNU?utm_source=little_wash&utm_medium=referral",
+      "creator": "Kasia Sikorska",
+      "creatorUrl": "https://unsplash.com/@kasiasikorska?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2021",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3671,
+      "intrinsicHeight": 4730,
+      "dominantColour": "#d9d9d9",
+      "imageUrl": "https://images.unsplash.com/photo-1633000116322-d7f5cb7d3ebb?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8NHx8dmFzZSUyMHdpdGglMjBvbmUlMjBzdGVtfGVufDB8MXx8fDE3OTA1Nzk5NDl8MA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/71EoX-X3LNU/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8NHx8dmFzZSUyMHdpdGglMjBvbmUlMjBzdGVtfGVufDB8MXx8fDE3OTA1Nzk5NDl8MA",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.046142578125,
+        "subjectCentrality": 0.4864170245505351,
+        "subjectRegions": 4,
+        "subjectSharpness": 781.3903854780017,
+        "detailLoad": 0.027534626038781162,
+        "borderVariance": 2.873814629307828,
+        "distinctColours": 2,
+        "meanLightness": 82.3059871663547,
+        "valueRange": 15.088455307916092,
+        "meanChroma": 2.1999055457971903,
+        "warmth": 0.8088143430259997,
+        "hash": "ffffe7effdedeeec",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Grass Heads in a Stoneware Vase",
+    "subject": "still-life",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "Two fluffy dried bunny-tail grass heads on thin stems in a cream stoneware vase with a round base, on crumpled linen against a plain white wall.",
+    "palette": [
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Raw Sienna",
+        "hex": "#b57e3c"
+      },
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "White on white. Paint only the shadows, and let the two grass heads be the one warm note.",
+    "tip": "Keep the linen's folds to a few soft greys, painted wet so they blur.",
+    "curationNote": "Simple focus subject on a plain white background, sharp. White on white practice."
+  },
+  {
+    "id": "white-bauble-cJVA",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "0WzWKpVcJVA",
+      "providerTitle": "A simpele white christmasball on a white background",
+      "providerAlt": "A white ball with a single diamond on top of it",
+      "objectUrl": "https://unsplash.com/photos/a-white-ball-with-a-single-diamond-on-top-of-it-0WzWKpVcJVA?utm_source=little_wash&utm_medium=referral",
+      "creator": "Danielle Suijkerbuijk",
+      "creatorUrl": "https://unsplash.com/@vandaantje?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2024",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 4020,
+      "intrinsicHeight": 6024,
+      "dominantColour": "#d9d9d9",
+      "imageUrl": "https://images.unsplash.com/photo-1728063976181-03fe683338c1?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8NXx8c2luZ2xlJTIwY2FuZGxlJTIwc2ltcGxlJTIwYmFja2dyb3VuZHxlbnwwfDF8fHwxNzkwNTc5OTUxfDA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/0WzWKpVcJVA/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8NXx8c2luZ2xlJTIwY2FuZGxlJTIwc2ltcGxlJTIwYmFja2dyb3VuZHxlbnwwfDF8fHwxNzkwNTc5OTUxfDA",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.008219401041666666,
+        "subjectCentrality": 0.4944400877690481,
+        "subjectRegions": 1,
+        "subjectSharpness": 3469.2216042780597,
+        "detailLoad": 0.00925207756232687,
+        "borderVariance": 1.556139603002863,
+        "distinctColours": 1,
+        "meanLightness": 91.8780315285294,
+        "valueRange": 9.042610480387467,
+        "meanChroma": 1.5400503016378915,
+        "warmth": 0.2527835296128049,
+        "hash": "07070703039193f3",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "White Bauble",
+    "subject": "objects",
+    "difficulty": "gentle",
+    "minutes": 15,
+    "alt": "A single matte white Christmas bauble with a small silver cap and wire loop, lying on a plain white surface with a soft grey shadow.",
+    "palette": [
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      },
+      {
+        "name": "Payne's Grey",
+        "hex": "#4a5a66"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "A white ball on white. Paint the shadow side and the cast shadow, and nothing else.",
+    "tip": "Soften the shadow's edge into the paper while it is wet so the ball looks round.",
+    "curationNote": "One simple shape on plain white: a quick white-on-white warm-up."
+  },
+  {
+    "id": "white-rose-in-water-5bKs",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "nbTn0tq5bKs",
+      "providerTitle": "white rose on glass vase",
+      "providerAlt": "white rose on glass vase",
+      "objectUrl": "https://unsplash.com/photos/white-rose-on-glass-vase-nbTn0tq5bKs?utm_source=little_wash&utm_medium=referral",
+      "creator": "NON",
+      "creatorUrl": "https://unsplash.com/@non_creation?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2018",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3102,
+      "intrinsicHeight": 4111,
+      "dominantColour": "#d9d9d9",
+      "imageUrl": "https://images.unsplash.com/photo-1526998482116-b73831d363fc?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8MXx8dmFzZSUyMHdpdGglMjBvbmUlMjBzdGVtfGVufDB8MXx8fDE3OTA1Nzk5NDl8MA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/nbTn0tq5bKs/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8MXx8dmFzZSUyMHdpdGglMjBvbmUlMjBzdGVtfGVufDB8MXx8fDE3OTA1Nzk5NDl8MA",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.034613715277777776,
+        "subjectCentrality": 0.05793651407950261,
+        "subjectRegions": 1,
+        "subjectSharpness": 5426.889874963587,
+        "detailLoad": 0.0425207756232687,
+        "borderVariance": 0.7912159283976287,
+        "distinctColours": 1,
+        "meanLightness": 85.304835972159,
+        "valueRange": 4.625300811071398,
+        "meanChroma": 4.241274006806496,
+        "warmth": -2.0075904016437804,
+        "hash": "ffff3b7278766676",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "White Rose in Water",
+    "subject": "still-life",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "A single white rose with two small buds and a few serrated leaves, in a tall straight glass half full of water, against a plain pale grey wall.",
+    "palette": [
+      {
+        "name": "Cool Grey",
+        "hex": "#8e9699"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Hooker's Green",
+        "hex": "#3f6b45"
+      },
+      {
+        "name": "Sap Green",
+        "hex": "#6f8f3a"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Leave the rose as paper and shape it with the grey around it.",
+    "tip": "Shift the stem slightly where it enters the water; that break is what makes it read as water.",
+    "curationNote": "One focus subject on a plain pale background, sharp. White petals to leave as paper, and water in the glass."
+  },
+  {
+    "id": "pink-leaf-on-teal-YIvo",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "hbzoxyHYIvo",
+      "providerTitle": "a single leaf laying on a green surface",
+      "providerAlt": "a single leaf laying on a green surface",
+      "objectUrl": "https://unsplash.com/photos/a-single-leaf-laying-on-a-green-surface-hbzoxyHYIvo?utm_source=little_wash&utm_medium=referral",
+      "creator": "Yuheng Mei",
+      "creatorUrl": "https://unsplash.com/@march4mei?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2021",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3875,
+      "intrinsicHeight": 3875,
+      "dominantColour": "#405959",
+      "imageUrl": "https://images.unsplash.com/photo-1638287370633-996d2feac114?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8MXx8c2luZ2xlJTIwbGVhZiUyMHBsYWluJTIwYmFja2dyb3VuZHxlbnwwfDJ8fHwxNzkwNTc5OTM4fDA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/hbzoxyHYIvo/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8MXx8c2luZ2xlJTIwbGVhZiUyMHBsYWluJTIwYmFja2dyb3VuZHxlbnwwfDJ8fHwxNzkwNTc5OTM4fDA",
+      "plannedSubject": "botanical",
+      "measurements": {
+        "subjectArea": 0.015245225694444444,
+        "subjectCentrality": 0.023259933232571233,
+        "subjectRegions": 1,
+        "subjectSharpness": 2575.1137200912012,
+        "detailLoad": 0.010443213296398891,
+        "borderVariance": 2.0946558791174605,
+        "distinctColours": 1,
+        "meanLightness": 32.64166856708058,
+        "valueRange": 11.119686313446813,
+        "meanChroma": 12.893057104823715,
+        "warmth": -4.739024034010478,
+        "hash": "2b09878f8f9f9f9e",
+        "hue": 186.31646409902012,
+        "sampledAt": 192
+      }
+    },
+    "title": "Pink Leaf on Teal",
+    "subject": "botanical",
+    "difficulty": "gentle",
+    "minutes": 10,
+    "alt": "A single faded pink leaf with a pale stalk lying on cracked, dusty teal-green concrete, seen from directly above.",
+    "palette": [
+      {
+        "name": "Rose Madder",
+        "hex": "#c86b82"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      },
+      {
+        "name": "Viridian",
+        "hex": "#2e7a63"
+      },
+      {
+        "name": "Payne's Grey",
+        "hex": "#4a5a66"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Wash the teal ground first, leave a leaf-shaped gap, then fill it pink.",
+    "tip": "A little spatter on the dry ground wash is all the cracked concrete needs.",
+    "curationNote": "One small shape on a plain ground: colour against colour."
+  },
+  {
+    "id": "two-glass-bottles-on-teal-W6Qo",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "oszfWeeW6Qo",
+      "providerTitle": "a couple glass bottles on a shelf",
+      "providerAlt": "a couple glass bottles on a shelf",
+      "objectUrl": "https://unsplash.com/photos/a-couple-glass-bottles-on-a-shelf-oszfWeeW6Qo?utm_source=little_wash&utm_medium=referral",
+      "creator": "Mathias Reding",
+      "creatorUrl": "https://unsplash.com/@matreding?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2022",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3779,
+      "intrinsicHeight": 5670,
+      "dominantColour": "#73a6a6",
+      "imageUrl": "https://images.unsplash.com/photo-1651764729665-ba91700d445f?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8NXx8Ym90dGxlJTIwb24lMjBwbGFpbiUyMHN1cmZhY2UlMjBtaW5pbWFsfGVufDB8MXx8fDE3OTA1Nzk5NTB8MA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/oszfWeeW6Qo/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8NXx8Ym90dGxlJTIwb24lMjBwbGFpbiUyMHN1cmZhY2UlMjBtaW5pbWFsfGVufDB8MXx8fDE3OTA1Nzk5NTB8MA",
+      "plannedSubject": "still-life",
+      "measurements": {
+        "subjectArea": 0.1769476996527778,
+        "subjectCentrality": 0.542574532090682,
+        "subjectRegions": 3,
+        "subjectSharpness": 690.8355194991991,
+        "detailLoad": 0.050166204986149585,
+        "borderVariance": 14.818908212390093,
+        "distinctColours": 5,
+        "meanLightness": 62.5920323459886,
+        "valueRange": 32.71511948537154,
+        "meanChroma": 21.290856001978298,
+        "warmth": -0.9658381875221698,
+        "hash": "21010101b961606e",
+        "hue": 189.3670809780234,
+        "sampledAt": 192
+      }
+    },
+    "title": "Two Glass Bottles on Teal",
+    "subject": "still-life",
+    "difficulty": "steady",
+    "minutes": 25,
+    "alt": "Two faceted glass bottles with ridged wooden stoppers standing apart on a golden wooden shelf, in the corner of two plain teal walls.",
+    "palette": [
+      {
+        "name": "Viridian",
+        "hex": "#2e7a63"
+      },
+      {
+        "name": "Cerulean Blue",
+        "hex": "#4f93bd"
+      },
+      {
+        "name": "Yellow Ochre",
+        "hex": "#c69a52"
+      },
+      {
+        "name": "Burnt Sienna",
+        "hex": "#9c4c2b"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Glass is mostly the colour behind it. Paint the teal and the gold, then the few darks.",
+    "tip": "Leave the highlights on the glass as bare paper from the start.",
+    "curationNote": "Two simple objects on a plain background with bold flat colour. Good practice for clear glass."
+  },
+  {
+    "id": "four-dried-stems-u0oA",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "reYY53ou0oA",
+      "providerTitle": "dry herbs on the wall",
+      "providerAlt": "white and brown wheat on white surface",
+      "objectUrl": "https://unsplash.com/photos/white-and-brown-wheat-on-white-surface-reYY53ou0oA?utm_source=little_wash&utm_medium=referral",
+      "creator": "Ksenia Mostovaya",
+      "creatorUrl": "https://unsplash.com/@ksanarts?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2021",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 3602,
+      "intrinsicHeight": 5201,
+      "dominantColour": "#d9d9d9",
+      "imageUrl": "https://images.unsplash.com/photo-1614378719646-ce1c2961b91c?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Nnx8ZHJpZWQlMjBmbG93ZXIlMjBzdGVtJTIwbWluaW1hbHxlbnwwfDF8fHwxNzkwNTc5OTQwfDA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/reYY53ou0oA/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Nnx8ZHJpZWQlMjBmbG93ZXIlMjBzdGVtJTIwbWluaW1hbHxlbnwwfDF8fHwxNzkwNTc5OTQwfDA",
+      "plannedSubject": "botanical",
+      "measurements": {
+        "subjectArea": 0.025960286458333332,
+        "subjectCentrality": 0.06184268228762158,
+        "subjectRegions": 1,
+        "subjectSharpness": 1915.7519078955333,
+        "detailLoad": 0.03761772853185596,
+        "borderVariance": 0.9920024552264901,
+        "distinctColours": 2,
+        "meanLightness": 88.73403521843764,
+        "valueRange": 6.745496211223127,
+        "meanChroma": 2.7572134688945154,
+        "warmth": 1.9928350419996126,
+        "hash": "1f1b6b5d5751535b",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Four Dried Stems",
+    "subject": "botanical",
+    "difficulty": "gentle",
+    "minutes": 15,
+    "alt": "Four dried plant stems taped side by side on a white wall: a pale leafy sprig, an oat stem, a brown grass plume and a fluffy bunny-tail grass.",
+    "palette": [
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      },
+      {
+        "name": "Raw Sienna",
+        "hex": "#b57e3c"
+      },
+      {
+        "name": "Burnt Umber",
+        "hex": "#6b432a"
+      },
+      {
+        "name": "Warm Grey",
+        "hex": "#a89c8c"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "Four stems, four strokes. Paint each one in a single movement from the base up.",
+    "tip": "The tape is a pale grey rectangle; leave it mostly paper.",
+    "curationNote": "Simple shapes on a plain white background, sharp. Good for brushstrokes."
+  },
+  {
+    "id": "wall-lantern-and-shadow-b1dY",
+    "candidate": {
+      "sourceId": "unsplash",
+      "externalId": "pmSWkYHb1dY",
+      "providerTitle": "A quiet moment of light and shadow: a vintage wall lantern casts its sharp silhouette onto a pale facade.",
+      "providerAlt": "An old-fashioned lantern casts a shadow on wall",
+      "objectUrl": "https://unsplash.com/photos/an-old-fashioned-lantern-casts-a-shadow-on-wall-pmSWkYHb1dY?utm_source=little_wash&utm_medium=referral",
+      "creator": "the iop",
+      "creatorUrl": "https://unsplash.com/@the_iop?utm_source=little_wash&utm_medium=referral",
+      "dateDisplay": "2025",
+      "medium": "Photograph",
+      "classification": null,
+      "intrinsicWidth": 4916,
+      "intrinsicHeight": 7374,
+      "dominantColour": "#d9c0a6",
+      "imageUrl": "https://images.unsplash.com/photo-1759500661956-a4261ac00361?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Mnx8bGFudGVybiUyMHBsYWluJTIwYmFja2dyb3VuZHxlbnwwfDF8fHwxNzkwNTc5OTQ1fDA&ixlib=rb-4.1.0",
+      "licenceId": "unsplash",
+      "retrievedAt": "2026-09-28",
+      "downloadLocation": "https://api.unsplash.com/photos/pmSWkYHb1dY/download?ixid=M3wxMDc1MzU0fDB8MXxzZWFyY2h8Mnx8bGFudGVybiUyMHBsYWluJTIwYmFja2dyb3VuZHxlbnwwfDF8fHwxNzkwNTc5OTQ1fDA",
+      "plannedSubject": "objects",
+      "measurements": {
+        "subjectArea": 0.4697265625,
+        "subjectCentrality": 0.02533521415063249,
+        "subjectRegions": 2,
+        "subjectSharpness": 2210.8645167217055,
+        "detailLoad": 0.15329639889196675,
+        "borderVariance": 8.560870836894672,
+        "distinctColours": 6,
+        "meanLightness": 52.47300746912802,
+        "valueRange": 79.52320250874001,
+        "meanChroma": 15.790394014539139,
+        "warmth": 11.144784246873138,
+        "hash": "3968686ce8e17353",
+        "hue": null,
+        "sampledAt": 192
+      }
+    },
+    "title": "Wall Lantern and Shadow",
+    "subject": "objects",
+    "difficulty": "stretch",
+    "minutes": 35,
+    "alt": "A copper and glass wall lantern with a round filament bulb inside, on a cream wall in hard sunlight, casting a long dark shadow of itself below.",
+    "palette": [
+      {
+        "name": "Burnt Umber",
+        "hex": "#6b432a"
+      },
+      {
+        "name": "Ivory Black",
+        "hex": "#33312c"
+      },
+      {
+        "name": "Yellow Ochre",
+        "hex": "#c69a52"
+      },
+      {
+        "name": "Naples Yellow",
+        "hex": "#e8d6a0"
+      }
+    ],
+    "kind": "photograph",
+    "approvedAt": "2026-09-28",
+    "prompt": "The shadow is half the picture, so give it as much care as the lantern.",
+    "tip": "Paint the dark frame last, in thin strokes, over dry washes.",
+    "curationNote": "One focus subject on a plain wall with a strong cast shadow."
+  }
+]
