@@ -1,6 +1,6 @@
 # Work status - little wash
 
-_Last updated: 19/09/2026_
+_Last updated: 28/09/2026_
 
 ## Where this stands - 19/09/2026
 
@@ -27,11 +27,11 @@ branches with thresholds enforced.
 
 ### Still open, and deliberately not decided here
 
-1. **A "Painted - coming soon" placeholder in the studio.** The chosen
-   direction's sketch showed one; it was left out because it repeats the
-   entry-point-ahead-of-capability defect the critique flagged twice, and risks
-   reading as a scoreboard against "No pressure, ever". Structural room exists -
-   adding it is one more `StudioSection`.
+1. ~~**A "Painted - coming soon" placeholder in the studio.**~~ **Closed
+   20/09/2026** - built rather than placeheld, which answers the first
+   objection. The second one was answered by rules rather than by restraint:
+   see "The painted mark, and the register it must keep" in `DESIGN.md`, and
+   the register tests in `src/screens/Painted.test.tsx`.
 2. **"Browse the studio" vs "Your studio".** Two uses of one word. A copy call.
 3. **Branch protection.** Workflow YAML cannot require its own checks. Require
    *Lint, types, unit tests, build* and *End-to-end journeys* on `main` in
@@ -456,3 +456,1009 @@ No gamification (decided). Future: small themed series; gentle continuity
 (optional reminders + private history); celebratory, never-punishing artistic
 progress visual. Plus backlog: saved-list screen, PWA/offline, Supabase,
 reminder scheduling, licensed imagery pipeline, CI. Detail in DESIGN.md.
+
+---
+
+## Checkpoint - 20/09/2026: reference imagery, phase A
+
+**Objective.** Replace the free-text provenance string with a real credit and
+image model, and put the seams in place for the ingestion pipeline, without
+touching the network. Plan: `~/.claude/plans/staged-crafting-bird.md`.
+
+**Decisions taken with the user.**
+
+- Catalogue will mix museum artworks and photographs, tagged `kind`.
+- Sources: Pexels and Unsplash (hotlinked), Met, Smithsonian, Art Institute and
+  Rijksmuseum (downloaded at build, self-hosted). Pexels leads in phase B.
+- Source switching is a **settings preference** at `#/sources`, not a filter.
+- Curation is heuristics producing a shortlist, then a local review tool.
+- **Attribution is always shown**, on every surface, regardless of licence.
+
+**Verified live against the providers, 20/09/2026.** Recorded because several
+of these contradict the documentation:
+
+- Unsplash and Pexels CDNs both send `Access-Control-Allow-Origin: *`, cache for
+  a year and resize on demand. Pexels returns AVIF from the browser's `Accept`
+  header; Unsplash needs an explicit `fm=avif`.
+- The Met's image host sends **no CORS header**; the Art Institute's IIIF host
+  **403s without `Referer: https://www.artic.edu/`**. Neither can be reliably
+  hotlinked from our origin, which is why they are downloaded at build time.
+- The old Rijksmuseum API (`api.rijksmuseum.nl`) is **HTTP 410 Gone**. The new
+  one returns Linked Art JSON-LD with **ID-only search results**, so it needs a
+  fetch per object and has almost no facets. It goes last.
+- Openverse anonymous is **200 requests/day** - ingestion only, never runtime.
+- Keys confirmed working: Pexels (200, and its real ceiling is **25,000/month**,
+  not the documented 20,000), Unsplash (200, demo tier at 50/hr), Smithsonian
+  (200 on a CC0 image search). Stored in gitignored `.env`.
+- Pexels exposes **1,153 featured collections**, several directly useful:
+  "Simply Citrus" (67), "Moka Pot Moments" (72), "Aquatic Aesthetic" (84).
+
+**Changed.**
+
+- New `src/lib/sources/` - `types.ts`, `registry.ts`, `attribution.ts`,
+  `images.ts`. Pure; no fetch code and no key reaches the bundle.
+- `PaintReference` loses `source: string` and `art: string`, gains `kind`,
+  `credit` and `image`. The twelve placeholders migrated onto it.
+- `CreditLine` (3 densities) on Detail, Today, Browse cards and the enlarged
+  view. Platform credits in the footer, built from the sources on screen.
+- `RefArt` rewritten: real `srcset`/`sizes`, per-item intrinsic dimensions
+  replacing the hard-coded 1000x1000, an LQIP sibling that unmounts on load,
+  and an error state instead of a broken-image icon.
+- `#/sources` screen, `useSources`, `lib/sourcePrefs.ts`. Disabled ids are
+  stored, not enabled ones, so a provider added later is on by default.
+- `Collection` gains optional `referenceIds`; `lib/collections.ts` resolves
+  either shape and drops collections that have emptied out.
+- **Browse no longer imports `REFERENCES` directly** - the leak that would have
+  bypassed source preferences.
+- `.env.example` (placeholders only, no `VITE_` prefix). Docs updated:
+  `PRODUCT.md` licence scope, `DESIGN.md` provenance section, `README.md`.
+
+**Verified.** `npm run lint` exit 0. `npm run typecheck` exit 0.
+`npm run test:coverage` 188/188 pass, 94.98 statements / 91.05 branches with
+thresholds enforced (baseline was 108 tests, 94.22 / 89.25); `src/lib/sources`
+at 100%. `npm run build` exit 0. `npx playwright test` 111/111 pass across
+three device projects (baseline 93), including the colour-fidelity posture
+check and axe on the new `#/sources` route. Screenshots taken at 390, 768 and
+1440 px.
+
+`vitest.config.ts` now excludes `src/lib/sources/types.ts` from coverage: it is
+declarations only, so v8 instruments an empty module and reports 0%. Same
+grounds as `vite-env.d.ts`. Every runtime value in that layer is still gated.
+
+**Open, for phase B and C.**
+
+1. `collectionSearch` has no URL for a list-backed collection - it returns the
+   filter params, which for a curated list would mean no filter at all. No
+   list-backed collection exists yet, so nothing is broken; phase C must add
+   `?collection=<id>` and have Browse honour it before shipping one.
+2. `DESIGN.md:139-140` fixes the Today hierarchy as "artwork -> identity ->
+   primary action -> ...". The credit now sits inside identity, one 0.8rem line
+   above the primary action. The posture test still passes; the line should be
+   amended to name the credit.
+3. "Visit Prototype placeholders" reads awkwardly for the placeholder source.
+   Cosmetic, and it disappears when placeholders are retired in phase C.
+4. Unsplash is on the demo tier (50 req/hr). Enough to ingest a curated set;
+   production access (1,000/hr) is an Unsplash review, not a switch.
+5. Unsplash's download-tracking endpoint is not implemented. It is a production
+   integration, deferred per CLAUDE.md until that phase is requested.
+
+**Next.** Phase B: `scripts/catalog/` - the provider interface, Pexels first,
+then Unsplash and the Met; harvest, shortlist heuristics, the review tool,
+committed API fixtures, the licence gates and a generated `docs/CREDITS.md`.
+
+---
+
+## Checkpoint - 20/09/2026: reference imagery, phase B
+
+**Objective.** Build the ingestion pipeline and land the first three providers,
+so a curated catalogue can be assembled. Plan:
+`~/.claude/plans/staged-crafting-bird.md`.
+
+**Changed.**
+
+- `scripts/catalog/` - the whole pipeline, Node only, never imported from
+  `src/`. `provider.ts` is the registry; adding a source is one file in
+  `providers/` and one line there.
+- Adapters for **Pexels**, **Unsplash** and **the Met**. Each splits into a
+  pure `normalise()` and an impure `harvest()` that takes its `fetch` from an
+  injected context, so both halves are testable without the network.
+- `shortlist.ts` - sketchability heuristics that score and explain, never
+  decide. Every candidate is kept with its reasoning attached.
+- `build.ts` - the licence, provenance and alt-text gates, plus the generated
+  catalogue module and `docs/CREDITS.md`. All problems are reported at once.
+- CLIs: `catalog:collections`, `catalog:harvest`, `catalog:shortlist`,
+  `catalog:review`, `catalog:build`.
+- `catalog:review` is a local-only page answering the question `PRODUCT.md:68`
+  left open - who curates, through what interface. It shows the image, the
+  heuristic reasoning and a form, enforces the same alt rules as the build
+  while you type, and writes to `catalog/approved/<source>.json`.
+- `npm run test:integration` plus `vitest.integration.config.ts` - live API
+  schema-drift checks, off by default, skipping with a printed reason when a
+  key is absent.
+- CI gains a catalogue-drift step: it re-runs `catalog:build` and fails on a
+  diff, so the generated catalogue cannot be hand-edited past the gates. It
+  reads only committed files, so CI still holds no secrets.
+- `tsconfig.scripts.json`; vitest now collects `scripts/**/*.test.ts` and holds
+  `scripts/catalog/**` to 80% (the project's floor for a new module).
+- Dev dependencies added: `tsx` (runs the TS CLIs, and CI needs a reliable
+  runner for the drift check) and `zod` (validates provider payloads). Neither
+  reaches the bundle.
+
+**Two real bugs the tests caught, both in code I had just written.**
+
+1. Pexels capitalises its media discriminator (`"Photo"`, `"Video"`). The
+   filter compared against lowercase `"video"`, so **every video would have
+   passed through as a reference**. Now case-insensitive and allow-listed.
+2. The Pexels page schema had both `photos` and `media` optional, so a payload
+   of any unexpected shape parsed cleanly and yielded nothing - a change at
+   Pexels' end would have looked like "no results" rather than failing. Now one
+   of the two is required.
+
+**Verified.** `npm run lint` exit 0. `npm run typecheck` exit 0.
+`npm run test:coverage` 283/283 pass, 94.02 statements / 90.60 branches, with
+`scripts/catalog` at 98.77 / 94.38 / 96.42 (baseline before this phase: 188
+tests). `npm run build` exit 0. `npx playwright test` 111/111.
+`npm run test:integration` 3/3 against the live Pexels, Unsplash and Met APIs,
+and verified to skip with a printed reason when `.env` is absent.
+
+End-to-end, against the live API: harvested 30 candidates from the Pexels
+"Simply Citrus" collection, shortlisted to 17, approved one through the review
+tool, built it, and confirmed the generated credit (institution, creator,
+licence, object URL, capture date), the image delivery (`remote` - Pexels must
+never be copied) and `docs/CREDITS.md` including the required platform credit.
+The smoke-test entry was then removed; `catalog/approved/` is empty on purpose.
+
+**Heuristics tuned against real data.** The first harvest ranked "a vibrant
+flat lay of various citrus slices and herbs" near the top. "various", "flat
+lay", "arrangement" and similar were added to the busy list, taking the
+shortlist from 25 of 30 to 17 of 30, with a regression test carrying the
+original phrasing.
+
+**What the review tool proved.** Its top-ranked candidate scored well on
+"close-up" and is a net bag of lemons with hands, twine and a plate in shot -
+not sketchable at all. Metadata cannot judge a composition. The heuristics
+order the queue; the person decides.
+
+**Open.**
+
+1. **No references are curated yet.** `catalog/approved/` is empty and the app
+   still ships the twelve placeholders. Curation is a judgement call and is the
+   user's to make: `npm run catalog:review -- --source=pexels` is ready, with
+   30 candidates already harvested in `catalog/candidates/`.
+2. `catalog.generated.ts` is not yet imported by the app. Phase C wires it in
+   and retires the placeholders.
+3. The Met is served locally, so it needs the derive-images step (`sharp`)
+   before any Met entry can build. `toImageSet` throws clearly until then.
+4. Unsplash's download-tracking endpoint is still unimplemented and deferred.
+5. `npm audit` reports a moderate advisory in `react-router` 6.30.0, fixable
+   only by a major upgrade to 7. Pre-existing, not introduced here.
+6. ~~`collectionSearch` has no URL for a list-backed collection.~~ **Closed
+   20/09/2026**, ahead of phase C, because a Pexels theme is exactly this
+   shape. A curated collection now travels as `?collection=<id>`; Browse
+   narrows to its list, the filters narrow within it, and "Show everything"
+   leaves. An id that matches nothing, or a collection whose pieces have all
+   gone because a source was switched off, falls back to the whole catalogue
+   rather than a blank screen. 15 tests across `src/lib/collections.test.ts`
+   and `src/screens/BrowseCollection.test.tsx`.
+
+**Next.** Phase C: curate roughly 120 references, wire `catalog.generated.ts`
+into the app, retire the placeholder SVGs, and update the tests that hard-code
+catalogue facts.
+
+---
+
+## Checkpoint - 20/09/2026: curation assistance in the review tool
+
+**Why.** Curating by hand was too slow to be practical, and the palette in
+particular is not something anyone can eyeball reliably.
+
+**Constraint that shaped it.** `PRODUCT.md:64` rules out runtime AI, so nothing
+here calls a model. Every suggestion is computed from the actual pixels, which
+for colour is better than a guess anyway.
+
+**Changed.**
+
+- `pigments.ts` - 31 named watercolour pigments, sRGB to CIE L\*a\*b\*, and
+  nearest-pigment matching. **Lightness is weighted down to 0.45** in the
+  distance function, because dilution is how value is controlled in
+  watercolour: a pale wash of ultramarine is still ultramarine, and matching on
+  lightness would call it a grey.
+- `imageAnalysis.ts` - dominant colour clusters, border variance, value range,
+  chroma, warmth. Pure, over a plain RGBA array.
+- `suggest.ts` - two prompts, two tips, a palette, and a starting difficulty
+  and duration.
+- `learned.ts` - the growing approve/reject vocabulary, wired into
+  `shortlist.ts`.
+- `review.ts` - an image proxy (canvas pixel reads are blocked cross-origin,
+  and the Met sends no CORS at all, so the bytes are served same-origin),
+  a `/api/suggest` endpoint, and "Set aside" now asks why.
+
+**Alt text is a scaffold, never a sentence.** The prompt and tip come out
+finished because they are about *how to paint*, which follows from value range,
+chroma and background. Alt text is about *what the thing is*, and nothing here
+can see that, so it comes out as "A [what it is], [its shape or posture], in
+naples yellow and warm grey, against a plain background." A complete-looking
+description would be the plausible lie the build's alt gate exists to catch.
+There is a test asserting every scaffold still contains a `[blank]`.
+
+**A flaw the first real run exposed.** The palette for a bowl of lemons came
+back "Chinese White, Warm Grey" - the pale tabletop outweighed the fruit by
+area. Two fixes, both tested: the palette is built from the **central 60%** of
+the image, and anything reading as bare paper (L\* > 86, chroma < 10) is
+excluded, because white is the paper's job and not a pigment. The same photo
+now gives Naples Yellow, Warm Grey, Burnt Umber, Burnt Sienna.
+
+**The learned vocabulary is deliberately timid.** A phrase needs three
+decisions and three-quarters agreement before it counts, and the signal is
+capped at +/-2, well below the hard rules - a test asserts a panorama stays out
+however often its phrasing was approved.
+
+**Verified.** Lint, typecheck, build exit 0. `npm run test:coverage` 354/354
+pass, 94.78 statements / 90.38 branches, `scripts/catalog` at 98.25 / 91.31 /
+98.21 (was 283 tests before this). `npx playwright test` 111/111. Driven in a
+real browser against a live Pexels photograph: pixel readings, palette, prompt,
+alt scaffolds and tips all rendered, clicking a suggestion filled its field,
+no console errors. The rejection endpoint was exercised and confirmed to record
+into the vocabulary and to stay silent below its three-decision floor.
+
+**Cleaned up.** The test rejection written during that check was deleted:
+`catalog/curation-vocabulary.json` should start from real judgements, not mine.
+
+**Open, unchanged.** No references curated yet; `catalog.generated.ts` not yet
+imported by the app; the Met needs the derive-images step; Unsplash download
+tracking deferred; react-router advisory pre-existing.
+
+---
+
+## Checkpoint - 20/09/2026: catalogue variety, and a shortlist that reads pixels
+
+**What prompted it.** The first curation session produced 8 references, all
+fruit. Of the app's 54 filter combinations, 4 had anything in them, and the
+"Under 10 min" band was empty outright. The cause was mine: I harvested one
+themed Pexels collection as a pipeline smoke test and left it as the review
+queue. It was never a catalogue plan.
+
+**Two honest negative results, recorded in `scripts/catalog/thresholds.ts`.**
+
+1. **No measurement separated the first 30 decisions.** `catalog:calibrate`
+   measured 8 approvals against 22 rejections; every separation score landed
+   between 0.36 and 0.61, where 0.5 is a coin toss. So **no hard threshold was
+   defined**. Filtering on any of them would have been a guess dressed up as a
+   measurement, and a candidate dropped by a threshold is never seen again.
+   The reason is the sample: all 30 came from one citrus collection shot
+   similarly, so there was almost no variance to find. The measurements are
+   used for ranking instead, and `MEASUREMENTS_MAY_FILTER` is false until a
+   varied harvest says otherwise.
+2. **The perceptual hash does not catch "we already have a similar one".** The
+   five candidates flagged that way sat 25-32 bits from their nearest approved
+   neighbour, against a median of 32 across all 435 pairs. Their words explain
+   it - "No more too many cross sectional slices of fruits" is a judgement
+   about the catalogue's balance, not about two files being the same image.
+   dHash is kept at a tight 8 bits for the case it *is* right for, and earned
+   its keep immediately: the broad harvest dropped 8 near-identical images,
+   including consecutive Pexels ids from the same shoot.
+
+**Changed.**
+
+- `focus.ts` - subject area, centrality, region count, sharpness, detail load.
+  Each traces to something the curator actually said.
+- `similarity.ts` - 64-bit dHash, Hamming distance, hue signature, dedupe.
+- `measure.ts` - the only file that decodes an image (sharp), cached by image
+  URL so re-running a harvest re-downloads nothing.
+- `plan.ts` + `catalog/harvest-plan.json` - 30 queries across all six subjects,
+  every one checked against the live API first.
+- `coverage.ts` + `catalog:coverage` - the matrix, the floor for going live,
+  and which planned queries fill each gap.
+- `catalog:calibrate` - measures decided candidates and reports how well each
+  measurement separates them. It changes nothing; its output is evidence.
+- `shortlist.ts` now scores on measurements where they exist, captions only as
+  a fallback.
+- The review tool takes `--subject`, shows progress against that subject's
+  target, prefills the subject from the harvest plan, and serves a 1200px
+  display image rather than the original (the first botanical candidate is
+  5272x5272, and the plate stayed blank while it downloaded).
+
+**A regression the broad harvest exposed and fixed.** The learned vocabulary
+was scoped globally, so a run of citrus rejections had "white" at 3-of-4 and
+"vibrant" at 10-of-13 - and started pushing white peonies and yellow daffodils,
+which are ideal subjects, down the botanical queue. Phrases are now recorded
+and applied **per subject**. A test carries the exact case.
+
+**Verified.** Lint, typecheck, build exit 0. `npm run test:coverage` 409/409
+pass, 91.79 statements / 89.94 branches, `scripts/catalog` at 90.91 / 90.14 /
+96.55 (354 tests before this). `npx playwright test` 111/111.
+
+Real run: `catalog:harvest --plan` fetched and measured **444 candidates across
+all six subjects**, dropped 8 near-identical, and left 436. Every measurement
+now has real spread - subjectRegions 0-13, borderVariance 0-23.5, detailLoad
+0-0.74 - where the citrus-only set had almost none. The top of the ranked queue
+is now a snail on mushrooms, three pears on blue, a white peony, budding fern
+fronds; the botanical queue's top candidate scores 14 and reads "one clear
+subject in the frame, subject sits well in the frame, plain quiet backdrop".
+Driven in a browser end to end, no console errors.
+
+**Coverage now:** 8 approved, all fruit; 436 candidates waiting, spread
+botanical 90, objects 86, creatures 75, still-life 71, landscape 70, fruit 44.
+
+**Next.** Curate by subject - `npm run catalog:review -- --source=pexels
+--subject=botanical` - and watch `catalog:coverage`. Once the floor is met
+(8 per subject, 12 per band, 12 per difficulty), wire
+`src/data/catalog.generated.ts` into `AppShell`, retire the placeholder SVGs,
+and re-run `catalog:calibrate` on the varied data to see whether the
+measurements separate decisions now that there is variance for them to find.
+
+---
+
+## Checkpoint - 20/09/2026: plates shaped like their reference
+
+Done alongside a curation session, so deliberately confined to `src/` - nothing
+in `catalog/` was touched.
+
+**The defect.** Every plate carried a fixed ratio: `aspect-[4/3]` on Today,
+`aspect-square` on Detail, `aspect-[5/4]` on cards. Correct when every
+reference was a 400x400 SVG. The first broad harvest is **53% square-ish, 22%
+tall portraits, 14% wide**, so this was about to become visible the moment the
+real catalogue went live.
+
+**Measured before and after**, in a browser, at real harvest ratios:
+
+| ratio | phone, artwork fills | desktop, artwork fills |
+| --- | --- | --- |
+| 0.6 tall portrait | 45% -> 100% (x1.44 area) | 17% -> 100% |
+| 0.8 portrait | 60% -> 100% (x1.44 area) | 23% -> 100% |
+| 1.0 square | 75% -> 100% (x1.45 area) | 29% -> 100% |
+| 1.33 landscape | already 100% | 39% -> 100% |
+| 1.78 wide | 75% -> 100% | 52% -> 100% |
+
+On a phone tall and square references gain about 45% more artwork area. On
+desktop the artwork does not get bigger - the height cap already bound - but
+the plate stops being a 1424px expanse of empty mat with the image marooned in
+the middle.
+
+**Changed.** `RefArt` gains `ownAspect`, used by Today and Detail. `.art-ratio`
+in `index.css`, with `--plate-cap` and `--detail-cap` so `max-width` can be
+`cap * ratio`. Cards keep their fixed ratio on purpose: a grid of differently
+shaped cards reads as broken rather than as varied. DESIGN.md records both.
+
+**Two traps worth recording.**
+
+1. Tailwind's `aspect-[4/3]` is a *utility*, and utilities beat the components
+   layer whatever the specificity - so `.art-ratio` could not simply override
+   it. `RefArt` strips the fallback utility when a real ratio applies, which is
+   also the clearer statement: exactly one thing decides the plate's shape. A
+   test carries the case.
+2. My first before/after measurement was wrong and read 0% waste for
+   everything. `object-fit: contain` letterboxes the image *inside* its
+   element, so the element's bounding box says nothing about how large the
+   artwork actually is - the rendered size has to be derived from the natural
+   size and the box. The numbers above are from the corrected measurement.
+
+**Verified.** Lint, typecheck, build exit 0. `npm run test:coverage` 418/418
+pass, 91.82 statements / 90.00 branches (409 before). `npx playwright test`
+111/111, including the colour-fidelity posture check and the propped-phone
+checks that constrain these exact plates. Geometry measured in Chromium at
+390x844 and 1440x900; harness and screenshots in the session scratchpad.
+
+**Not yet verified in the app itself**, because the catalogue still holds the
+twelve square placeholders, for which the change is a no-op. The full visual
+pass at 390 / 768 / 1440 belongs with the switchover.
+
+---
+
+## Checkpoint - 20/09/2026: tests decoupled from the catalogue
+
+**Why.** Every spec pinned facts about twelve placeholder SVGs: `toHaveCount(12)`,
+a 4/5/3 time-band split, and literal ids like `ripe-pear`. All of it would have
+broken at once on the day the curated catalogue goes live, which is the worst
+possible moment to be rewriting tests.
+
+**The better framing.** The magic numbers were standing in for properties
+nobody had written down. "4, 5 and 3" really meant *the bands partition the
+catalogue and none of them returns all of it* - which is the defect that was
+actually being guarded, and which holds at any catalogue size. Asserting the
+property is both catalogue-independent and a stronger test than the number was.
+
+**Changed.**
+
+- `src/data/catalogue.ts` - one seam. Everything that needs "all the
+  references" imports `CATALOGUE` from here, so the switchover is a single
+  line in this file and nothing downstream names `references.ts` or
+  `catalog.generated.ts`.
+- `e2e/support.ts` - `catalogue`, `readPieces`, `pieceIds`, `pieceIdsFrom`,
+  `smallestSubject`, `TIME_BANDS`. Everything is read through the same DOM a
+  painter sees; nothing is exported from the app for testing.
+- Specs assert properties: the bands partition the catalogue; Browse shows more
+  than one piece; a saved piece is the one that was seeded; a collection
+  delivers the count its card advertised.
+- Component tests that are about a *screen's behaviour* now supply their own
+  small catalogue via the test factory, rather than depending on what the real
+  one happens to hold. Browse cannot demonstrate that a subject filter narrows
+  if every reference shares a subject - true of the real catalogue today.
+
+**Verified against both catalogues.** This is the part worth recording: after
+the first pass, switching the seam to the real curated catalogue still broke
+**five** tests, and after fixing those, **three** more. "One line" was only
+true once it had actually been run. Final state, with `catalogue.ts` pointed at
+each in turn:
+
+- placeholders: 418/418 pass
+- the curated catalogue (8 approved at the time of writing): 418/418 pass
+
+Lint, typecheck, coverage thresholds, build all exit 0. `npx playwright test`
+111/111.
+
+**A trap worth recording.** `pieceIds(page)` navigates to Browse to read real
+ids, and `context.addInitScript` only applies from the *next* navigation - so
+looking up an id before seeding meant the seed never landed, and the studio
+came up empty. `pieceIdsFrom(context)` reads on a scratch page and leaves the
+page under test alone.
+
+**What the switchover now costs.** One line in `src/data/catalogue.ts`, once
+`npm run catalog:coverage` says the floor is met.
+
+---
+
+## Checkpoint - 20/09/2026: mark as painted
+
+**What this closes.** `PRODUCT.md:58` lists practice history as a capability
+and it was the one still missing. `docs/work-status.md` recorded two reasons it
+was held back: a "coming soon" placeholder would be an entry point ahead of a
+capability, and a panel of counts risked reading as a scoreboard against "No
+pressure, ever". Building it answers the first. The second is answered by
+rules, not by restraint.
+
+**Shape**, from three decisions taken with the user: a **set**, not a log - a
+piece is painted or it is not; a **flat grid, newest first**, with the date on
+each card; and **independent of Saved** - marking something painted never
+removes what someone chose to keep.
+
+**Changed.**
+
+- `src/lib/painted.ts` - the store, mirroring `favorites.ts`. Holds `{ id, on }`
+  at local-calendar-day precision.
+- `paintedReferences` in `src/lib/catalog.ts`, beside `savedReferences`, with
+  the same choice to drop unknown ids rather than render holes.
+- `src/hooks/usePainted.ts`, spread into the context alongside favourites and
+  sources. It shares the clock `AppProvider` already threads through for the
+  daily pick, so a recorded date is deterministic under test.
+- `src/components/PaintedButton.tsx` - on the detail view's action row and in
+  the enlarged view's title bar. Not on cards or Today.
+- A `Painted` section in the studio, and `PieceCard` gains an optional `note`
+  so the date sits inside the card.
+- `AppShell` opens the studio for *either* list - counting only saved pieces
+  would strand someone who has painted things but set none aside.
+
+**The register, which is the actual requirement.** Six rules, recorded in
+`DESIGN.md` and enforced by tests rather than trusted:
+
+1. Absolute dates only - "14 September", never "six days ago".
+2. Nothing reads across the dates. `painted.ts` exports a store and no summary,
+   and a test asserts its exported surface stays that way, so a streak cannot
+   be computed without someone deliberately adding code.
+3. A count framed as Saved's is - a bare number beside the heading.
+4. No achievement vocabulary.
+5. The empty state invites rather than corrects.
+6. Nothing in the app chrome.
+
+**Contrast, measured rather than assumed.** Ink on the sage-tinted active fill
+is **10.23:1**. The plan's guess that sage could not carry the glyph was right:
+a sage glyph on `--surface-raised` is **1.96:1** and fails 3:1, so the glyph is
+ink and sage is fill only - the same reason rose carries the heart but never
+the word.
+
+**Verified.** Lint, typecheck, build exit 0. `npm run test:coverage` 453/453
+pass, 92.03 statements / 90.20 branches, `src/lib` at 98.45 (418 tests before
+this). `npx playwright test` 129/129 across three device projects, including
+six new painted journeys. Screenshots at 390 and 1440 with both sections
+populated.
+
+**A gap in my own verification, found and closed.** The axe routes seeded
+favourites but not painted, so accessibility was only ever being checked
+against the *empty* record. `seedPainted` now seeds it, and axe passes against
+the populated section including the 44px target check.
+
+**Two copy changes worth noting.** The studio's live region said "3 pieces in
+your studio", which is ambiguous once there are two lists; it now says "3
+pieces set aside. 2 pieces painted." And `EnlargeDialog`'s tests needed an
+`AppProvider`, because the dialog now carries a control that reads context.
+
+**Open.** A set records nothing when a piece is painted a second time, which is
+a real loss for a practice app where repetition is the point. The stored shape
+(`{ id, on }[]`) allows a log later without migrating what is already stored.
+
+---
+
+## Where this stands - 20/09/2026, handed back for curation
+
+Everything the catalogue needs is built and green. The one remaining step is
+curation, which is a human judgement and the user's to make.
+
+**The state.** 8 approved of a 72 target, all fruit. 428 candidates harvested,
+measured and ranked across all six subjects, waiting in
+`catalog/shortlist/pexels.json`.
+
+```bash
+npm run catalog:coverage                                        # where the gaps are
+npm run catalog:review -- --source=pexels --subject=botanical   # then localhost:4321
+npm run catalog:build                                           # gates, then generate
+```
+
+`docs/curating.md` is the working reference: the six subject names, the command
+sequence, the targets and the known rough edges.
+
+**When coverage is met**, `catalog:coverage` says so, and the switchover is one
+line in `src/data/catalogue.ts`:
+
+```ts
+export { CATALOG as CATALOGUE } from "./catalog.generated";
+```
+
+That is verified, not assumed: the suite passes 418/418 against both the
+placeholders and the curated catalogue with the seam pointed either way.
+
+**Queued for the next session**, in the order I would take them:
+
+1. **Make curating cheaper.** Landscape ranks at 6% (4 of 69 candidates score
+   8+, against 25-42% everywhere else) because `subjectArea` and
+   `subjectRegions` assume figure-ground separation and a misty hillside has
+   none - so roughly 65 usable candidates sit buried. Per-subject thresholds
+   fix it. Alongside: keyboard shortcuts in the review tool, one button to
+   accept every suggestion, and draft persistence.
+2. **Re-run `catalog:calibrate`.** The first run found no measurement separated
+   approvals from rejections, but that was 30 candidates from one citrus
+   collection with almost no variance. With decisions spread across six
+   subjects there is something real to calibrate against, and `thresholds.ts`
+   records what has to change for measurements to be allowed to filter.
+3. **The museums.** Only the Met adapter exists and is tested
+   (`scripts/catalog/providers/met.ts`). Smithsonian, the Art Institute and
+   the Rijksmuseum are registry entries in `src/lib/sources/registry.ts`
+   with no adapter; corrected 28/09/2026, this line used to say all three
+   existed. Every museum needs the `sharp` derive-images step because their
+   images are self-hosted. `toImageSet` throws clearly until then.
+4. **Production readiness.** Fonts still load from Google (`index.html:22-27`),
+   flagged in the README as a must-fix. A moderate `react-router` advisory
+   needs a v7 major upgrade. Branch protection needs repository settings.
+5. **PWA/offline** (`docs/plans/pwa-offline.md`), which should wait for the
+   real catalogue: precaching twelve placeholder SVGs proves nothing, and the
+   budget is now known to be small because the photo sources are hotlinked.
+
+**A correction to the record.** An earlier note in this file said the curated
+catalogue held 16 entries. It holds 8. `"id":` appears twice per reference in
+the generated file - once for the reference, once for its licence - and I
+counted occurrences rather than references.
+
+## Session checkpoint - 21/09/2026
+
+**Objective.** Three things the curator hit during a real `catalog:review` run
+on `--subject=botanical` then `--subject=creatures`: plates that would not
+load, a prompt and a tip that were required when neither was wanted, and the
+same two suggested sentences on candidate after candidate.
+
+**What was wrong with the plates.** The page pointed its `<img>` straight at
+the Pexels resize URL (`?auto=compress&cs=tinysrgb&w=1200`). Measured against
+the live CDN at 19:44 on 21/09/2026 across 40 shortlisted candidates, 30
+returned HTTP 500, or 503 with "upstream connect error ... reset reason:
+overflow" - and all 30 of those returned 200 for the untouched original.
+Immediate retries and a different requested width failed identically. By 20:20
+the service had recovered on its own, so it was a provider-side outage, not a
+property of those images.
+
+**Decisions taken.**
+
+| Decision | Choice | Why |
+| --- | --- | --- |
+| Plate delivery | Always through `/api/image`, never hotlinked from the page | One place to fall back from, and the canvas needs same-origin bytes anyway |
+| Proxy addressing | `?id=<externalId>`, resolved against the queue | Keeps the exact original to fall back to, and an unauthenticated local server can no longer be asked to fetch arbitrary URLs |
+| On a resize failure | Fall back to the original, downscale with sharp | The original never failed; 29 of 428 candidates are over 40MP, so the browser must not decode them raw |
+| Retry policy | None automatic; a "Try again" button | Retrying inside the outage was measured and changed nothing |
+| Prompt and tip | Optional on `ApprovedEntry` and `PaintReference`, omitted rather than stored empty | Requiring them bought invented filler; the app tests the field to decide whether to render the line at all |
+| Suggestion variety | Condition-tagged pools, most specific tier first, rotated by candidate id | Only ever offers lines that are true of the image, and stable per candidate so reopening the tool does not reshuffle |
+
+**Changed areas.** New `scripts/catalog/imageProxy.ts` (fallback logic, fetch
+injected) and `scripts/catalog/imageResize.ts` (the one sharp call in the
+review path), both with tests. `cli/review.ts`: id-based proxy, plate failure
+state with Try again, optional prompt/tip fields, seed sent to
+`/api/suggest`.
+`suggest.ts` rewritten around line pools. Optional fields threaded through
+`scripts/catalog/types.ts`, `src/lib/types.ts`, `build.ts`, `Detail.tsx`,
+`Today.tsx`, `src/test/factory.ts`.
+
+**Commands and results.** `npm run lint` clean; `npm run typecheck` clean;
+`npm run test:unit` 486/486 across 31 files; `npm run test:coverage` exit 0 at
+93.15 statements / 92.09 branches / 89.8 functions; `npm run build` clean.
+Live: 8 previously-failing creature candidates all served 200 image/* through
+the tool. Fallback proven end to end against a stub that 500s exactly as
+Pexels did - a 5406x5406, 1.51MB original delivered as 1400x1400, 165KB.
+Browser-driven checks at 1440 and 390 covered the loaded plate, the failure
+panel and recovery via Try again. `npm run test:e2e` 129/129 passed.
+
+**Not done / next.** The review tool is not covered by an automated browser
+test; the checks above were driven by hand through Playwright and are not
+committed, so a regression in the plate failure state would not be caught by
+CI. It still has no keyboard shortcuts, no accept-all button and no draft
+persistence (item 1 in the queue above). The queue above is otherwise
+unchanged.
+
+## Session checkpoint - 28/09/2026: proposed decisions
+
+**Objective.** The curator asked whether curation could be done automatically
+from their past decisions, then asked for a subject done in full: every field
+filled and a decision on each, for them to approve or change.
+
+**State found.** 80 approved (landscape 47, botanical 20, fruit 8, creatures
+4, objects 1, still life 0). Coverage floor not met: still life empty,
+creatures 4, objects 1, the short band 5 of 12, stretch 10 of 12.
+
+**The decision history is mostly not decisions.** Counted by candidate (the
+vocabulary has 257 notes for 224 candidates, so note counts overstate it),
+102 candidates were set aside without being judged: 90 read "Image did not
+load" (52 creatures, 38 botanical: the Pexels outage of 21/09) and 12 read
+"Cute Tabby Kitten" against candidates that are mostly feathers, snails, a
+butterfly and a leaf. Neither describes the image. They still counted as
+rejections in the phrase vocabulary, and they took those candidates out of
+the queue: creatures shows as fully reviewed with 4 approved, but only 10 of
+its 74 were actually judged. **Not changed**; it is the curator's data and
+the curator's call. Taste decisions left: 80 approvals, 80 set-asides.
+
+**Can it be automated? Measured, not assumed.** A blind test: 30 decided
+candidates (15 approved, 15 set aside by taste), judged at 500px without
+seeing the answers. Agreement **16 of 30 (53%)**, a coin toss. 7 of the 14
+misses were the curator rejecting for soft focus that was not visible at
+that size; the rest were catalogue-balance calls ("we already have this
+misty forest") that a blind sample cannot see. So: not automatic. Drafting
+for confirmation, at review size and with focus judged strictly, is what was
+built.
+
+**Decisions taken.**
+
+| Decision | Choice | Why |
+| --- | --- | --- |
+| Who decides | The curator, always. Proposals never write to `catalog/approved/` | The blind test says a proposal is a draft, not a decision |
+| Runtime AI | None. Proposals are made at authoring time and the app ships only what was approved | `PRODUCT.md:64` |
+| Queue order | Approvals, unsure set-asides, confident set-asides, then unproposed | Confirm what goes in while fresh; the unsure ones are likeliest to be overruled |
+| Set-aside fields | Optional | Nobody should write alt text for something expected to be set aside |
+| Where a field came from | `notes` on each proposal, shown and never saved | The curator should know which parts are measured and which are judgement |
+| Agreement | Measured: each decision records `proposed`, and the header counts matches | Whether proposals are good is evidence, not opinion |
+
+**Changed areas.** New `scripts/catalog/proposals.ts` (+ tests):
+`checkProposals` runs every proposed approval through the build's own
+`validateEntry`; `proposalQueue`; `agreement`. `learned.ts`: `record` takes
+the proposed decision and keeps the note even with no reason typed.
+`cli/review.ts`: `--proposals[=file]`, banner, pre-filled form, decision
+buttons that make agreeing one press, and the agreement count. `suggest.ts`:
+"A arrangement" / "A object" fixed. `docs/curating.md`: how to review
+proposals, and the palette limitation. New `catalog/proposals/pexels.json`:
+71 still-life proposals, 25 approve and 46 set aside.
+
+**If all 25 are accepted**, still life has 25, the short band reaches 12
+(7 new) and stretch reaches 12 (2 new). Creatures and objects stay short.
+
+**Bugs found and fixed, with evidence.**
+
+1. `suggest.ts` offered "A arrangement and almost nothing else" for still
+   life (and "A object" for objects). A regression test failed on the
+   unfixed code with exactly that string, then passed after the fix.
+2. The proposal banner rendered white on pale green (1.48:1) because it
+   carried the `approve` class the buttons use. No automated check caught
+   it; the screenshot did. A contrast check in the browser driver failed
+   against the old styles (1.48:1), then passed on the fix (12.61:1). The
+   same check then found the banner's helper line at 3.56:1 on `--faint`;
+   now `--soft`, 6.13:1.
+
+**Found and not fixed.** The palette reader misses small coloured subjects
+(documented in `docs/curating.md`). 14 of the 25 proposed palettes had a
+pigment added by eye, and each proposal says so.
+
+**Commands and results.** `npm run lint` exit 0. `npm run typecheck` exit 0,
+and confirmed to cover `scripts/` with a deliberately wrong probe file.
+`npm run test:coverage` 510/510 across 32 files, 93.61 statements / 92.46
+branches (486 tests before). `npm run build` exit 0. `npm run test:e2e` NOT
+RUN: nothing under `src/` changed. Review tool driven in Chromium against a
+sandbox copy of `catalog/` (real files fingerprinted before and after,
+unchanged): approve path 18/18 checks, set-aside path 11/11, no-proposals
+mode unchanged, bad and missing proposal files refused with exit 1. Those
+drivers live in the session scratchpad and are **not committed**, so CI
+would not catch a regression in the review page.
+
+**Also true, and worth deciding.** `catalog/` and `scripts/` are both
+untracked. The 80 approvals, the vocabulary and the whole curation pipeline
+exist only on this disk.
+
+**Next.** The curator reviews still life:
+`npm run catalog:review -- --source=pexels --subject=still-life --proposals`,
+then `npm run catalog:build` and `npm run catalog:coverage`. Then read the
+agreement count. If it is high, objects next. If it is low, the overruled
+reasons say what to change.
+
+## Session checkpoint - 28/09/2026: still life done, approvals-only review
+
+**Still life result.** The curator agreed with **71 of 71** proposals (25
+approve, 46 set aside) and changed fields on 7 approvals: minutes up on 6,
+two raised to stretch (the food bowl and the cool-cast dried bloom), one
+lowered to gentle, one prompt rewritten. Read back from
+`catalog/curation-vocabulary.json`, not from memory. `catalog:build`
+re-run: 105 references, 25 still life, output byte-identical to the
+curator's own run. Coverage floor now short only on creatures (4 of 8) and
+objects.
+
+**Process change, at the curator's request.** "Just dont show me the set
+aside... from now on I will just review what you already curated."
+
+| Decision | Choice | Why |
+| --- | --- | --- |
+| Set-asides | Recorded without review by `catalog:proposals --apply-set-asides`, marked `decidedBy: "Claude"` | The curator agreed with all 46 on still life and asked not to see them |
+| Agreement count | Excludes anything with `decidedBy` | A decision nobody reviewed is the proposal agreeing with itself |
+| Review queue | Proposed approvals only, confident first | What goes into the catalogue is the part that still needs the curator |
+| A doubtful but promising plate | Proposed as a low-confidence approval, not a set-aside | Set-asides no longer reach the curator, so doubt has to go to the reviewed side |
+| Minutes | Steady around 20-25, stretch 30-35 | The curator's edits on still life raised them |
+
+**Changed areas.** `proposals.ts`: `proposalQueue` now approvals only,
+`applySetAsides`, agreement excludes `decidedBy`. `learned.ts`: `record`
+takes `{ proposed, decidedBy }`; `decisionText` moved here from the review
+tool so both paths learn from the same words. `cli/review.ts`: set-aside
+banner and buttons removed, and it says how many set-asides are unrecorded.
+New `cli/proposals.ts` and `npm run catalog:proposals`. `docs/curating.md`
+updated.
+
+**Objects proposed.** 85 plates viewed at 1200px: 18 approve (16 objects, 2
+filed as still life, 7 marked unsure), 67 set aside and recorded. If all 18
+are accepted, objects reaches 17 across all three time bands. Doors, chairs
+and windows were thinned to 3-6 each, the way the curator's "we already
+have a similar one" rejections did.
+
+**Commands and results.** `npm run lint` exit 0. `npm run typecheck` exit 0.
+`npm run test:coverage` 517/517 across 32 files, 93.71 statements / 92.53
+branches (510 before). `npm run build` exit 0. `catalog:proposals` run
+twice in a sandbox copy: 67 recorded, then 0, file unchanged. Review page
+driven in Chromium against the sandbox: 18/18 checks, including the queue
+holding only the 18 approvals and the header excluding the 67 recorded
+set-asides ("72 of 72", not 139). Two checks failed first on my own wrong
+expectation of the count; the tool was right. The vocabulary before the
+real apply is backed up in the session scratchpad. `npm run test:e2e` NOT
+RUN: nothing under `src/` changed.
+
+**Next.** The curator reviews objects:
+`npm run catalog:review -- --source=pexels --subject=objects --proposals`,
+then `catalog:build` and `catalog:coverage`. After that, creatures, which
+needs its 64 unjudged set-asides (52 "Image did not load", 12 "Cute Tabby
+Kitten") cleared first (the curator's call) or a fresh harvest.
+
+## Session checkpoint - 28/09/2026: objects done, creatures proposed
+
+**Objects result.** 17 of 18 approved; the curator overruled one ("Carved
+Door": "Too busy with intricate details") and edited minutes or difficulty
+on 8. Agreement on reviewed decisions is now 88 of 89. `catalog:build` run
+by the curator: 122 references. Coverage floor short only on creatures (4
+of 8).
+
+**Clearing the unjudged creatures set-asides.** The curator said "Next",
+which I took as the go-ahead offered in the previous reply. New `forget` in
+`learned.ts` removes notes and reverses exactly the phrase counts `record`
+added for them, so the shortlist stops being pushed by decisions nobody
+made. Tested: 8 cases in the new `learned.test.ts`, including one showing
+the learned penalty on "snail on a leaf" going from negative to zero.
+Applied to the real file after a backup: 96 notes removed (73 candidates),
+4835 phrases down to 4141, and 64 of 74 creatures undecided again. The 3
+already-approved candidates and the 10 real judgements were kept.
+
+**Creatures proposed.** 64 plates viewed at 1200px: 17 approve (16
+creatures, 1 leaf filed as botanical; 3 marked unsure), 47 set aside and
+recorded. Thinned by kind as the curator's "we already have a similar one"
+rejections did: 5 butterflies, 6 birds, 2 cats, 2 snails, 1 feather. Every
+palette note is generated from the difference to the measured palette.
+
+**Commands and results.** `npm run lint` exit 0. `npm run typecheck` exit 0.
+`npm run test:coverage` 525/525 across 33 files, 93.82 statements / 92.65
+branches (517 before). `npm run build` exit 0. Vocabulary backups before
+each write are in the session scratchpad. `npm run test:e2e` NOT RUN:
+nothing under `src/` changed.
+
+**Next.** The curator reviews creatures:
+`npm run catalog:review -- --source=pexels --subject=creatures --proposals`,
+then `catalog:build` and `catalog:coverage`. If creatures reaches 8, the
+coverage floor is met and the switchover in `src/data/catalogue.ts` is the
+next step, with its visual pass at 390, 768 and 1440. `catalog/` and
+`scripts/` are still untracked in git.
+
+## Session checkpoint - 28/09/2026: creatures done, coverage floor met, fruit proposed
+
+**Creatures result.** 17 of 17 approved, 12 with minutes or difficulty
+raised (7 to stretch). Agreement on reviewed decisions: 105 of 106.
+`catalog:build` run by the curator: 139 references. `catalog:coverage`
+now reports **"Ready to replace the placeholders in the app: yes"**. Only
+gap left: fruit has 8 of its 12 target and nothing under 10 minutes.
+
+**Order agreed with the curator.** Fruit top-up, then Unsplash, then the
+Met. The switchover in `src/data/catalogue.ts` waits until the curator
+asks for it.
+
+**Fruit proposed.** No harvest was needed: 40 fruit candidates had never
+been reviewed. Viewed at 1200px: 12 approve (11 fruit, 1 garlic bulb filed
+as still life; 5 unsure), 28 set aside and recorded. All whole fruit, none
+cut, as the curator asked. 3 proposed under 10 minutes for the empty short
+band. Proposals and vocabulary backed up in the session scratchpad before
+each write.
+
+**Unsplash, next.** Adapter built and tested, key set, images hotlinked.
+One loose end before it ships: its API guidelines ask for
+`links.download_location` to be called when a photo is used, recorded but
+not called in `scripts/catalog/providers/unsplash.ts`.
+
+**Next.** Curator reviews fruit:
+`npm run catalog:review -- --source=pexels --subject=fruit --proposals`,
+then `catalog:build`.
+
+## Session checkpoint - 28/09/2026: fruit done, Unsplash wired and proposed
+
+**Fruit result.** 11 of 12 approved; "Pear in Palm Shadow" set aside for a
+blurred frond at the edge. Minutes raised on 5. Reviewed agreement across
+all subjects: 116 of 118. 150 approved references from Pexels.
+
+**Unsplash, three changes, each test-first (red on the unchanged code,
+then green).**
+
+1. The download report its API guidelines require. `downloadLocation` is
+   now kept at harvest; `trackUnsplashDownload` calls it once, on a photo's
+   first approval in the review tool, and reports a miss in the terminal
+   rather than undoing the approval. 7 tests.
+2. Orientation. The harvest plan says "square", Pexels' word; Unsplash
+   answered **400 Bad Request** on the first live harvest. Now mapped to
+   "squarish". 3 tests.
+3. Measuring downloads a 640px copy for hotlinked sources, falling back to
+   the original, instead of always fetching the original (Unsplash
+   originals run to tens of megabytes). Museums still fetch their file as
+   is. New `measure.test.ts`, 5 tests, using an injectable cache directory.
+   Its first red run wrote two entries into the real
+   `catalog/.measurements/`; both were identified by hash and deleted, and
+   the cache count checked back at 465.
+
+**Harvest.** `catalog:harvest -- --plan --source=unsplash --per-page=6`:
+144 fetched, 4 near-duplicates dropped (2 of them of Pexels photos already
+approved), 140 kept, shortlisted.
+
+**Proposed.** 140 plates viewed at 1200px (converted from AVIF to JPEG for
+viewing only): 15 approve (fruit 2, botanical 4, still life 5, creatures 1,
+objects 3; 7 unsure), 125 set aside and recorded. Nothing from landscape
+(already 47). Thinned against the whole catalogue: second daisies, callas,
+ferns, lone trees, calm seas, single pears and misty forests went.
+
+**Commands and results.** `npm run lint` exit 0. `npm run typecheck`
+exit 0. `npm run test:coverage` 540/540 across 34 files, 95.91 statements
+/ 92.54 branches (525 before). `npm run build` exit 0.
+`catalog:proposals` validated the file (no problems) and recorded the 125
+set-asides after a vocabulary backup in the session scratchpad.
+
+**Next.** Curator reviews Unsplash on port 4322 (4321 held by the curator's
+own fruit session): `npm run catalog:review -- --source=unsplash --proposals
+--port=4322`, then `catalog:build`. First real approval will make the first
+live `download_location` call; watch the terminal for "told Unsplash".
+Then the Met.
+
+## Session checkpoint - 28/09/2026: Unsplash done, the Met wired and proposed
+
+**Unsplash result.** 15 of 15 approved; all 15 download reports reached
+Unsplash ("told Unsplash ... was used" in the server log, once each). One
+moved from creatures to objects, minutes raised on 10. 165 approved.
+
+**The Met, five changes, each test-first (red on the unchanged code, then
+green).**
+
+1. **Derive step** (`derive.ts`, 16 tests). Each approved museum piece is
+   downloaded once and written as 400/800/1600px WebP to
+   `public/references/<source>/`, recorded in `catalog/derived.json`.
+   Never enlarges. The review tool does it on approval; `catalog:derive`
+   repairs anything missing; `catalog:build` reads the manifest and stays
+   offline, naming any museum entry not yet derived instead of failing
+   inside `toImageSet`.
+2. **Image size.** The adapter took `primaryImageSmall`, measured live at
+   **600px**, under the 1200px the enlarged view needs; the original was
+   4000px. It now keeps the original as the image and web-large as
+   `previewUrl`, which harvest measures from.
+3. **Politeness.** ~130 unpaced requests earned a 403 from the Met's
+   Imperva firewall for every request after. Now 350ms between object
+   requests, and a 403/429 stops the harvest instead of being skipped. The
+   firewall still cut in after ~110 paced requests, so harvest one subject
+   at a time.
+4. **A refused harvest kept nothing.** Now it keeps what it fetched and
+   names the queries not run.
+5. **A planned harvest replaced the whole candidates file**, so
+   `--plan --subject=X` would have wiped every other subject (and, on
+   Pexels, the candidates 220+ recorded proposals refer to). It now merges
+   (`mergeCandidates`, 4 tests).
+
+Also: `--plan=<file>` for a source-specific plan, and
+`catalog/harvest-plan-met.json` (no landscape).
+
+**Harvest.** Five subjects, one at a time with pauses, no refusals: 62
+public-domain candidates, all measured.
+
+**Proposed.** All 62 viewed at the Met's preview size: 4 approve (two
+painted vases, a French botanical watercolour, a Chinese fan painting; 2
+unsure), 58 set aside and recorded. Most were figure paintings, altarpieces,
+manuscripts and dark crowded Old Master still lifes. Two more vases went for
+intricate detail, as the curator did with the Carved Door. Originals of the
+4 checked at 2417-4000px.
+
+**End-to-end check in a sandbox copy** (real `catalog/` fingerprinted,
+unchanged): approving the first proposal in the browser wrote 3 WebP files
+(400x498, 800x996, 1600x1991; 317 KB) and the manifest entry;
+`catalog:derive` then reported "1 already derived" and changed nothing;
+`catalog:build` produced 166 references with `delivery: "local"` widths and
+a CC0 credit line.
+
+**Commands and results.** `npm run lint` exit 0. `npm run typecheck` exit 0.
+`npm run test:coverage` 565/565 across 36 files, 96.12 statements / 92.9
+branches (540 before). `npm run build` exit 0. `catalog:build` on the real
+files byte-identical before and after these changes.
+
+**Not verified.** The app still ships the placeholders, so no Met image has
+been rendered in the app itself; `references/...` paths are relative and
+Vite copies `public/`, which should resolve under HashRouter, but that is
+for the switchover's visual pass to prove.
+
+**Next.** Curator reviews the Met on port 4322:
+`npm run catalog:review -- --source=met --proposals --port=4322`, then
+`catalog:build`. The Met images add a few hundred KB each to the site.
+
+## Session checkpoint - 28/09/2026: Met round two (objects, animals, paintings)
+
+**Round one result.** 3 of 4 approved and derived (9 WebP files); the fan
+painting set aside, "focus is not clear with the dark background". 168
+references built.
+
+**Why round one was mostly people: a search bug.** The Met ignores the
+search words unless `q` is the last query parameter; the adapter put it
+first, so every Met search returned unrelated works (measured:
+"hippopotamus" gave a stela, a bust, an altarpiece; with `q` last, 77
+hippopotamuses). Fixed test-first, keeping `isPublicDomain=true` and its
+existing test. Also added `department` to plan queries (Met
+`departmentId`), test-first. New plan `catalog/harvest-plan-met-
+collections.json`: Egyptian, Greek and Roman, Ancient West Asian and Asian
+Art, Drawings and Prints, European Paintings. `test:coverage` 569/569.
+
+**Harvest.** 166 new candidates across five subjects, one subject at a
+time; one network drop mid-creatures, whose four missing queries were
+re-run afterwards.
+
+**Proposed.** 168 undecided plates judged from 3x3 contact sheets at the
+Met's preview resolution (600px a cell): 23 approve (10 creatures, 9
+objects, 3 botanical, 1 still life; 13 unsure), 145 set aside and
+recorded. Thinned hard against each other and the catalogue: one of five
+bottle vases in each colour family, one hippo pose, one bronze cat, one
+horse, two of three botanical studies from one 1820s series. A celadon
+bowl was set aside because its original is 1183px, under the 1200px the
+enlarged view needs; every other original was checked at 1096px on the
+short side or more. Creator fields read before writing: the pheasant is by
+Hakusanjin Hokui, not Hokusai as first said to the curator.
+
+**Next.** Curator reviews on port 4322, then `catalog:build`.
+
+## Session checkpoint - 29/09/2026: committed, Netlify-ready
+
+**Round two result.** 22 of 24 approved (a plant study "subject is too
+small", the orchid scroll "subject leaves are too thin"); all 24 Met
+approvals derived. 189 references: Pexels 150, Unsplash 15, Met 24.
+
+**Committed** on `feat/curated-catalogue`, at the curator's request, in
+three commits: the code (pipeline, app features, tests, configs,
+fixtures), the curated data (`catalog/`, `public/references/`, the
+generated catalogue and credits), and Netlify settings with this note.
+`catalog/.measurements/` is now gitignored. The real API keys in `.env`
+were scanned for across every file committed: no hits.
+
+**Netlify.** New `netlify.toml`: `npm run build`, publish `dist`. Node
+from `.nvmrc` (22). No redirects, because the app uses HashRouter and
+relative asset paths. `dist/` is 4.7 MB, the Met images 3.9 MB of it.
+Connecting the site in the Netlify UI is the curator's step; it needs
+their account.
+
+**Before a public deploy.** The app still shows the twelve placeholder
+illustrations: the switchover is one line in `src/data/catalogue.ts` plus
+its visual pass at 390, 768 and 1440. Fonts still load from Google, which
+the README lists as a must-fix. The Met images ship in `dist/` already,
+unreferenced until the switchover.
+
+**Commands and results.** `npm run lint` exit 0. `npm run typecheck` exit
+0. `npm run test:coverage` 569/569, 96.14 statements / 92.94 branches.
+`catalog:build` byte-identical to the committed output. `npm run build`
+exit 0. `npm run test:e2e` 129/129.

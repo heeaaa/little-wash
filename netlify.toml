@@ -1,0 +1,14 @@
+# Netlify build settings, kept in the repository so a new site needs no
+# setup in the Netlify UI beyond connecting the repo.
+#
+# Node comes from .nvmrc, which Netlify reads on its own. No redirect rules
+# are needed: the app uses HashRouter, so every route is index.html plus a
+# fragment, and asset paths are relative (vite.config.ts, base "./").
+#
+# The museum images in public/references/ are copied into dist/ by Vite and
+# served as ordinary static files. Pexels and Unsplash images are never
+# copied; they are hotlinked from the providers' CDNs, as their terms require.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
