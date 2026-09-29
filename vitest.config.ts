@@ -28,6 +28,9 @@ export default defineConfig({
       include: ["src/**/*.{ts,tsx}", "scripts/catalog/**/*.ts"],
       exclude: [
         "src/main.tsx",
+        // Bootstrap too: stylesheet imports and nothing else. The fonts are
+        // tested where they can be, in a browser (e2e/fonts.spec.ts).
+        "src/fonts.ts",
         "src/data/**",
         "src/test/**",
         "src/**/*.test.{ts,tsx}",

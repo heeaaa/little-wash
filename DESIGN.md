@@ -114,11 +114,23 @@ as small body text. The text label always carries the meaning.
 
 - Display / editorial: **Libre Baskerville** (400 / 700 + italic). Wordmark,
   page and section headings, piece titles, prompts (italic).
-- Body / UI: **Source Sans 3** (400-700).
-- Handwritten accent: **Caveat**, used sparingly.
+- Body / UI: **Source Sans 3** (400-700, no italic).
+- Handwritten accent: **Caveat**, used sparingly. Part of the brand, but no
+  element sets `font-hand` yet, so it is not bundled; `src/fonts.ts` says how
+  to add it when it gets a job.
 - Headings use `text-wrap: balance`; body `text-wrap: pretty`; number columns
   use tabular numerals; body measure capped at 68ch.
-- Fonts load from Google Fonts in the prototype; **self-host before production**.
+- **Self-hosted** from the Fontsource packages, all SIL OFL 1.1, imported in
+  `src/fonts.ts` and bundled by Vite: nothing loads from a third party.
+  `e2e/fonts.spec.ts` fails on any Google Fonts request and on any face the
+  page falls back from. Every file carries unicode-range subsets, so a first
+  visit to Today downloads five Latin files, 87 KB (measured 29/09/2026);
+  Latin Extended arrives only for a credit that needs it.
+- **`font-medium` on a Libre Baskerville heading renders at 400.** It always
+  has: the Google Fonts link asked for 400 and 700 only, and the approved
+  screens were drawn that way. The family now ships 500 and 600, so heavier
+  headings are possible, but importing 500 would thicken every heading at
+  once. Treat it as a design change, not a font fix.
 
 ### Spacing, shape, elevation
 
@@ -289,6 +301,24 @@ share because it holds the prompt; the prompt and the difficulty note are
 allowed to wrap rather than be clamped, and the stacking margins give back the
 room instead.
 
+Real pieces carry two- or three-line prompts and a credit line, and that alone
+pushed "Open this piece" below the fold for 109 of 189 pieces on a sideways
+Pixel 7 and for all 189 at 667x375. Three trades hold the promise, cheapest
+first, in short landscape only:
+
+- **The full Save button goes** (`.featured-save-full`). The plate's own heart
+  saves the same piece in the same screen; the duplicate was what wrapped the
+  actions onto a second row.
+- **The title and the prompt each drop a step** (1.45rem, 0.98rem). The prompt
+  stays whole and in the display face; it is never clamped.
+- **Under 740px wide, the "Today's wash" heading leaves the screen but not the
+  document.** The header's current-page Today tab sits directly above it, so
+  on screen it only repeated that; it stays the page's h1 for screen readers.
+
+Verified 29/09/2026 by rendering every piece of the catalogue: the plate and
+the whole action row sit inside the first screen for all 189 at 863x360 and
+667x375, and the plate does at 412x839 and 1440x900 as well.
+
 **Back goes where you came from.** A piece card records its origin
 (`state.from`), and Detail's back link names it - "Browse", "Your studio", or
 Today as the fallback for a shared link. It always returned to Today, which
@@ -306,6 +336,14 @@ empty mat, in the exact scene PRODUCT.md names.
 - `.detail-art` caps the plate at `62svh`, `48svh` in short landscape. The
   reference is the point of this screen, so the cap is generous; what it must
   never do is exceed the screen it is read on.
+- **On an upright phone or tablet the cap also leaves room for the title**:
+  `min(62svh, 100svh - 27.5rem)`. Stacked, the name sits under the plate, its
+  caption and its credit, and a tall reference (a 9:16 door on a Pixel 7) put
+  it 145px below the first screen. 27.5rem is the plate's top plus the tallest
+  caption-to-title stack in the catalogue, measured across all 189 pieces; in
+  rem so it grows with enlarged text. Verified 29/09/2026: every piece's title
+  is inside the first screen at 412x839, 863x360, 667x375 and 1440x900, and
+  Enlarge is too in both short-landscape sizes.
 - **Short landscape puts the plate and the identity side by side**
   (`@media (orientation: landscape) and (max-height: 520px)`) - the same move
   `.enlarge` makes at the same breakpoint, for the same reason: height is the
@@ -567,10 +605,12 @@ before opening it, is not a thing that happens.
 
 ## Assets and provenance
 
-Reference artwork is currently original CC0 placeholder watercolour SVG,
-labelled as placeholder and carried under the `placeholder` source id so the
-app cannot forget what it is. Icons are authored SVG in one stroke weight; no
-emoji.
+Reference artwork is the curated catalogue: 189 photographs and museum works
+(150 Pexels, 15 Unsplash, 24 The Met), each approved by hand and credited on
+every surface that shows it. The full list is `docs/CREDITS.md`, generated with
+the catalogue by `npm run catalog:build`. It replaced the twelve CC0
+placeholder SVGs on 29/09/2026; those remain only as unit-test fixtures. Icons
+are authored SVG in one stroke weight; no emoji.
 
 ### Sources and licences
 
@@ -580,7 +620,7 @@ a free-text string. The licence allowlist is enforced at build time.
 
 | Source | Licence | Images |
 | --- | --- | --- |
-| Prototype placeholders | CC0 1.0 | Ours, bundled |
+| Prototype placeholders | CC0 1.0 | Ours; unit-test fixtures only since 29/09/2026 |
 | Pexels | Pexels License (not CC0) | Hotlinked from its CDN |
 | Unsplash | Unsplash License (not CC0) | Hotlinked; its guidelines require it |
 | The Met, Smithsonian, Art Institute, Rijksmuseum | CC0 1.0 | Downloaded at build, served as our own AVIF/WebP |
@@ -621,6 +661,13 @@ the item's intrinsic size (`RefArt ownAspect`, `.art-ratio`), clamped to the
 how large it gets; `max-width` is now the cap multiplied by the ratio, which is
 what keeps a height-capped plate from staying full width and letterboxing
 anyway.
+
+Detail's half of this did not work until 29/09/2026, and square placeholders
+hid it because 1 is their right answer. The cap reads `--ar` on `.detail-art`,
+the plate, but the ratio was set on the mat inside it, and a custom property
+inherits downward only: every Detail plate was sized as a square. `Detail`
+now sets `--ar` on the plate itself, from the same `plateRatio` `RefArt`
+uses, and `Detail.test.tsx` asserts it.
 
 They used to be fixed - `aspect-[4/3]` on Today, `aspect-square` on Detail -
 which was right when every reference was a 400x400 SVG. Measured against the

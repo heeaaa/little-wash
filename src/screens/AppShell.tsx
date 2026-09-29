@@ -187,9 +187,9 @@ function Footer() {
     <footer className="relative z-10 border-t border-line px-4 py-6 sm:px-6">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 text-[0.78rem] text-ink-faint">
         <p className="text-pretty">
-          Design-exploration prototype. All data is local to your browser and
-          artwork is original placeholder illustration (CC0). Saving, filtering,
-          Surprise me and exercises are simulated on-device - no account or network.
+          Design-exploration prototype. There is no account yet: what you save,
+          paint and switch off stays in this browser. References are real
+          photographs and museum works, credited on every piece.
         </p>
         <PlatformCredits />
         <p>

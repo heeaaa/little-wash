@@ -1,5 +1,5 @@
 import { useState, type CSSProperties, type Ref } from "react";
-import { buildImageSources } from "@/lib/sources/images";
+import { buildImageSources, plateRatio } from "@/lib/sources/images";
 import type { PaintReference } from "@/lib/types";
 
 interface RefArtProps {
@@ -74,16 +74,7 @@ export function RefArt({
     reference.credit.sourceId,
   );
 
-  /*
-    Clamped to the same range the ingestion pipeline enforces, so the plate can
-    never be asked to be a 6:1 strip. A reference outside it would not have
-    reached the catalogue; the clamp is here so a hand-edited entry cannot
-    collapse the layout either.
-  */
-  const ratio =
-    ownAspect && width > 0 && height > 0
-      ? Math.min(2, Math.max(0.5, width / height))
-      : null;
+  const ratio = ownAspect ? plateRatio(reference) : null;
   /*
     The fallback ratio is a Tailwind utility on `className`, and utilities beat
     the components layer whatever the specificity - so `.art-ratio` cannot

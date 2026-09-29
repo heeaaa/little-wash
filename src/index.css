@@ -708,6 +708,23 @@ html[data-wash="rewet"]::view-transition-group(piece-art) {
   }
 
   /*
+    Stacked, the piece's name sits under the plate, below its caption and
+    credit, so a tall reference could push the title off the first screen:
+    a 9:16 door on a Pixel 7 put it 145px below. The cap here leaves room for
+    that stack. 27.5rem is the plate's top (209px on a phone, under the header
+    and back link) plus the tallest caption-to-title stack in the catalogue
+    (226px), measured across all 189 pieces on 29/09/2026. In rem, so it grows
+    with the text when someone enlarges it. Side by side (lg and up) the title
+    has its own column and the generous cap above stands.
+  */
+  @media (max-width: 1023.98px) and (orientation: portrait) {
+    .detail-art {
+      --detail-cap: min(62vh, calc(100vh - 27.5rem));
+      --detail-cap: min(62svh, calc(100svh - 27.5rem));
+    }
+  }
+
+  /*
     Short and wide is the propped posture. Height is the scarce axis, so the
     plate and the piece's identity sit side by side rather than stacked - the
     same move `.enlarge` makes at the same breakpoint, for the same reason.
@@ -799,6 +816,58 @@ html[data-wash="rewet"]::view-transition-group(piece-art) {
     }
     .featured-actions.featured-actions {
       margin-top: 0.5rem;
+    }
+    /*
+      Real pieces, from 29/09/2026, carry a two- or three-line prompt and a
+      credit line, and on a propped phone that pushed "Open this piece" below
+      the fold for 109 of 189 pieces on a Pixel 7 and all 189 on a 667x375
+      phone. Three trades, in order of how little they cost:
+
+      - The full Save button goes. The plate's own heart saves the same piece,
+        one tap away and in the first screen; the duplicate was what wrapped
+        the actions onto a second row in a narrow column.
+      - The title drops to the size the narrowest phone already uses.
+      - The prompt drops a step, still in the display face and still whole:
+        it is the piece's invitation, so it is never clamped.
+    */
+    .featured-save-full.featured-save-full {
+      display: none;
+    }
+    .featured-title.featured-title {
+      font-size: 1.45rem;
+    }
+    .featured-prompt.featured-prompt {
+      font-size: 0.98rem;
+    }
+  }
+
+  /*
+    The tightest propped phones (667x375 and the like) still missed by up to
+    36px after the trades above, on 129 of 189 pieces. Here the page title goes
+    from sight, and only here: the header's "Today" tab sits directly above it,
+    already marked as the current page, so the title repeated it at the cost of
+    ~37px. It stays in the document as the page's h1 for screen readers, the
+    same technique as Tailwind's sr-only. Wider phones keep it on screen.
+  */
+  @media (orientation: landscape) and (max-height: 520px) and (max-width: 739.98px) {
+    .today-title.today-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .today-grid.today-grid {
+      margin-top: 0;
+    }
+    /* With the title gone the page's own top padding can halve; this was the
+       last 1px on four pieces. */
+    .today-page.today-page {
+      padding-top: 0.25rem;
     }
   }
 

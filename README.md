@@ -81,7 +81,7 @@ route with their tail and query intact; anything unrecognised goes to Today.
   a `<dialog>` bottom sheet below `lg` and to the sticky rail at `lg+`. The
   catalogue deliberately is not on this screen - "deal me another" is the
   one-tap alternative and Browse owns the library.
-- **Browse** - the full catalogue (12 references) with the same control
+- **Browse** - the full catalogue (189 curated references) with the same control
   hierarchy, plus curated collections.
 - **Detail** - the reference uncropped on a fixed neutral mat, its prompt and
   tip where it has them, its palette, and an enlarged view for use beside a
@@ -106,9 +106,10 @@ whole catalogue.
 
 React 18, TypeScript (strict), Vite and Tailwind CSS, routed with `HashRouter`
 so deep links survive a static host with no rewrite rules. Vitest and React
-Testing Library cover the logic, the screens and the routing (108 tests),
-and Playwright covers the journeys end to end (31 tests in 4 spec files,
-93 checks across phone, propped-phone and desktop).
+Testing Library cover the logic, the screens, the routing and the catalogue
+pipeline (571 tests in 36 files), and Playwright covers the journeys end to end
+(45 tests in 7 spec files, 135 checks across phone, propped-phone and desktop).
+Counts as of 29/09/2026.
 Filtering, saving and "deal me another" are all simulated on-device.
 
 Piece changes are animated with the View Transitions API under one rule - the
@@ -125,8 +126,9 @@ src/
   screens/       Today, Browse, Detail, Exercises, AppShell
   components/    Reusable UI (plus studio/ ornaments)
   lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, types, wash (motion)
-  data/          Mock catalogue, collections, exercises
-  assets/refs/   Original placeholder watercolour SVGs
+  data/          The generated catalogue, collections, exercises
+  assets/refs/   The retired placeholder SVGs, now unit-test fixtures only
+  fonts.ts       The self-hosted brand faces
   assets/brand/  Generated in-app brand mark
 e2e/             Playwright journeys (discovery, filtering, posture, accessibility)
 public/          Favicons, app icons, site.webmanifest
@@ -153,15 +155,19 @@ The official little wash brand is the visual source of truth.
 Contrast rules that constrain use: Ink and Deep teal pass AA on Paper; Rose is a
 graphic accent only (it fails AA for small text); Sage is for fills, never text.
 Colour is only ever applied through the tokens on `:root` in `src/index.css`.
-Fonts currently load from Google Fonts and must be self-hosted before
-production.
+Fonts are self-hosted from the Fontsource packages (SIL OFL 1.1) and bundled
+by Vite, so nothing loads from a third party; see `src/fonts.ts`. Caveat is
+part of the brand but not bundled until something uses it.
 
 ## Assets
 
 Brand originals live in `assets/` and are never edited; everything in
 `src/assets/brand/` and `public/` is a regenerable derivative. Reference artwork
-is original CC0 placeholder watercolour SVG, labelled as placeholder and
-carried under the `placeholder` source id. Full asset mapping is in `DESIGN.md`.
+is the curated catalogue of 189 photographs and museum works from Pexels,
+Unsplash and The Met, listed with their credits in `docs/CREDITS.md`. Pexels
+and Unsplash images load from those services' own image servers; The Met's are
+downloaded at build and served from `public/references/met/`. Full asset
+mapping is in `DESIGN.md`.
 
 Every reference carries a structured `credit` - maker, institution, object URL,
 licence, capture date - and **every surface that shows a reference shows who
