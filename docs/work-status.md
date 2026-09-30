@@ -2,6 +2,62 @@
 
 _Last updated: 30/09/2026_
 
+## Checkpoint - 30/09/2026: Small themed series, Browse in pages
+
+**Objective.** Build roadmap item 1, small themed series, on
+`feat/small-series`. Two pre-existing problems found on the way were fixed
+with it, one at the user's direction and one at their request mid-build.
+Plan, decisions and acceptance criteria: `docs/plans/small-series.md`. Rules:
+DESIGN.md, "Small series", "A new page opens at its top" and "Browse draws a
+page at a time".
+
+**Decisions (user, 30/09/2026).** Cross-section fruits in place of "Five cafe
+treats" (the catalogue holds one treat); each piece shows its own painted date
+and nothing adds them up; the scroll bug fixed app-wide; skies and leaves as
+proposed; Browse paged with "Show more". **Awaiting the curator's review:** the
+fruit list, and all three titles and blurbs, on the rendered pages.
+
+**Changed.** Series: `src/data/series.ts`, `src/lib/series.ts`,
+`src/screens/Series.tsx`, `SeriesCard`, `SeriesSteps`, Detail (series in the
+URL, keyed by piece, name released when the plate has scrolled away), Browse's
+Series section, the route. Scroll: `src/hooks/useNewPageAtTop.ts` in
+`AppShell`. Paging: `src/lib/paging.ts`, Browse, `setFilter` releases `shown`.
+Shared: `claimArtwork` and `releaseArtworkIfScrolledAway` in `wash.ts`,
+`rewet(update, before)`, `WashLink moment`, `EmptyPanel titleAs`,
+`PaintedNote` (from Studio), a 200px rung in `REMOTE_WIDTHS`.
+
+**Evidence, measured.**
+
+- Scroll bug, red then green: "a piece opened from far down Browse starts at
+  its top" failed at plate y=-370 (phone) and y=-318 (propped) before the fix,
+  passes after. Before/after at Pixel 7:
+  `Claude outputs/small-series/scroll-{before,after}-pixel7.png`.
+- Next from the foot of Detail on a phone: the artwork's morph started at
+  translateY -472 and flew 694px; after the release there is no morph of the
+  old artwork and the new one resolves in place. Desktop re-wets in place
+  (group 190 to 190).
+- Browse, Pixel 7 profile, CPU x4, whole catalogue: blocked main thread
+  1,113 to 360ms, filter tap to paint 1,792 to 830ms, DOM nodes 6,383 to 1,106.
+- Series strips: 20 plates, 276 KB at 400px wide; the 200px rung serves them.
+- Mutation checks: the per-piece key, the "stays put" scroll rules and the
+  failed-image test each go red when their code is reverted.
+
+**Verified locally, 30/09/2026 (Node 24.13 - the repo pins 22; CI uses 22).**
+`npm run lint` and `npm run typecheck` exit 0. `npm run test:coverage` 762/762
+in 49 files, 97.11 statements / 93.6 branches / 91.97 functions / 97.11 lines
+(baseline 642/642 in 41, 96.66 / 93.15 / 91.75 / 96.66). `npm run test:e2e`
+195/195 on phone, propped phone and desktop (baseline 159/159); after that run
+the filtering journeys stopped drawing the whole catalogue just to count it,
+and `e2e/filtering.spec.ts` passed 18/18 on its own - CI runs the full suite on
+the final revision. Impeccable finish review: "fix" with six items, all six
+scored resolved on recapture, "ship" for those six (not a whole-surface
+review). Evidence: `Claude outputs/small-series/` (pass1-3, motion).
+
+**Remaining.** Curator review of the series content; collection covers pass no
+`sizes` and download 1600px images for 96px plates (most of a phone's 1,685 KB
+on Browse), left for its own change; the 830ms filter tap on a slowed phone;
+real-device check; branch protection still unset.
+
 ## Checkpoint - 30/09/2026: Warm-ups and catalogue ready for main
 
 **Objective.** Ship the curated catalogue, self-hosted fonts and rebuilt

@@ -180,9 +180,10 @@ subject tags (real metadata only), reference/browse cards with a pigment
 under-rule, primary time/energy filter groups and the subject sheet, buttons
 (teal primary, hairline secondary, teal-underline quiet), brush-dab difficulty
 marks with a text label, palette dab swatches (display only), native `<dialog>`
-enlarge view and bottom sheet, colour-coded collection cards, warm-up rows
-that expand into a practice sheet (see **Warm-ups** below), and a sticky
-editorial header (mark + wordmark, nav, saved count).
+enlarge view and bottom sheet, colour-coded collection cards, series cards with
+their strip of plates and the numbered series rows (see **Small series**
+below), warm-up rows that expand into a practice sheet (see **Warm-ups**
+below), and a sticky editorial header (mark + wordmark, nav, saved count).
 
 **Optional content takes its container with it.** A reference may have no
 prompt and no tip. Detail drops the whole tinted Tip panel rather than heading
@@ -415,6 +416,38 @@ it read as a hang.
   means to without grabbing focus, and a filter chip - which already sits beside
   the results - leaves focus on the chip.
 
+**A new page opens at its top.** Nothing reset the scroll on navigation, so a
+page kept the position of the one before it, clamped to its own height: on a
+Pixel 7, a piece opened from card 41 of Browse landed at scrollY 579 with its
+plate at -370px, entirely off the screen. `useNewPageAtTop` (in `AppShell`)
+moves a forward navigation to a new page to the top in a layout effect, so it
+happens before paint and before a view transition snapshots the new page. A
+change of query string is the same page and never moves - filters, deals and
+warm-ups all rewrite it in place - and Back and Forward are left to the
+browser, which already restores the exact place you left.
+`e2e/discovery.spec.ts` guards both directions.
+
+**Browse draws a page at a time.** It rendered every matching piece at once.
+Measured 30/09/2026 on a Pixel 7 profile with the CPU slowed four times: the
+whole catalogue of 189 blocked the main thread for 1,113ms on arrival and a
+filter tap took 1,792ms to paint; images were already lazy, so the cards
+themselves were the cost, at about 4ms each. Now 24 are drawn, then 24 more
+per tap of "Show 24 more" ("Show the last 13" at the end), with "Showing 48 of
+189" beside it: 360ms and 830ms on the same profile, 6,383 DOM nodes down to
+1,106. Still above the 200ms responsiveness target on that slowed profile, and
+recorded as such.
+
+- **A button, not loading on scroll.** An endless list keeps the footer, and
+  the platform credits it carries, out of reach, and it moves under a keyboard
+  or a screen reader without being asked.
+- **The length lives in the URL** (`?shown=48`, written with `replace`), so
+  Back returns to a list as long as the one you left and the browser can put
+  you back in it. A filter change, a collection and leaving a collection all
+  start the new result on its first page.
+- **Focus goes to the first piece added**, without scrolling: the new cards
+  arrive above the button, exactly where the list left off.
+- The results heading keeps the whole count; only the grid is paged.
+
 **Time bands are ranges, not budgets.** "Under 10 min" / "10-20 min" / "Over 20
 min" tile the catalogue with no overlap and no gap, so **every band genuinely
 narrows**. `min` is inclusive and `max` exclusive, which matters: two disjoint
@@ -485,6 +518,72 @@ place), the visuals (original illustrations plus five approved photos) and the
   unknown value falls back rather than failing, and a filter that hides the
   open warm-up closes it.
 - **No scores, no streaks.** Nothing on this page is tracked or counted.
+
+### Small series: a run in order (`#/series/<id>`)
+
+A series is a short, fixed run of catalogue pieces around one theme, in the
+order they are meant to be painted: "Seven tiny skies", "A week of leaves",
+"Six fruit cross-sections". Built 30/09/2026; the content lives in
+`src/data/series.ts`, the rules in `src/lib/series.ts`.
+
+- **Not a collection.** A collection is a lens with a cover, and the filters
+  narrow inside it. A series names its size and its order is the curation, so
+  it is never filtered: narrowing seven skies to four would break both.
+- **Whole or withdrawn.** A series is offered only when every piece is in the
+  catalogue the painter has switched on. Switch off a source it draws on and
+  it leaves Browse rather than showing with gaps in its numbering; its own page
+  keeps the title and blurb and says which source it needs ("This series needs
+  Unsplash and The Met"), with the way to Sources. A piece that has left the
+  catalogue altogether makes the series "not here", because no switch would
+  bring it back. `src/data/series.test.ts` fails if a title's number stops
+  matching its pieces or a piece id stops matching the catalogue.
+- **On Browse**, a Series section above Collections. Each card shows the whole
+  run as a strip of small 5:4 plates - the thing a collection's single cover
+  cannot say - then "7 pieces · 8-25 min each". Square cells left a wide sky a
+  sliver; 5:4 is the ratio every small plate in the app uses. One link, the
+  title, with the `.card-link` overlay; the strip is `aria-hidden`, since seven
+  descriptions inside a link would bury its name, and the series page names
+  every piece. The plates ask the CDN for 200px images (`REMOTE_WIDTHS` gained
+  the rung for them): twenty of them cost 276 KB at 400px. An odd last card
+  takes the whole row in the two-column grid rather than leaving half of it
+  empty.
+- **The series page is a contents page, not a gallery.** A numbered row per
+  piece - plate, numeral beside the title, time and difficulty with its note,
+  credit, Save - so the whole run reads in a screen or two. On a phone Save
+  sits under the plate and the text keeps the whole column beside it: in the
+  title line it left a title 88px at 320px wide, one word a line. The
+  introduction holds the left column from `lg` and sits above the list below
+  it. The lede says the promise out loud, as the studio's does: "Take them in
+  order, one a day or all in one go. Nothing unlocks, and nothing here keeps
+  score."
+- **Numbered, never counted.** "No. 3" is a place in the order. Nothing says
+  "3 of 7", "4 to go" or "series complete", nothing unlocks, and there are no
+  day labels - "A week of leaves" is seven leaves, not a schedule. The painted
+  register below applies in full: a painted piece shows its own absolute date
+  ("Painted 14 September", the studio's `PaintedNote`), and nothing adds the
+  dates up. A series with every piece painted reads exactly as it did, plus
+  the dates. `src/lib/series.ts` exposes no progress function, and a test
+  asserts that it stays that way.
+- **On Detail**, a piece opened from a series carries it in the URL
+  (`?series=<id>`), like the dealt piece, so a reload or a shared link keeps
+  the way through. The back link names the series. Below the action row - never
+  above the title, whose first-screen budget is measured to the rem - a
+  navigation headed "Seven tiny skies · No. 3" offers Previous and Next with a
+  small plate each; the first piece has no Previous, and the last offers "Back
+  to the series" in place of Next, marked with the series' pigment rather than
+  a second left arrow - two left-pointing cards read as two ways back. An
+  unknown series, one that is withdrawn, or one the piece is not in is simply
+  ignored.
+- **Previous and Next are a re-wet**, not a move: the same page with a
+  different piece in it. Detail is keyed by the piece, as Today's featured piece
+  is, so a reference that failed to load does not mark the next one failed
+  before it is tried. Tapped from the foot of a phone screen the plate is far
+  above the viewport, and holding the shared name made the artwork fly 694px
+  down across the header; so the name is released when the plate's top edge is
+  off screen (`releaseArtworkIfScrolledAway`), and the new piece resolves out of
+  the wet paper where it sits. Where the plate is still in view it re-wets in
+  place, the group held still. `e2e/series.spec.ts` asserts that the morph
+  never starts above the screen.
 
 ### Ornament restraint (load-bearing)
 
@@ -773,8 +872,10 @@ gamification - to uphold PRODUCT.md's "No pressure, ever. No streaks, no guilt,
 no achievement language." The only progress feature is the celebratory visual
 below, which never punishes a missed day.
 
-1. **Small themed series** - "Seven tiny skies", "Five cafe treats", "A week of
-   leaves": finite, ordered collections.
+1. ~~**Small themed series**~~ - **built 30/09/2026**: "Seven tiny skies", "A
+   week of leaves" and "Six fruit cross-sections" (in place of "Five cafe
+   treats", which the catalogue could not fill honestly - it holds one treat).
+   See **Small series** under Components.
 2. **Gentle continuity** - optional reminders and a private painting history,
    never requiring public sharing.
 3. **Artistic progress tracking (celebratory, never punishing)** - an artsy,
