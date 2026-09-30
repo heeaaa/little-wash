@@ -7,9 +7,12 @@ import { INSPIRATION_PHOTOS } from "@/data/inspiration";
 import { Icon } from "@/components/Icon";
 import { WashFilter } from "@/components/WashFilter";
 import { SavedPalette } from "@/components/SavedPalette";
+import { useNewPageAtTop } from "@/hooks/useNewPageAtTop";
 import markUrl from "@/assets/brand/mark.png";
 
 export function AppShell() {
+  useNewPageAtTop();
+
   return (
     <AppProvider references={CATALOGUE}>
       <div className="paper-grain relative flex min-h-dvh flex-col">

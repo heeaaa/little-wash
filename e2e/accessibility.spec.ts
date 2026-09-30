@@ -1,6 +1,13 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type BrowserContext } from "@playwright/test";
 import { createRequire } from "node:module";
-import { pieceIdsFrom, ready, seedFavourites, seedPainted } from "./support";
+import {
+  firstSeries,
+  pieceIdsFrom,
+  ready,
+  seedFavourites,
+  seedPainted,
+  seriesRows,
+} from "./support";
 
 const require = createRequire(import.meta.url);
 const AXE_PATH = require.resolve("axe-core/axe.min.js");
@@ -19,7 +26,45 @@ const ROUTES = [
   ["Exercises, a warm-up open", "#/exercises?warmup=graded-wash&variation=sunset-wash"],
   ["Your studio", "#/studio"],
   ["Sources", "#/sources"],
+  // Resolved from Browse at run time, like Detail, so a renamed series
+  // does not break them.
+  ["A series", "series"],
+  ["A piece in a series", "series-piece"],
+  ["A series with its sources switched off", "series-withdrawn"],
 ] as const;
+
+/** The address a route stands for, looking up the ones that depend on content. */
+async function resolve(
+  route: (typeof ROUTES)[number][1],
+  piece: string,
+  context: BrowserContext,
+): Promise<string> {
+  if (route === null) return `#/piece/${piece}`;
+  if (!route.startsWith("series")) return route;
+
+  const scratch = await context.newPage();
+  try {
+    const series = await firstSeries(scratch);
+    if (route === "series") return series.href;
+    if (route === "series-withdrawn") {
+      // Every source off, so the series has nothing to show and says why.
+      await context.addInitScript(() => {
+        localStorage.setItem(
+          "little-wash:sources:v1",
+          JSON.stringify({
+            disabled: ["pexels", "unsplash", "met", "smithsonian", "aic", "rijksmuseum", "openverse", "placeholder"],
+          }),
+        );
+      });
+      return series.href;
+    }
+    await scratch.goto(`/${series.href}`);
+    await ready(scratch);
+    return (await seriesRows(scratch))[1]!.href;
+  } finally {
+    await scratch.close();
+  }
+}
 
 /**
  * WCAG 2.2 AA is a stated product requirement, not a nice-to-have, and the
@@ -37,7 +82,7 @@ test.describe("accessibility", () => {
       // Seed the painted record too, so axe sees that section populated
       // rather than only ever its empty state.
       await seedPainted(context, seeds.slice(0, 2));
-      await page.goto(`/${route ?? `#/piece/${seeds[0]}`}`);
+      await page.goto(`/${await resolve(route, seeds[0]!, context)}`);
       await ready(page);
       await page.addScriptTag({ path: AXE_PATH });
 

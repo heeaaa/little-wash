@@ -15,12 +15,18 @@ import { remoteImageUrl } from "./registry";
 import type { ImageSet, SourceId } from "./types";
 
 /**
- * The ladder asked of a provider CDN. 400 covers a card on a phone, 800 a
- * featured plate, 1600 the enlarged view on a desktop or a 2x phone. Beyond
- * that a watercolour reference gains nothing a painter can use and costs
- * megabytes on a mobile connection.
+ * The ladder asked of a provider CDN. 200 covers the small plates in a
+ * series strip, 400 a card on a phone, 800 a featured plate, 1600 the
+ * enlarged view on a desktop or a 2x phone. Beyond that a watercolour
+ * reference gains nothing a painter can use and costs megabytes on a mobile
+ * connection.
+ *
+ * The 200 rung is there for the strips: twenty 52px plates at the top of
+ * Browse fetched 276 KB at 400 wide (measured 30/09/2026). The CDNs resize on
+ * demand, so a smaller rung costs nothing to offer, and the browser still
+ * picks 400 or more for anything drawn larger.
  */
-export const REMOTE_WIDTHS: readonly number[] = [400, 800, 1600];
+export const REMOTE_WIDTHS: readonly number[] = [200, 400, 800, 1600];
 
 /** The width a non-srcset browser falls back to. */
 const FALLBACK_WIDTH = 800;

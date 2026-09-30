@@ -1,5 +1,12 @@
 import { test, expect } from "@playwright/test";
-import { enlargedFill, isInFirstScreen, pieceIds, ready } from "./support";
+import {
+  enlargedFill,
+  firstSeries,
+  isInFirstScreen,
+  pieceIds,
+  ready,
+  seriesRows,
+} from "./support";
 
 /**
  * The propped phone. PRODUCT.md names this scene - "a device set down at an
@@ -19,7 +26,19 @@ const isShortLandscape = (page: { viewportSize: () => { width: number; height: n
 test.describe("the propped-phone posture", () => {
   test("nothing scrolls sideways, at any size", async ({ page }) => {
     const [id] = await pieceIds(page);
-    for (const route of ["#/", "#/browse", `#/piece/${id}`, "#/exercises", "#/studio"]) {
+    const series = await firstSeries(page);
+    await page.goto(`/${series.href}`);
+    await ready(page);
+    const inSeries = (await seriesRows(page))[0]!.href;
+    for (const route of [
+      "#/",
+      "#/browse",
+      `#/piece/${id}`,
+      "#/exercises",
+      "#/studio",
+      series.href,
+      inSeries,
+    ]) {
       await page.goto(`/${route}`);
       await ready(page);
       const overflow = await page.evaluate(() => {

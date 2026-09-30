@@ -24,6 +24,7 @@ import { useFavorites, type FavoritesApi } from "@/hooks/useFavorites";
 import { useSources, type SourcesApi } from "@/hooks/useSources";
 import { usePainted, type PaintedApi } from "@/hooks/usePainted";
 import { rewet } from "@/lib/wash";
+import { SHOWN_PARAM } from "@/lib/paging";
 import type { RandomSource } from "@/lib/shuffle";
 
 interface AppContextValue extends FavoritesApi, SourcesApi, PaintedApi {
@@ -132,6 +133,8 @@ export function AppProvider({
               nothing on screen, teaching the user the controls were unreliable.
             */
             next.delete("piece");
+            // A different set of results starts again at its first page.
+            next.delete(SHOWN_PARAM);
             return next;
           },
           { replace: true },

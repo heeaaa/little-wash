@@ -56,6 +56,13 @@ describe("routing", () => {
     expect(await screen.findByRole("heading", { name: /today/i, level: 1 })).toBeInTheDocument();
   });
 
+  it("serves a series", async () => {
+    renderAt("/series/seven-tiny-skies");
+    expect(
+      await screen.findByRole("heading", { name: "Seven tiny skies", level: 1 }),
+    ).toBeInTheDocument();
+  });
+
   it("serves the studio", async () => {
     renderAt("/studio");
     expect(await screen.findByRole("heading", { name: "Your studio", level: 1 })).toBeInTheDocument();

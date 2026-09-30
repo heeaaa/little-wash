@@ -7,7 +7,9 @@ import {
   pieceIdsFrom,
   readPieces,
   ready,
+  resultsCount,
   seedFavourites,
+  startsInView,
 } from "./support";
 
 /**
@@ -142,8 +144,94 @@ test.describe("discovery", () => {
     await expect(page.locator("#main").getByRole("link", { name: /^Browse$/ })).toBeVisible();
   });
 
-  test("every card offers exactly one link to its piece", async ({ page }) => {
+  /*
+    Nothing reset the scroll on navigation, so a piece opened from far down
+    Browse kept the old scroll position, clamped to its own height. Measured
+    30/09/2026 on a Pixel 7 from card 41 (y=21283): Detail at scrollY 579,
+    its plate at top -370px, entirely off the screen, with only the title and
+    the buttons in view.
+  */
+  test("a piece opened from far down Browse starts at its top", async ({ page }) => {
     await page.goto("/#/browse");
+    await ready(page);
+    await page.getByRole("button", { name: "Show 24 more" }).click();
+
+    const deep = pieceCards(page).nth(40);
+    await deep.scrollIntoViewIfNeeded();
+    const name = (await deep.locator("a.card-link").textContent())?.trim();
+    await deep.locator("a.card-link").click();
+    await expect(page.getByRole("heading", { level: 1, name: name! })).toBeVisible();
+
+    const plate = await startsInView(page, ".detail-art");
+    expect(plate.clear, `the plate starts at y=${plate.top}`).toBe(true);
+  });
+
+  test("Back returns to the same place in Browse", async ({ page }) => {
+    // The browser restores this itself. Resetting the scroll on every
+    // navigation would take it away, so this guards the other direction - and
+    // the second page has to come back too, or the place would not exist.
+    await page.goto("/#/browse");
+    await ready(page);
+    await page.getByRole("button", { name: "Show 24 more" }).click();
+
+    const deep = pieceCards(page).nth(40);
+    await deep.scrollIntoViewIfNeeded();
+    /*
+      Read where the page is when the tap lands, not before it: Playwright may
+      scroll again to reach an unobscured point under the sticky header.
+      Measured 30/09/2026, 22116 after scrolling the card into view and 21832
+      at the click - and Back restored 21832 exactly.
+    */
+    await page.evaluate(() =>
+      document.addEventListener(
+        "click",
+        () => {
+          (window as unknown as { __atTap: number }).__atTap = Math.round(window.scrollY);
+        },
+        { capture: true, once: true },
+      ),
+    );
+    await deep.locator("a.card-link").click();
+    await expect(page.locator(".detail-art")).toBeVisible();
+    const atTap = await page.evaluate(() => (window as unknown as { __atTap: number }).__atTap);
+    expect(atTap).toBeGreaterThan(0);
+
+    await page.goBack();
+    await expect(page.getByRole("heading", { level: 1, name: /browse the catalogue/i })).toBeVisible();
+    await expect(pieceCards(page)).toHaveCount(48);
+    await expect
+      .poll(() => page.evaluate(() => Math.round(window.scrollY)))
+      .toBe(atTap);
+  });
+
+  /*
+    Every matching piece used to be drawn at once. On a Pixel 7 profile with
+    the CPU slowed four times, 189 cards blocked the main thread for 1,113ms
+    and a filter tap took 1,792ms to paint (src/lib/paging.ts).
+  */
+  test("the catalogue arrives a page at a time, and the rest on request", async ({ page }) => {
+    await page.goto("/#/browse");
+    await ready(page);
+
+    const total = Number(await resultsCount(page).textContent());
+    expect(total).toBeGreaterThan(48);
+    await expect(pieceCards(page)).toHaveCount(24);
+    await expect(page.getByText(`Showing 24 of ${total}`)).toBeVisible();
+
+    await page.getByRole("button", { name: "Show 24 more" }).click();
+    await expect(pieceCards(page)).toHaveCount(48);
+    // Focus goes to the first piece added, so the keyboard carries on there.
+    await expect(pieceCards(page).nth(24).locator("a.card-link")).toBeFocused();
+
+    // The length is part of the address, so a reload keeps it.
+    await expect(page).toHaveURL(/shown=48/);
+    await page.reload();
+    await ready(page);
+    await expect(pieceCards(page)).toHaveCount(48);
+  });
+
+  test("every card offers exactly one link to its piece", async ({ page }) => {
+    await page.goto(`/#/browse?shown=${10_000}`);
     await ready(page);
 
     const links = await pieceCards(page).evaluateAll((cards) =>
