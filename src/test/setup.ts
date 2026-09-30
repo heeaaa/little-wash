@@ -25,6 +25,12 @@ if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
   Element.prototype.scrollIntoView = () => {};
 }
 
+// jsdom defines window.scrollTo but only to report "not implemented", which
+// every navigation in a test would print. Tests that care spy on it.
+if (typeof window !== "undefined") {
+  window.scrollTo = (() => {}) as typeof window.scrollTo;
+}
+
 afterEach(() => {
   cleanup();
   try {

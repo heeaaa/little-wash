@@ -304,7 +304,9 @@ describe("Browse", () => {
     order and in a screen reader's link list. One card, one link.
   */
   it("gives every catalogue card exactly one link to its piece", () => {
-    renderScreen(Browse);
+    // Every piece showing, so the rule is checked across the whole catalogue
+    // and not only its first page (BrowsePaging.test.tsx covers the paging).
+    renderScreen(Browse, { entry: `/browse?shown=${CATALOGUE.length}` });
 
     const cards = screen
       .getAllByRole("listitem")

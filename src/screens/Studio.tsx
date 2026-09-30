@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useApp } from "@/state/AppContext";
 import { paintedReferences, savedReferences } from "@/lib/catalog";
 import { PieceCard } from "@/components/PieceCard";
+import { PaintedNote } from "@/components/PaintedNote";
 import { EmptyPanel } from "@/components/EmptyPanel";
 import { Icon } from "@/components/Icon";
 
@@ -39,26 +40,6 @@ function StudioSection({ title, count, children }: StudioSectionProps) {
  * target, no progress and no language about keeping it up (PRODUCT.md: "No
  * pressure, ever").
  */
-/**
- * The day a piece was painted, as a date and never as a duration.
- *
- * "14 September" and not "six days ago". A date measured against *now* implies
- * a clock you are falling behind, which is the pressure PRODUCT.md:38 rules
- * out - and it is the one place this screen could slip into it without anyone
- * noticing.
- */
-function paintedOn(on: string): string {
-  const [year, month, day] = on.split("-").map(Number);
-  if (!year || !month || !day) return "";
-  const date = new Date(year, month - 1, day);
-  const sameYear = date.getFullYear() === new Date().getFullYear();
-  return date.toLocaleDateString("en-NZ", {
-    day: "numeric",
-    month: "long",
-    ...(sameYear ? {} : { year: "numeric" }),
-  });
-}
-
 export function Studio() {
   const { references, favorites, painted: paintedEntries } = useApp();
   const saved = savedReferences(references, favorites);
@@ -153,11 +134,7 @@ export function Studio() {
                 <PieceCard
                   reference={reference}
                   to={`/piece/${reference.id}`}
-                  note={
-                    <p className="text-[0.8rem] text-ink-faint">
-                      Painted {paintedOn(on)}
-                    </p>
-                  }
+                  note={<PaintedNote on={on} />}
                 />
               </li>
             ))}

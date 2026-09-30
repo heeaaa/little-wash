@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { pieceCards, ready } from "./support";
+import { pieceCards, ready, resultsCount } from "./support";
 
 /**
  * Where ideas come from.
@@ -62,9 +62,11 @@ test.describe("source preferences", () => {
   });
 
   test("turning a source back on restores the catalogue", async ({ page }) => {
+    // The stated count, not the cards drawn: Browse draws a page at a time, so
+    // two first pages would match whatever had happened to the catalogue.
     await page.goto("/#/browse");
     await ready(page);
-    const before = await pieceCards(page).count();
+    const before = await resultsCount(page).textContent();
 
     await page.goto("/#/sources");
     await ready(page);
@@ -73,6 +75,6 @@ test.describe("source preferences", () => {
 
     await page.goto("/#/browse");
     await ready(page);
-    await expect(pieceCards(page)).toHaveCount(before);
+    await expect(resultsCount(page)).toHaveText(before!);
   });
 });

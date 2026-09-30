@@ -1,8 +1,11 @@
-import { useState, type CSSProperties } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useRef, useState, type CSSProperties } from "react";
+import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import { WashLink } from "@/components/WashLink";
 import { useApp } from "@/state/AppContext";
 import { findReference } from "@/lib/catalog";
+import { findSeries, placeInSeries, resolveSeries } from "@/lib/series";
+import { SERIES, SERIES_PARAM } from "@/data/series";
+import { SeriesSteps } from "@/components/SeriesSteps";
 import { CreditLine } from "@/components/CreditLine";
 import { PaintedButton } from "@/components/PaintedButton";
 import { RefArt } from "@/components/RefArt";
@@ -15,13 +18,31 @@ import { WashiTag } from "@/components/studio/WashiTag";
 import { Icon } from "@/components/Icon";
 import { plateRatio } from "@/lib/sources/images";
 import { pigment } from "@/lib/types";
-import { PIECE_ART, move } from "@/lib/wash";
+import { PIECE_ART, move, releaseArtworkIfScrolledAway } from "@/lib/wash";
 
 export function Detail() {
   const { id } = useParams();
-  const { references } = useApp();
+  const { references, catalogue } = useApp();
   const { search, state } = useLocation();
+  const [searchParams] = useSearchParams();
   const [enlarged, setEnlarged] = useState(false);
+  const art = useRef<HTMLDivElement>(null);
+  const reference = findReference(references, id);
+
+  /*
+    A piece opened from a series stays in it: the series travels in the URL,
+    like the dealt piece, so a reload or a shared link keeps the way through.
+    Only a series that is whole and holds this piece counts. An unknown id, a
+    series withdrawn by a source switch, or one this piece is not in is simply
+    ignored, and the page behaves as though it had been opened from anywhere
+    else.
+  */
+  const series = findSeries(SERIES, searchParams.get(SERIES_PARAM));
+  const seriesState = series ? resolveSeries(series, catalogue, references) : null;
+  const inSeries =
+    series && reference && seriesState?.kind === "whole"
+      ? placeInSeries(seriesState.pieces, reference.id)
+      : null;
 
   /*
     Back goes where you came from. It always returned to Today, so arriving
@@ -31,12 +52,13 @@ export function Detail() {
   const from = typeof (state as { from?: unknown } | null)?.from === "string"
     ? (state as { from: string }).from
     : null;
-  const back = from?.startsWith("/browse")
-    ? { to: from, label: "Browse" }
-    : from?.startsWith("/studio")
-      ? { to: from, label: "Your studio" }
-      : { to: { pathname: "/", search }, label: "Today’s wash" };
-  const reference = findReference(references, id);
+  const back = series && inSeries
+    ? { to: `/series/${series.id}`, label: series.title }
+    : from?.startsWith("/browse")
+      ? { to: from, label: "Browse" }
+      : from?.startsWith("/studio")
+        ? { to: from, label: "Your studio" }
+        : { to: { pathname: "/", search }, label: "Today’s wash" };
 
   if (!reference) {
     return (
@@ -55,8 +77,14 @@ export function Detail() {
 
   const ratio = plateRatio(reference);
 
+  /*
+    Keyed by the piece, as Today's featured piece is. Previous and Next in a
+    series keep this route mounted and change only the piece, and RefArt
+    remembers whether its image loaded: without a fresh page, one reference
+    that failed to load would show the next one as failed without trying it.
+  */
   return (
-    <div className="detail-page mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:py-10">
+    <div key={reference.id} className="detail-page mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:py-10">
       <WashLink
         to={back.to}
         className="inline-flex min-h-[44px] items-center gap-2 rounded-chip pr-3 text-[0.95rem] font-semibold text-ink-soft hover:text-ink"
@@ -81,6 +109,7 @@ export function Detail() {
               priority
               inset="roomy"
               transitionName={enlarged ? undefined : PIECE_ART}
+              containerRef={art}
               ownAspect
               className="aspect-square w-full rounded-[6px]"
             />
@@ -150,6 +179,14 @@ export function Detail() {
               <Icon name="expand" size={18} /> Paint beside it
             </button>
           </div>
+
+          {series && inSeries ? (
+            <SeriesSteps
+              series={series}
+              place={inSeries}
+              onBeforeStep={() => releaseArtworkIfScrolledAway(art.current)}
+            />
+          ) : null}
         </div>
       </div>
 

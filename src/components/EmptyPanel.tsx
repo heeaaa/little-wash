@@ -5,6 +5,12 @@ interface EmptyPanelProps {
   /** The mark in the badge. Pick one that names the situation, not the app. */
   icon: IconName;
   title: string;
+  /**
+   * The element the title is set in. A paragraph where the panel sits inside
+   * a page that already has its headings; a heading where the panel *is* the
+   * page - a series that is not there has nothing else to be titled by.
+   */
+  titleAs?: "p" | "h1" | "h2";
   /** The explanation. Sits with the title, inside the reading measure. */
   description: ReactNode;
   /** The way out, if there is one. Sits below the measure, full width. */
@@ -25,6 +31,7 @@ interface EmptyPanelProps {
 export function EmptyPanel({
   icon,
   title,
+  titleAs: Title = "p",
   description,
   children,
   containerRef,
@@ -39,7 +46,7 @@ export function EmptyPanel({
       </span>
 
       <div className="max-w-sm space-y-1.5">
-        <p className="font-display text-xl text-ink">{title}</p>
+        <Title className="text-balance font-display text-xl text-ink">{title}</Title>
         {description}
       </div>
 

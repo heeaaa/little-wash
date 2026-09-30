@@ -24,6 +24,56 @@ import { flushSync } from "react-dom";
  */
 export const PIECE_ART = "piece-art";
 
+/** Marks an element that took the shared name imperatively, so it can be released. */
+const CLAIMED_ATTR = "data-claimed-art";
+
+/**
+ * Give the shared name to one artwork in a list, in the instant before the
+ * browser snapshots the page it is leaving.
+ *
+ * Many cards, one name: the card being left claims it, so the name stays
+ * unique and the browser is never asked to snapshot the other cards' layers,
+ * which would pair with nothing. Written to the DOM directly because React
+ * gets no commit between the click and the snapshot; the page arriving
+ * carries the name afterwards.
+ *
+ * Whatever a previous card claimed is released first. Nothing else would
+ * clear it - React never set it, so it will not remove it - and two clicks
+ * before the first transition captures would leave two live elements holding
+ * the name, which the browser answers by skipping the transition outright.
+ * Only imperatively claimed elements are touched; the ones Today and Detail
+ * set through React are left alone.
+ */
+export function claimArtwork(element: HTMLElement | null): void {
+  for (const claimed of document.querySelectorAll<HTMLElement>(`[${CLAIMED_ATTR}]`)) {
+    claimed.style.viewTransitionName = "";
+    claimed.removeAttribute(CLAIMED_ATTR);
+  }
+  if (!element) return;
+  element.style.viewTransitionName = PIECE_ART;
+  element.setAttribute(CLAIMED_ATTR, "");
+}
+
+/**
+ * Let go of the shared name when the artwork holding it has scrolled away.
+ *
+ * Next in a series re-wets the piece in place, and a new page opens at its
+ * top. Tapped from the foot of a phone screen, though, the plate is far above
+ * the viewport - measured 30/09/2026 on a Pixel 7, its top at -485px - and
+ * holding the name made the artwork fly 694px down across the header into
+ * place. Without an outgoing partner the new piece simply resolves out of the
+ * wet paper where it will sit. An artwork whose top edge is still on screen
+ * keeps the name and re-wets in place, as a deal does.
+ *
+ * Only for an element the navigation is about to replace: React set this
+ * name, and it will not set it again on the same node.
+ */
+export function releaseArtworkIfScrolledAway(element: HTMLElement | null): void {
+  if (!element) return;
+  const { top } = element.getBoundingClientRect();
+  if (top < 0 || top >= window.innerHeight) element.style.viewTransitionName = "none";
+}
+
 /** Set on <html> for the duration of a re-wet so CSS can tell the moments apart. */
 const WASH_ATTR = "data-wash";
 
@@ -68,12 +118,16 @@ function beginBloom(): void {
  * Replace the featured piece as a re-wet. Falls back to running `update`
  * directly wherever View Transitions are unavailable or motion is unwanted,
  * where the CSS `.piece-settle` default still carries the change.
+ *
+ * `before` runs while the outgoing piece is still on screen, as it does for a
+ * move, and only when a transition is actually going to run.
  */
-export function rewet(update: Update): void {
+export function rewet(update: Update, before?: Update): void {
   if (!supported() || prefersReducedMotion()) {
     update();
     return;
   }
+  before?.();
   const root = document.documentElement;
   const seq = ++washSeq;
   root.setAttribute(WASH_ATTR, "rewet");

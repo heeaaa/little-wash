@@ -179,11 +179,49 @@ export async function enlargedFill(page: Page) {
   DOM a painter sees. Nothing is exported from the app for testing.
 */
 
+/*
+  Browse draws a page at a time and keeps the length in the URL. A spec that
+  needs every piece asks for more than there are, which the app clamps to the
+  whole list - one navigation rather than a button press per page.
+*/
+const EVERY_PIECE = "shown=100000";
+
 /** Every piece the unfiltered catalogue offers: id, title, minutes. */
 export async function catalogue(page: Page) {
-  await page.goto("/#/browse");
+  await page.goto(`/#/browse?${EVERY_PIECE}`);
   await ready(page);
   return readPieces(page);
+}
+
+/** The number the results heading states: every match, not only the page drawn. */
+export function resultsCount(page: Page) {
+  return page.locator("main h2.jump-target + span");
+}
+
+/**
+ * How many pieces the unfiltered catalogue holds, as Browse states it.
+ *
+ * For a spec that needs only the size. Drawing all 189 cards to count them was
+ * most of the time in journeys that sat at their 30s limit.
+ */
+export async function catalogueSize(page: Page) {
+  await page.goto("/#/browse");
+  await ready(page);
+  return Number(await resultsCount(page).textContent());
+}
+
+/** Press "Show more" until the whole result is on screen, as a painter would. */
+export async function showEveryPiece(page: Page) {
+  const more = page.getByRole("button", { name: /^Show (\d+ more|the last \d+)$/ });
+  while (await more.isVisible()) {
+    const before = await pieceCards(page).count();
+    await more.click();
+    await page.waitForFunction(
+      (count) =>
+        document.querySelectorAll('main li a[href*="/piece/"]').length > count,
+      before,
+    );
+  }
 }
 
 /** The pieces currently on screen, whatever filter is applied. */
@@ -238,6 +276,47 @@ function take(ids: string[], count: number): string[] {
   return usable.slice(0, count);
 }
 
+/**
+ * The first series Browse offers: its page and what its card promises.
+ *
+ * Read from Browse for the same reason pieces are: a curator can rename,
+ * reorder or add series, and a spec that names one breaks for a reason that
+ * has nothing to do with the behaviour it guards.
+ */
+export async function firstSeries(page: Page) {
+  await page.goto("/#/browse");
+  await ready(page);
+  const section = page.locator("section").filter({
+    has: page.getByRole("heading", { level: 2, name: "Series" }),
+  });
+  // The inner locator must be a fresh one: `has` is queried inside each list
+  // item, so one already rooted at the section would look for a section there.
+  const card = section.locator("li").filter({ has: page.locator('a[href*="/series/"]') }).first();
+  const link = card.locator('a[href*="/series/"]');
+  const size = Number((await card.textContent())?.match(/(\d+)\s*pieces/)?.[1] ?? Number.NaN);
+  return {
+    href: (await link.getAttribute("href"))!,
+    title: (await link.textContent())!.trim(),
+    size,
+  };
+}
+
+/** The pieces a series page lists, in order: number, title and link. */
+export async function seriesRows(page: Page) {
+  return page.locator("main ol > li").evaluateAll((rows) =>
+    rows.map((row) => {
+      const link = row.querySelector('a[href*="/piece/"]') as HTMLAnchorElement;
+      // The numeral sits beside the title, not first in the row: a picture
+      // that fails to load puts its message ahead of it.
+      return {
+        number: Number(link.parentElement?.textContent?.trim().match(/^\d+/)?.[0] ?? Number.NaN),
+        title: link.textContent?.trim() ?? "",
+        href: link.getAttribute("href") ?? "",
+      };
+    }),
+  );
+}
+
 /** The time bands the app filters by, and what each one promises. */
 export const TIME_BANDS = [
   { label: "Under 10 min", holds: (m: number) => m < 10 },
@@ -266,9 +345,11 @@ export async function smallestSubject(page: Page, catalogueSize: number) {
   let best: { name: string; count: number } | null = null;
 
   for (const name of SUBJECTS) {
+    // The count the results heading states, rather than drawing every card of
+    // every subject: this ran inside journeys already near their time limit.
     await page.goto(`/#/browse?subject=${name}`);
     await ready(page);
-    const count = await pieceCards(page).count();
+    const count = Number(await resultsCount(page).textContent());
     if (count > 0 && count < catalogueSize && (!best || count < best.count)) {
       best = { name, count };
     }

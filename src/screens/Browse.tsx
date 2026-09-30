@@ -3,14 +3,18 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useApp } from "@/state/AppContext";
 import { filterReferences } from "@/lib/catalog";
 import { resolveCollection, visibleCollections } from "@/lib/collections";
+import { availableSeries } from "@/lib/series";
+import { SHOWN_PARAM, nextShown, showMoreLabel, shownCount } from "@/lib/paging";
 import {
   COLLECTIONS,
   COLLECTION_PARAM,
   collectionSearch,
   type Collection,
 } from "@/data/collections";
+import { SERIES } from "@/data/series";
 import { RefArt } from "@/components/RefArt";
 import { PieceCard } from "@/components/PieceCard";
+import { SeriesCard } from "@/components/SeriesCard";
 import {
   ClearFilters,
   FilterControls,
@@ -57,11 +61,49 @@ export function Browse() {
 
   const shown = themed && openPieces ? filterReferences(openPieces, filters) : visible;
 
+  /*
+    A page at a time - see lib/paging.ts for the measurements. The count lives
+    in the URL, written with `replace` like every other in-place change here,
+    so Back from a piece returns to a list as long as the one you left and the
+    browser can put you back where you were.
+  */
+  const drawn = shownCount(searchParams.get(SHOWN_PARAM), shown.length);
+  const page = shown.slice(0, drawn);
+  const grid = useRef<HTMLUListElement>(null);
+  const revealFrom = useRef<number | null>(null);
+
+  const showMore = () => {
+    revealFrom.current = drawn;
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.set(SHOWN_PARAM, String(nextShown(drawn, shown.length)));
+        return next;
+      },
+      { replace: true },
+    );
+  };
+
+  /*
+    The new pieces arrive above the button, so focus goes to the first of
+    them: tabbing carries on into what was just added rather than past it,
+    and a screen reader names where it landed. Nothing scrolls - they appear
+    exactly where the list left off.
+  */
+  useEffect(() => {
+    if (revealFrom.current === null) return;
+    const first = grid.current?.children[revealFrom.current]?.querySelector<HTMLElement>("a");
+    revealFrom.current = null;
+    first?.focus({ preventScroll: true });
+  });
+
   const leaveCollection = () => {
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
         next.delete(COLLECTION_PARAM);
+        // A different set of results starts again at its first page.
+        next.delete(SHOWN_PARAM);
         return next;
       },
       { replace: true },
@@ -74,6 +116,11 @@ export function Browse() {
     as a dead end.
   */
   const collections = visibleCollections(COLLECTIONS, catalogue);
+  /*
+    Whole series only. A series whose source has been switched off leaves
+    rather than showing with gaps in its numbering - see lib/series.ts.
+  */
+  const series = availableSeries(SERIES, catalogue);
   const results = useRef<HTMLHeadingElement>(null);
   const jumpPending = useRef(false);
 
@@ -131,10 +178,30 @@ export function Browse() {
           Browse the catalogue
         </h1>
         <p className="mt-2 text-pretty text-[1.02rem] leading-relaxed text-ink-soft">
-          Start from a collection, or filter the whole catalogue to whatever fits
-          your afternoon.
+          Start from a series or a collection, or filter the whole catalogue to
+          whatever fits your afternoon.
         </p>
       </div>
+
+      {series.length > 0 ? (
+        <section className="mb-12">
+          <h2 className="font-display text-xl font-medium tracking-tight text-ink">
+            Series
+          </h2>
+          <p className="mb-4 mt-1 max-w-reading text-pretty text-[0.95rem] leading-relaxed text-ink-soft">
+            A few pieces in a set order, to paint one after another at your own
+            pace.
+          </p>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {series.map((entry) => (
+              /* An odd last card takes the row rather than leaving half of it empty. */
+              <li key={entry.series.id} className="sm:odd:last:col-span-2 lg:odd:last:col-span-1">
+                <SeriesCard series={entry.series} pieces={entry.pieces} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="mb-12">
         <h2 className="mb-4 font-display text-xl font-medium tracking-tight text-ink">
@@ -201,13 +268,29 @@ export function Browse() {
               <EmptyState />
             </div>
           ) : (
-            <ul className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {shown.map((reference) => (
-                <li key={reference.id}>
-                  <PieceCard reference={reference} to={`/piece/${reference.id}`} />
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul ref={grid} className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {page.map((reference) => (
+                  <li key={reference.id}>
+                    <PieceCard reference={reference} to={`/piece/${reference.id}`} />
+                  </li>
+                ))}
+              </ul>
+              {drawn < shown.length ? (
+                <div className="mt-8 flex flex-col items-center gap-3">
+                  <p className="tnum text-[0.85rem] text-ink-soft">
+                    Showing {drawn} of {shown.length}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={showMore}
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-chip border border-line bg-surface-raised px-5 text-[0.95rem] font-semibold text-ink shadow-lift hover:border-[rgb(var(--ink)/0.35)]"
+                  >
+                    {showMoreLabel(drawn, shown.length)}
+                  </button>
+                </div>
+              ) : null}
+            </>
           )}
         </div>
 

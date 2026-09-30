@@ -69,8 +69,8 @@ merging to `main`.
 
 ## What is built
 
-The app opens on **Today** at `#/`; pieces are `#/piece/<id>`, plus `#/browse`
-`#/exercises` and `#/studio`. The direction chooser, the second exploratory treatment and
+The app opens on **Today** at `#/`; pieces are `#/piece/<id>`, series are
+`#/series/<id>`, plus `#/browse`, `#/exercises` and `#/studio`. The direction chooser, the second exploratory treatment and
 the `/a` URL segment that carried them were all removed once the direction was
 approved. Exploration-era links (`#/a/piece/ripe-pear`) redirect onto the flat
 route with their tail and query intact; anything unrecognised goes to Today.
@@ -82,7 +82,14 @@ route with their tail and query intact; anything unrecognised goes to Today.
   catalogue deliberately is not on this screen - "deal me another" is the
   one-tap alternative and Browse owns the library.
 - **Browse** - the full catalogue (189 curated references) with the same control
-  hierarchy, plus curated collections.
+  hierarchy, plus series and curated collections. Results arrive 24 at a time,
+  with "Show 24 more" for the rest; how many are showing lives in the URL, so
+  Back returns to the same place.
+- **Series** (`#/series/<id>`) - small themed runs to paint in order: "Seven
+  tiny skies", "A week of leaves", "Six fruit cross-sections". A numbered
+  contents page per series, and Previous / Next on Detail when a piece is opened
+  from one. Offered only when every piece's source is switched on. Numbered,
+  never counted - see "Small series" in `DESIGN.md`.
 - **Detail** - the reference uncropped on a fixed neutral mat, its prompt and
   tip where it has them, its palette, and an enlarged view for use beside a
   physical sketchbook.
@@ -131,15 +138,15 @@ are in [`DESIGN.md`](./DESIGN.md#motion-one-material-two-moments).
 ```
 src/
   routes.tsx     One route tree, shared by the app and the tests
-  screens/       Today, Browse, Detail, Exercises, AppShell
+  screens/       Today, Browse, Series, Detail, Exercises, Studio, Sources, AppShell
   components/    Reusable UI (plus studio/ ornaments)
-  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, warm-up selection, types, wash (motion)
-  hooks/         Favourites, painted record, sources, and the screen wake lock
-  data/          The generated catalogue, collections, warm-ups and their inspiration photos
+  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, series, paging, warm-up selection, types, wash (motion)
+  hooks/         Favourites, painted record, sources, the screen wake lock, and a new page opening at its top
+  data/          The generated catalogue, collections, series, warm-ups and their inspiration photos
   assets/refs/   The retired placeholder SVGs, now unit-test fixtures only
   fonts.ts       The self-hosted brand faces
   assets/brand/  Generated in-app brand mark
-e2e/             Playwright journeys (discovery, filtering, posture, accessibility, warm-ups)
+e2e/             Playwright journeys (discovery, filtering, series, posture, accessibility, warm-ups)
 public/          Favicons, app icons, site.webmanifest
 assets/          Brand originals (keep intact)
 ```

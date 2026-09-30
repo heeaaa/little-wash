@@ -1,6 +1,6 @@
 import type { ComponentProps, MouseEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { move } from "@/lib/wash";
+import { move, rewet } from "@/lib/wash";
 
 type WashLinkProps = ComponentProps<typeof Link> & {
   /**
@@ -10,6 +10,13 @@ type WashLinkProps = ComponentProps<typeof Link> & {
    * snapshot.
    */
   onBeforeMove?: () => void;
+  /**
+   * Which of the two moments this navigation is. A move by default: the
+   * artwork changes place. A re-wet for a link that puts a different piece in
+   * the same place - the next piece in a series - which is a deal, not a
+   * journey.
+   */
+  moment?: "move" | "rewet";
 };
 
 /**
@@ -19,8 +26,8 @@ type WashLinkProps = ComponentProps<typeof Link> & {
  * It stays a real anchor with a real href, so middle-click, modifier-click,
  * "open in new tab" and the status bar all behave normally - the transition is
  * only taken for the plain left-click that would have navigated in place
- * anyway. Where View Transitions are unavailable, `move` falls through to an
- * ordinary navigation.
+ * anyway. Where View Transitions are unavailable, `move` and `rewet` fall
+ * through to an ordinary navigation.
  */
 export function WashLink({
   to,
@@ -29,6 +36,7 @@ export function WashLink({
   preventScrollReset,
   relative,
   onBeforeMove,
+  moment = "move",
   onClick,
   ...rest
 }: WashLinkProps) {
@@ -49,7 +57,9 @@ export function WashLink({
     event.preventDefault();
     // Forwarded, not just spread onto the anchor: this navigation is ours,
     // so anything the caller set on the link has to reach `navigate` too.
-    move(() => navigate(to, { state, replace, preventScrollReset, relative }), onBeforeMove);
+    const go = () => navigate(to, { state, replace, preventScrollReset, relative });
+    if (moment === "rewet") rewet(go, onBeforeMove);
+    else move(go, onBeforeMove);
   }
 
   return (
