@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import {
+  enlargedFill,
   featuredTitle,
   pieceCards,
   pieceIds,
@@ -113,14 +114,9 @@ test.describe("discovery", () => {
     await expect(dialog).toBeVisible();
 
     // The point of this view: the reference big enough to paint beside.
-    const fill = await page.evaluate(() => {
-      const img = document.querySelector("dialog[open] img") as HTMLImageElement;
-      const box = img.getBoundingClientRect();
-      const scale = Math.min(box.width / img.naturalWidth, box.height / img.naturalHeight);
-      const painted = Math.min(img.naturalWidth * scale, img.naturalHeight * scale);
-      return painted / Math.min(window.innerWidth, window.innerHeight);
-    });
-    expect(fill).toBeGreaterThan(0.8);
+    const fill = await enlargedFill(page);
+    expect(fill.clipped).toBe(false);
+    expect(fill.ratio).toBeGreaterThan(0.8);
 
     await page.keyboard.press("Escape");
     await expect(dialog).not.toBeVisible();
@@ -206,6 +202,6 @@ test.describe("discovery", () => {
 
     await expect(page.getByText(/nothing set aside yet/i)).toBeVisible();
     await page.getByRole("link", { name: /find a piece to paint/i }).click();
-    await expect(page.getByRole("heading", { level: 1, name: /browse the studio/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /browse the catalogue/i })).toBeVisible();
   });
 });

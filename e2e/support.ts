@@ -129,6 +129,37 @@ export async function isInFirstScreen(page: Page, selector: string) {
   }, selector);
 }
 
+/**
+ * How much of the screen's short axis the open enlarged view fills.
+ *
+ * Measures the painted image (object-fit: contain) along whichever of the
+ * viewport's axes is shorter, which is the axis a reference can always fill
+ * whatever its shape. This used to compare the image's own short side with the
+ * viewport's, which only holds for square images: a portrait photo filling a
+ * landscape phone top to bottom scored 0.77 because its width is its short
+ * side. Measured 29/09/2026 on the Dogwood Vase, 3:4 portrait: 344 of 360px
+ * tall on a Pixel 7 held sideways, 749 of 900px on desktop.
+ */
+export async function enlargedFill(page: Page) {
+  return page.evaluate(() => {
+    const img = document.querySelector("dialog[open] img") as HTMLImageElement;
+    const box = img.getBoundingClientRect();
+    const scale = Math.min(box.width / img.naturalWidth, box.height / img.naturalHeight);
+    const painted = { width: img.naturalWidth * scale, height: img.naturalHeight * scale };
+    const shortIsHeight = window.innerHeight <= window.innerWidth;
+    return {
+      ratio: shortIsHeight
+        ? painted.height / window.innerHeight
+        : painted.width / window.innerWidth,
+      clipped:
+        box.top < -1 ||
+        box.left < -1 ||
+        box.bottom > window.innerHeight + 1 ||
+        box.right > window.innerWidth + 1,
+    };
+  });
+}
+
 /*
   ───────────────────────────────────────────────────────────────────────────
   Reading the catalogue instead of hard-coding it.

@@ -150,11 +150,11 @@ function FeaturedPlate() {
 
       <div className="featured-identity mt-3.5">
         <SubjectTag subject={featured.subject} rotate={-2} />
-        <h2 className="mt-1.5 text-balance font-display text-[1.45rem] font-medium leading-tight tracking-tight text-ink sm:text-[1.9rem]">
+        <h2 className="featured-title mt-1.5 text-balance font-display text-[1.45rem] font-medium leading-tight tracking-tight text-ink sm:text-[1.9rem]">
           {featured.title}
         </h2>
         {featured.prompt ? (
-          <p className="mt-1 max-w-reading text-pretty font-display text-[1.02rem] italic leading-relaxed text-ink-soft sm:text-[1.1rem]">
+          <p className="featured-prompt mt-1 max-w-reading text-pretty font-display text-[1.02rem] italic leading-relaxed text-ink-soft sm:text-[1.1rem]">
             {featured.prompt}
           </p>
         ) : null}
@@ -171,7 +171,7 @@ function FeaturedPlate() {
           Open this piece
           <Icon name="arrow-left" size={19} className="rotate-180" />
         </WashLink>
-        <SaveButton reference={featured} variant="full" />
+        <SaveButton reference={featured} variant="full" className="featured-save-full" />
         <SurpriseButton variant="quiet" describedBy="deal-note" />
       </div>
       {onlyOne ? (

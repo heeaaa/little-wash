@@ -18,7 +18,7 @@ function renderShell(entry = "/studio") {
       <Routes>
         <Route path="/" element={<AppShell />}>
           <Route path="studio" element={<Studio />} />
-          <Route path="browse" element={<h1>Browse the studio</h1>} />
+          <Route path="browse" element={<h1>Browse the catalogue</h1>} />
         </Route>
       </Routes>
     </MemoryRouter>,

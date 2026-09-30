@@ -71,6 +71,23 @@
   --t-rise: 240ms;
   --t-move: 380ms;
   --t-wash: 520ms;
+
+  /*
+    The sticky header's height, for anything that sticks beneath it. Two rows
+    below `md`, one above it and in the propped posture (see `.nav-inline`).
+    Measured, not derived - update it if the header changes.
+  */
+  --header-h: 7.6rem;
+}
+@media (min-width: 768px) {
+  :root {
+    --header-h: 4.35rem;
+  }
+}
+@media (orientation: landscape) and (max-height: 520px) and (min-width: 640px) {
+  :root {
+    --header-h: 4.35rem;
+  }
 }
 
 @layer base {
@@ -436,6 +453,87 @@
       grid-row: 2;
     }
   }
+
+  /*
+    ─────────────────────────────────────────────────────────────────────────
+    A warm-up's practice sheet: the example you are painting towards, the
+    guide you are following, and a photo to look at where there is one.
+    ─────────────────────────────────────────────────────────────────────────
+    The point of the layout is that the example and the steps stay in view
+    together while someone paints. DOM order is example, guide, photo - the
+    order you need them in - and wide screens only *place* them, so the
+    reading order a screen reader gets is the order on screen.
+
+    The example and the guide share `.warmup-main`, and that wrapper is what
+    bounds the sticky example: it lets go where the guide ends, so it never
+    rides over the photo and the two are never on screen as one stack.
+  */
+  .warmup-body,
+  .warmup-main {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .warmup-example-art {
+    max-height: var(--example-cap, none);
+  }
+
+  /*
+    Upright phone: one column, so the example sticks under the header while
+    the steps scroll beneath it, capped low enough to leave room to read.
+    Only where the screen is tall enough to spare it.
+  */
+  @media (max-width: 767.98px) and (orientation: portrait) and (min-height: 640px) {
+    .warmup-example {
+      --example-cap: 22vh;
+      --example-cap: 22svh;
+      position: sticky;
+      top: var(--header-h);
+      z-index: 2;
+      margin-inline: -0.25rem;
+      padding: 0.35rem 0.25rem 0.3rem;
+      background: rgb(var(--surface-raised));
+      box-shadow: 0 12px 12px -14px rgb(40 38 30 / 0.45);
+    }
+  }
+
+  /*
+    Side by side from `md`, and in the propped posture at any width: the
+    example holds the left column for the whole length of the guide, and the
+    photo follows in the guide's column. Both grids carry the same columns, so
+    the photo lines up under the guide without needing subgrid.
+  */
+  @media (min-width: 768px), (orientation: landscape) and (max-height: 520px) {
+    .warmup-body,
+    .warmup-main {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      column-gap: 2rem;
+      row-gap: 1.75rem;
+      align-items: start;
+    }
+    .warmup-main {
+      grid-column: 1 / -1;
+    }
+    .warmup-example {
+      position: sticky;
+      top: calc(var(--header-h) + 1rem);
+    }
+    .warmup-photo {
+      grid-column: 2;
+    }
+  }
+
+  /* Propped on its side, height is the scarce axis: the example fits the screen. */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .warmup-body,
+    .warmup-main {
+      column-gap: 1.25rem;
+    }
+    .warmup-example {
+      --example-cap: calc(100vh - var(--header-h) - 4.5rem);
+      --example-cap: calc(100svh - var(--header-h) - 4.5rem);
+      top: calc(var(--header-h) + 0.5rem);
+    }
+  }
 }
 
 @layer utilities {
@@ -708,6 +806,23 @@ html[data-wash="rewet"]::view-transition-group(piece-art) {
   }
 
   /*
+    Stacked, the piece's name sits under the plate, below its caption and
+    credit, so a tall reference could push the title off the first screen:
+    a 9:16 door on a Pixel 7 put it 145px below. The cap here leaves room for
+    that stack. 27.5rem is the plate's top (209px on a phone, under the header
+    and back link) plus the tallest caption-to-title stack in the catalogue
+    (226px), measured across all 189 pieces on 29/09/2026. In rem, so it grows
+    with the text when someone enlarges it. Side by side (lg and up) the title
+    has its own column and the generous cap above stands.
+  */
+  @media (max-width: 1023.98px) and (orientation: portrait) {
+    .detail-art {
+      --detail-cap: min(62vh, calc(100vh - 27.5rem));
+      --detail-cap: min(62svh, calc(100svh - 27.5rem));
+    }
+  }
+
+  /*
     Short and wide is the propped posture. Height is the scarce axis, so the
     plate and the piece's identity sit side by side rather than stacked - the
     same move `.enlarge` makes at the same breakpoint, for the same reason.
@@ -799,6 +914,58 @@ html[data-wash="rewet"]::view-transition-group(piece-art) {
     }
     .featured-actions.featured-actions {
       margin-top: 0.5rem;
+    }
+    /*
+      Real pieces, from 29/09/2026, carry a two- or three-line prompt and a
+      credit line, and on a propped phone that pushed "Open this piece" below
+      the fold for 109 of 189 pieces on a Pixel 7 and all 189 on a 667x375
+      phone. Three trades, in order of how little they cost:
+
+      - The full Save button goes. The plate's own heart saves the same piece,
+        one tap away and in the first screen; the duplicate was what wrapped
+        the actions onto a second row in a narrow column.
+      - The title drops to the size the narrowest phone already uses.
+      - The prompt drops a step, still in the display face and still whole:
+        it is the piece's invitation, so it is never clamped.
+    */
+    .featured-save-full.featured-save-full {
+      display: none;
+    }
+    .featured-title.featured-title {
+      font-size: 1.45rem;
+    }
+    .featured-prompt.featured-prompt {
+      font-size: 0.98rem;
+    }
+  }
+
+  /*
+    The tightest propped phones (667x375 and the like) still missed by up to
+    36px after the trades above, on 129 of 189 pieces. Here the page title goes
+    from sight, and only here: the header's "Today" tab sits directly above it,
+    already marked as the current page, so the title repeated it at the cost of
+    ~37px. It stays in the document as the page's h1 for screen readers, the
+    same technique as Tailwind's sr-only. Wider phones keep it on screen.
+  */
+  @media (orientation: landscape) and (max-height: 520px) and (max-width: 739.98px) {
+    .today-title.today-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .today-grid.today-grid {
+      margin-top: 0;
+    }
+    /* With the title gone the page's own top padding can halve; this was the
+       last 1px on four pieces. */
+    .today-page.today-page {
+      padding-top: 0.25rem;
     }
   }
 

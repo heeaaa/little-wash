@@ -81,12 +81,20 @@ route with their tail and query intact; anything unrecognised goes to Today.
   a `<dialog>` bottom sheet below `lg` and to the sticky rail at `lg+`. The
   catalogue deliberately is not on this screen - "deal me another" is the
   one-tap alternative and Browse owns the library.
-- **Browse** - the full catalogue (12 references) with the same control
+- **Browse** - the full catalogue (189 curated references) with the same control
   hierarchy, plus curated collections.
 - **Detail** - the reference uncropped on a fixed neutral mat, its prompt and
   tip where it has them, its palette, and an enlarged view for use beside a
   physical sketchbook.
-- **Exercises** - 6 brushwork and colour warm-ups.
+- **Exercises** (the Warm-ups page) - five brushwork and colour warm-ups, each
+  with three to five variations (20 in all) that teach the same technique
+  through a different composition. Opening one expands it in place into a
+  practice sheet: an illustrated example, suggested colours and materials with
+  substitutions, three to five steps and one thing to notice, plus a credited
+  inspiration photo on the five scenic variations. The example and the steps
+  stay in view together, and an optional "Keep screen on" switch uses the
+  Screen Wake Lock API where the browser has it. Filter, warm-up and variation
+  live in the URL.
 - **Your studio** (`#/studio`) - two sections: pieces you set aside, and a
   record of what you have painted. The record is dated and deliberately plain:
   no streaks, no totals framed as progress, no relative dates. See "The painted
@@ -106,9 +114,10 @@ whole catalogue.
 
 React 18, TypeScript (strict), Vite and Tailwind CSS, routed with `HashRouter`
 so deep links survive a static host with no rewrite rules. Vitest and React
-Testing Library cover the logic, the screens and the routing (108 tests),
-and Playwright covers the journeys end to end (31 tests in 4 spec files,
-93 checks across phone, propped-phone and desktop).
+Testing Library cover the logic, the screens, the routing and the catalogue
+pipeline (642 tests in 41 files), and Playwright covers the journeys end to end
+(53 tests in 8 spec files, 159 checks across phone, propped-phone and desktop).
+Counts as of 29/09/2026.
 Filtering, saving and "deal me another" are all simulated on-device.
 
 Piece changes are animated with the View Transitions API under one rule - the
@@ -124,11 +133,13 @@ src/
   routes.tsx     One route tree, shared by the app and the tests
   screens/       Today, Browse, Detail, Exercises, AppShell
   components/    Reusable UI (plus studio/ ornaments)
-  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, types, wash (motion)
-  data/          Mock catalogue, collections, exercises
-  assets/refs/   Original placeholder watercolour SVGs
+  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, warm-up selection, types, wash (motion)
+  hooks/         Favourites, painted record, sources, and the screen wake lock
+  data/          The generated catalogue, collections, warm-ups and their inspiration photos
+  assets/refs/   The retired placeholder SVGs, now unit-test fixtures only
+  fonts.ts       The self-hosted brand faces
   assets/brand/  Generated in-app brand mark
-e2e/             Playwright journeys (discovery, filtering, posture, accessibility)
+e2e/             Playwright journeys (discovery, filtering, posture, accessibility, warm-ups)
 public/          Favicons, app icons, site.webmanifest
 assets/          Brand originals (keep intact)
 ```
@@ -153,15 +164,19 @@ The official little wash brand is the visual source of truth.
 Contrast rules that constrain use: Ink and Deep teal pass AA on Paper; Rose is a
 graphic accent only (it fails AA for small text); Sage is for fills, never text.
 Colour is only ever applied through the tokens on `:root` in `src/index.css`.
-Fonts currently load from Google Fonts and must be self-hosted before
-production.
+Fonts are self-hosted from the Fontsource packages (SIL OFL 1.1) and bundled
+by Vite, so nothing loads from a third party; see `src/fonts.ts`. Caveat is
+part of the brand but not bundled until something uses it.
 
 ## Assets
 
 Brand originals live in `assets/` and are never edited; everything in
 `src/assets/brand/` and `public/` is a regenerable derivative. Reference artwork
-is original CC0 placeholder watercolour SVG, labelled as placeholder and
-carried under the `placeholder` source id. Full asset mapping is in `DESIGN.md`.
+is the curated catalogue of 189 photographs and museum works from Pexels,
+Unsplash and The Met, listed with their credits in `docs/CREDITS.md`. Pexels
+and Unsplash images load from those services' own image servers; The Met's are
+downloaded at build and served from `public/references/met/`. Full asset
+mapping is in `DESIGN.md`.
 
 Every reference carries a structured `credit` - maker, institution, object URL,
 licence, capture date - and **every surface that shows a reference shows who

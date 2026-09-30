@@ -232,7 +232,20 @@ export function buildCatalog(
  * Every reference, with its maker, its holder, its licence and a link. The app
  * credits each piece where it appears; this is the whole list in one place.
  */
-export function renderCredits(references: readonly PaintReference[]): string {
+/**
+ * A photo shown beside a warm-up as inspiration. Not a catalogue reference -
+ * it is approved and fixed in src/data/inspiration.ts - but it is somebody's
+ * photograph, so it is credited in the same file as everything else.
+ */
+export interface CreditedInspiration {
+  title: string;
+  credit: Credit;
+}
+
+export function renderCredits(
+  references: readonly PaintReference[],
+  inspiration: readonly CreditedInspiration[] = [],
+): string {
   const bySource = new Map<string, PaintReference[]>();
   for (const reference of references) {
     const key = reference.credit.sourceId;
@@ -263,6 +276,24 @@ export function renderCredits(references: readonly PaintReference[]): string {
       const c = r.credit;
       lines.push(
         `| ${r.title} | ${c.creator ?? "Not recorded"} | ${c.dateDisplay ?? "-"} | ${c.licence.name} | [View](${c.objectUrl}) |`,
+      );
+    }
+    lines.push("");
+  }
+
+  if (inspiration.length > 0) {
+    lines.push(
+      "## Warm-up photo inspiration",
+      "",
+      `${inspiration.length} photograph(s) shown beside a warm-up, never as the example. ` +
+        "Chosen and approved by hand, and fixed to their variation in `src/data/inspiration.ts`.",
+      "",
+      "| Photo | Photographer | Platform | Licence | Source |",
+      "| --- | --- | --- | --- | --- |",
+    );
+    for (const { title, credit: c } of inspiration) {
+      lines.push(
+        `| ${title} | ${c.creator ?? "Not recorded"} | ${c.institution} | ${c.licence.name} | [View](${c.objectUrl}) |`,
       );
     }
     lines.push("");

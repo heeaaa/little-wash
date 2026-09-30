@@ -43,17 +43,17 @@ This source requires a platform credit: "Photos provided by Pexels".
 
 | Reference | Maker | Date | Licence | Source |
 | --- | --- | --- | --- | --- |
-| Close-up of lemon, lime, and orange on a yellow surface, sho | Cup of  Couple | - | Pexels License | [View](https://www.pexels.com/photo/an-orange-fruit-beside-lime-and-lemon-7657216/) |
-| Colorful grapefruit and lemon half on a vibrant yellow plate | Ivan S | - | Pexels License | [View](https://www.pexels.com/photo/flat-lay-with-citrus-fruits-7703606/) |
-| High angle of whole ripe lemons and mandarins with green lea | Sevde Şen | - | Pexels License | [View](https://www.pexels.com/photo/citrus-fruits-on-black-cloth-in-sunlight-7614253/) |
-| Vibrant close-up of sliced citrus and kiwi fruits showcasing | Lukas Blazek | - | Pexels License | [View](https://www.pexels.com/photo/photo-of-sliced-kiwi-lemon-and-orange-fruits-1414126/) |
-| Vibrant halves of citrus fruits including oranges, grapefrui | Bruna Branco | - | Pexels License | [View](https://www.pexels.com/photo/close-up-photo-of-sliced-fruits-6461831/) |
-| Bright and juicy slices of grapefruit and orange arranged on | Alena Darmel | - | Pexels License | [View](https://www.pexels.com/photo/sliced-citrus-fruits-on-orange-and-yellow-surface-7223306/) |
-| Colorful orange slices on a contrasting green and white back | Tamanna Rumee | - | Pexels License | [View](https://www.pexels.com/photo/orange-slices-on-green-and-white-background-9108284/) |
-| Bright orange slices and green leaves on a yellow background | Tamanna Rumee | - | Pexels License | [View](https://www.pexels.com/photo/sliced-orange-fruit-and-leaves-9108253/) |
-| Elegant close-up of a blooming white peony flower with soft | Fez Brook | - | Pexels License | [View](https://www.pexels.com/photo/close-up-of-a-white-peony-flower-against-black-38039807/) |
-| Close-up of a white and yellow Gazania flower with dew again | Abdus Samad Mahkri | - | Pexels License | [View](https://www.pexels.com/photo/vibrant-gazania-flower-with-dew-drops-37029833/) |
-| Close-up of a vibrant yellow daffodil bloom set against a st | Larry Siegel | - | Pexels License | [View](https://www.pexels.com/photo/a-daffodil-in-bloom-11213118/) |
+| Lemon, Lime and Orange | Cup of  Couple | - | Pexels License | [View](https://www.pexels.com/photo/an-orange-fruit-beside-lime-and-lemon-7657216/) |
+| Grapefruit and Lemon Half | Ivan S | - | Pexels License | [View](https://www.pexels.com/photo/flat-lay-with-citrus-fruits-7703606/) |
+| Lemons and Mandarins | Sevde Şen | - | Pexels License | [View](https://www.pexels.com/photo/citrus-fruits-on-black-cloth-in-sunlight-7614253/) |
+| Citrus and Kiwi Slices | Lukas Blazek | - | Pexels License | [View](https://www.pexels.com/photo/photo-of-sliced-kiwi-lemon-and-orange-fruits-1414126/) |
+| Citrus Halves | Bruna Branco | - | Pexels License | [View](https://www.pexels.com/photo/close-up-photo-of-sliced-fruits-6461831/) |
+| Grapefruit and Orange Slices | Alena Darmel | - | Pexels License | [View](https://www.pexels.com/photo/sliced-citrus-fruits-on-orange-and-yellow-surface-7223306/) |
+| Orange Slices on Green | Tamanna Rumee | - | Pexels License | [View](https://www.pexels.com/photo/orange-slices-on-green-and-white-background-9108284/) |
+| Orange Slices and Leaves | Tamanna Rumee | - | Pexels License | [View](https://www.pexels.com/photo/sliced-orange-fruit-and-leaves-9108253/) |
+| White Peony | Fez Brook | - | Pexels License | [View](https://www.pexels.com/photo/close-up-of-a-white-peony-flower-against-black-38039807/) |
+| Gazania with Dew | Abdus Samad Mahkri | - | Pexels License | [View](https://www.pexels.com/photo/vibrant-gazania-flower-with-dew-drops-37029833/) |
+| Yellow Daffodil | Larry Siegel | - | Pexels License | [View](https://www.pexels.com/photo/a-daffodil-in-bloom-11213118/) |
 | Dried flower with lots of leaves | Tiia Pakk | - | Pexels License | [View](https://www.pexels.com/photo/person-holding-green-and-black-plant-4350771/) |
 | Pink and white ranunculus flower | Siegfried Poepperl | - | Pexels License | [View](https://www.pexels.com/photo/vibrant-pink-and-white-ranunculus-on-black-background-38566138/) |
 | Back View of a Daisy | Olivia Marry | - | Pexels License | [View](https://www.pexels.com/photo/vibrant-yellow-gerbera-daisy-close-up-photography-29071443/) |
@@ -217,4 +217,16 @@ This source requires a platform credit: "Photos from Unsplash".
 | Two Glass Bottles on Teal | Mathias Reding | 2022 | Unsplash License | [View](https://unsplash.com/photos/a-couple-glass-bottles-on-a-shelf-oszfWeeW6Qo?utm_source=little_wash&utm_medium=referral) |
 | Four Dried Stems | Ksenia Mostovaya | 2021 | Unsplash License | [View](https://unsplash.com/photos/white-and-brown-wheat-on-white-surface-reYY53ou0oA?utm_source=little_wash&utm_medium=referral) |
 | Wall Lantern and Shadow | the iop | 2025 | Unsplash License | [View](https://unsplash.com/photos/an-old-fashioned-lantern-casts-a-shadow-on-wall-pmSWkYHb1dY?utm_source=little_wash&utm_medium=referral) |
+
+## Warm-up photo inspiration
+
+5 photograph(s) shown beside a warm-up, never as the example. Chosen and approved by hand, and fixed to their variation in `src/data/inspiration.ts`.
+
+| Photo | Photographer | Platform | Licence | Source |
+| --- | --- | --- | --- | --- |
+| A single cloud | engin akyurt | Unsplash | Unsplash License | [View](https://unsplash.com/photos/white-clouds-and-blue-sky-during-daytime-A9_IsUtjHm4?utm_source=little_wash&utm_medium=referral) |
+| Misty mountain ridges | Mehmet Turgut  Kirkgoz | Pexels | Pexels License | [View](https://www.pexels.com/photo/mountain-peaks-shrouded-in-the-morning-fog-16466665/) |
+| Clear sky over the sea | Je Hwan Lee | Pexels | Pexels License | [View](https://www.pexels.com/photo/endless-blue-ocean-horizon-under-clear-sky-36475851/) |
+| Evening sky gradient | César Couto | Unsplash | Unsplash License | [View](https://unsplash.com/photos/a-plane-flying-in-the-sky-at-sunset-Kg2M24Pr9aU?utm_source=little_wash&utm_medium=referral) |
+| Hills fading into mist | Mihály Köles | Unsplash | Unsplash License | [View](https://unsplash.com/photos/green-trees-on-mountain-during-daytime-5V-W4zTqZ74?utm_source=little_wash&utm_medium=referral) |
 

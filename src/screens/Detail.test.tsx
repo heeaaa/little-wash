@@ -125,3 +125,43 @@ describe("Detail when a piece has no prompt or tip", () => {
     expect(screen.queryByRole("heading", { name: /Tip/ })).not.toBeInTheDocument();
   });
 });
+
+describe("Detail's plate is shaped by its reference", () => {
+  /*
+    Found at the switch to the curated catalogue, 29/09/2026. `.detail-art`
+    caps its width with `calc(var(--detail-cap) * var(--ar, 1))`, but `--ar`
+    was only set on the artwork inside it, and a custom property never reaches
+    its parent. The cap therefore always assumed a square: a 9:16 door on a
+    phone got a 380px-wide plate 655px tall, pushing the title off the first
+    screen. Square placeholders hid it, because 1 is their right answer.
+  */
+  function plateFor(width: number, height: number) {
+    const reference = makeReference("shaped", {
+      image: { delivery: "remote", baseUrl: "https://images.example.test/p.jpg", intrinsicWidth: width, intrinsicHeight: height, lqip: null },
+    });
+    const { container } = render(
+      <MemoryRouter initialEntries={[{ pathname: "/piece/shaped", search: "", state: null }]}>
+        <Routes>
+          <Route
+            path="/piece/:id"
+            element={
+              <AppProvider references={[reference]}>
+                <Detail />
+              </AppProvider>
+            }
+          />
+        </Routes>
+      </MemoryRouter>,
+    );
+    return container.querySelector<HTMLElement>(".detail-art")!;
+  }
+
+  it("carries the reference's own ratio on the plate that is capped", () => {
+    expect(plateFor(900, 1600).style.getPropertyValue("--ar")).toBe(String(900 / 1600));
+  });
+
+  it("uses the same clamp as the artwork, so a strip cannot collapse the plate", () => {
+    expect(plateFor(400, 2000).style.getPropertyValue("--ar")).toBe("0.5");
+    expect(plateFor(4000, 1000).style.getPropertyValue("--ar")).toBe("2");
+  });
+});

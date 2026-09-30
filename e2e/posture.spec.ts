@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { isInFirstScreen, pieceIds, ready } from "./support";
+import { enlargedFill, isInFirstScreen, pieceIds, ready } from "./support";
 
 /**
  * The propped phone. PRODUCT.md names this scene - "a device set down at an
@@ -73,20 +73,7 @@ test.describe("the propped-phone posture", () => {
     await page.getByRole("button", { name: /^enlarge$/i }).click();
     await expect(page.getByRole("dialog")).toBeVisible();
 
-    const fill = await page.evaluate(() => {
-      const img = document.querySelector("dialog[open] img") as HTMLImageElement;
-      const box = img.getBoundingClientRect();
-      const scale = Math.min(box.width / img.naturalWidth, box.height / img.naturalHeight);
-      const painted = Math.min(img.naturalWidth * scale, img.naturalHeight * scale);
-      return {
-        ratio: painted / Math.min(window.innerWidth, window.innerHeight),
-        clipped:
-          box.top < -1 ||
-          box.left < -1 ||
-          box.bottom > window.innerHeight + 1 ||
-          box.right > window.innerWidth + 1,
-      };
-    });
+    const fill = await enlargedFill(page);
     expect(fill.clipped).toBe(false);
     expect(fill.ratio).toBeGreaterThan(0.8);
   });

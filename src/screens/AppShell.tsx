@@ -3,6 +3,7 @@ import { AppProvider, useApp } from "@/state/AppContext";
 import { paintedReferences, savedReferences } from "@/lib/catalog";
 import { platformAttributions } from "@/lib/sources/attribution";
 import { CATALOGUE } from "@/data/catalogue";
+import { INSPIRATION_PHOTOS } from "@/data/inspiration";
 import { Icon } from "@/components/Icon";
 import { WashFilter } from "@/components/WashFilter";
 import { SavedPalette } from "@/components/SavedPalette";
@@ -158,10 +159,20 @@ function Header() {
  * true: switch a source off and its line goes with it.
  */
 function PlatformCredits() {
-  const { catalogue } = useApp();
-  const credits = platformAttributions(
-    catalogue.map((reference) => reference.credit.sourceId),
-  );
+  const { catalogue, isSourceEnabled } = useApp();
+  /*
+    Warm-up inspiration photos come from the same platforms and owe the same
+    credit. They are named here rather than assumed to be covered by the
+    catalogue, and they obey the same switch: a source turned off hides its
+    warm-up photos too.
+  */
+  const inspiration = Object.values(INSPIRATION_PHOTOS)
+    .map((photo) => photo.credit.sourceId)
+    .filter(isSourceEnabled);
+  const credits = platformAttributions([
+    ...catalogue.map((reference) => reference.credit.sourceId),
+    ...inspiration,
+  ]);
 
   if (credits.length === 0) return null;
 
@@ -187,9 +198,9 @@ function Footer() {
     <footer className="relative z-10 border-t border-line px-4 py-6 sm:px-6">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 text-[0.78rem] text-ink-faint">
         <p className="text-pretty">
-          Design-exploration prototype. All data is local to your browser and
-          artwork is original placeholder illustration (CC0). Saving, filtering,
-          Surprise me and exercises are simulated on-device - no account or network.
+          Design-exploration prototype. There is no account yet: what you save,
+          paint and switch off stays in this browser. References are real
+          photographs and museum works, credited on every piece.
         </p>
         <PlatformCredits />
         <p>

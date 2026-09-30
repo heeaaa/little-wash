@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { WashLink } from "@/components/WashLink";
 import { useApp } from "@/state/AppContext";
@@ -13,6 +13,7 @@ import { EnlargeDialog } from "@/components/EnlargeDialog";
 import { SubjectTag } from "@/components/SubjectTag";
 import { WashiTag } from "@/components/studio/WashiTag";
 import { Icon } from "@/components/Icon";
+import { plateRatio } from "@/lib/sources/images";
 import { pigment } from "@/lib/types";
 import { PIECE_ART, move } from "@/lib/wash";
 
@@ -52,6 +53,8 @@ export function Detail() {
     );
   }
 
+  const ratio = plateRatio(reference);
+
   return (
     <div className="detail-page mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:py-10">
       <WashLink
@@ -65,9 +68,13 @@ export function Detail() {
         <div className="min-w-0">
           <div
             className="detail-art relative rounded-card border border-line bg-surface-raised p-3 shadow-plate sm:p-4"
-            style={{
-              boxShadow: `0 0 0 4px ${pigment(reference.subject, 0.28)}, var(--shadow-plate)`,
-            }}
+            style={
+              {
+                boxShadow: `0 0 0 4px ${pigment(reference.subject, 0.28)}, var(--shadow-plate)`,
+                // The cap in index.css reads this; it must be on the plate itself.
+                ...(ratio ? { "--ar": String(ratio) } : {}),
+              } as CSSProperties
+            }
           >
             <RefArt
               reference={reference}

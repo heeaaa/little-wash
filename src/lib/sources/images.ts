@@ -83,3 +83,22 @@ export function buildImageSources(
     lqip: image.lqip,
   };
 }
+
+/**
+ * The shape a reference's plate takes: its width over its height.
+ *
+ * Clamped to the range the ingestion pipeline enforces, so a plate can never
+ * be asked to be a 6:1 strip; a reference outside it would not have reached
+ * the catalogue, and the clamp stops a hand-edited entry collapsing the layout.
+ * Null when the size is unknown, so callers keep their fallback shape.
+ *
+ * One function because two elements need the same number: the artwork, which
+ * takes the shape, and Detail's plate around it, which caps its width by it.
+ * A custom property set on the artwork cannot reach the plate, which is how
+ * the plate came to assume every reference was square.
+ */
+export function plateRatio(reference: { image: ImageSet }): number | null {
+  const { intrinsicWidth: width, intrinsicHeight: height } = reference.image;
+  if (!(width > 0 && height > 0)) return null;
+  return Math.min(2, Math.max(0.5, width / height));
+}

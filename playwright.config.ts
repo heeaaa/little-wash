@@ -41,7 +41,15 @@ export default defineConfig({
     baseURL: BASE_URL,
     // Kept on the first failure only, so a red run is diagnosable without
     // every green run writing a trace nobody opens.
-    trace: "retain-on-failure",
+    /*
+      DOM snapshots, network and sources, but no screencast. With the real
+      189-piece catalogue the screencast frames alone took the filtering
+      journey from 7.7s to 37s, and past the 30s timeout, on every run - pass
+      or fail - because a trace is recorded before anyone knows it will be
+      kept. Measured 29/09/2026: 10.2s with this setting. The failure
+      screenshot below is separate and still taken.
+    */
+    trace: { mode: "retain-on-failure", screenshots: false },
     screenshot: "only-on-failure",
     video: "off",
   },

@@ -1582,7 +1582,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "close-up-of-lemon-lime-and-orange-on-a-yellow-su-7216",
-    "title": "Close-up of lemon, lime, and orange on a yellow surface, sho",
+    "title": "Lemon, Lime and Orange",
     "subject": "fruit",
     "difficulty": "steady",
     "minutes": 25,
@@ -1635,7 +1635,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "colorful-grapefruit-and-lemon-half-on-a-vibrant--3606",
-    "title": "Colorful grapefruit and lemon half on a vibrant yellow plate",
+    "title": "Grapefruit and Lemon Half",
     "subject": "fruit",
     "difficulty": "steady",
     "minutes": 30,
@@ -1688,7 +1688,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "high-angle-of-whole-ripe-lemons-and-mandarins-wi-4253",
-    "title": "High angle of whole ripe lemons and mandarins with green lea",
+    "title": "Lemons and Mandarins",
     "subject": "fruit",
     "difficulty": "gentle",
     "minutes": 20,
@@ -1740,7 +1740,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "vibrant-close-up-of-sliced-citrus-and-kiwi-fruit-4126",
-    "title": "Vibrant close-up of sliced citrus and kiwi fruits showcasing",
+    "title": "Citrus and Kiwi Slices",
     "subject": "fruit",
     "difficulty": "steady",
     "minutes": 35,
@@ -1793,7 +1793,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "vibrant-halves-of-citrus-fruits-including-orange-1831",
-    "title": "Vibrant halves of citrus fruits including oranges, grapefrui",
+    "title": "Citrus Halves",
     "subject": "fruit",
     "difficulty": "stretch",
     "minutes": 25,
@@ -1838,7 +1838,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "bright-and-juicy-slices-of-grapefruit-and-orange-3306",
-    "title": "Bright and juicy slices of grapefruit and orange arranged on",
+    "title": "Grapefruit and Orange Slices",
     "subject": "fruit",
     "difficulty": "steady",
     "minutes": 15,
@@ -1891,7 +1891,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "colorful-orange-slices-on-a-contrasting-green-an-8284",
-    "title": "Colorful orange slices on a contrasting green and white back",
+    "title": "Orange Slices on Green",
     "subject": "fruit",
     "difficulty": "stretch",
     "minutes": 25,
@@ -1943,7 +1943,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "bright-orange-slices-and-green-leaves-on-a-yello-8253",
-    "title": "Bright orange slices and green leaves on a yellow background",
+    "title": "Orange Slices and Leaves",
     "subject": "fruit",
     "difficulty": "steady",
     "minutes": 25,
@@ -1988,7 +1988,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "elegant-close-up-of-a-blooming-white-peony-flowe-9807",
-    "title": "Elegant close-up of a blooming white peony flower with soft",
+    "title": "White Peony",
     "subject": "botanical",
     "difficulty": "stretch",
     "minutes": 45,
@@ -2041,7 +2041,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "close-up-of-a-white-and-yellow-gazania-flower-wi-9833",
-    "title": "Close-up of a white and yellow Gazania flower with dew again",
+    "title": "Gazania with Dew",
     "subject": "botanical",
     "difficulty": "steady",
     "minutes": 30,
@@ -2094,7 +2094,7 @@ export const CATALOG: PaintReference[] = [
   },
   {
     "id": "close-up-of-a-vibrant-yellow-daffodil-bloom-set--3118",
-    "title": "Close-up of a vibrant yellow daffodil bloom set against a st",
+    "title": "Yellow Daffodil",
     "subject": "botanical",
     "difficulty": "gentle",
     "minutes": 15,

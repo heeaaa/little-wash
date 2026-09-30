@@ -1,6 +1,43 @@
 # Work status - little wash
 
-_Last updated: 28/09/2026_
+_Last updated: 30/09/2026_
+
+## Checkpoint - 30/09/2026: Warm-ups and catalogue ready for main
+
+**Objective.** Ship the curated catalogue, self-hosted fonts and rebuilt
+warm-ups page to `main`. Branch `feat/real-catalogue-and-fonts`, pushed, with
+a PR into `main` for CI. **Netlify is connected to `main`** (user-confirmed
+30/09/2026), so merging that PR is the public deploy.
+
+**Commits on the branch.** `161be52` catalogue and self-hosted fonts;
+`17b1ec7` warm-ups with variations, guides and pictures (user-reviewed and
+approved 30/09/2026); `66a2ebe` Browse's h1 is "Browse the catalogue" (closes
+"Still open" item 2 below).
+
+**Warm-ups decisions (user-approved 29/09/2026).**
+
+- Layout: the list expands in place, one warm-up open at a time.
+- Visuals: 20 original SVG illustrations, plus five photos the user picked
+  (soft clouds, layered mountains, fading sky, sunset wash, misty landscape),
+  fixed to their variation - no shuffling.
+- A "Keep screen on" switch (Screen Wake Lock), hidden where unsupported.
+- Not route-split: +14.1 kB gzip on the main chunk (111.66 -> 125.80 kB,
+  468.8 -> 512.3 kB raw), which crosses Vite's 500 kB advisory. Revisit with
+  the PWA work.
+
+**Verified locally 30/09/2026, before commit.** `npm run lint` and
+`npm run typecheck` exit 0; `npm run test:coverage` 642/642 in 41 files,
+96.66 statements / 93.15 branches / 91.75 functions / 96.66 lines;
+`npm run test:e2e` (build + Playwright) 159/159.
+
+**Not verified.** Wake lock, install and touch on a real device.
+
+**Next.** CI on the PR, then merge when the user says so. After that, on the
+live site: a real-phone check, then the go-live tidy-ups (README still says
+"working name ... prototype ... mock data"; DESIGN.md backlog is stale; branch
+protection; a short privacy note; the two moderate `react-router` advisories).
+PWA/offline is the next feature: `docs/plans/pwa-offline.md`, whose
+Workstream 1 (self-hosted fonts) is already done.
 
 ## Where this stands - 19/09/2026
 
@@ -32,7 +69,10 @@ branches with thresholds enforced.
    objection. The second one was answered by rules rather than by restraint:
    see "The painted mark, and the register it must keep" in `DESIGN.md`, and
    the register tests in `src/screens/Painted.test.tsx`.
-2. **"Browse the studio" vs "Your studio".** Two uses of one word. A copy call.
+2. ~~**"Browse the studio" vs "Your studio".**~~ **Closed 30/09/2026** - Browse's
+   h1 is now "Browse the catalogue" (user-approved). "Studio" means only the
+   user's own space: the nav item, `/studio`, the header palette and "Your
+   studio".
 3. **Branch protection.** Workflow YAML cannot require its own checks. Require
    *Lint, types, unit tests, build* and *End-to-end journeys* on `main` in
    repository settings.
@@ -1462,3 +1502,69 @@ unreferenced until the switchover.
 0. `npm run test:coverage` 569/569, 96.14 statements / 92.94 branches.
 `catalog:build` byte-identical to the committed output. `npm run build`
 exit 0. `npm run test:e2e` 129/129.
+
+## Session checkpoint - 29/09/2026: real references live, fonts self-hosted
+
+**Objective.** The curator asked to switch the app to the curated catalogue
+and self-host the fonts. Branch `feat/real-catalogue-and-fonts` off `main`
+at `cfd3957`. **Not pushed and no PR, at the curator's request:** they have
+a change to add first.
+
+**Switchover.** `src/data/catalogue.ts` now re-exports the generated
+catalogue: 189 references in the app, the twelve placeholders kept only as
+unit-test fixtures. The footer no longer claims placeholder art or "no
+network"; Pexels and Unsplash images load from their own servers.
+
+**A real bug the placeholders hid.** Detail's plate cap reads `--ar` on
+`.detail-art`, but the ratio was set on the mat inside it, and custom
+properties inherit downward only, so every Detail plate was sized as a
+square. Test first: `Detail.test.tsx` failed with `expected '' to be
+'0.5625'`, then passed once `Detail` set `--ar` on the plate from a shared
+`plateRatio` (`src/lib/sources/images.ts`).
+
+**First screen, measured across all 189 pieces** at 412x839, 863x360,
+667x375 and 1440x900 (scratchpad sweep, not a committed test). Real prompts
+and credits pushed the Detail title and Today's actions off screen. Fixes,
+all in `src/index.css` and recorded in DESIGN.md: an upright-phone Detail
+cap that leaves room for the title; in short landscape Today hides the
+duplicate full Save (the plate heart stays), steps the title and prompt down
+one size, and under 740px wide keeps "Today's wash" as a screen-reader-only
+h1. Result: 0 failures on all four screens. **The curator may veto any of
+these trades.**
+
+**Titles.** Eleven Pexels titles were truncated captions; renamed in
+`catalog/approved/pexels.json`, ids unchanged: Lemon, Lime and Orange;
+Grapefruit and Lemon Half; Lemons and Mandarins; Citrus and Kiwi Slices;
+Citrus Halves; Grapefruit and Orange Slices; Orange Slices on Green; Orange
+Slices and Leaves; White Peony; Gazania with Dew; Yellow Daffodil.
+
+**Fonts.** Fontsource packages (`@fontsource/libre-baskerville`,
+`@fontsource/source-sans-3`, 5.3.0, OFL-1.1, no dependencies) imported in
+`src/fonts.ts`; the Google links are gone from `index.html`. This settles
+the parked PWA plan's two font questions: Caveat and Source Sans 3 italic
+have no job, so they are not bundled; `font-medium` Libre Baskerville
+headings stay at 400, as the approved screens always drew them. A first
+visit to Today downloads five Latin files, 87 KB. `e2e/fonts.spec.ts`
+fails on any Google Fonts request (red on the old code: 6 per project) and
+on any face the page falls back from (red when the 600 import was removed:
+the browser used 700). `src/fonts.ts` joins `main.tsx` in the coverage
+exclusions as bootstrap.
+
+**Test infrastructure.** `enlargedFill` in `e2e/support.ts` measures the
+enlarged image along the viewport's short axis; the old formula only held
+for square images. Playwright traces no longer record screencast frames,
+which had pushed the filtering journey from 7.7s to 37s.
+
+**Commands and results**, on the final working tree. `npm run lint` exit 0.
+`npm run typecheck` exit 0. `npm run test:coverage` 571/571 in 36 files,
+96.31 statements / 92.90 branches. `catalog:build` output unchanged (no
+drift). `npm run test:e2e` (build included) 135/135 in 1.7m. Visual pass at
+390, 768 and 1440 on eight screens: no horizontal overflow, no broken
+images, no console errors.
+
+**Known, not changed here.** `npm audit` reports the same 8 findings as
+`main`; the only production one is `react-router` (2 moderate). Netlify still
+needs the curator to connect the repository in its UI.
+
+**Next action.** Committed locally on the branch, not pushed. The curator
+adds their change; then push and open the PR when they say so.

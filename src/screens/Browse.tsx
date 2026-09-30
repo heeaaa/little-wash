@@ -128,7 +128,7 @@ export function Browse() {
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
       <div className="mb-8 max-w-reading">
         <h1 className="text-balance font-display text-[2rem] font-medium leading-tight tracking-tight text-ink sm:text-[2.5rem]">
-          Browse the studio
+          Browse the catalogue
         </h1>
         <p className="mt-2 text-pretty text-[1.02rem] leading-relaxed text-ink-soft">
           Start from a collection, or filter the whole catalogue to whatever fits
