@@ -1,6 +1,67 @@
 # Work status - little wash
 
-_Last updated: 30/09/2026_
+_Last updated: 01/10/2026_
+
+## Checkpoint - 01/10/2026: The painted tree
+
+**Objective.** Roadmap item 3, artistic progress that is celebratory and never
+punishing, on `feat/artistic-progress`, cut from `main` at `30a84c4` after
+`feat/small-series` merged (PR #5). Built with Impeccable delight and
+overdrive at the user's request; the user asked for planning, then
+implementation without a round of questions, then a PR. Plan, decisions and
+evidence: `docs/plans/artistic-progress.md`. Rules: DESIGN.md, "The painted
+tree", "Painted on", register rules 7 and 8.
+
+**Decisions (made here, recorded to be revisited).** A tree, leaf by leaf; a
+one-stroke brush leaf; leaf colour from the piece's first pigment with chroma
+(70 of 189 open on a neutral); growth and framing that never show room to
+fill; arrival once per leaf when on screen, newest six; the empty state, Today
+and Detail untouched.
+
+**Changed.** New `src/lib/tree.ts`, `leafColour.ts`, `leavesSeen.ts`
+(storage key `little-wash:leaves-seen:v1`), `src/components/PaintedTree.tsx`,
+`e2e/tree.spec.ts`. Studio renders the tree; `PaintedNote` caches its date
+formatters and exports `paintedOn`; `wash.ts` exports `prefersReducedMotion`;
+`index.css` gains `--bark` and the tree's styles; DESIGN.md, README.
+
+**Evidence, measured.**
+
+- A real bug found in arrival frames: the trunk's id `""` is falsy, so the
+  first leaf's stem never grew. Component test red, then green.
+- Choosing a leaf, Pixel 7 profile at 4x CPU, 189 leaves: 658-796ms to the
+  second frame before; 160-232ms interaction (Event Timing) after, 64-128ms at
+  40 leaves. Five causes traced and removed (see the plan).
+- Seven mutation checks, each red against a broken build.
+- Bundle: +7.0 KB gzip JS, +0.7 KB gzip CSS against `main`.
+- An independent read-only review: 0 high, 2 medium, 8 low. All fixed, each
+  with a test shown red against the code before it (listed in the plan). One
+  first fix was itself wrong - the ring circled empty paper while its leaf
+  waited to arrive - and was caught in the arrival frames.
+- Safari's engine: WebKit 26.6 on the iPhone 15 profile, from the single-file
+  build (this machine's WebKit cannot reach a local server). Arrival, settled
+  trees and a touch tap matched Chromium.
+
+**Verified locally, 01/10/2026 (Node 24.13; CI uses 22), on the final code.**
+`npm run lint` and `npm run typecheck` exit 0. `npm run test:coverage` with
+the committed `Series.test.tsx`: 855/855 in 53 files, 97.3 statements /
+93.95 branches / 92.61 functions / 97.3 lines, thresholds met (with the stray
+file below: 855/858, its three red tests the only failures). Playwright with
+CI's 2 workers: 225/225 on phone, propped phone and desktop. Two earlier
+7-worker runs of the same code each had 2 of 225 time out at 30s - different
+tests each time, on Today and a series step, the first pair on
+`net::ERR_ABORTED` at the first navigation - which passed when re-run; the
+machine was also running a browser. Screenshots:
+`Claude outputs/artistic-progress/`.
+
+**Not part of this branch.** `src/screens/Series.test.tsx` carries someone
+else's uncommitted follow-up to the series work: three red tests for real
+defects (Series back link loses filters; focus drops to the page on Previous
+and Next; the enlarged view survives a change of piece) - one of them needs
+jsdom's dialog shim to fail for the right reason. Left unstaged and untouched.
+
+**Remaining.** A real iPhone and a real mid-range Android: Chromium only here.
+The studio draws every painted card at once, which is most of a tap's cost
+with the whole catalogue painted. CI on the PR.
 
 ## Checkpoint - 30/09/2026: Small themed series, Browse in pages
 
