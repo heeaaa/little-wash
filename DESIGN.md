@@ -180,9 +180,9 @@ subject tags (real metadata only), reference/browse cards with a pigment
 under-rule, primary time/energy filter groups and the subject sheet, buttons
 (teal primary, hairline secondary, teal-underline quiet), brush-dab difficulty
 marks with a text label, palette dab swatches (display only), native `<dialog>`
-enlarge view and bottom sheet, colour-coded collection cards, exercise cards
-with painterly demos, and a sticky editorial header (mark + wordmark, nav,
-saved count).
+enlarge view and bottom sheet, colour-coded collection cards, warm-up rows
+that expand into a practice sheet (see **Warm-ups** below), and a sticky
+editorial header (mark + wordmark, nav, saved count).
 
 **Optional content takes its container with it.** A reference may have no
 prompt and no tip. Detail drops the whole tinted Tip panel rather than heading
@@ -432,6 +432,60 @@ bound cannot express.
 and belong a step up the ink ramp. This is now a hierarchy rule, not a contrast
 workaround - `ink-faint` clears AA since it was darkened.
 
+### Warm-ups: choosing one, then following it (`#/exercises`)
+
+Two jobs on one page, in this order: pick a warm-up quickly, then paint along
+with it. Rebuilt 29/09/2026 with the curator's approval of the layout (expand in
+place), the visuals (original illustrations plus five approved photos) and the
+"Keep screen on" switch.
+
+- **Five rows, always.** The list stays five warm-ups long so it scans in a
+  glance: classic preview, name, skill focus, duration (a range when the
+  variations differ), variation count and the kind as a washi tag. Variations
+  are never cards of their own on the page. At `lg+` a row also shows small
+  previews of its other variations, decoratively; the count carries the
+  information.
+- **A row is a disclosure, not a link.** The whole row is one button inside the
+  warm-up's `h2` (`aria-expanded`, `aria-controls` while open), and the sheet
+  it opens is a `region` named by that button. One warm-up is open at a time.
+  Closing is offered three ways - the row itself (it reads "Close" while open),
+  a "Close warm-up" button at the foot of the sheet, and Escape from anywhere
+  inside it - and the last two return focus to the row.
+- **It comes up to meet you.** A warm-up opened below the fold, or whose sheet
+  runs past it, scrolls so its row settles under the header (`.jump-target`).
+  One already wholly in view stays put, and a deep link or reload never jumps.
+- **Variations are a native radio group** of labelled visual choices, classic
+  first and checked by default. Selected is a teal border, a tinted card, a
+  check and a heavier label - never colour alone - and the visually hidden
+  input's focus ring is drawn on its card. Arrow keys choose, as any radio
+  group does. On a phone four choices sit in one row (two by two under 380px)
+  and five break three-and-two.
+- **Preview and guide change together.** The sheet holds the illustrated
+  example, then the guide - name, what you will practise, minutes, the switch,
+  "You'll need" (colours with a substitution note, three to five materials),
+  three to five steps, one "What to notice" - then the inspiration photo where
+  there is one. That DOM order is the reading order everywhere.
+- **The example stays in view while you paint.** From `md`, and in the propped
+  posture at any width, the example holds the left column (`position: sticky`
+  under `--header-h`) for the whole length of the guide. On an upright phone
+  at least 640px tall it sticks above the steps, capped at 24svh so there is
+  room to read. `e2e/warmups.spec.ts` asserts the example and the first step
+  are on screen together on every project.
+- **Keep screen on** is a `role="switch"` hidden where the browser has no
+  Screen Wake Lock. The wish is kept apart from whether a lock is held: the
+  browser drops it when the page is hidden and the hook asks again on return.
+  A refusal - or a lock dropped while the page is in front of the painter -
+  ends the wish: the switch reads off, the reason is said in words ("Your
+  browser didn't keep the screen on"), one tap asks again, and nothing is taken
+  later behind a switch that says it is off. Closing the warm-up releases the
+  lock and forgets the wish. It is a request, not a guarantee, and has only been verified in
+  headless Chromium, which refuses it.
+- **The URL holds the state** - `kind`, `warmup`, `variation`, written with
+  `replace` like Today's dealt piece. The classic is left out of the URL, an
+  unknown value falls back rather than failing, and a filter that hides the
+  open warm-up closes it.
+- **No scores, no streaks.** Nothing on this page is tracked or counted.
+
 ### Ornament restraint (load-bearing)
 
 - **No scattered background dabs** (removed - they competed with the artwork).
@@ -645,6 +699,37 @@ commitment, not a licence obligation, so `CreditLine` never branches on
 - Platform credits ("Photos provided by Pexels") are an application-level
   obligation and live in the footer, built from the sources actually on screen,
   so switching a source off removes its line.
+
+### Warm-up illustrations and inspiration photos
+
+**Illustrations** (`ExerciseArt`, 20 drawings, one per variation) are original
+SVG drawn for Little Wash. They use the variation's own suggested colours, so
+the example shows what the list asks for, and they are deliberately loose - a
+beginner should think "I could do that". The paint is three shared SVG filters
+rendered once per screen by `ExerciseArtDefs`: a crisp wash with pigment pooled
+at its edge, a soft wet-in-wet bloom, and a frilly backrun. Each is captioned
+"A Little Wash illustration. Yours will look different, and that's fine."
+
+**Photos** sit on the five scenic variations only - soft clouds, layered
+mountains, fading sky, sunset wash, misty landscape - and nowhere else, because
+there a real photograph shows how gently one colour becomes the next. Each was
+proposed from Pexels or Unsplash, checked against the provider's API (standard
+licence, not Unsplash+ or sponsored; Unsplash use reported as its guidelines
+require), and approved one by one by the curator on 29/09/2026. They are fixed
+to their variation in `src/data/inspiration.ts`: nothing is random, rotated or
+searched at run time.
+
+- Headed "Photo inspiration" and captioned "A real photograph to look at while
+  you paint, not a painting to copy", so a photo is never mistaken for the
+  example. They go through `RefArt` and `CreditLine` like every reference:
+  uncropped on the neutral mat, lazy-loaded, an honest message if they fail,
+  and credited inline with links to photographer, platform and licence.
+- Alt text is ours. Provider captions are machine-written and can be wrong -
+  the sunset's claims a plane that is not in the photograph.
+- They obey the Sources switch: turning a platform off hides its warm-up
+  photos, and the footer's platform credits include them explicitly.
+- `docs/CREDITS.md` lists them in their own section, generated by
+  `npm run catalog:build` like the rest of that file.
 
 ### Reference images
 

@@ -286,4 +286,17 @@ describe("the credits file", () => {
   it("says it is generated, so nobody edits it by hand", () => {
     expect(credits).toMatch(/Do not edit by hand/);
   });
+
+  it("credits warm-up inspiration photos in a section of their own", () => {
+    const [reference] = buildCatalog([entry()]);
+    const withPhotos = renderCredits(buildCatalog([entry()]), [
+      { title: "A single cloud", credit: { ...reference!.credit, creator: "A. Photographer" } },
+      { title: "An unsigned sky", credit: { ...reference!.credit, creator: null } },
+    ]);
+    expect(withPhotos).toContain("## Warm-up photo inspiration");
+    expect(withPhotos).toContain("2 photograph(s) shown beside a warm-up");
+    expect(withPhotos).toContain("| A single cloud | A. Photographer | Pexels | Pexels License |");
+    expect(withPhotos).toContain("| An unsigned sky | Not recorded |");
+    expect(credits).not.toContain("Warm-up photo inspiration");
+  });
 });

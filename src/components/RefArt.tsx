@@ -3,7 +3,12 @@ import { buildImageSources, plateRatio } from "@/lib/sources/images";
 import type { PaintReference } from "@/lib/types";
 
 interface RefArtProps {
-  reference: PaintReference;
+  /**
+   * Only what drawing it needs, so a warm-up's inspiration photo - which is
+   * not a catalogue piece - goes through the same loading, failure and
+   * colour-fidelity rules as every reference.
+   */
+  reference: Pick<PaintReference, "image" | "credit" | "alt">;
   /** Eager-load the above-the-fold featured piece; lazy-load the rest. */
   priority?: boolean;
   className?: string;

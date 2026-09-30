@@ -17,6 +17,7 @@ import {
 } from "../build.ts";
 import { applyDerived, readManifest } from "../derive.ts";
 import type { ApprovedEntry } from "../types.ts";
+import { INSPIRATION_PHOTOS } from "../../../src/data/inspiration.ts";
 
 const APPROVED_DIR = "catalog/approved";
 const CATALOG_MODULE = "src/data/catalog.generated.ts";
@@ -52,7 +53,11 @@ try {
   writeFileSync(CATALOG_MODULE, renderCatalogModule(references), "utf-8");
 
   mkdirSync("docs", { recursive: true });
-  writeFileSync(CREDITS, `${renderCredits(references)}\n`, "utf-8");
+  writeFileSync(
+    CREDITS,
+    `${renderCredits(references, Object.values(INSPIRATION_PHOTOS))}\n`,
+    "utf-8",
+  );
 
   console.log(`${references.length} reference(s) -> ${CATALOG_MODULE}, ${CREDITS}`);
 } catch (error) {

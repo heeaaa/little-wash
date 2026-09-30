@@ -2,7 +2,8 @@ import { creditParts } from "@/lib/sources/attribution";
 import type { PaintReference } from "@/lib/types";
 
 interface CreditLineProps {
-  reference: PaintReference;
+  /** Only the provenance, so anything with a credit can be credited the same way. */
+  reference: Pick<PaintReference, "credit" | "kind">;
   /**
    * How much of the credit to show.
    *

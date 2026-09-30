@@ -15,6 +15,8 @@ const ROUTES = [
   ["Browse", "#/browse"],
   ["Detail", null],
   ["Exercises", "#/exercises"],
+  // A warm-up open on a variation with a photo: the heaviest state the page has.
+  ["Exercises, a warm-up open", "#/exercises?warmup=graded-wash&variation=sunset-wash"],
   ["Your studio", "#/studio"],
   ["Sources", "#/sources"],
 ] as const;

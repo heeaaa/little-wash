@@ -218,3 +218,15 @@ This source requires a platform credit: "Photos from Unsplash".
 | Four Dried Stems | Ksenia Mostovaya | 2021 | Unsplash License | [View](https://unsplash.com/photos/white-and-brown-wheat-on-white-surface-reYY53ou0oA?utm_source=little_wash&utm_medium=referral) |
 | Wall Lantern and Shadow | the iop | 2025 | Unsplash License | [View](https://unsplash.com/photos/an-old-fashioned-lantern-casts-a-shadow-on-wall-pmSWkYHb1dY?utm_source=little_wash&utm_medium=referral) |
 
+## Warm-up photo inspiration
+
+5 photograph(s) shown beside a warm-up, never as the example. Chosen and approved by hand, and fixed to their variation in `src/data/inspiration.ts`.
+
+| Photo | Photographer | Platform | Licence | Source |
+| --- | --- | --- | --- | --- |
+| A single cloud | engin akyurt | Unsplash | Unsplash License | [View](https://unsplash.com/photos/white-clouds-and-blue-sky-during-daytime-A9_IsUtjHm4?utm_source=little_wash&utm_medium=referral) |
+| Misty mountain ridges | Mehmet Turgut  Kirkgoz | Pexels | Pexels License | [View](https://www.pexels.com/photo/mountain-peaks-shrouded-in-the-morning-fog-16466665/) |
+| Clear sky over the sea | Je Hwan Lee | Pexels | Pexels License | [View](https://www.pexels.com/photo/endless-blue-ocean-horizon-under-clear-sky-36475851/) |
+| Evening sky gradient | César Couto | Unsplash | Unsplash License | [View](https://unsplash.com/photos/a-plane-flying-in-the-sky-at-sunset-Kg2M24Pr9aU?utm_source=little_wash&utm_medium=referral) |
+| Hills fading into mist | Mihály Köles | Unsplash | Unsplash License | [View](https://unsplash.com/photos/green-trees-on-mountain-during-daytime-5V-W4zTqZ74?utm_source=little_wash&utm_medium=referral) |
+

@@ -13,7 +13,9 @@ export type IconName =
   | "palette"
   | "grid"
   | "today"
-  | "tag";
+  | "tag"
+  | "chevron-down"
+  | "screen";
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name"> {
   name: IconName;
@@ -83,6 +85,13 @@ const PATHS: Record<IconName, JSX.Element> = {
     </>
   ),
   check: <path d="M5 12.5l4.2 4.2L19 7" />,
+  "chevron-down": <path d="M6 9.5l6 6 6-6" />,
+  screen: (
+    <>
+      <rect x="6.5" y="3" width="11" height="18" rx="2.5" />
+      <path d="M10.5 18h3" />
+    </>
+  ),
   tag: (
     <>
       <path d="M11.2 4H5a1 1 0 0 0-1 1v6.2a2 2 0 0 0 .6 1.4l7 7a1.6 1.6 0 0 0 2.3 0l5.3-5.3a1.6 1.6 0 0 0 0-2.3l-7-7A2 2 0 0 0 11.2 4Z" />

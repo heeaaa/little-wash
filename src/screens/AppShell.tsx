@@ -3,6 +3,7 @@ import { AppProvider, useApp } from "@/state/AppContext";
 import { paintedReferences, savedReferences } from "@/lib/catalog";
 import { platformAttributions } from "@/lib/sources/attribution";
 import { CATALOGUE } from "@/data/catalogue";
+import { INSPIRATION_PHOTOS } from "@/data/inspiration";
 import { Icon } from "@/components/Icon";
 import { WashFilter } from "@/components/WashFilter";
 import { SavedPalette } from "@/components/SavedPalette";
@@ -158,10 +159,20 @@ function Header() {
  * true: switch a source off and its line goes with it.
  */
 function PlatformCredits() {
-  const { catalogue } = useApp();
-  const credits = platformAttributions(
-    catalogue.map((reference) => reference.credit.sourceId),
-  );
+  const { catalogue, isSourceEnabled } = useApp();
+  /*
+    Warm-up inspiration photos come from the same platforms and owe the same
+    credit. They are named here rather than assumed to be covered by the
+    catalogue, and they obey the same switch: a source turned off hides its
+    warm-up photos too.
+  */
+  const inspiration = Object.values(INSPIRATION_PHOTOS)
+    .map((photo) => photo.credit.sourceId)
+    .filter(isSourceEnabled);
+  const credits = platformAttributions([
+    ...catalogue.map((reference) => reference.credit.sourceId),
+    ...inspiration,
+  ]);
 
   if (credits.length === 0) return null;
 

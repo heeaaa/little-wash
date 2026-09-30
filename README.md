@@ -86,7 +86,15 @@ route with their tail and query intact; anything unrecognised goes to Today.
 - **Detail** - the reference uncropped on a fixed neutral mat, its prompt and
   tip where it has them, its palette, and an enlarged view for use beside a
   physical sketchbook.
-- **Exercises** - 6 brushwork and colour warm-ups.
+- **Exercises** (the Warm-ups page) - five brushwork and colour warm-ups, each
+  with three to five variations (20 in all) that teach the same technique
+  through a different composition. Opening one expands it in place into a
+  practice sheet: an illustrated example, suggested colours and materials with
+  substitutions, three to five steps and one thing to notice, plus a credited
+  inspiration photo on the five scenic variations. The example and the steps
+  stay in view together, and an optional "Keep screen on" switch uses the
+  Screen Wake Lock API where the browser has it. Filter, warm-up and variation
+  live in the URL.
 - **Your studio** (`#/studio`) - two sections: pieces you set aside, and a
   record of what you have painted. The record is dated and deliberately plain:
   no streaks, no totals framed as progress, no relative dates. See "The painted
@@ -107,8 +115,8 @@ whole catalogue.
 React 18, TypeScript (strict), Vite and Tailwind CSS, routed with `HashRouter`
 so deep links survive a static host with no rewrite rules. Vitest and React
 Testing Library cover the logic, the screens, the routing and the catalogue
-pipeline (571 tests in 36 files), and Playwright covers the journeys end to end
-(45 tests in 7 spec files, 135 checks across phone, propped-phone and desktop).
+pipeline (642 tests in 41 files), and Playwright covers the journeys end to end
+(53 tests in 8 spec files, 159 checks across phone, propped-phone and desktop).
 Counts as of 29/09/2026.
 Filtering, saving and "deal me another" are all simulated on-device.
 
@@ -125,12 +133,13 @@ src/
   routes.tsx     One route tree, shared by the app and the tests
   screens/       Today, Browse, Detail, Exercises, AppShell
   components/    Reusable UI (plus studio/ ornaments)
-  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, types, wash (motion)
-  data/          The generated catalogue, collections, exercises
+  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, warm-up selection, types, wash (motion)
+  hooks/         Favourites, painted record, sources, and the screen wake lock
+  data/          The generated catalogue, collections, warm-ups and their inspiration photos
   assets/refs/   The retired placeholder SVGs, now unit-test fixtures only
   fonts.ts       The self-hosted brand faces
   assets/brand/  Generated in-app brand mark
-e2e/             Playwright journeys (discovery, filtering, posture, accessibility)
+e2e/             Playwright journeys (discovery, filtering, posture, accessibility, warm-ups)
 public/          Favicons, app icons, site.webmanifest
 assets/          Brand originals (keep intact)
 ```
