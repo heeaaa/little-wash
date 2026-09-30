@@ -1,47 +1,43 @@
 # Work status - little wash
 
-_Last updated: 29/09/2026_
+_Last updated: 30/09/2026_
 
-## Checkpoint - 29/09/2026: Warm-ups page rebuilt (uncommitted)
+## Checkpoint - 30/09/2026: Warm-ups and catalogue ready for main
 
-**Objective.** Make `#/exercises` easier to choose from and follow while
-painting: variations for all five warm-ups, a guide per variation, visuals
-that help. On branch `feat/real-catalogue-and-fonts`, **not committed, not
-pushed, no PR** - the user asked for no PR yet because Netlify deploys from it.
+**Objective.** Ship the curated catalogue, self-hosted fonts and rebuilt
+warm-ups page to `main`. Branch `feat/real-catalogue-and-fonts`, pushed, with
+a PR into `main` for CI. **Netlify is connected to `main`** (user-confirmed
+30/09/2026), so merging that PR is the public deploy.
 
-**Decisions (user-approved 29/09/2026).**
+**Commits on the branch.** `161be52` catalogue and self-hosted fonts;
+`17b1ec7` warm-ups with variations, guides and pictures (user-reviewed and
+approved 30/09/2026); `66a2ebe` Browse's h1 is "Browse the catalogue" (closes
+"Still open" item 2 below).
+
+**Warm-ups decisions (user-approved 29/09/2026).**
 
 - Layout: the list expands in place, one warm-up open at a time.
 - Visuals: 20 original SVG illustrations, plus five photos the user picked
-  from candidates (one each for soft clouds, layered mountains, fading sky,
-  sunset wash, misty landscape), fixed to their variation - no shuffling.
+  (soft clouds, layered mountains, fading sky, sunset wash, misty landscape),
+  fixed to their variation - no shuffling.
 - A "Keep screen on" switch (Screen Wake Lock), hidden where unsupported.
 - Not route-split: +14.1 kB gzip on the main chunk (111.66 -> 125.80 kB,
-  468.8 -> 512.3 kB raw), which crosses Vite's 500 kB advisory. Splitting
-  without a service worker would add an offline failure the app does not
-  have today; revisit with the PWA work.
+  468.8 -> 512.3 kB raw), which crosses Vite's 500 kB advisory. Revisit with
+  the PWA work.
 
-**Changed.** `src/data/exercises.ts`, `src/data/inspiration.ts` (new),
-`src/lib/exercises.ts` (new), `src/hooks/useWakeLock.ts` (new),
-`src/components/ExerciseArt.tsx`, `src/components/Icon.tsx`,
-`src/screens/Exercises.tsx`, `src/screens/AppShell.tsx` (footer credits),
-`RefArt`/`CreditLine` prop types, `src/index.css` (`.warmup-*`,
-`--header-h`), `scripts/catalog/build.ts` + CLI (credits section),
-`docs/CREDITS.md` (regenerated), tests, DESIGN.md, README.
+**Verified locally 30/09/2026, before commit.** `npm run lint` and
+`npm run typecheck` exit 0; `npm run test:coverage` 642/642 in 41 files,
+96.66 statements / 93.15 branches / 91.75 functions / 96.66 lines;
+`npm run test:e2e` (build + Playwright) 159/159.
 
-**Verified.** See the evidence summary in the session; commands were
-`npx tsc -b --noEmit`, `npx eslint src e2e scripts --max-warnings=0`,
-`npx vitest run --coverage`, `npm run build`, `npm run catalog:build` (only
-`docs/CREDITS.md` changed) and `npx playwright test`.
+**Not verified.** Wake lock, install and touch on a real device.
 
-**Not verified.** Wake lock on a real device (headless Chromium refuses it, so
-only the refusal path ran in a browser); real-device install/touch.
-
-**Also in this working tree (30/09/2026).** Browse's h1 renamed "Browse the
-studio" -> "Browse the catalogue"; see "Still open" item 2 below.
-
-**Next.** User review of the page, then commit on this branch when asked.
-Candidate photo sheet: `Claude outputs/warmup-photo-candidates.html`.
+**Next.** CI on the PR, then merge when the user says so. After that, on the
+live site: a real-phone check, then the go-live tidy-ups (README still says
+"working name ... prototype ... mock data"; DESIGN.md backlog is stale; branch
+protection; a short privacy note; the two moderate `react-router` advisories).
+PWA/offline is the next feature: `docs/plans/pwa-offline.md`, whose
+Workstream 1 (self-hosted fonts) is already done.
 
 ## Where this stands - 19/09/2026
 
