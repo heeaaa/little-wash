@@ -1,5 +1,9 @@
 # little wash
 
+[![CI (main)](https://github.com/heeaaa/little-wash/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/heeaaa/little-wash/actions/workflows/ci.yml?query=branch%3Amain)
+[![React 18](https://img.shields.io/badge/React-18-149ECA?logo=react&logoColor=white)](package.json)
+[![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](package-lock.json)
+
 _a little colour, every day._
 
 little wash removes the decision that stops people painting. It offers one
