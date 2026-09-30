@@ -138,7 +138,31 @@ describe("the studio's painted section", () => {
   it("shows the day each piece was painted", () => {
     seedPainted([{ id: "pear", on: "2026-09-14" }]);
     renderStudio();
-    expect(within(paintedSection()).getByText(/painted 14 september/i)).toBeVisible();
+    // On the piece's own card. The tree's leaf card says it too, so the
+    // section as a whole holds the date more than once.
+    const [card] = within(paintedSection()).getAllByRole("listitem");
+    expect(within(card!).getByText(/painted 14 september/i)).toBeVisible();
+  });
+
+  it("draws a tree with a leaf for each piece painted, oldest first", () => {
+    seedPainted([
+      { id: "pear", on: "2026-09-01" },
+      { id: "mug", on: "2026-09-18" },
+    ]);
+    renderStudio();
+    const tree = within(paintedSection()).getByRole("listbox", { name: /leaves on your tree/i });
+    const names = within(tree)
+      .getAllByRole("option")
+      .map((option) => option.textContent ?? "");
+    expect(names).toHaveLength(2);
+    expect(names[0]).toMatch(/^Ripe Pear/);
+    expect(names[1]).toMatch(/^Blue Mug/);
+  });
+
+  it("draws no tree while nothing is painted - no bare branch, no seed waiting", () => {
+    renderStudio();
+    expect(document.querySelector("[data-tree]")).toBeNull();
+    expect(screen.queryByRole("listbox")).toBeNull();
   });
 
   it("drops a piece the catalogue no longer holds", () => {

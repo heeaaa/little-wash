@@ -43,7 +43,9 @@ test.describe("marking a piece painted", () => {
       .getByRole("heading", { name: "Painted" })
       .locator("xpath=ancestor::section[1]");
     await expect(painted.locator("li")).toHaveCount(1);
-    await expect(painted.getByText(/^Painted \d+ \w+/)).toBeVisible();
+    // On the piece's card. The tree's leaf card gives the date too, so the
+    // section as a whole holds it twice.
+    await expect(painted.locator("li").getByText(/^Painted \d+ \w+/)).toBeVisible();
   });
 
   test("unmarking removes it from the record again", async ({ page, context }) => {

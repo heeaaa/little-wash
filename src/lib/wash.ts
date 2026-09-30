@@ -88,7 +88,7 @@ let washSeq = 0;
 
 type Update = () => void;
 
-function prefersReducedMotion(): boolean {
+export function prefersReducedMotion(): boolean {
   return (
     typeof matchMedia === "function" &&
     matchMedia("(prefers-reduced-motion: reduce)").matches

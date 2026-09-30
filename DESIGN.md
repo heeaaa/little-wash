@@ -81,6 +81,7 @@ Tokens are RGB channel triples on `:root` in `src/index.css`, consumed as
 | `--save` / `--rose` | Rose | `#D96986` | 217 105 134 | Saved state, restrained accent |
 | `--sage` | Sage | `#A8B99B` | 168 185 155 | Supportive fills only |
 | `--note` | note paper | `#DEE0D1` | 222 224 209 | Note slips (`.note-paper`) |
+| `--bark` | sepia ink | `#5B4636` | 91 70 54 | The painted tree's branches only; the warm-up illustrations' line colour |
 
 **Contrast rules (verified in-browser against the painted background):** Ink is
 body text (about 12:1) and ink-soft is 6.3:1. **ink-faint is a text colour and
@@ -231,6 +232,8 @@ header palette is a link.
   "0 pieces".
 - **The empty state is the invitation**, not a failure: it names what the heart
   does and offers a way to the catalogue.
+- **The Painted section is headed by the painted tree** - a leaf for each piece
+  painted, above the dated cards. See **The painted tree** below.
 
 **Nav: the studio earns its place.** "Studio" joins Today / Browse / Exercises
 only once at least one piece is saved. An empty destination advertised on every
@@ -622,18 +625,20 @@ silent on first paint. A count-only live region is not sufficient - the piece ca
 change off-screen with nothing to signal it. This matters more now that a piece
 can change behind a 520ms transition.
 
-## Motion: one material, two moments
+## Motion: one material, three moments
 
 Motion is a system now, not a single exception. It is still restrained - nothing
 decorative animates, and the rule below is the whole of it:
 
-> **The paper is never cut, only moved or re-wet.**
+> **The paper is never cut, only moved, re-wet or painted on.**
 
-Everything that moves in the app is one of those two things, and both run on the
-same View Transitions machinery so they read as one material rather than as a
-set of effects. The implementation lives in `src/lib/wash.ts`, the turbulence in
-`src/components/WashFilter.tsx`, and the choreography at the foot of
-`index.css`.
+Everything that moves in the app is one of those three things. The first two
+run on the same View Transitions machinery so they read as one material rather
+than as a set of effects; the implementation lives in `src/lib/wash.ts`, the
+turbulence in `src/components/WashFilter.tsx`, and the choreography at the foot
+of `index.css`. The third - paint arriving, which is how a leaf joins the
+painted tree - is a CSS sequence built from the same scale (see **Painted on**
+below and **The painted tree**).
 
 ### The scale
 
@@ -645,8 +650,8 @@ One easing family, four durations. Nothing invents its own.
 
 | `--t-micro` | 140ms | every `transition-*` utility (hover, chip, nav) |
 | `--t-rise` | 240ms | a surface arriving (`.sheet`), a swatch landing (`.dab-settle`) |
-| `--t-move` | 380ms | the artwork changing place |
-| `--t-wash` | 520ms | the artwork being replaced |
+| `--t-move` | 380ms | the artwork changing place; a twig growing on the painted tree |
+| `--t-wash` | 520ms | the artwork being replaced; a leaf pressed in, a leaf drying, a leaf stirring |
 
 `--t-micro` and `--ease-paper` are wired into Tailwind as the default
 `transitionDuration` and `transitionTimingFunction` (`tailwind.config.js`), so
@@ -692,6 +697,32 @@ never repeats, and a transition that does is the thing that reads as canned.
   once and only re-sampled as the displacement swells. On a 4x-throttled profile
   that was 30fps against 60.
 
+### Painted on - a leaf arrives on the painted tree
+
+The one moment in the app that is allowed to take its time, because it happens
+once per painting. It is a sequence of the scale's own steps, not a duration of
+its own:
+
+1. **The twig reaches out** from its parent, if the leaf needs a new one:
+   `--t-move`.
+2. **The brush presses the leaf in** from its stem - scale from the stem with a
+   touch of overshoot, as the bead of water spreads past where it settles:
+   `--t-wash`, 300ms after its twig starts.
+3. **It dries**, 300ms later: the wet, deeper tone and the shine go off - so it
+   dries lighter, as watercolour does - and the pigment pools darker at the
+   edge: `--t-wash`.
+
+Leaves arriving together start 420ms apart, the newest six at most. It plays
+once, when the drawing is at least half on screen, and never again for that
+leaf; it is recorded as seen at its start, so leaving part-way never replays it.
+Every keyframe runs from a hidden or wet start to the resting state, which is
+the dry leaf - a leaf whose animation never runs is simply there.
+
+A chosen leaf **stirs** on its stem (`--t-wash`), a response to a deliberate
+touch in the same register as `.dab-settle`: never on arrival, never by itself,
+never in a loop - and never later, untouched, for a leaf chosen while it was
+still arriving.
+
 ### Rules this system must not break
 
 - **Colour fidelity outranks the transition.** The UA cross-fade uses
@@ -710,9 +741,11 @@ never repeats, and a transition that does is the thing that reads as canned.
   `.piece-settle` remains as the fallback for a changed piece (an
   already-visible default, so nothing is hidden if it never runs).
 - **Nothing else animates** beyond `.dab-settle`, the single swatch that lands
-  when a piece is saved - a response to a deliberate action, not an entrance.
-  No decorative motion, no entrance animation per section, no hover
-  choreography beyond the existing state changes.
+  when a piece is saved, and the painted tree's arrival and stir above - each a
+  response to something the painter did, not an entrance. No decorative motion,
+  no entrance animation per section, no idle loop, no hover choreography beyond
+  the existing state changes. Under reduced motion the tree's leaves are simply
+  there, and a chosen leaf is ringed and lifted without stirring.
 
 ## The painted mark, and the register it must keep
 
@@ -746,15 +779,96 @@ heart but never the word.
 6. **Nothing in the app chrome.** The header carries a saved count; painted
    stays inside the studio. A tally of paintings in the furniture is a
    scoreboard however it is worded.
+7. **Never punishing.** Painting another piece only ever adds to the record,
+   and time passing changes nothing about it: no wilting, no fading, no
+   seasons. The only thing that takes a piece out is unmarking that piece -
+   and on the painted tree, where leaves are places in the order things were
+   painted, the pieces after it then close up by one, so the tree loses its
+   newest place rather than gaining a hole.
+8. **No targets.** Nothing is drawn or said that waits to be filled - no empty
+   place, no outline to colour in, no "x to go", no end state. A record that
+   shows room still to fill is a target however it is drawn.
 
 Rules 1, 3, 4, 5 and 6 are enforced by tests in `src/screens/Painted.test.tsx`
-and `e2e/painted.spec.ts`, because they are the requirement rather than a
-preference.
+and `e2e/painted.spec.ts`, and 7 and 8 - with 1, 3, 4 and 6 again for the
+tree - by `src/lib/tree.test.ts`, `src/components/PaintedTree.test.tsx` and
+`e2e/tree.spec.ts`, because they are the requirement rather than a preference.
 
 **Where the control lives.** The detail view's action row, and the enlarged
 view's title bar - both places where someone has actually just painted.
 Deliberately not on cards or on Today: marking something painted from a grid,
 before opening it, is not a thing that happens.
+
+## The painted tree
+
+Roadmap item 3, built 01/10/2026: a leaf for every piece marked painted, washed
+in that piece's own colours, heading the studio's Painted section. The feeling
+it is for is flipping back through your own sketchbook - "look what I've made",
+never a ledger. Plan and evidence: `docs/plans/artistic-progress.md`.
+
+**How it grows** (`src/lib/tree.ts`). One drawing for everyone, deterministic,
+a function of the count alone - it cannot know when anything was painted. Each
+branch forks into a leader that carries on nearly straight and a lateral that
+turns off to alternating sides (Honda's model; symmetric forks made a flat
+umbrella). Leaves arrive level by level and alternate halves, so the tree is
+balanced at every count; a branch is drawn only once its first leaf exists, and
+grows longer as the tree ages. So it is a stem with one leaf, a three-leaf
+sprout, a young tree by twenty, a round crown by fifty, and there is no last
+level. The drawing is framed to the tree it is, centred on the trunk: a small
+tree is never shown small on an empty page.
+
+**Its colours** (`src/lib/leafColour.ts`). Only colours the piece names. The
+body is the piece's first pigment with any chroma (CIE C* 20 or more) - 70 of
+189 pieces open on Cool Grey, Ivory Black, Warm Grey or Chinese White, which is
+the ground or the shadow rather than the subject - charged wet-in-wet with the
+swatch after it at the tip. A palette of neutrals keeps its first swatch that
+can be seen on the paper (L* 88 or darker - Chinese White measured 1.04:1 on
+the mat, a leaf that read as an outline waiting to be coloured in), with a
+paler one it passed over charged in at the tip: a grey piece grows a grey leaf,
+a misty one a grey leaf with a white tip. Only a palette with nothing darker
+than white grows a white leaf. No palette at all takes the subject's pigment.
+Each leaf is a wash, thinner the darker the pigment, with the pigment pooled
+darker at its rim; branches are `--bark` over a paler wash of it.
+
+**The hand in the line** is geometry, not a filter: each leaf's edge and each
+branch's width wander a little, seeded per leaf and branch. An SVG turbulence
+filter over the drawing was re-rasterised on every tap and measured at
+660-780ms per choice on a phone profile at 4x CPU throttle with 189 leaves.
+
+**Layout.** On the neutral mat, like the warm-up illustrations, at 5:4. Phone:
+drawing, leaf card, caption, stacked. From `md`, and in the propped posture,
+the drawing sits beside its leaf card; propped, it is capped by the screen's
+height under the header.
+
+**Choosing a leaf.** The drawing is one `listbox`, one tab stop, its options
+the leaves oldest to newest, each named "Ripe Pear, in Cadmium Yellow, painted
+14 September"; the newest is chosen first, and a choice is held by its piece,
+not its place. A tap takes the leaf under the finger - measured to the leaf's
+own shape, since a young tree's leaves are ~100px long on a desktop and a tap
+near a tip was out of reach of the centre - the one drawn on top where leaves
+overlap, or else the nearest within 32px, so a dense crown still works with wet
+hands. Arrow keys, Home and End step through the leaves, and leave Alt, Ctrl
+and Cmd shortcuts to the browser (Alt+Left is Back). Previous and Next leaf
+buttons (44px) do the same on touch, say aloud the leaf they land on through a
+polite live region, and at either end say so with `aria-disabled` rather than
+disabling themselves under the finger, which would drop keyboard focus. The
+chosen leaf is lifted and ringed in dashed teal - never colour alone. While it
+arrives, its ring appears as the brush lands on it, a `--t-rise` after its
+press, and never before - the newest leaf arrives last, and a ring shown from
+the start circled the empty place it would grow. On a
+fine pointer a dotted ring previews the leaf a click would take. The leaf card
+names the piece, its date and its two pigments, and its title is the row's one
+link (`.card-link`), which morphs the plate into Detail.
+
+**Performance** (Pixel 7 profile, 4x CPU throttle, measured 01/10/2026). The
+settled drawing is about 190 elements - one path per leaf, the branches merged
+- and takes no pointer; the listbox over it takes none either, and the stage
+beneath does the choosing. Choosing a leaf: 64-128ms interaction at 40 leaves,
+160-232ms at 189, where the studio's own grid of 189 cards is most of what is
+left. Arrival: 16.7ms median frame at both.
+
+**What it must never do**: register rules 7 and 8 above, and the motion rules -
+it plays once, waits to be seen, and is still under reduced motion.
 
 ## Assets and provenance
 
@@ -878,10 +992,10 @@ below, which never punishes a missed day.
    See **Small series** under Components.
 2. **Gentle continuity** - optional reminders and a private painting history,
    never requiring public sharing.
-3. **Artistic progress tracking (celebratory, never punishing)** - an artsy,
-   cute progress visual (a tree colouring in leaf by leaf, hexagons filling with
-   honey, or another little wash motif): a quiet record to enjoy, with no
-   streaks, no targets and no achievement language.
+3. ~~**Artistic progress tracking (celebratory, never punishing)**~~ - **built
+   01/10/2026** as the painted tree: a leaf for every piece painted, in its own
+   colours, with no streaks, no targets and no achievement language. See **The
+   painted tree**.
 
 Plus the standing backlog: saved-list screen, PWA/offline, Supabase, backend
 reminder scheduling, real curated licensed imagery + provenance pipeline, CI.

@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { useApp } from "@/state/AppContext";
 import { paintedReferences, savedReferences } from "@/lib/catalog";
 import { PieceCard } from "@/components/PieceCard";
 import { PaintedNote } from "@/components/PaintedNote";
+import { PaintedTree } from "@/components/PaintedTree";
 import { EmptyPanel } from "@/components/EmptyPanel";
 import { Icon } from "@/components/Icon";
 
@@ -43,7 +44,12 @@ function StudioSection({ title, count, children }: StudioSectionProps) {
 export function Studio() {
   const { references, favorites, painted: paintedEntries } = useApp();
   const saved = savedReferences(references, favorites);
-  const painted = paintedReferences(references, paintedEntries);
+  const painted = useMemo(
+    () => paintedReferences(references, paintedEntries),
+    [references, paintedEntries],
+  );
+  // Oldest first for the tree, which grows in the order things were painted.
+  const paintedInOrder = useMemo(() => [...painted].reverse(), [painted]);
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
@@ -128,17 +134,25 @@ export function Studio() {
             </Link>
           </EmptyPanel>
         ) : (
-          <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {painted.map(({ reference, on }) => (
-              <li key={reference.id}>
-                <PieceCard
-                  reference={reference}
-                  to={`/piece/${reference.id}`}
-                  note={<PaintedNote on={on} />}
-                />
-              </li>
-            ))}
-          </ul>
+          <>
+            {/*
+              The same record, drawn: a leaf for each piece, in the order they
+              were painted. It grows only when something is painted and never
+              changes with time - see "The painted tree" in DESIGN.md.
+            */}
+            <PaintedTree pieces={paintedInOrder} />
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {painted.map(({ reference, on }) => (
+                <li key={reference.id}>
+                  <PieceCard
+                    reference={reference}
+                    to={`/piece/${reference.id}`}
+                    note={<PaintedNote on={on} />}
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
         )}
       </StudioSection>
     </div>

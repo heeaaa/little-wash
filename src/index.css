@@ -50,6 +50,13 @@
   --pig-landscape: 124 147 166;
   --pig-objects: 151 124 147;
 
+  /*
+    The painted tree's ink: a warm sepia for the branches, so the leaves carry
+    the colour (DESIGN.md, "The painted tree"). The same sepia the warm-up
+    illustrations draw their lines in.
+  */
+  --bark: 91 70 54;
+
   --font-display: "Libre Baskerville", Georgia, "Times New Roman", serif;
   --font-body: "Source Sans 3", system-ui, -apple-system, sans-serif;
   --font-hand: "Caveat", "Segoe Script", cursive;
@@ -571,9 +578,10 @@
 
 /*
   ─────────────────────────────────────────────────────────────────────────
-  The paper is never cut, only moved or re-wet.
+  The paper is never cut, only moved or re-wet - or painted on, the third
+  moment, which is the painted tree's and lives at the foot of this file.
 
-  Both moments run on View Transitions. A navigation pairs the artwork's old
+  These two run on View Transitions. A navigation pairs the artwork's old
   and new snapshots and morphs the geometry between them; a deal pairs the
   same two snapshots but pushes both through one animated turbulence field, so
   one piece dissolves into the wet paper as the other resolves out of it.
@@ -1009,6 +1017,255 @@ html[data-wash="rewet"]::view-transition-group(piece-art) {
       justify-content: center;
       margin-top: 0.5rem;
       backdrop-filter: none;
+    }
+  }
+}
+
+/*
+  ─────────────────────────────────────────────────────────────────────────
+  The painted tree (DESIGN.md, "The painted tree").
+
+  A leaf for every piece marked painted. The drawing is our illustration, so
+  it sits on the neutral mat like the warm-up examples do, and the leaves are
+  the palette's own pigment colours - nothing here tints a reference.
+
+  Its one authored moment is a leaf arriving, and it is built from the motion
+  scale rather than given durations of its own: the twig grows in a move, the
+  leaf is pressed in and then dries in a wash each. Every keyframe runs from
+  a hidden or wet start to the resting state, which is the dry leaf, so a leaf
+  whose animation never runs is simply there.
+  ─────────────────────────────────────────────────────────────────────────
+*/
+@layer components {
+  .tree-figure {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-areas: "stage" "card" "caption";
+  }
+
+  .tree-stage {
+    grid-area: stage;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    border-radius: var(--radius-card);
+    border: 1px solid rgb(var(--line));
+  }
+
+  /*
+    The drawing never takes a pointer itself: the listbox over it does all the
+    choosing. Left hit-testable, a mouse move over a full tree cost ~150ms of
+    hit testing on a throttled phone profile.
+  */
+  .tree-drawing {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  /*
+    The listbox lies over the drawing, so its focus ring surrounds the tree,
+    but it takes no pointer: the stage beneath it does the choosing. Hit
+    testing the listbox walked its 189 hidden option labels on every pointer
+    move - measured 50-75ms a move on a throttled phone, against 16-23ms once
+    the pointer passed through it.
+  */
+  .tree-leaves {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-card);
+    pointer-events: none;
+  }
+
+  .tree-stage {
+    touch-action: manipulation;
+  }
+
+  .tree-card {
+    grid-area: card;
+  }
+
+  .tree-caption {
+    grid-area: caption;
+    max-width: 42ch;
+  }
+
+  /*
+    Beside its card from md, the card centred on the drawing's height. Stacked,
+    a tablet drew the tree 720px wide with its card stranded underneath.
+  */
+  @media (min-width: 768px) {
+    .tree-figure {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      grid-template-rows: 1fr auto auto 1fr;
+      grid-template-areas: "stage ." "stage card" "stage caption" "stage .";
+      column-gap: 2.5rem;
+      row-gap: 1rem;
+    }
+    .tree-stage {
+      max-width: 40rem;
+    }
+  }
+
+  /*
+    Propped on its side, the scene PRODUCT.md is built around: the drawing
+    beside its card, and no taller than the screen under the header.
+  */
+  @media (orientation: landscape) and (max-height: 520px) and (min-width: 640px) {
+    .tree-figure {
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-rows: 1fr auto auto 1fr;
+      grid-template-areas: "stage ." "stage card" "stage caption" "stage .";
+      column-gap: 1.5rem;
+    }
+    .tree-stage {
+      width: auto;
+      height: calc(100vh - var(--header-h) - 3rem);
+      height: calc(100svh - var(--header-h) - 3rem);
+      max-height: 22rem;
+    }
+  }
+
+  .tree-bark {
+    fill: rgb(var(--bark) / 0.92);
+  }
+  .tree-bark-wash {
+    fill: rgb(var(--bark) / 0.13);
+  }
+  .tree-ground {
+    fill: rgb(var(--ink) / 0.09);
+  }
+
+  /* The chosen leaf: teal, dashed, and never colour alone - it is also lifted. */
+  .tree-ring {
+    stroke: rgb(var(--accent));
+    stroke-width: 2.5px;
+    stroke-dasharray: 4 3.5;
+  }
+  .tree-ring-hover {
+    stroke: rgb(var(--ink) / 0.45);
+    stroke-width: 1.5px;
+    stroke-dasharray: 2 3;
+  }
+
+  /*
+    The ring of a leaf still arriving appears as the brush lands, a rise
+    after its press - never round the empty place where it will grow.
+  */
+  .ring-arrive {
+    animation: ring-in var(--t-rise) var(--ease-paper) var(--press, 0ms) backwards;
+  }
+
+  @keyframes ring-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  .leaf-lift {
+    transform: scale(1.14);
+  }
+
+  /* At rest a leaf is dry: no wet tone, no shine. */
+  .leaf-wet,
+  .leaf-sheen {
+    opacity: 0;
+  }
+
+  /* Leaves still to arrive, while the tree is below the fold. */
+  .tree-waiting {
+    opacity: 0;
+  }
+
+  /* 1. The twig reaches out from its parent. */
+  .twig-arrive {
+    animation: twig-grow var(--t-move) var(--ease-paper) var(--at, 0ms) backwards;
+  }
+
+  /* 2. The brush presses the leaf in from its stem, and the bead of water spreads a touch past where it settles. */
+  .leaf-arrive {
+    animation: leaf-press var(--t-wash) var(--ease-paper) var(--press, 0ms) backwards;
+  }
+
+  /* 3. It dries: the wet, darker tone goes off - watercolour dries lighter - and the pigment pools at the edge. */
+  .leaf-arrive .leaf-wet {
+    animation: leaf-dry var(--t-wash) var(--ease-paper) var(--dry, 0ms) both;
+  }
+  .leaf-arrive .leaf-rim {
+    animation: rim-pool var(--t-wash) var(--ease-paper) var(--dry, 0ms) backwards;
+  }
+  /* The shine holds while the paint is wet and goes off as it dries - the same step, on the same scale. */
+  .leaf-arrive .leaf-sheen {
+    animation: sheen-dry var(--t-wash) var(--ease-paper) var(--dry, 0ms) both;
+  }
+
+  /* Touched, a leaf stirs on its stem. A response to a deliberate action, never an idle loop. */
+  .leaf-stir {
+    animation: leaf-stir var(--t-wash) var(--ease-paper);
+  }
+
+  @keyframes twig-grow {
+    from {
+      transform: scale(0.02);
+    }
+  }
+
+  @keyframes leaf-press {
+    0% {
+      opacity: 0;
+      transform: scale(0.06) rotate(-10deg);
+    }
+    16% {
+      opacity: 1;
+    }
+    70% {
+      transform: scale(1.06) rotate(1.5deg);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes leaf-dry {
+    from {
+      opacity: 0.5;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes rim-pool {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes sheen-dry {
+    from {
+      opacity: 0.85;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes leaf-stir {
+    0%,
+    100% {
+      transform: scale(1.14);
+    }
+    28% {
+      transform: scale(1.14) rotate(9deg);
+    }
+    58% {
+      transform: scale(1.14) rotate(-5deg);
+    }
+    82% {
+      transform: scale(1.14) rotate(2deg);
     }
   }
 }

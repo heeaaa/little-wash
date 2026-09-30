@@ -106,6 +106,11 @@ route with their tail and query intact; anything unrecognised goes to Today.
   record of what you have painted. The record is dated and deliberately plain:
   no streaks, no totals framed as progress, no relative dates. See "The painted
   mark, and the register it must keep" in `DESIGN.md`.
+- **The painted tree** - heading the studio's Painted section, a leaf for every
+  piece marked painted, washed in that piece's own colours. It grows only when
+  something is painted and never changes with time; a new leaf arrives once, in
+  front of you, the way watercolour dries. Tap a leaf to see which piece it
+  was. See "The painted tree" in `DESIGN.md`.
 - **Sources** (`#/sources`) - which collections ideas are drawn from, with each
   source's licence and a link to it. A standing preference, not a filter:
   it shapes the catalogue before filtering, and saved pieces ignore it.
@@ -127,11 +132,12 @@ pipeline (642 tests in 41 files), and Playwright covers the journeys end to end
 Counts as of 29/09/2026.
 Filtering, saving and "deal me another" are all simulated on-device.
 
-Piece changes are animated with the View Transitions API under one rule - the
-paper is never cut, only moved or re-wet. Navigating morphs the artwork between
-screens; dealing dissolves it through an animated turbulence field. Both degrade
-to an ordinary update where the API is missing or motion is reduced. The rules
-are in [`DESIGN.md`](./DESIGN.md#motion-one-material-two-moments).
+Motion follows one rule - the paper is never cut, only moved, re-wet or painted
+on. Navigating morphs the artwork between screens and dealing dissolves it
+through an animated turbulence field, both with the View Transitions API; a new
+leaf on the painted tree is painted on, once. All of it degrades to an ordinary
+update where an API is missing or motion is reduced. The rules are in
+[`DESIGN.md`](./DESIGN.md#motion-one-material-three-moments).
 
 ## Layout
 
@@ -140,13 +146,13 @@ src/
   routes.tsx     One route tree, shared by the app and the tests
   screens/       Today, Browse, Series, Detail, Exercises, Studio, Sources, AppShell
   components/    Reusable UI (plus studio/ ornaments)
-  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, series, paging, warm-up selection, types, wash (motion)
+  lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, series, paging, warm-up selection, types, wash (motion), the painted tree's growth and colours
   hooks/         Favourites, painted record, sources, the screen wake lock, and a new page opening at its top
   data/          The generated catalogue, collections, series, warm-ups and their inspiration photos
   assets/refs/   The retired placeholder SVGs, now unit-test fixtures only
   fonts.ts       The self-hosted brand faces
   assets/brand/  Generated in-app brand mark
-e2e/             Playwright journeys (discovery, filtering, series, posture, accessibility, warm-ups)
+e2e/             Playwright journeys (discovery, filtering, series, posture, accessibility, warm-ups, the painted tree)
 public/          Favicons, app icons, site.webmanifest
 assets/          Brand originals (keep intact)
 ```
