@@ -202,6 +202,6 @@ test.describe("discovery", () => {
 
     await expect(page.getByText(/nothing set aside yet/i)).toBeVisible();
     await page.getByRole("link", { name: /find a piece to paint/i }).click();
-    await expect(page.getByRole("heading", { level: 1, name: /browse the studio/i })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /browse the catalogue/i })).toBeVisible();
   });
 });

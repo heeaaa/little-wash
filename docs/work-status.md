@@ -1,6 +1,47 @@
 # Work status - little wash
 
-_Last updated: 28/09/2026_
+_Last updated: 29/09/2026_
+
+## Checkpoint - 29/09/2026: Warm-ups page rebuilt (uncommitted)
+
+**Objective.** Make `#/exercises` easier to choose from and follow while
+painting: variations for all five warm-ups, a guide per variation, visuals
+that help. On branch `feat/real-catalogue-and-fonts`, **not committed, not
+pushed, no PR** - the user asked for no PR yet because Netlify deploys from it.
+
+**Decisions (user-approved 29/09/2026).**
+
+- Layout: the list expands in place, one warm-up open at a time.
+- Visuals: 20 original SVG illustrations, plus five photos the user picked
+  from candidates (one each for soft clouds, layered mountains, fading sky,
+  sunset wash, misty landscape), fixed to their variation - no shuffling.
+- A "Keep screen on" switch (Screen Wake Lock), hidden where unsupported.
+- Not route-split: +14.1 kB gzip on the main chunk (111.66 -> 125.80 kB,
+  468.8 -> 512.3 kB raw), which crosses Vite's 500 kB advisory. Splitting
+  without a service worker would add an offline failure the app does not
+  have today; revisit with the PWA work.
+
+**Changed.** `src/data/exercises.ts`, `src/data/inspiration.ts` (new),
+`src/lib/exercises.ts` (new), `src/hooks/useWakeLock.ts` (new),
+`src/components/ExerciseArt.tsx`, `src/components/Icon.tsx`,
+`src/screens/Exercises.tsx`, `src/screens/AppShell.tsx` (footer credits),
+`RefArt`/`CreditLine` prop types, `src/index.css` (`.warmup-*`,
+`--header-h`), `scripts/catalog/build.ts` + CLI (credits section),
+`docs/CREDITS.md` (regenerated), tests, DESIGN.md, README.
+
+**Verified.** See the evidence summary in the session; commands were
+`npx tsc -b --noEmit`, `npx eslint src e2e scripts --max-warnings=0`,
+`npx vitest run --coverage`, `npm run build`, `npm run catalog:build` (only
+`docs/CREDITS.md` changed) and `npx playwright test`.
+
+**Not verified.** Wake lock on a real device (headless Chromium refuses it, so
+only the refusal path ran in a browser); real-device install/touch.
+
+**Also in this working tree (30/09/2026).** Browse's h1 renamed "Browse the
+studio" -> "Browse the catalogue"; see "Still open" item 2 below.
+
+**Next.** User review of the page, then commit on this branch when asked.
+Candidate photo sheet: `Claude outputs/warmup-photo-candidates.html`.
 
 ## Where this stands - 19/09/2026
 
@@ -32,7 +73,10 @@ branches with thresholds enforced.
    objection. The second one was answered by rules rather than by restraint:
    see "The painted mark, and the register it must keep" in `DESIGN.md`, and
    the register tests in `src/screens/Painted.test.tsx`.
-2. **"Browse the studio" vs "Your studio".** Two uses of one word. A copy call.
+2. ~~**"Browse the studio" vs "Your studio".**~~ **Closed 30/09/2026** - Browse's
+   h1 is now "Browse the catalogue" (user-approved). "Studio" means only the
+   user's own space: the nav item, `/studio`, the header palette and "Your
+   studio".
 3. **Branch protection.** Workflow YAML cannot require its own checks. Require
    *Lint, types, unit tests, build* and *End-to-end journeys* on `main` in
    repository settings.

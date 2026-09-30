@@ -25,7 +25,7 @@ function renderStudio() {
             </AppProvider>
           }
         />
-        <Route path="/browse" element={<h1>Browse the studio</h1>} />
+        <Route path="/browse" element={<h1>Browse the catalogue</h1>} />
         <Route path="/piece/:id" element={<div>detail</div>} />
       </Routes>
     </MemoryRouter>,
@@ -112,7 +112,7 @@ describe("Studio", () => {
       renderStudio();
 
       await user.click(screen.getByRole("link", { name: /find a piece to paint/i }));
-      expect(screen.getByRole("heading", { name: "Browse the studio" })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: "Browse the catalogue" })).toBeInTheDocument();
     });
 
     /*

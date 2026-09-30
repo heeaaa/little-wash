@@ -240,7 +240,7 @@ describe("Today (shared editorial screen)", () => {
 describe("Browse", () => {
   it("lists collections and the whole catalogue by default", () => {
     renderScreen(Browse);
-    expect(screen.getByRole("heading", { name: /browse the studio/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /browse the catalogue/i })).toBeInTheDocument();
     /*
       Collections that have emptied out leave Browse rather than sitting there
       as a dead end, so which ones appear depends on the catalogue. What must
