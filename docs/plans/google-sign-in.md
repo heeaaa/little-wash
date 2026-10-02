@@ -337,6 +337,7 @@ cannot be automated here and stay **not run** until phase 7.
 | A deploy preview that is not on the redirect allow list returns to production, where its PKCE verifier does not exist | The preview pattern goes on the list; the app recognises an orphaned `code` and says to try again |
 | Session tokens live in `localStorage`, readable by any script on the page | No third-party scripts; React escaping; a Content-Security-Policy is a recorded follow-up (it needs testing on Netlify, which `vite preview` cannot do) |
 | A future service worker caching account responses | Recorded for the parked PWA plan: never cache the Supabase host or a URL with `code` |
+| After Auth could not be reached to refresh an expired session, supabase-js 2.117 answers later refreshes with that failure for 60 seconds (its `REFRESH_FAILURE_COOLDOWN_MS`), so for up to a minute after the connection returns, "Try again" cannot reconnect | The studio keeps working from the device's copy and changes wait on it; the growing pause carries on, and the first try after the minute reaches Auth. Accepted: it is supabase-js's guard against a storm of refresh requests |
 
 ## Free-tier limits that apply
 

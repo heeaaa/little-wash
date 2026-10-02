@@ -124,7 +124,10 @@ add-on; that is a later decision.
    sensitive variable policy **Require approval**. After that, never approve
    a preview of a pull request you have not read. If you would rather not rely
    on this, add the preview pattern only for step 6 and remove it afterwards;
-   previews then simply cannot sign in.
+   previews then simply cannot sign in. Your previews are also private to your
+   Netlify team at the moment (they show "This site is private" to anyone
+   else, seen 03/10/2026), so nobody outside the team can open one: keep that
+   on as well.
 
 ## Step 4 - create the tables
 
@@ -178,8 +181,10 @@ three. Without them the site simply has no sign-in, as today.
 ## Step 6 - test on the deploy preview
 
 Open the pull request's deploy preview (Netlify posts the link on the pull
-request; if it was built before step 5, **Retry deploy** it). Then, signed in
-with a Google account you added as a test user:
+request; if it was built before step 5, **Retry deploy** it). Previews are
+private to your Netlify team, so sign in to Netlify in each browser you test
+with, your phone's included. Then, signed in with a Google account you added
+as a test user:
 
 - [ ] **Studio** shows "Sign in to keep your studio"; the sheet opens, says
       what signing in does and names the Supabase host.
