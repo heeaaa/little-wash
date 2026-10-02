@@ -166,10 +166,19 @@ describe("what this module deliberately cannot do", () => {
   });
 
   it("exports only a store, not a summary", () => {
+    /*
+      replacePainted and onPaintedReplaced were added deliberately on
+      02/10/2026: signing in moves this browser's record into the account and
+      empties it here, and a session that ends before the account has it puts
+      it back (src/lib/account). Both are store operations - they replace the
+      record and say so - and neither reads a date.
+    */
     expect(Object.keys(painted).sort()).toEqual([
       "isPainted",
       "loadPainted",
+      "onPaintedReplaced",
       "persistPainted",
+      "replacePainted",
       "today",
       "togglePainted",
     ]);

@@ -70,6 +70,20 @@ export function persistSeenLeaves(ids: readonly string[]): void {
 }
 
 /**
+ * Forget every leaf seen. Signing out removes an account's pieces from this
+ * browser, and this record names some of them, so it goes too.
+ */
+export function clearSeenLeaves(): void {
+  memory = [];
+  unwritable = false;
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // Storage unavailable: memory, now empty, was the whole record.
+  }
+}
+
+/**
  * The leaves still to arrive, oldest first: the pieces in `painted` (in the
  * order they were painted) that have not been seen, and at most the newest
  * `limit` of those. Older unseen leaves are already there - someone opening

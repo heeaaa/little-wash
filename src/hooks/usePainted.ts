@@ -1,7 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   isPainted as isPaintedIn,
   loadPainted,
+  onPaintedReplaced,
   persistPainted,
   today,
   togglePainted,
@@ -25,6 +26,9 @@ export interface PaintedApi {
 export function usePainted(now?: Date): PaintedApi {
   // Lazy init so storage is read once, not on every render.
   const [painted, setPainted] = useState<PaintedEntry[]>(() => loadPainted());
+
+  // Follows storage when the record is replaced from outside, as useFavorites does.
+  useEffect(() => onPaintedReplaced(() => setPainted(loadPainted())), []);
 
   const toggle = useCallback(
     (id: string) => {

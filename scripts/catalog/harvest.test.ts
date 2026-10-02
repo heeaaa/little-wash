@@ -3,7 +3,7 @@
  *
  * `fetch` is injected through HarvestContext precisely so this can be tested
  * without the network. The live APIs are checked separately, by
- * `npm run test:integration`.
+ * `npm run test:providers`.
  */
 
 import { describe, it, expect } from "vitest";

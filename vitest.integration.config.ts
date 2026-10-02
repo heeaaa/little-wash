@@ -2,24 +2,29 @@ import { defineConfig } from "vitest/config";
 import path from "node:path";
 
 /**
- * Live-API checks, kept apart from the routine suite.
+ * The backend checks: the real migrations, the real Auth and the real REST
+ * API of a local Supabase stack, reached the way the browser reaches them.
  *
- * The unit tests run each provider's `normalise` against payloads captured in
- * catalog/fixtures/, which is deterministic and needs no keys - but a
- * committed fixture cannot notice that a provider changed its response last
- * week. These hit the real APIs to catch exactly that.
+ * They need the stack running (`npx supabase@2.119.0 start`, which needs
+ * Docker) and its address and keys in the environment - see integration/env.ts
+ * for the names. CI's "Accounts against a local Supabase" job does both. With
+ * no stack the suite fails and says why: a skip is not a pass.
  *
- * Never on pull requests: they need credentials, they are slow, and a provider
- * having a bad afternoon must not turn someone's PR red.
+ * The live catalogue-provider checks that used to live under this name are
+ * `npm run test:providers` now (vitest.providers.config.ts).
  */
 export default defineConfig({
   resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+  // Like the unit suite, never a developer's own .env.
+  envDir: path.resolve(__dirname, "./src/test/env"),
   test: {
     globals: true,
     environment: "node",
-    include: ["scripts/**/*.integration.ts"],
-    // Third-party endpoints over a real network.
+    include: ["integration/**/*.test.ts"],
+    // One stack, shared: users are created per test with unique emails, but
+    // the files run one after another so their logs read in order.
+    fileParallelism: false,
     testTimeout: 30_000,
-    hookTimeout: 30_000,
+    hookTimeout: 60_000,
   },
 });

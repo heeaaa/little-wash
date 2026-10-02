@@ -32,3 +32,12 @@ import "@fontsource/source-sans-3/400.css";
 import "@fontsource/source-sans-3/500.css";
 import "@fontsource/source-sans-3/600.css";
 import "@fontsource/source-sans-3/700.css";
+
+/*
+  Google Sans Medium, for one thing only: the "Sign in with Google" button,
+  whose face Google's branding guidelines fix (DESIGN.md, "Accounts"). SIL OFL
+  1.1, self-hosted like the rest. Latin only - the button says one English
+  phrase - and a browser fetches the file (23 KB) only when that button is on
+  screen, inside the sign-in sheet.
+*/
+import "@fontsource/google-sans/latin-500.css";

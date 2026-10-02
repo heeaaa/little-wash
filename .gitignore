@@ -48,6 +48,8 @@ playwright/.auth/
 .env
 .env.*
 !.env.example
+# The e2e build's fake project address: no secret, see the file itself.
+!.env.e2e
 *.pem
 *.key
 secrets.json
@@ -109,3 +111,7 @@ catalog/.measurements/
 # Screenshots and reports produced while working. Useful to look at, not worth
 # carrying in the repository - they are large binaries that change every run.
 Claude outputs/
+
+# The live account journeys' own output (playwright.live.config.ts)
+test-results-live/
+playwright-report-live/

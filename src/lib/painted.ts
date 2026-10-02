@@ -110,3 +110,29 @@ export function togglePainted(
 export function persistPainted(entries: readonly PaintedEntry[]): void {
   writeStorage({ entries: [...entries] });
 }
+
+const replacedListeners = new Set<() => void>();
+
+/** Hear when the stored record is replaced from outside the hook, here or in another tab. */
+export function onPaintedReplaced(listener: () => void): () => void {
+  replacedListeners.add(listener);
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY || event.key === null) listener();
+  };
+  window.addEventListener("storage", onStorage);
+  return () => {
+    replacedListeners.delete(listener);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+/** Replace this browser's record from outside the hook, as `replaceFavorites` does and for the same reason. */
+export function replacePainted(entries: readonly PaintedEntry[]): void {
+  try {
+    if (entries.length === 0) localStorage.removeItem(STORAGE_KEY);
+    else writeStorage({ entries: [...entries] });
+  } catch {
+    // Storage unavailable: the in-memory record is all there was.
+  }
+  for (const listener of replacedListeners) listener();
+}

@@ -60,6 +60,7 @@ Confirmed capabilities (from the brief in CLAUDE.md):
 Confirmed constraints:
 
 - **Accounts:** local-first. The app works fully with no account, with data on-device. Supabase sign-in is optional and additive, for syncing across devices. No sign-up wall before the first painting.
+  - Decided and built 02/10/2026 (`docs/plans/google-sign-in.md`): Google is the only way to sign in, by redirect through Supabase Auth. Saved and painted pieces follow the account; source preferences and the painted tree's seen record stay on the device. Signing in moves this browser's pieces into the account; signing out removes the account's pieces from the browser. People can delete their account. Sign-in is offered only in the studio and the footer's small print.
 - **Reminders:** a service worker alone cannot reliably deliver scheduled local reminders. Reminders are best-effort, scheduled on the backend against the user's timezone, and therefore only available to signed-in users. Notification permission is requested only after an explicit user action. Denial, revocation and expired subscriptions are ordinary states to design for.
 - **Cost:** free-tier only. No paid services, no runtime AI calls, no app-store distribution without agreement.
 - **Access control:** per-user and admin access enforced in the backend with Supabase RLS, not hidden UI. Ordinary users cannot curate content.

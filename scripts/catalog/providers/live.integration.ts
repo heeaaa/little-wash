@@ -1,7 +1,7 @@
 /**
  * Schema-drift checks against the live provider APIs.
  *
- *   npm run test:integration
+ *   npm run test:providers
  *
  * The unit suite proves each adapter against a payload captured on 20/09/2026.
  * That is the right default - deterministic, offline, no secrets in CI - but it
