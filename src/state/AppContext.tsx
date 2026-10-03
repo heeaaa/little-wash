@@ -23,6 +23,8 @@ import {
 import { useFavorites, type FavoritesApi } from "@/hooks/useFavorites";
 import { useSources, type SourcesApi } from "@/hooks/useSources";
 import { usePainted, type PaintedApi } from "@/hooks/usePainted";
+import { useAccountLists } from "@/hooks/useAccountLists";
+import { useAccount } from "@/state/AccountContext";
 import { rewet } from "@/lib/wash";
 import { SHOWN_PARAM } from "@/lib/paging";
 import type { RandomSource } from "@/lib/shuffle";
@@ -86,11 +88,21 @@ export function AppProvider({
   today,
 }: AppProviderProps) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const favorites = useFavorites();
   const sources = useSources();
+  const guestFavorites = useFavorites();
   // Shares the injected clock with the daily pick, so a marked date is
   // deterministic under test.
-  const painted = usePainted(today);
+  const guestPainted = usePainted(today);
+  /*
+    Signed in, the pieces come from the account (src/lib/account); otherwise
+    from this browser, exactly as before accounts existed. Same API either
+    way, so no screen has to know which. The guest hooks keep running while
+    someone is signed in - their lists are simply empty then, having moved
+    into the account on sign-in.
+  */
+  const accountLists = useAccountLists(useAccount(), today);
+  const favorites = accountLists?.favorites ?? guestFavorites;
+  const painted = accountLists?.painted ?? guestPainted;
 
   const catalogue = useMemo(
     () => enabledReferences(references, sources.disabledSources),

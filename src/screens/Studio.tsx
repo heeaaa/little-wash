@@ -7,6 +7,9 @@ import { PaintedNote } from "@/components/PaintedNote";
 import { PaintedTree } from "@/components/PaintedTree";
 import { EmptyPanel } from "@/components/EmptyPanel";
 import { Icon } from "@/components/Icon";
+import { AccountLine } from "@/components/account/AccountLine";
+import { AccountSection } from "@/components/account/AccountSection";
+import { useAccount } from "@/state/AccountContext";
 
 interface StudioSectionProps {
   title: string;
@@ -43,6 +46,7 @@ function StudioSection({ title, count, children }: StudioSectionProps) {
  */
 export function Studio() {
   const { references, favorites, painted: paintedEntries } = useApp();
+  const { status } = useAccount();
   const saved = savedReferences(references, favorites);
   const painted = useMemo(
     () => paintedReferences(references, paintedEntries),
@@ -61,6 +65,11 @@ export function Studio() {
           Pieces you set aside to paint. They keep for as long as you like, and
           nothing here is keeping score.
         </p>
+        {/*
+          The one offer of an account, in the person's own space, said once
+          and quietly. Nothing on Today or Detail asks (DESIGN.md, "Accounts").
+        */}
+        <AccountLine />
       </div>
 
       {/*
@@ -155,6 +164,12 @@ export function Studio() {
           </>
         )}
       </StudioSection>
+
+      {status === "signed-in" ? (
+        <StudioSection title="Your account">
+          <AccountSection />
+        </StudioSection>
+      ) : null}
     </div>
   );
 }

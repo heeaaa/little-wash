@@ -26,7 +26,8 @@
       "@/*": ["./src/*"]
     },
 
-    "types": ["node", "vitest/globals"]
+    // integration/ reaches src/lib/account, which reads Vite's import.meta.env.
+    "types": ["node", "vitest/globals", "vite/client"]
   },
-  "include": ["scripts"]
+  "include": ["scripts", "supabase/pglite", "integration", "vite-env.d.ts"]
 }

@@ -18,6 +18,7 @@
     "vite.config.ts",
     "vitest.config.ts",
     "vitest.integration.config.ts",
+    "vitest.providers.config.ts",
     "vite.singlefile.config.ts"
   ]
 }

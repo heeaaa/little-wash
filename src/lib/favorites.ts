@@ -58,3 +58,38 @@ export function toggleFavorite(ids: readonly string[], id: string): string[] {
 export function persistFavorites(ids: readonly string[]): void {
   writeStorage({ ids: [...ids] });
 }
+
+const replacedListeners = new Set<() => void>();
+
+/**
+ * Hear when the stored list is replaced from outside the hook: by
+ * `replaceFavorites` in this tab, or by another tab changing it. The hook
+ * then reads the list again, so an in-memory copy never outlives it.
+ */
+export function onFavoritesReplaced(listener: () => void): () => void {
+  replacedListeners.add(listener);
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY || event.key === null) listener();
+  };
+  window.addEventListener("storage", onStorage);
+  return () => {
+    replacedListeners.delete(listener);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+/**
+ * Replace this browser's list, from outside the hook. Signing in moves its
+ * pieces into the account and empties it (src/lib/account); a session that
+ * ends before the account has them puts them back. Without telling the hook,
+ * its in-memory copy would reappear - or the restored pieces would not.
+ */
+export function replaceFavorites(ids: readonly string[]): void {
+  try {
+    if (ids.length === 0) localStorage.removeItem(STORAGE_KEY);
+    else writeStorage({ ids: [...ids] });
+  } catch {
+    // Storage unavailable: the in-memory list is all there was.
+  }
+  for (const listener of replacedListeners) listener();
+}

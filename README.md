@@ -11,8 +11,10 @@ simple, sketchable subject a day, with gentle filters for the time and energy
 you actually have, so you can go from opening the app to brush on paper in under
 a minute. No streaks, no pressure, ever.
 
-> Working name. This repository is the design-exploration prototype, not the
-> production app. All data is local mock data; nothing talks to a backend.
+> Working name. This repository is the design-exploration prototype. The
+> catalogue is real; accounts are optional Google sign-in on Supabase (see
+> **Accounts** below). A build without the account variables talks to no
+> backend at all.
 
 ## Quick start
 
@@ -29,8 +31,11 @@ npm run dev        # opens straight onto Today (#/)
 | `npm run test:unit` | Unit and component tests once (Vitest) |
 | `npm run test:watch` | Tests in watch mode |
 | `npm run test:coverage` | Tests with V8 coverage and enforced thresholds |
-| `npm run test:e2e` | Builds, then runs the Playwright journeys |
+| `npm run test:e2e` | Builds (`build:e2e`, against a fake account host), then runs the Playwright journeys |
 | `npm run test:e2e:ui` | The same suite in Playwright's UI mode |
+| `npm run test:integration` | Backend checks against a local Supabase stack (needs Docker; CI runs it) |
+| `npm run test:e2e:live` | Account journeys against a local Supabase stack (needs Docker; CI runs it) |
+| `npm run test:providers` | Live catalogue-provider API checks (needs keys; not in CI) |
 | `npm run test:e2e:report` | Open the last Playwright report |
 | `npm run lint` | Lint |
 | `npm run typecheck` | TypeScript checks, no emit |
@@ -42,34 +47,44 @@ npm run dev        # opens straight onto Today (#/)
 own bundled JavaScript, and linting it produced ~1,300 errors that had nothing
 to do with this app - enough noise to make the gate useless.
 
-`test:integration` checks the live provider APIs for schema drift - the unit
-suite runs each adapter against payloads captured in `catalog/fixtures/`, which
-is deterministic but cannot notice a provider changing its response since. It
-needs keys, is not part of CI, and skips any provider whose key is absent with
-the reason printed. A skip is not a pass.
+`test:integration` checks the backend: the migrations in `supabase/`, Supabase
+Auth and the REST API of a local stack, reached through the app's own requests
+(`integration/`). It needs that stack - `npx supabase@2.119.0 start`, which
+needs Docker - and its address and keys in the environment
+(`integration/env.ts`); without them it fails and says why. The database rules
+are also checked on every unit run, without Docker, by running the real
+migrations on PGlite (`supabase/pglite/`).
 
-There is still no backend to integrate against. That part is deliberately
-absent rather than stubbed, because an empty green job is worse than an honest
-gap.
+`test:providers` (called `test:integration` until 02/10/2026) checks the live
+catalogue-provider APIs for schema drift - the unit suite runs each adapter
+against payloads captured in `catalog/fixtures/`, which is deterministic but
+cannot notice a provider changing its response since. It needs keys, is not
+part of CI, and skips any provider whose key is absent with the reason printed.
+A skip is not a pass.
 
 ## CI
 
 `.github/workflows/ci.yml` runs on pull requests and on pushes to `main`, in
-two jobs:
+three jobs:
 
 - **verify** - `npm ci`, lint, typecheck, unit/component tests with coverage
   thresholds, production build. Uploads the coverage report and the build.
 - **e2e** - installs Chromium, runs the Playwright journeys against the
   production build at phone, propped-phone and desktop viewports. Uploads the
-  HTML report always and failure traces on red.
+  HTML report always and failure traces on red. The account journeys here run
+  against a fake backend (`e2e/fakeSupabase.ts`) and are reported as mocked.
+- **accounts** - starts a local Supabase stack with the CLI (pinned, 2.119.0),
+  applies the migrations to a clean database, lints the database functions,
+  then runs `test:integration` and `test:e2e:live` against it. The stack's keys
+  are the CLI's public demo values, so this job holds no secrets either.
 
 Actions are pinned to commit SHAs, permissions are `contents: read`, no secrets
 are used, and superseded runs are cancelled except on `main`.
 
 **Branch protection is not configured.** Workflow YAML cannot require its own
 checks - that is a repository setting, and it needs doing by hand: require
-`Lint, types, unit tests, build` and `End-to-end journeys` to pass before
-merging to `main`.
+`Lint, types, unit tests, build`, `End-to-end journeys` and `Accounts against a
+local Supabase` to pass before merging to `main`.
 
 ## What is built
 
@@ -121,6 +136,13 @@ route with their tail and query intact; anything unrecognised goes to Today.
 - **Save** - favourites persist on-device via `localStorage` behind a versioned
   schema, degrading to in-memory when storage is unavailable. A dedicated saved
   list screen is still backlog.
+- **Accounts** - optional Google sign-in, so saved and painted pieces follow a
+  person across devices. Offered once in the studio and in the footer's small
+  print, nowhere else; a guest's app is unchanged and makes no request to the
+  account service. Signing in moves this browser's pieces into the account;
+  changes are kept on the device and sent when there is a connection; signing
+  out removes the account's pieces from the browser; `#/privacy` says what is
+  kept. See "Accounts" in `DESIGN.md` and `docs/plans/google-sign-in.md`.
 
 The daily piece is seeded on the date *and* the active filter combination, so
 changing a filter genuinely reshuffles the pool rather than re-picking from the
@@ -134,7 +156,8 @@ Testing Library cover the logic, the screens, the routing and the catalogue
 pipeline (642 tests in 41 files), and Playwright covers the journeys end to end
 (53 tests in 8 spec files, 159 checks across phone, propped-phone and desktop).
 Counts as of 29/09/2026.
-Filtering, saving and "deal me another" are all simulated on-device.
+Filtering and "deal me another" run on-device; saving and painting do too,
+unless someone signs in.
 
 Motion follows one rule - the paper is never cut, only moved, re-wet or painted
 on. Navigating morphs the artwork between screens and dealing dissolves it
@@ -151,12 +174,16 @@ src/
   screens/       Today, Browse, Series, Detail, Exercises, Studio, Sources, AppShell
   components/    Reusable UI (plus studio/ ornaments)
   lib/           Pure logic: filtering, daily pick, seeded shuffle, favourites, series, paging, warm-up selection, types, wash (motion), the painted tree's growth and colours
+  lib/account/   Accounts: config, the device's record and its sync, sign-in returns, and the lazily loaded Supabase backend
   hooks/         Favourites, painted record, sources, the screen wake lock, and a new page opening at its top
   data/          The generated catalogue, collections, series, warm-ups and their inspiration photos
   assets/refs/   The retired placeholder SVGs, now unit-test fixtures only
   fonts.ts       The self-hosted brand faces
   assets/brand/  Generated in-app brand mark
-e2e/             Playwright journeys (discovery, filtering, series, posture, accessibility, warm-ups, the painted tree)
+e2e/             Playwright journeys (discovery, filtering, series, posture, accessibility, warm-ups, the painted tree, accounts against a fake backend)
+e2e-live/        Account journeys against a real local Supabase stack (CI)
+integration/     Backend checks against a real local Supabase stack (CI)
+supabase/        The migration, the local stack's config, and the PGlite policy tests
 public/          Favicons, app icons, site.webmanifest
 assets/          Brand originals (keep intact)
 ```
@@ -269,7 +296,7 @@ needs at least three decisions, at least three quarters agreeing, and the
 learned signal is capped well below the hard proportion and resolution rules,
 so it can reorder a queue but never override a fact about the file.
 
-`npm run test:integration` checks the live APIs for schema drift. It needs keys,
+`npm run test:providers` checks the live APIs for schema drift. It needs keys,
 is not part of CI, and skips any provider whose key is absent with its reason
 printed - a skip is not a pass.
 
@@ -279,3 +306,22 @@ Copy `.env.example` to `.env` and fill in keys for the sources you ingest from.
 They are read by build-time scripts only and are deliberately **not** `VITE_`
 prefixed, so Vite cannot put them in the browser bundle. `.env` is gitignored,
 and the app itself makes no authenticated request to any provider.
+
+## Accounts
+
+Optional Google sign-in through Supabase Auth (open source), with saved and
+painted pieces in two Postgres tables guarded by row level security. Two
+build-time variables turn it on; without them the app has no sign-in at all:
+
+| Variable | Value |
+| --- | --- |
+| `VITE_SUPABASE_URL` | The project's address, e.g. `https://<ref>.supabase.co` |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Its publishable key (`sb_publishable_...`). Public by design |
+| `VITE_SUPPORT_EMAIL` | Optional: an address for privacy questions |
+
+Never put a secret key in a `VITE_` variable: everything `VITE_` is written into
+the site's JavaScript, and `vite.config.ts` refuses to build if one is there.
+The deployment steps, from the Google Cloud console to production, are in
+[`docs/deploying-accounts.md`](./docs/deploying-accounts.md); the plan,
+decisions and evidence are in
+[`docs/plans/google-sign-in.md`](./docs/plans/google-sign-in.md).

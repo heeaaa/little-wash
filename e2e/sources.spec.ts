@@ -38,7 +38,9 @@ test.describe("source preferences", () => {
       await toggle.click();
     }
 
-    await expect(page.getByRole("status")).toContainText("Every source is switched off");
+    // Named by its words: with accounts on, the page also carries the account
+    // notice's live region, which is always present and empty until needed.
+    await expect(page.getByRole("status").filter({ hasText: "Every source is switched off" })).toBeVisible();
 
     await page.goto("/#/browse");
     await ready(page);

@@ -1,5 +1,8 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { AppProvider, useApp } from "@/state/AppContext";
+import { AccountProvider, useAccount } from "@/state/AccountContext";
+import { AccountNotice } from "@/components/account/AccountNotice";
+import { SignInSheet } from "@/components/account/SignInSheet";
 import { paintedReferences, savedReferences } from "@/lib/catalog";
 import { platformAttributions } from "@/lib/sources/attribution";
 import { CATALOGUE } from "@/data/catalogue";
@@ -14,22 +17,28 @@ export function AppShell() {
   useNewPageAtTop();
 
   return (
-    <AppProvider references={CATALOGUE}>
-      <div className="paper-grain relative flex min-h-dvh flex-col">
-        <WashFilter />
-        <a
-          href="#main"
-          className="sr-only left-3 top-3 z-50 min-h-[44px] items-center rounded-chip bg-accent px-4 py-2 font-semibold text-accent-ink focus:not-sr-only focus:absolute focus:inline-flex"
-        >
-          Skip to content
-        </a>
-        <Header />
-        <main id="main" className="relative z-10 flex-1">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </AppProvider>
+    // Accounts sit outside the app's state: AppProvider reads the signed-in
+    // record, when there is one, in place of this browser's own lists.
+    <AccountProvider>
+      <AppProvider references={CATALOGUE}>
+        <div className="paper-grain relative flex min-h-dvh flex-col">
+          <WashFilter />
+          <a
+            href="#main"
+            className="sr-only left-3 top-3 z-50 min-h-[44px] items-center rounded-chip bg-accent px-4 py-2 font-semibold text-accent-ink focus:not-sr-only focus:absolute focus:inline-flex"
+          >
+            Skip to content
+          </a>
+          <Header />
+          <main id="main" className="relative z-10 flex-1">
+            <AccountNotice />
+            <Outlet />
+          </main>
+          <Footer />
+          <SignInSheet />
+        </div>
+      </AppProvider>
+    </AccountProvider>
   );
 }
 
@@ -196,23 +205,55 @@ function PlatformCredits() {
   );
 }
 
+const FOOTER_LINK =
+  "underline decoration-[rgb(var(--ink)/0.25)] underline-offset-2 hover:decoration-[rgb(var(--ink)/0.6)]";
+
+/**
+ * Where what you save and paint lives, in a sentence. The second of the two
+ * places sign-in is offered (the studio is the other), and the quieter: small
+ * print, no button styling, there for whoever reads that far.
+ */
+function WhereThingsAreKept() {
+  const { status, openSignIn } = useAccount();
+  if (status === "unavailable") {
+    return <>What you save, paint and switch off stays in this browser.</>;
+  }
+  if (status === "signed-in") {
+    return <>Signed in: what you save and paint is kept with your account.</>;
+  }
+  return (
+    <>
+      What you save and paint stays in this browser unless you{" "}
+      {/* A real button with a 44px target, dressed as the footer's links. */}
+      <button
+        type="button"
+        onClick={openSignIn}
+        className={`-my-3 inline-flex min-h-[44px] items-center ${FOOTER_LINK}`}
+      >
+        sign in
+      </button>
+      .
+    </>
+  );
+}
+
 function Footer() {
   return (
     <footer className="relative z-10 border-t border-line px-4 py-6 sm:px-6">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 text-[0.78rem] text-ink-faint">
         <p className="text-pretty">
-          Design-exploration prototype. There is no account yet: what you save,
-          paint and switch off stays in this browser. References are real
-          photographs and museum works, credited on every piece.
+          Design-exploration prototype. <WhereThingsAreKept /> References are
+          real photographs and museum works, credited on every piece.
         </p>
         <PlatformCredits />
         <p>
           little wash - a little colour, every day. Working name.{" "}
-          <Link
-            to="/sources"
-            className="underline decoration-[rgb(var(--ink)/0.25)] underline-offset-2 hover:decoration-[rgb(var(--ink)/0.6)]"
-          >
+          <Link to="/sources" className={FOOTER_LINK}>
             Where ideas come from
+          </Link>
+          {" · "}
+          <Link to="/privacy" className={FOOTER_LINK}>
+            Privacy
           </Link>
         </p>
       </div>

@@ -1,6 +1,62 @@
 # Work status - little wash
 
-_Last updated: 01/10/2026_
+_Last updated: 03/10/2026_
+
+## Checkpoint - 03/10/2026: Optional Google sign-in
+
+**Objective.** Optional Google sign-in, so the pieces someone saves and marks
+painted are kept with their account on every device, with guests otherwise
+unchanged (open guest tabs now follow each other's lists, review finding 8).
+On `feat/google-sign-in`, cut from `main` at `067d7c8`. The user asked for a
+thorough plan, then implementation, then a PR; never merge (merging deploys).
+Plan, decisions and evidence: `docs/plans/google-sign-in.md`. The owner's
+steps: `docs/deploying-accounts.md`. Rules: DESIGN.md, "Accounts".
+
+**Decisions (made here, recorded to be revisited).** Supabase Auth and
+Postgres on the free plan; Google only, redirect with PKCE; Saved and Painted
+follow the account; the first sign-in moves this browser's pieces in (later
+painted day wins); offline changes are "last to arrive wins"; sign-out is this
+device only; the offer lives in the studio and the footer only. The Supabase
+project is `dbbjvtbaljprmfhmxdmr`; nothing here connects to it.
+
+**Changed.** `supabase/` (migration, config, PGlite tests), `src/lib/account/`,
+`src/state/AccountContext.tsx`, `src/components/account/`,
+`src/screens/Privacy.tsx`, the guest lists' replace listeners
+(`favorites.ts`, `painted.ts`, their hooks, `leavesSeen.ts`), `e2e/`
+(`account.spec.ts`, `fakeSupabase.ts`), `e2e-live/`, `integration/`, CI's
+accounts job, `test:integration` (backend) with the provider checks moved to
+`test:providers`, DESIGN.md, README, PRODUCT.md.
+
+**Evidence, measured.**
+
+- An independent review: 1 high, 3 medium, 8 low. All fixed, each with a test
+  shown red against the code before it; listed in the plan.
+- Found while fixing them: backend tests leaked supabase-js clients from test
+  to test (a leftover client refreshed a later test's session); a sheet left
+  open when another tab signed in came back on the next sign-out. Both red,
+  then green.
+- Bundle: main JavaScript 136.80 to 148.80 KB gzip (+12.00 KB) against
+  `main`; CSS 10.99 to 11.48 KB gzip; the sign-in chunk is 60.34 KB gzip,
+  loaded only when the sign-in sheet opens or someone is signed in, and the
+  only file with supabase-js in it.
+
+**Verified locally, 03/10/2026 (Node 24.13; CI uses 22), on the final code.**
+`npm run lint` and `npm run typecheck` exit 0. `npm run test:coverage`:
+1,120 of 1,120 in 63 files; 97.47 statements, 93.23 branches, 93.77
+functions, 97.47 lines, thresholds met. Playwright with CI's 2 workers: 264
+of 264 on phone, propped phone and desktop; after one last class on the
+dismiss button's focus ring, the account journeys again, 39 of 39.
+Screenshots: `Claude outputs/google-sign-in/` and its `review-fixes/`.
+
+**Not run here.** The real local Supabase stack (`npm run test:integration`,
+`npm run test:e2e:live`): no Docker on this machine; CI's accounts job runs
+them, and the PR's first run is their first evidence. Real Google, the real
+project and real phones (the iPhone home-screen app especially): the owner's
+step 6. A real screen reader.
+
+**Next action.** The owner works through `docs/deploying-accounts.md`; then
+the deploy-preview checks of step 6. If the iPhone home-screen app is left
+signed out, the planned follow-up (sign-in in a window that stays in the app).
 
 ## Checkpoint - 01/10/2026: The painted tree
 

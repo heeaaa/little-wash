@@ -116,6 +116,9 @@ as small body text. The text label always carries the meaning.
 - Display / editorial: **Libre Baskerville** (400 / 700 + italic). Wordmark,
   page and section headings, piece titles, prompts (italic).
 - Body / UI: **Source Sans 3** (400-700, no italic).
+- **Google Sans** Medium, for the "Sign in with Google" button only, because
+  Google's branding guidelines fix that button's face (see **Accounts**). Never
+  used for anything of little wash's own.
 - Handwritten accent: **Caveat**, used sparingly. Part of the brand, but no
   element sets `font-hand` yet, so it is not bundled; `src/fonts.ts` says how
   to add it when it gets a job.
@@ -870,6 +873,87 @@ left. Arrival: 16.7ms median frame at both.
 **What it must never do**: register rules 7 and 8 above, and the motion rules -
 it plays once, waits to be seen, and is still under reduced motion.
 
+## Accounts (optional sign-in)
+
+Built 02/10/2026: optional Google sign-in, so the pieces someone saves and
+marks painted follow them across devices. Plan, decisions and evidence:
+`docs/plans/google-sign-in.md`; the owner's setup steps:
+`docs/deploying-accounts.md`. A build without the two `VITE_SUPABASE_`
+variables has no accounts at all and looks exactly as it did before.
+
+**Where it may appear - and nowhere else.**
+
+- **The studio**, one quiet line under the lede: "Your studio is kept in this
+  browser." and a teal-underline quiet button, "Sign in to keep it on every
+  device". The studio is the person's own space, and the one place keeping
+  track is the subject.
+- **The footer's small print**: "What you save and paint stays in this browser
+  unless you sign in." with "sign in" as a link-styled button.
+- **Never** on Today or Detail, in the header, in the nav, or after saving or
+  marking something painted. No banner, no badge, no reminder that returns.
+  Register rule 6 applies: nothing in the chrome. Asking someone to sign in
+  between a reference and the brush is the deliberation this app exists to
+  remove.
+
+**The words.** Practical and unpressured, like the rest of the studio. Say what
+happens ("moves into your account", "kept with your account"), never what
+might be lost: no "Don't lose your work", no "Unlock", no "Join", no
+achievement vocabulary. "You don't need an account to use little wash" is said
+in the sheet, every time.
+
+**The sign-in sheet** (`SignInSheet`, `.sign-in-sheet`). A bottom sheet below
+640px, reached by thumb like the subject sheet; a centred card from 640px,
+because a full-width strip along a desktop window's bottom reads as a cookie
+banner. It explains before Google's screen appears: what is kept, that this
+browser's pieces move across, and the Supabase host Google will name - Google
+shows the redirect host, not "little wash", until a paid custom domain exists,
+and a person told first is not alarmed by it. In an app's built-in browser
+(Instagram, Facebook and the like), where Google refuses sign-in, it says to
+open little wash in Safari or Chrome.
+
+**The Google button** (`GoogleSignInButton`, `.google-signin`) is the one place
+another company's colours and type appear, because Google's branding guidelines
+fix them: white, a 1px `#747775` stroke inside, `#1F1F1F` text, Google Sans
+Medium at 14/20 (self-hosted from Fontsource, latin only, fetched only when the
+sheet opens), and Google's own standard-colour "G" from its asset pack,
+unmodified (`src/assets/google/README.md`). Its colours are tokens on `:root`
+(`--google-fill`, `--google-stroke`, `--google-ink`) used by that class only.
+44px tall, against Google's 40, for this app's floor. While leaving for Google
+it is `aria-disabled`, keeps focus and its words, and a status line under it
+says "Opening Google...".
+
+**Signed in.** The studio's line names who ("Signed in as ...") with a quiet
+"Sign out", and a last section, "Your account", holds what is kept and "Delete
+my account". Leaving is always available and never the first thing anyone sees.
+The connection is spoken about only when a change is stuck: offline with
+changes waiting ("1 change will reach your account when you're back online"),
+or the account unreachable ("Can't reach your account just now", with "Try
+again"). Sending and syncing say nothing.
+
+**Notices** (`AccountNotice`). One at a time, under the header on whatever page
+the person is on: a sign-in that worked (and how many pieces came across), one
+that was cancelled or did not finish, a session that ended, a deletion. Paper
+and ink, no colour coding, no motion, no timer - it stays until dismissed. Its
+words go through a live region that is always on the page, so they are heard;
+the card repeats them for sight with its copy hidden from assistive technology,
+so nothing is read twice. Signing out and deleting the account remove the
+button that did it, along with the signed-in view; focus then moves to the
+notice's dismiss button, beside the words saying what happened. No other notice
+moves focus, and neither does one when focus is still somewhere.
+
+**Inside an open sheet or question, the dialog speaks for itself.** The page
+behind a modal is inert, and the notice under the header may be off-screen, so
+a sign-in that cannot start or a delete that fails is said in the dialog's own
+status line, the one that said "Opening Google..." or "Deleting your
+account...". Only what happened since it opened: open it again and the line
+starts empty.
+
+**Questions that cannot be taken back** (`ConfirmDialog`): deleting the account,
+and signing out with changes that could not be sent. The safe answer comes
+first and has focus, so Enter, Escape or a stray tap keep things as they are.
+The serious answer is filled ink: there is no red in this palette, and rose
+fails AA for text.
+
 ## Assets and provenance
 
 Reference artwork is the curated catalogue: 189 photographs and museum works
@@ -997,5 +1081,6 @@ below, which never punishes a missed day.
    colours, with no streaks, no targets and no achievement language. See **The
    painted tree**.
 
-Plus the standing backlog: saved-list screen, PWA/offline, Supabase, backend
-reminder scheduling, real curated licensed imagery + provenance pipeline, CI.
+Plus the standing backlog: saved-list screen, PWA/offline, backend reminder
+scheduling, real curated licensed imagery + provenance pipeline, CI. Supabase
+and optional sign-in were built 02/10/2026 (see **Accounts**).

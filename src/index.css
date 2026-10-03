@@ -57,6 +57,15 @@
   */
   --bark: 91 70 54;
 
+  /*
+    Google's colours for its "Sign in with Google" button, light theme. Fixed
+    by Google's branding guidelines, not part of this palette, and used by
+    `.google-signin` only (DESIGN.md, "Accounts").
+  */
+  --google-fill: 255 255 255;
+  --google-stroke: 116 119 117;
+  --google-ink: 31 31 31;
+
   --font-display: "Libre Baskerville", Georgia, "Times New Roman", serif;
   --font-body: "Source Sans 3", system-ui, -apple-system, sans-serif;
   --font-hand: "Caveat", "Segoe Script", cursive;
@@ -233,6 +242,79 @@
     max-height: 85svh;
     overflow-y: auto;
     animation: sheet-rise var(--t-rise) var(--ease-paper);
+  }
+
+  /*
+    The sign-in sheet (SignInSheet). A bottom sheet on a phone, like the
+    subject sheet, reached by thumb; a centred card from 640px, where a
+    full-width strip along the bottom of a desktop window would read as a
+    cookie banner. It carries no Tailwind layout utilities, so nothing here
+    has a utility outranking it (DESIGN.md, the layer note).
+  */
+  .sign-in-sheet {
+    width: 100%;
+    max-width: 100%;
+    max-height: 88vh;
+    max-height: 88svh;
+    overflow-y: auto;
+    /* A short landscape screen scrolls inside the sheet; the page stays put. */
+    overscroll-behavior: contain;
+    margin: auto 0 0;
+    /* Along the foot of an iPhone, clear of the home indicator (viewport-fit=cover). */
+    padding: 0 0 env(safe-area-inset-bottom, 0px);
+    border: 0;
+    border-top: 1px solid rgb(var(--line));
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+    background: rgb(var(--surface-raised));
+    color: rgb(var(--ink));
+    animation: sheet-rise var(--t-rise) var(--ease-paper);
+  }
+  .sign-in-sheet::backdrop {
+    background: rgb(20 28 34 / 0.5);
+  }
+  @media (min-width: 640px) {
+    .sign-in-sheet {
+      margin: auto;
+      padding-bottom: 0;
+      max-width: 30rem;
+      border: 1px solid rgb(var(--line));
+      border-radius: var(--radius-card);
+      /* A panel, not a plate: the hairline and the small lift, as the app's
+         cards carry. --shadow-plate is for plates that hold artwork. */
+      box-shadow: var(--shadow-lift);
+    }
+  }
+
+  /*
+    "Sign in with Google", to Google's branding guidelines for a custom
+    button: light theme (white, a 1px #747775 stroke inside, #1F1F1F text),
+    Google Sans Medium 14/20, the standard-colour "G" 20px with 12px before it
+    and 10px after. Taller than Google's 40px only to meet this app's 44px
+    floor. The one place another company's colours and face appear.
+  */
+  .google-signin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0 16px 0 12px;
+    border-radius: 9999px;
+    background-color: rgb(var(--google-fill));
+    box-shadow: inset 0 0 0 1px rgb(var(--google-stroke));
+    color: rgb(var(--google-ink));
+    font-family: "Google Sans", var(--font-body);
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    white-space: nowrap;
+  }
+  .google-signin:hover {
+    background-image: linear-gradient(rgb(var(--google-ink) / 0.06), rgb(var(--google-ink) / 0.06));
+  }
+  .google-signin[aria-disabled="true"] {
+    cursor: progress;
+    opacity: 0.65;
   }
   @keyframes sheet-rise {
     from {

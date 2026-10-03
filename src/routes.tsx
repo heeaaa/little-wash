@@ -7,6 +7,7 @@ import { Exercises } from "@/screens/Exercises";
 import { Studio } from "@/screens/Studio";
 import { Sources } from "@/screens/Sources";
 import { Series } from "@/screens/Series";
+import { Privacy } from "@/screens/Privacy";
 
 /**
  * The exploration-era URLs carried a direction segment (#/a/piece/ripe-pear).
@@ -31,6 +32,7 @@ export const routeElements = (
       <Route path="exercises" element={<Exercises />} />
       <Route path="studio" element={<Studio />} />
       <Route path="sources" element={<Sources />} />
+      <Route path="privacy" element={<Privacy />} />
     </Route>
     <Route path="/a/*" element={<LegacyDirectionRedirect />} />
     <Route path="/b/*" element={<LegacyDirectionRedirect />} />

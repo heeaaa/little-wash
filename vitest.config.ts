@@ -9,12 +9,22 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  /*
+    No .env reaches the unit suite. A developer's own .env may point at the
+    real Supabase project (docs/deploying-accounts.md, "Local development"),
+    and a test that quietly became a signed-in app would be testing whatever
+    that file says. This directory holds no .env files, so `import.meta.env`
+    carries no VITE_SUPABASE_ values here and accounts are simply unavailable
+    unless a test configures them itself.
+  */
+  envDir: path.resolve(__dirname, "./src/test/env"),
   test: {
     globals: true,
     environment: "jsdom",
     // Unit and component tests only. `e2e/` holds Playwright specs, which share
-    // the `.spec.ts` suffix and must not be collected here.
-    include: ["src/**/*.test.{ts,tsx}", "scripts/**/*.test.ts"],
+    // the `.spec.ts` suffix and must not be collected here. `supabase/pglite/`
+    // runs the real migrations on Postgres in WebAssembly.
+    include: ["src/**/*.test.{ts,tsx}", "scripts/**/*.test.ts", "supabase/**/*.test.ts"],
     setupFiles: ["./src/test/setup.ts"],
     css: false,
     coverage: {

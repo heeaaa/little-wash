@@ -6,7 +6,7 @@
  * response shape fails a test instead of a build. These never touch the
  * network, so CI needs no keys.
  *
- * The live APIs are checked separately, by `npm run test:integration`.
+ * The live APIs are checked separately, by `npm run test:providers`.
  */
 
 import { describe, it, expect } from "vitest";
