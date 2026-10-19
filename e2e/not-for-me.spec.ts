@@ -1,7 +1,7 @@
 import { test, expect, type BrowserContext, type Page } from "@playwright/test";
 import { createRequire } from "node:module";
 import { FakeSupabase } from "./fakeSupabase";
-import { featuredTitle, ready } from "./support";
+import { animationsSettled, featuredTitle, ready } from "./support";
 
 const require = createRequire(import.meta.url);
 const AXE_PATH = require.resolve("axe-core/axe.min.js");
@@ -28,7 +28,7 @@ async function hiddenIds(page: Page): Promise<string[]> {
   the page is checked as it rests, which is what a person reads.
 */
 async function axeViolations(page: Page) {
-  await page.waitForFunction(() => document.getAnimations().every((animation) => animation.playState !== "running"));
+  await animationsSettled(page);
   await page.addScriptTag({ path: AXE_PATH });
   return page.evaluate(async () => {
     const result = await (window as unknown as { axe: { run: typeof import("axe-core").run } }).axe.run(document, {
