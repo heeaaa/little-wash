@@ -80,8 +80,17 @@ test.describe("the propped-phone posture", () => {
 
     if (isShortLandscape(page)) {
       // "Open this piece" sat at y=616 in a 390px viewport when these stacked.
-      const cta = await isInFirstScreen(page, ".featured-actions");
-      expect(cta.clear).toBe(true);
+      const open = await isInFirstScreen(page, ".featured-actions a");
+      expect(open.clear).toBe(true);
+      const deal = await isInFirstScreen(page, '[data-action="deal"]');
+      expect(deal.clear).toBe(true);
+      /*
+        "Not for me" does not fit beside them propped sideways (the row is
+        357-475px wide; the three need 492px), so it takes the next line, one
+        short scroll down - chosen with the user 19/10/2026 over covering a
+        corner of the reference with another button. DESIGN.md, "Not for me".
+      */
+      await expect(page.getByRole("button", { name: "Not for me" })).toBeVisible();
     }
   });
 

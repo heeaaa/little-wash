@@ -228,6 +228,20 @@ describe("Today (shared editorial screen)", () => {
     expect(featuredTitle()).not.toEqual(before);
   });
 
+  /*
+    Found 19/10/2026 while adding "Not for me" beside it. The featured piece is
+    keyed by its id, so a deal remounts it and the button that was pressed is
+    gone: focus fell back to the page, and someone dealing by keyboard had to
+    tab all the way back from the top to deal again.
+  */
+  it("keeps focus on Deal me another after dealing, so it can be pressed again", async () => {
+    const user = userEvent.setup();
+    renderScreen(Today, { seed: 3 });
+    screen.getByRole("button", { name: /deal me another/i }).focus();
+    await user.keyboard("{Enter}");
+    expect(document.activeElement).toBe(screen.getByRole("button", { name: /deal me another/i }));
+  });
+
   it("saves and unsaves the featured piece", async () => {
     const user = userEvent.setup();
     renderScreen(Today);

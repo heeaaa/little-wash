@@ -23,8 +23,16 @@ test.describe("fonts", () => {
   });
 
   test("Today draws with the brand faces, not their fallbacks", async ({ page }) => {
-    await page.goto("/#/");
+    /*
+      Pinned to a piece with a prompt, because the prompt is the only thing on
+      Today set in the italic. Following the day's own pick made this test
+      depend on the date: on 19/10/2026 the pick had no prompt, the italic was
+      never drawn, and the test failed on every project with no change to the
+      app.
+    */
+    await page.goto("/#/?piece=dogwood-vase-9317");
     await ready(page);
+    await expect(page.locator(".featured-prompt")).toBeVisible();
 
     /*
       Only faces the page itself asked for, so nothing here is forced by the

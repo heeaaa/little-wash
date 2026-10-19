@@ -13,6 +13,7 @@ import {
   sortPainted,
   sortSaved,
   toInstant,
+  toggleHidden,
   togglePainted,
   toggleSaved,
   type AccountRecord,
@@ -80,7 +81,7 @@ describe("toggling", () => {
     const three = toggleSaved(two.record, two.pending, "apple", T1);
     expect(three.record.saved.map((r) => r.id)).toEqual(["pear", "mug", "apple"]);
     // And after a row whose clock ran ahead of this one.
-    const ahead = toggleSaved({ saved: [{ id: "from-a-fast-clock", at: T3 }], painted: [] }, [], "now", T1);
+    const ahead = toggleSaved({ saved: [{ id: "from-a-fast-clock", at: T3 }], painted: [], hidden: [] }, [], "now", T1);
     expect(ahead.record.saved.map((r) => r.id)).toEqual(["from-a-fast-clock", "now"]);
 
     const painted = togglePainted(EMPTY_RECORD, [], "zebra", "2026-10-02", T1);
@@ -126,10 +127,11 @@ describe("hearing back from the account", () => {
       { id: "removed-here", at: T1 },
     ],
     painted: [{ id: "painted-there", on: "2026-09-20", at: T1 }],
+    hidden: [],
   };
 
   it("takes the account's version of every piece that has no unsent change", () => {
-    const device: AccountRecord = { saved: [{ id: "stale", at: T1 }], painted: [] };
+    const device: AccountRecord = { saved: [{ id: "stale", at: T1 }], painted: [], hidden: [] };
     const result = overlay(account, device, []);
     expect(result.saved.map((r) => r.id)).toEqual(["from-the-phone", "removed-here"]);
     expect(result.painted.map((r) => r.id)).toEqual(["painted-there"]);
@@ -142,6 +144,7 @@ describe("hearing back from the account", () => {
         { id: "saved-offline", at: T3 },
       ],
       painted: [],
+      hidden: [],
     };
     const pending = [pendingKey("saved", "removed-here"), pendingKey("saved", "saved-offline"), pendingKey("painted", "painted-there")];
     const result = overlay(account, device, pending);
@@ -155,6 +158,7 @@ describe("sending", () => {
   const record: AccountRecord = {
     saved: [{ id: "pear", at: T1 }],
     painted: [{ id: "mug", on: "2026-09-14", at: T2 }],
+    hidden: [],
   };
 
   it("turns each pending piece into an upsert or a delete", () => {
@@ -200,17 +204,18 @@ describe("first sign-in: this browser's pieces move into the account", () => {
       { id: "painted-earlier-there", on: "2026-09-01", at: T1 },
       { id: "painted-later-there", on: "2026-09-30", at: T1 },
     ],
+    hidden: [],
   };
 
   it("adds every saved piece the account lacks, after its own, in this browser's order", () => {
-    const result = mergeGuest(account, [], { saved: ["b-second", "already-saved", "a-first"].reverse(), painted: [] }, NOW);
+    const result = mergeGuest(account, [], { saved: ["b-second", "already-saved", "a-first"].reverse(), painted: [], hidden: [] }, NOW);
     expect(result.record.saved.map((r) => r.id)).toEqual(["already-saved", "a-first", "b-second"]);
     expect(result.added).toEqual({ saved: 2, painted: 0 });
     expect(result.pending).toEqual(["saved:a-first", "saved:b-second"]);
   });
 
   it("adds painted pieces on their own day, so they fall into place", () => {
-    const result = mergeGuest(account, [], { saved: [], painted: [{ id: "mid-september", on: "2026-09-14" }] }, NOW);
+    const result = mergeGuest(account, [], { saved: [], painted: [{ id: "mid-september", on: "2026-09-14" }], hidden: [] }, NOW);
     expect(result.record.painted.map((r) => r.id)).toEqual(["painted-earlier-there", "mid-september", "painted-later-there"]);
     expect(result.added.painted).toBe(1);
   });
@@ -225,6 +230,7 @@ describe("first sign-in: this browser's pieces move into the account", () => {
           { id: "painted-earlier-there", on: "2026-09-20" },
           { id: "painted-later-there", on: "2026-09-02" },
         ],
+        hidden: [],
       },
       NOW,
     );
@@ -239,7 +245,7 @@ describe("first sign-in: this browser's pieces move into the account", () => {
     const result = mergeGuest(
       EMPTY_RECORD,
       [],
-      { saved: ["fine", "has space", ""], painted: [{ id: "ok", on: "2026-02-30" }, { id: "bad id!", on: "2026-09-14" }] },
+      { saved: ["fine", "has space", ""], painted: [{ id: "ok", on: "2026-02-30" }, { id: "bad id!", on: "2026-09-14" }], hidden: [] },
       NOW,
     );
     expect(result.record.saved.map((r) => r.id)).toEqual(["fine"]);
@@ -247,7 +253,7 @@ describe("first sign-in: this browser's pieces move into the account", () => {
   });
 
   it("changes nothing the second time", () => {
-    const guest = { saved: ["a"], painted: [{ id: "b", on: "2026-09-14" }] };
+    const guest = { saved: ["a"], painted: [{ id: "b", on: "2026-09-14" }], hidden: [] };
     const once = mergeGuest(account, [], guest, NOW);
     const twice = mergeGuest(once.record, once.pending, guest, NOW);
     expect(twice.record).toEqual(once.record);
@@ -278,5 +284,100 @@ describe("reading back what was stored", () => {
       "painted:b",
     ]);
     expect(parsePending("saved:a")).toEqual([]);
+  });
+});
+
+/*
+  "Not for me" (docs/plans/not-for-me-reminders-curation.md, Phase 1): a third
+  list that follows the account exactly as saved pieces do - one row per piece,
+  oldest first, pending until the account has it.
+*/
+describe("hidden pieces", () => {
+  const NOW = new Date("2026-10-19T08:00:00.000Z");
+
+  it("hides a piece after the others and marks it pending, once", () => {
+    const first = toggleHidden(EMPTY_RECORD, [], "cat", T1);
+    const second = toggleHidden(first.record, first.pending, "tower", T2);
+    expect(second.record.hidden).toEqual([
+      { id: "cat", at: T1 },
+      { id: "tower", at: T2 },
+    ]);
+    expect(second.pending).toEqual([pendingKey("hidden", "cat"), pendingKey("hidden", "tower")]);
+
+    const shown = toggleHidden(second.record, second.pending, "cat", T3);
+    expect(shown.record.hidden.map((r) => r.id)).toEqual(["tower"]);
+    expect(shown.pending).toEqual([pendingKey("hidden", "cat"), pendingKey("hidden", "tower")]);
+  });
+
+  it("keeps hiding apart from saving and painting the same piece", () => {
+    const saved = toggleSaved(EMPTY_RECORD, [], "pear", T1);
+    const hidden = toggleHidden(saved.record, saved.pending, "pear", T2);
+    expect(hidden.record.saved.map((r) => r.id)).toEqual(["pear"]);
+    expect(hidden.record.hidden.map((r) => r.id)).toEqual(["pear"]);
+    expect(hidden.pending).toEqual([pendingKey("saved", "pear"), pendingKey("hidden", "pear")]);
+  });
+
+  it("takes the account's hidden pieces, and keeps this device's unsent ones", () => {
+    const account: AccountRecord = {
+      ...EMPTY_RECORD,
+      hidden: [
+        { id: "hidden-on-the-phone", at: T1 },
+        { id: "shown-again-here", at: T1 },
+      ],
+    };
+    const device: AccountRecord = { ...EMPTY_RECORD, hidden: [{ id: "hidden-offline", at: T3 }] };
+    const pending = [pendingKey("hidden", "shown-again-here"), pendingKey("hidden", "hidden-offline")];
+    expect(overlay(account, device, pending).hidden.map((r) => r.id)).toEqual(["hidden-on-the-phone", "hidden-offline"]);
+  });
+
+  it("sends each pending hidden piece as an upsert or a delete, and settles it", () => {
+    const record: AccountRecord = { ...EMPTY_RECORD, hidden: [{ id: "cat", at: T1 }] };
+    const pending = [pendingKey("hidden", "cat"), pendingKey("hidden", "shown")];
+    const changes = changesFor(record, pending);
+    expect(changes).toEqual([
+      { key: "hidden:cat", list: "hidden", id: "cat", row: { id: "cat", at: T1 } },
+      { key: "hidden:shown", list: "hidden", id: "shown", row: null },
+    ]);
+    expect(settle(record, pending, changes, new Set(pending))).toEqual([]);
+    // Shown again while the send was in flight: still to send.
+    const now: AccountRecord = { ...record, hidden: [] };
+    expect(settle(now, pending, changes, new Set(pending))).toEqual(["hidden:cat"]);
+  });
+
+  it("moves this browser's hidden pieces in on first sign-in, quietly", () => {
+    const account: AccountRecord = { ...EMPTY_RECORD, hidden: [{ id: "already-hidden", at: T1 }] };
+    const result = mergeGuest(
+      account,
+      [],
+      { saved: [], painted: [], hidden: ["first", "already-hidden", "bad id!", "second"] },
+      NOW,
+    );
+    expect(result.record.hidden.map((r) => r.id)).toEqual(["already-hidden", "first", "second"]);
+    expect(result.pending).toEqual(["hidden:first", "hidden:second"]);
+    // The sign-in notice counts the pieces someone kept, not the ones they turned down.
+    expect(result.added).toEqual({ saved: 0, painted: 0 });
+
+    const again = mergeGuest(result.record, result.pending, { saved: [], painted: [], hidden: ["first"] }, NOW);
+    expect(again.record).toEqual(result.record);
+    expect(again.pending).toEqual(result.pending);
+  });
+
+  it("reads hidden rows back from storage, and a record stored before there were any", () => {
+    const record = parseRecord({
+      saved: [],
+      painted: [],
+      hidden: [{ id: "cat", at: T2 }, { id: "cat", at: T3 }, { id: "bad id", at: T1 }, { id: "no-time" }, null],
+    });
+    expect(record.hidden).toEqual([{ id: "cat", at: T3 }]);
+    // A device that stored its record before this change.
+    expect(parseRecord({ saved: [{ id: "pear", at: T1 }], painted: [] })).toEqual({
+      saved: [{ id: "pear", at: T1 }],
+      painted: [],
+      hidden: [],
+    });
+  });
+
+  it("keeps hidden pending keys", () => {
+    expect(parsePending(["hidden:cat", "hidden:cat", "hidden:bad id"])).toEqual(["hidden:cat"]);
   });
 });

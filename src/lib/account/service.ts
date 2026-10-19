@@ -39,6 +39,7 @@ import {
   mergeGuest,
   overlay,
   settle,
+  toggleHidden as toggleHiddenIn,
   togglePainted as togglePaintedIn,
   toggleSaved as toggleSavedIn,
   type AccountRecord,
@@ -116,6 +117,8 @@ export interface AccountService {
   deleteAccount(): Promise<void>;
   toggleSaved(id: string): void;
   togglePainted(id: string, on: string): void;
+  /** "Not for me", or showing the piece again. */
+  toggleHidden(id: string): void;
   /** Try to reach the account now, instead of at the next scheduled try. */
   retry(): void;
   dismissNotice(): void;
@@ -459,7 +462,7 @@ export function createAccountService(options: AccountServiceOptions): AccountSer
     if (!absorbGuest || !device) return;
     absorbGuest = false;
     const library = guest.read();
-    if (library.saved.length === 0 && library.painted.length === 0) return;
+    if (library.saved.length === 0 && library.painted.length === 0 && library.hidden.length === 0) return;
     const base = current();
     if (!base) return;
     const merged = mergeGuest(base.record, base.pending, library, now());
@@ -470,6 +473,7 @@ export function createAccountService(options: AccountServiceOptions): AccountSer
         ...(kept?.painted ?? []),
         ...library.painted.filter((entry) => !kept?.painted.some((old) => old.id === entry.id)),
       ],
+      hidden: [...(kept?.hidden ?? []), ...library.hidden.filter((id) => !kept?.hidden.includes(id))],
     };
     if (keep({ ...base, record: merged.record, pending: merged.pending, guestBackup: backup })) guest.clear();
     added = { saved: added.saved + merged.added.saved, painted: added.painted + merged.added.painted };
@@ -482,7 +486,8 @@ export function createAccountService(options: AccountServiceOptions): AccountSer
     if (!base || !backup) return;
     const waiting =
       backup.saved.some((id) => base.pending.includes(`saved:${id}`)) ||
-      backup.painted.some((entry) => base.pending.includes(`painted:${entry.id}`));
+      backup.painted.some((entry) => base.pending.includes(`painted:${entry.id}`)) ||
+      backup.hidden.some((id) => base.pending.includes(`hidden:${id}`));
     if (!waiting) keep({ ...base, guestBackup: null });
   }
 
@@ -819,6 +824,14 @@ export function createAccountService(options: AccountServiceOptions): AccountSer
       const base = current();
       if (snapshot.status !== "signed-in" || !base || !isPieceId(id) || !isDay(on)) return;
       keep({ ...base, ...togglePaintedIn(base.record, base.pending, id, on, now().toISOString()) });
+      publish({ sync: online() ? "sending" : "offline" });
+      scheduleSend();
+    },
+
+    toggleHidden(id) {
+      const base = current();
+      if (snapshot.status !== "signed-in" || !base || !isPieceId(id)) return;
+      keep({ ...base, ...toggleHiddenIn(base.record, base.pending, id, now().toISOString()) });
       publish({ sync: online() ? "sending" : "offline" });
       scheduleSend();
     },

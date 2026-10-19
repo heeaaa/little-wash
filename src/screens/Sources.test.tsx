@@ -110,10 +110,11 @@ describe("Sources: switching a source off", () => {
     renderSources();
 
     await user.click(screen.getByRole("switch", { name: "Pexels" }));
-    expect(screen.queryByRole("status")).toBeNull();
+    expect(screen.queryByText(/Every source is switched off/)).toBeNull();
 
     await user.click(screen.getByRole("switch", { name: "Prototype placeholders" }));
-    expect(screen.getByRole("status")).toHaveTextContent(/Every source is switched off/);
+    // Found by its words: the hidden-pieces list keeps a live region of its own on this page.
+    expect(screen.getByText(/Every source is switched off/)).toHaveAttribute("role", "status");
   });
 });
 

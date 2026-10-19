@@ -2,7 +2,7 @@ import { test, expect, type BrowserContext, type Page } from "@playwright/test";
 import { createRequire } from "node:module";
 import { readdirSync } from "node:fs";
 import { FakeSupabase, type FakePerson } from "./fakeSupabase";
-import { pieceIdsFrom, ready } from "./support";
+import { animationsSettled, pieceIdsFrom, ready } from "./support";
 
 const require = createRequire(import.meta.url);
 const AXE_PATH = require.resolve("axe-core/axe.min.js");
@@ -71,6 +71,8 @@ async function storageKeys(page: Page) {
 }
 
 async function axeViolations(page: Page) {
+  // A sheet or question that has just opened is still fading in (support.ts).
+  await animationsSettled(page);
   await page.addScriptTag({ path: AXE_PATH });
   return page.evaluate(async () => {
     const result = await (window as unknown as { axe: { run: typeof import("axe-core").run } }).axe.run(document, {

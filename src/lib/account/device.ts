@@ -97,7 +97,7 @@ export function emptyDevice(userId: string, email: string | null): DeviceRecord 
 
 function parseGuestBackup(value: unknown): GuestLibrary | null {
   if (!value || typeof value !== "object") return null;
-  const source = value as { saved?: unknown; painted?: unknown };
+  const source = value as { saved?: unknown; painted?: unknown; hidden?: unknown };
   const saved = Array.isArray(source.saved) ? source.saved.filter(isPieceId) : [];
   const painted = Array.isArray(source.painted)
     ? source.painted.filter(
@@ -105,7 +105,9 @@ function parseGuestBackup(value: unknown): GuestLibrary | null {
           Boolean(entry) && isPieceId((entry as { id?: unknown }).id) && isDay((entry as { on?: unknown }).on),
       )
     : [];
-  return saved.length || painted.length ? { saved, painted } : null;
+  // Absent in a backup stored before "Not for me" existed.
+  const hidden = Array.isArray(source.hidden) ? source.hidden.filter(isPieceId) : [];
+  return saved.length || painted.length || hidden.length ? { saved, painted, hidden } : null;
 }
 
 /**

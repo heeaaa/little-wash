@@ -67,8 +67,15 @@ const painted = (id: string, on = "2026-10-02", at = "2026-10-02T08:00:00.000Z")
   row: { id, on, at },
 });
 const unsaved = (id: string): Change => ({ key: `saved:${id}`, list: "saved", id, row: null });
+const hidden = (id: string, at = "2026-10-19T08:00:00.000Z"): Change => ({
+  key: `hidden:${id}`,
+  list: "hidden",
+  id,
+  row: { id, at },
+});
+const shownAgain = (id: string): Change => ({ key: `hidden:${id}`, list: "hidden", id, row: null });
 
-async function rowsAsAdmin(table: "saved_pieces" | "painted_pieces", userId: string) {
+async function rowsAsAdmin(table: "saved_pieces" | "painted_pieces" | "hidden_pieces", userId: string) {
   const { data, error } = await admin.from(table).select("piece_id").eq("user_id", userId).order("piece_id");
   if (error) throw error;
   return (data ?? []).map((row: { piece_id: string }) => row.piece_id);
@@ -110,6 +117,22 @@ describe("a signed-in person's own pieces", () => {
     expect((await ana.backend.push(ana.id, [unsaved("pear")])).confirmed).toEqual(["saved:pear"]);
     expect(await rowsAsAdmin("saved_pieces", ana.id)).toEqual([]);
   });
+
+  it("include the pieces they said are not for them, until shown again", async () => {
+    const ana = await person("ana");
+    const result = await ana.backend.push(ana.id, [
+      hidden("tower", "2026-10-19T08:00:01.000Z"),
+      hidden("tabby", "2026-10-19T08:00:00.000Z"),
+    ]);
+    expect(result).toEqual({ confirmed: ["hidden:tower", "hidden:tabby"], refused: [], problem: null });
+    expect((await ana.backend.fetchRecord(ana.id)).hidden).toEqual([
+      { id: "tabby", at: "2026-10-19T08:00:00.000Z" },
+      { id: "tower", at: "2026-10-19T08:00:01.000Z" },
+    ]);
+
+    expect((await ana.backend.push(ana.id, [shownAgain("tabby")])).confirmed).toEqual(["hidden:tabby"]);
+    expect(await rowsAsAdmin("hidden_pieces", ana.id)).toEqual(["tower"]);
+  });
 });
 
 describe("everyone else", () => {
@@ -119,7 +142,7 @@ describe("everyone else", () => {
     await ana.backend.push(ana.id, [saved("anas-pear"), painted("anas-mug")]);
 
     // Asking for Ana's rows by her id, as Ben: row level security returns none.
-    expect(await ben.backend.fetchRecord(ana.id)).toEqual({ saved: [], painted: [] });
+    expect(await ben.backend.fetchRecord(ana.id)).toEqual({ saved: [], painted: [], hidden: [] });
     // And an unfiltered read shows Ben only his own.
     const { data } = await ben.client.from("saved_pieces").select("user_id, piece_id");
     expect(data).toEqual([]);
@@ -140,6 +163,22 @@ describe("everyone else", () => {
     expect(removal.data).toEqual([]);
 
     expect(await rowsAsAdmin("saved_pieces", ana.id)).toEqual(["anas-pear"]);
+  });
+
+  it("cannot see, hide for, or show again a person's hidden pieces", async () => {
+    const ana = await person("ana");
+    const ben = await person("ben");
+    await ana.backend.push(ana.id, [hidden("anas-cat")]);
+
+    expect((await ben.backend.fetchRecord(ana.id)).hidden).toEqual([]);
+    const planted = await ben.backend.push(ana.id, [hidden("planted-by-ben")]);
+    expect(planted.confirmed).toEqual([]);
+    const removal = await ben.client.from("hidden_pieces").delete().eq("user_id", ana.id).select();
+    expect(removal.data).toEqual([]);
+    const anonymous = createClient(env.url, env.publishableKey, noSession);
+    expect((await anonymous.from("hidden_pieces").select("*")).error?.code).toBe("42501");
+
+    expect(await rowsAsAdmin("hidden_pieces", ana.id)).toEqual(["anas-cat"]);
   });
 
   it("who is signed out can do nothing at all", async () => {
@@ -201,7 +240,7 @@ describe("leaving", () => {
   it("deletes the account and its pieces, and nobody else's", async () => {
     const ana = await person("ana");
     const ben = await person("ben");
-    await ana.backend.push(ana.id, [saved("anas-pear"), painted("anas-mug")]);
+    await ana.backend.push(ana.id, [saved("anas-pear"), painted("anas-mug"), hidden("anas-cat")]);
     await ben.backend.push(ben.id, [saved("bens-pear")]);
 
     await ana.backend.deleteAccount();
@@ -210,10 +249,11 @@ describe("leaving", () => {
     expect(gone.data.user).toBeNull();
     expect(await rowsAsAdmin("saved_pieces", ana.id)).toEqual([]);
     expect(await rowsAsAdmin("painted_pieces", ana.id)).toEqual([]);
+    expect(await rowsAsAdmin("hidden_pieces", ana.id)).toEqual([]);
     expect(await rowsAsAdmin("saved_pieces", ben.id)).toEqual(["bens-pear"]);
     // Every session Ana had has stopped working.
     expect((await ana.client.auth.refreshSession()).error).not.toBeNull();
-    await expect(ana.backend.fetchRecord(ana.id)).resolves.toEqual({ saved: [], painted: [] });
+    await expect(ana.backend.fetchRecord(ana.id)).resolves.toEqual({ saved: [], painted: [], hidden: [] });
   });
 
   it("signs one device out without signing out the others", async () => {

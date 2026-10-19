@@ -53,6 +53,19 @@ export async function seedPainted(
   );
 }
 
+/**
+ * Wait until nothing is animating, so a check reads the page as it rests.
+ *
+ * Measured 19/10/2026: axe run as soon as a dialog was visible read it mid-fade
+ * (`sheet-rise` starts at opacity 0), with the page behind showing through, and
+ * reported colour contrast that no person ever sees - on CI's slower runner,
+ * not on this machine. Slowing animations tenfold reproduced it here; waiting
+ * for them to finish cleared it.
+ */
+export async function animationsSettled(page: Page) {
+  await page.waitForFunction(() => document.getAnimations().every((animation) => animation.playState !== "running"));
+}
+
 /** Wait for fonts and the first paint to settle before measuring anything. */
 export async function ready(page: Page) {
   await page.evaluate(() => document.fonts?.ready);

@@ -22,10 +22,10 @@ const NOW = new Date("2026-10-02T08:00:00.000Z");
 const anas: DeviceRecord = {
   userId: ANA,
   email: "ana@example.test",
-  record: { saved: [{ id: "pear", at: "2026-10-01T08:00:00.000Z" }], painted: [] },
+  record: { saved: [{ id: "pear", at: "2026-10-01T08:00:00.000Z" }], painted: [], hidden: [] },
   pending: ["saved:pear"],
   pulledAt: null,
-  guestBackup: { saved: ["pear"], painted: [{ id: "mug", on: "2026-10-01" }] },
+  guestBackup: { saved: ["pear"], painted: [{ id: "mug", on: "2026-10-01" }], hidden: [] },
 };
 
 /** Storage that refuses every call, like a locked-down private window. */
@@ -85,9 +85,17 @@ describe("the account's record on this device", () => {
       localStorage.setItem(DEVICE_KEY, JSON.stringify({ v: 1, ...anas, guestBackup }));
 
     stored({ saved: ["plum", "bad id"], painted: [{ id: "mug", on: "yesterday" }, { id: "jug", on: "2026-09-30" }] });
-    expect(loadDevice(localStorage, ANA)?.guestBackup).toEqual({ saved: ["plum"], painted: [{ id: "jug", on: "2026-09-30" }] });
+    // Stored before "Not for me" existed, so it has no hidden list: read as none hidden.
+    expect(loadDevice(localStorage, ANA)?.guestBackup).toEqual({
+      saved: ["plum"],
+      painted: [{ id: "jug", on: "2026-09-30" }],
+      hidden: [],
+    });
 
-    for (const damaged of [undefined, null, "pear", { saved: [], painted: [] }, { saved: ["bad id"] }]) {
+    stored({ hidden: ["cat", "bad id", 7] });
+    expect(loadDevice(localStorage, ANA)?.guestBackup).toEqual({ saved: [], painted: [], hidden: ["cat"] });
+
+    for (const damaged of [undefined, null, "pear", { saved: [], painted: [] }, { saved: ["bad id"] }, { hidden: ["bad id"] }]) {
       stored(damaged);
       expect(loadDevice(localStorage, ANA)?.guestBackup).toBeNull();
     }

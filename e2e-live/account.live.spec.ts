@@ -47,7 +47,7 @@ async function signIn(context: BrowserContext, who: Person) {
   );
 }
 
-async function rows(table: "saved_pieces" | "painted_pieces", who: Person) {
+async function rows(table: "saved_pieces" | "painted_pieces" | "hidden_pieces", who: Person) {
   const { data, error } = await admin.from(table).select("piece_id").eq("user_id", who.id).order("piece_id");
   if (error) throw error;
   return (data ?? []).map((row: { piece_id: string }) => row.piece_id);
@@ -105,6 +105,33 @@ test("what one device saves and paints is in the account, and on the next device
     await ready(other);
     await expect(other.getByRole("main").locator(`a[href*="/piece/${id}"]`).first()).toBeVisible();
     await expect(other.getByRole("heading", { level: 2, name: "Painted" })).toBeVisible();
+  } finally {
+    await laptop.close();
+  }
+});
+
+test("a piece hidden on one device stays out of Browse on the next", async ({ page, context, browser, baseURL }) => {
+  const ana = await person("ana");
+  const id = await anyPiece(context);
+  await signIn(context, ana);
+
+  await page.goto(`/#/piece/${id}`);
+  await ready(page);
+  await page.getByRole("button", { name: "Not for me" }).click();
+  await expect(page.getByText("Hidden from Today and Browse.")).toBeVisible();
+  await expect.poll(() => rows("hidden_pieces", ana)).toEqual([id]);
+
+  const laptop = await browser.newContext({ baseURL });
+  try {
+    await signIn(laptop, ana);
+    const other = await laptop.newPage();
+    await other.goto("/#/sources");
+    await ready(other);
+    await expect(other.getByRole("button", { name: /^Bring back: / })).toHaveCount(1);
+    await other.goto("/#/browse");
+    await ready(other);
+    await expect(other.getByText("1 piece you’ve hidden is left out.")).toBeVisible();
+    await expect(other.getByRole("main").locator(`a[href*="/piece/${id}"]`)).toHaveCount(0);
   } finally {
     await laptop.close();
   }

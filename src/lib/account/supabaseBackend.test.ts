@@ -185,14 +185,21 @@ describe("signing in", () => {
 describe("reading the person's rows", () => {
   it("asks for their own rows only, oldest first, as them", async () => {
     storeSession();
-    const { fetchImpl, requests } = recordingFetch((request) =>
-      request.url.pathname.endsWith("/saved_pieces")
-        ? json(200, [
-            { piece_id: "pear", saved_at: "2026-10-01T08:00:00+00:00" },
-            { piece_id: "bad id!", saved_at: "2026-10-01T08:00:00+00:00" },
-          ])
-        : json(200, [{ piece_id: "mug", painted_on: "2026-09-14", marked_at: "2026-09-14T09:00:00.123456+00:00" }]),
-    );
+    const { fetchImpl, requests } = recordingFetch((request) => {
+      if (request.url.pathname.endsWith("/saved_pieces")) {
+        return json(200, [
+          { piece_id: "pear", saved_at: "2026-10-01T08:00:00+00:00" },
+          { piece_id: "bad id!", saved_at: "2026-10-01T08:00:00+00:00" },
+        ]);
+      }
+      if (request.url.pathname.endsWith("/hidden_pieces")) {
+        return json(200, [
+          { piece_id: "tabby", hidden_at: "2026-10-19T07:00:00+00:00" },
+          { piece_id: "no time" },
+        ]);
+      }
+      return json(200, [{ piece_id: "mug", painted_on: "2026-09-14", marked_at: "2026-09-14T09:00:00.123456+00:00" }]);
+    });
     const backend = createSupabaseBackend(CONFIG, { fetch: fetchImpl });
     await backend.start();
     const record = await backend.fetchRecord(ANA);
@@ -200,6 +207,7 @@ describe("reading the person's rows", () => {
     expect(record).toEqual({
       saved: [{ id: "pear", at: "2026-10-01T08:00:00.000Z" }],
       painted: [{ id: "mug", on: "2026-09-14", at: "2026-09-14T09:00:00.123Z" }],
+      hidden: [{ id: "tabby", at: "2026-10-19T07:00:00.000Z" }],
     });
 
     const saved = requests.find((r) => r.url.pathname === "/rest/v1/saved_pieces")!;
@@ -214,6 +222,15 @@ describe("reading the person's rows", () => {
 
     const painted = requests.find((r) => r.url.pathname === "/rest/v1/painted_pieces")!;
     expect(painted.url.searchParams.get("order")).toBe("painted_on.asc,marked_at.asc,piece_id.asc");
+
+    const hidden = requests.find((r) => r.url.pathname === "/rest/v1/hidden_pieces")!;
+    expect(hidden.method).toBe("GET");
+    expect(hidden.url.searchParams.get("select")).toBe("piece_id,hidden_at");
+    expect(hidden.url.searchParams.get("user_id")).toBe(`eq.${ANA}`);
+    expect(hidden.url.searchParams.get("order")).toBe("hidden_at.asc,piece_id.asc");
+    expect(hidden.url.searchParams.get("limit")).toBe("1000");
+    expect(hidden.headers.get("authorization")).toBe(`Bearer ${accessToken(ANA)}`);
+    expect(requests).toHaveLength(3);
   });
 
   it.each([
@@ -227,7 +244,8 @@ describe("reading the person's rows", () => {
     const backend = createSupabaseBackend(CONFIG, { fetch: fetchImpl });
     await backend.start();
     await expect(backend.fetchRecord(ANA)).rejects.toMatchObject({ problem });
-    expect(requests).toHaveLength(2);
+    // One request per list, none of them repeated.
+    expect(requests).toHaveLength(3);
   });
 
   it("reports no connection as offline", async () => {
@@ -276,6 +294,26 @@ describe("sending changes", () => {
     const deletePainted = requests.find((r) => r.method === "DELETE" && r.url.pathname === "/rest/v1/painted_pieces")!;
     expect(deletePainted.url.searchParams.get("piece_id")).toBe("in.(unmarked)");
     expect(requests.every((r) => r.headers.get("authorization") === `Bearer ${accessToken(ANA)}`)).toBe(true);
+  });
+
+  it("upserts and deletes hidden pieces the same way, in their own table", async () => {
+    storeSession();
+    const { fetchImpl, requests } = recordingFetch((request) => empty(request.method === "POST" ? 201 : 204));
+    const backend = createSupabaseBackend(CONFIG, { fetch: fetchImpl });
+    await backend.start();
+    const result = await backend.push(ANA, [
+      { key: "hidden:tabby", list: "hidden", id: "tabby", row: { id: "tabby", at: "2026-10-19T07:00:00.000Z" } },
+      { key: "hidden:shown-again", list: "hidden", id: "shown-again", row: null },
+    ]);
+    expect(result).toEqual({ confirmed: ["hidden:tabby", "hidden:shown-again"], refused: [], problem: null });
+
+    const upsert = requests.find((r) => r.method === "POST" && r.url.pathname === "/rest/v1/hidden_pieces")!;
+    expect(upsert.url.searchParams.get("on_conflict")).toBe("user_id,piece_id");
+    expect(upsert.body).toEqual([{ user_id: ANA, piece_id: "tabby", hidden_at: "2026-10-19T07:00:00.000Z" }]);
+    const remove = requests.find((r) => r.method === "DELETE" && r.url.pathname === "/rest/v1/hidden_pieces")!;
+    expect(remove.url.searchParams.get("user_id")).toBe(`eq.${ANA}`);
+    expect(remove.url.searchParams.get("piece_id")).toBe("in.(shown-again)");
+    expect(requests).toHaveLength(2);
   });
 
   it("settles each group on its own and reports the most serious problem", async () => {
@@ -433,7 +471,7 @@ describe("when Auth cannot be reached for a moment", () => {
     saveDevice(localStorage, {
       userId: ANA,
       email: "ana@example.test",
-      record: { saved: [], painted: [{ id: "blue-mug", on: "2026-10-01", at: "2026-10-01T19:00:00.000Z" }] },
+      record: { saved: [], painted: [{ id: "blue-mug", on: "2026-10-01", at: "2026-10-01T19:00:00.000Z" }], hidden: [] },
       pending: ["painted:blue-mug"],
       pulledAt: null,
     });

@@ -6,6 +6,7 @@
 
 import { loadFavorites, replaceFavorites } from "@/lib/favorites";
 import { loadPainted, replacePainted } from "@/lib/painted";
+import { loadHidden, replaceHidden } from "@/lib/hidden";
 import { clearSeenLeaves } from "@/lib/leavesSeen";
 import type { GuestLibrary } from "./record";
 
@@ -20,10 +21,11 @@ export interface GuestStore {
 }
 
 export const browserGuestStore: GuestStore = {
-  read: () => ({ saved: loadFavorites(), painted: loadPainted() }),
+  read: () => ({ saved: loadFavorites(), painted: loadPainted(), hidden: loadHidden() }),
   clear: () => {
     replaceFavorites([]);
     replacePainted([]);
+    replaceHidden([]);
   },
   restore: (library) => {
     // Whatever this browser gained since, plus what it had before.
@@ -32,8 +34,10 @@ export const browserGuestStore: GuestStore = {
       ...library.painted,
       ...loadPainted().filter((entry) => !library.painted.some((kept) => kept.id === entry.id)),
     ];
+    const hidden = [...library.hidden, ...loadHidden().filter((id) => !library.hidden.includes(id))];
     replaceFavorites(saved);
     replacePainted(painted);
+    replaceHidden(hidden);
   },
   forgetSeenLeaves: clearSeenLeaves,
 };

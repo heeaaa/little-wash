@@ -15,6 +15,7 @@ import {
   sortSaved,
   type AccountRecord,
   type Change,
+  type HiddenRow,
   type PaintedRow,
   type SavedRow,
 } from "@/lib/account/record";
@@ -95,7 +96,7 @@ export function createFakeServer(initial: Partial<Pick<FakeServer, "session">> =
       for (const listener of listeners) listener();
     },
     rowsOf(userId) {
-      return server.rows.get(userId) ?? { saved: [], painted: [] };
+      return server.rows.get(userId) ?? { saved: [], painted: [], hidden: [] };
     },
   };
   return server;
@@ -105,6 +106,7 @@ function copy(record: AccountRecord): AccountRecord {
   return {
     saved: record.saved.map((row) => ({ ...row })),
     painted: record.painted.map((row) => ({ ...row })),
+    hidden: record.hidden.map((row) => ({ ...row })),
   };
 }
 
@@ -157,7 +159,7 @@ export function createFakeBackend(server: FakeServer): AccountBackend {
       server.log.push("fetch");
       fail();
       const caller = signedIn();
-      return caller.id === userId ? copy(server.rowsOf(userId)) : { saved: [], painted: [] };
+      return caller.id === userId ? copy(server.rowsOf(userId)) : { saved: [], painted: [], hidden: [] };
     },
 
     async push(userId, changes: readonly Change[]) {
@@ -177,13 +179,20 @@ export function createFakeBackend(server: FakeServer): AccountBackend {
         if (change.list === "saved") {
           record.saved = record.saved.filter((row) => row.id !== change.id);
           if (change.row) record.saved.push({ ...(change.row as SavedRow) });
-        } else {
+        } else if (change.list === "painted") {
           record.painted = record.painted.filter((row) => row.id !== change.id);
           if (change.row) record.painted.push({ ...(change.row as PaintedRow) });
+        } else {
+          record.hidden = record.hidden.filter((row) => row.id !== change.id);
+          if (change.row) record.hidden.push({ ...(change.row as HiddenRow) });
         }
         result.confirmed.push(change.key);
       }
-      server.rows.set(userId, { saved: sortSaved(record.saved), painted: sortPainted(record.painted) });
+      server.rows.set(userId, {
+        saved: sortSaved(record.saved),
+        painted: sortPainted(record.painted),
+        hidden: sortSaved(record.hidden),
+      });
       return result;
     },
 

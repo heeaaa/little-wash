@@ -22,7 +22,11 @@ import {
   SubjectSheet,
 } from "@/components/FilterControls";
 import { EmptyState } from "@/components/EmptyState";
+import { Icon } from "@/components/Icon";
 import { type PaintReference, type Subject } from "@/lib/types";
+
+/** In the URL, so Back from a hidden piece returns to the list as it was. */
+export const SHOW_HIDDEN_PARAM = "hidden";
 
 /**
  * A representative piece for a collection card.
@@ -39,7 +43,7 @@ function coverFor(
 }
 
 export function Browse() {
-  const { catalogue, filters, visible, activeFilters } = useApp();
+  const { catalogue, offered, filters, activeFilters, isHidden } = useApp();
   const [searchParams, setSearchParams] = useSearchParams();
 
   /*
@@ -59,7 +63,31 @@ export function Browse() {
     : null;
   const themed = openPieces && openPieces.length > 0 ? openCollection : null;
 
-  const shown = themed && openPieces ? filterReferences(openPieces, filters) : visible;
+  /*
+    Hidden pieces ("Not for me") are left out of the results, and a line
+    under the heading says how many match, so the count never quietly
+    disagrees with what someone remembers being there. One tap shows them,
+    marked and first, for a moment's look or to bring one back from its page.
+  */
+  const matching = filterReferences(themed && openPieces ? openPieces : catalogue, filters);
+  const hiddenHere = matching.filter((reference) => isHidden(reference.id));
+  const showHidden = hiddenHere.length > 0 && searchParams.get(SHOW_HIDDEN_PARAM) === "shown";
+  // Shown on request, they come first: they are what was asked for, and in
+  // catalogue order they could sit pages down, so the tap seemed to do nothing.
+  const offeredHere = matching.filter((reference) => !isHidden(reference.id));
+  const shown = showHidden ? [...hiddenHere, ...offeredHere] : offeredHere;
+
+  const toggleShowHidden = () => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (showHidden) next.delete(SHOW_HIDDEN_PARAM);
+        else next.set(SHOW_HIDDEN_PARAM, "shown");
+        return next;
+      },
+      { replace: true },
+    );
+  };
 
   /*
     A page at a time - see lib/paging.ts for the measurements. The count lives
@@ -115,7 +143,8 @@ export function Browse() {
     honestly, and one with nothing left in it leaves rather than sitting there
     as a dead end.
   */
-  const collections = visibleCollections(COLLECTIONS, catalogue);
+  // Counted without hidden pieces, as their results are.
+  const collections = visibleCollections(COLLECTIONS, offered);
   /*
     Whole series only. A series whose source has been switched off leaves
     rather than showing with gaps in its numbering - see lib/series.ts.
@@ -263,16 +292,51 @@ export function Browse() {
             ) : null}
           </div>
 
+          {hiddenHere.length > 0 ? (
+            <p className="browse-hidden mt-2 flex flex-wrap items-center gap-x-1.5 text-[0.9rem] text-ink-soft">
+              <Icon name="eye-off" size={16} />
+              <span>
+                {showHidden
+                  ? `Including ${hiddenHere.length} ${hiddenHere.length === 1 ? "piece" : "pieces"} you’ve hidden, first.`
+                  : `${hiddenHere.length} ${hiddenHere.length === 1 ? "piece you’ve hidden is" : "pieces you’ve hidden are"} left out.`}
+              </span>
+              <button
+                type="button"
+                onClick={toggleShowHidden}
+                className="min-h-[44px] rounded-chip px-1.5 text-[0.9rem] font-semibold text-teal underline decoration-[rgb(var(--teal)/0.35)] underline-offset-4 hover:decoration-[rgb(var(--teal))]"
+              >
+                {hiddenHere.length === 1
+                  ? showHidden
+                    ? "Leave it out"
+                    : "Show it"
+                  : showHidden
+                    ? "Leave them out"
+                    : "Show them"}
+              </button>
+            </p>
+          ) : null}
+
           {shown.length === 0 ? (
             <div className="mt-6">
-              <EmptyState />
+              <EmptyState hiddenCount={hiddenHere.length} />
             </div>
           ) : (
             <>
               <ul ref={grid} className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {page.map((reference) => (
                   <li key={reference.id}>
-                    <PieceCard reference={reference} to={`/piece/${reference.id}`} />
+                    <PieceCard
+                      reference={reference}
+                      to={`/piece/${reference.id}`}
+                      note={
+                        showHidden && isHidden(reference.id) ? (
+                          <p className="flex items-center gap-1.5 text-[0.85rem] text-ink-soft">
+                            <Icon name="eye-off" size={15} />
+                            Hidden
+                          </p>
+                        ) : undefined
+                      }
+                    />
                   </li>
                 ))}
               </ul>

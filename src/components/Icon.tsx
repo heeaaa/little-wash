@@ -15,7 +15,9 @@ export type IconName =
   | "today"
   | "tag"
   | "chevron-down"
-  | "screen";
+  | "screen"
+  | "eye"
+  | "eye-off";
 
 interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name"> {
   name: IconName;
@@ -86,6 +88,22 @@ const PATHS: Record<IconName, JSX.Element> = {
   ),
   check: <path d="M5 12.5l4.2 4.2L19 7" />,
   "chevron-down": <path d="M6 9.5l6 6 6-6" />,
+  eye: (
+    <>
+      <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+      <circle cx="12" cy="12" r="2.8" />
+    </>
+  ),
+  // The eye, closed off by one stroke: "Not for me". Drawn rather than a no-entry
+  // sign, which would read as forbidden instead of as a preference.
+  "eye-off": (
+    <>
+      <path d="M4 4l16 16" />
+      <path d="M10.4 5.6A9 9 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a16.6 16.6 0 0 1-2.7 3.5" />
+      <path d="M6.5 6.9C4 8.6 2.5 12 2.5 12S6 18.5 12 18.5c1.8 0 3.4-.6 4.7-1.4" />
+      <path d="M10 10.1a2.8 2.8 0 0 0 3.9 3.9" />
+    </>
+  ),
   screen: (
     <>
       <rect x="6.5" y="3" width="11" height="18" rx="2.5" />

@@ -50,6 +50,7 @@ export interface AccountContextValue extends AccountSnapshot {
   deleteAccount: () => Promise<void>;
   toggleSaved: (id: string) => void;
   togglePainted: (id: string, on: string) => void;
+  toggleHidden: (id: string) => void;
   retry: () => void;
   dismissNotice: () => void;
   /** The sign-in sheet: one, in AppShell, opened from wherever offers it. */
@@ -85,6 +86,7 @@ const UNAVAILABLE: AccountContextValue = {
   deleteAccount: resolved,
   toggleSaved: noop,
   togglePainted: noop,
+  toggleHidden: noop,
   retry: noop,
   dismissNotice: noop,
   sheetOpen: false,
@@ -139,6 +141,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       deleteAccount: service.deleteAccount,
       toggleSaved: service.toggleSaved,
       togglePainted: service.togglePainted,
+      toggleHidden: service.toggleHidden,
       retry: service.retry,
       dismissNotice: service.dismissNotice,
       sheetOpen,
