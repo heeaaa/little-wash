@@ -132,12 +132,19 @@ route with their tail and query intact; anything unrecognised goes to Today.
   was. See "The painted tree" in `DESIGN.md`.
 - **Sources** (`#/sources`) - which collections ideas are drawn from, with each
   source's licence and a link to it. A standing preference, not a filter:
-  it shapes the catalogue before filtering, and saved pieces ignore it.
+  it shapes the catalogue before filtering, and saved pieces ignore it. Also
+  the list of pieces marked Not for me, each with "Bring back".
+- **Not for me** - on Today (beside "Deal me another") and on a piece's own
+  page: hide a piece you will never paint, and Today, dealing and Browse stop
+  offering it. On Today it deals another in its place, with Undo and no timer.
+  Browse says how many hidden pieces match and can show them. Today also
+  prefers pieces not painted before today, and never moves because some other
+  piece was hidden or painted. See "Not for me" in `DESIGN.md`.
 - **Save** - favourites persist on-device via `localStorage` behind a versioned
   schema, degrading to in-memory when storage is unavailable. A dedicated saved
   list screen is still backlog.
-- **Accounts** - optional Google sign-in, so saved and painted pieces follow a
-  person across devices. Offered once in the studio and in the footer's small
+- **Accounts** - optional Google sign-in, so saved, painted and hidden pieces
+  follow a person across devices. Offered once in the studio and in the footer's small
   print, nowhere else; a guest's app is unchanged and makes no request to the
   account service. Signing in moves this browser's pieces into the account;
   changes are kept on the device and sent when there is a connection; signing

@@ -1,6 +1,44 @@
 # Work status - little wash
 
-_Last updated: 03/10/2026_
+_Last updated: 19/10/2026_
+
+## Checkpoint - 19/10/2026: Not for me
+
+**Objective.** Phase 1 of `docs/plans/not-for-me-reminders-curation.md`: hide a
+piece you will never paint, so Today, dealing and Browse stop offering it; a
+list on Sources brings it back; it follows the account. On `feat/not-for-me`,
+cut from `main` at `e73d018`. The user asked for the plan, then "go ahead";
+never merge (merging deploys). Phases 2-4 (push groundwork, reminders,
+curation from anywhere) are not started.
+
+**Decisions (user, 19/10/2026).** The list lives on Sources; "Not for me" is
+quieter than Deal; propped sideways it takes the next line, one short scroll
+down (Open and Deal still fit all 189 pieces). No temporary keep-awake job.
+Others are in the plan's "Phase 1 - as built".
+
+**Changed.** `supabase/migrations/20261019090000_hidden_pieces.sql`;
+`src/lib/hidden.ts`, `src/hooks/useHidden.ts`; `src/lib/catalog.ts` (per-piece
+day score, set-aside); `src/lib/account/` (third list); `AppContext`,
+`AccountContext`, `useAccountLists`; `src/components/NotForMe.tsx`, `Icon`
+(eye, eye-off), `EmptyState`, `SurpriseButton`; Today, Detail, Browse,
+Sources, Privacy; tests in `src/`, `supabase/pglite`, `integration/`, `e2e/`,
+`e2e-live/`; DESIGN.md, PRODUCT.md, README, `docs/deploying-accounts.md`.
+
+**Verified locally, 19/10/2026 (Node 24.13; CI uses 22), on the final code.**
+Lint and typecheck exit 0. `npm run test:coverage`: 1,221 of 1,221 in 65 files;
+97.59 / 93.48 / 94.04 / 97.59 (baseline 97.47 / 93.22 / 93.77 / 97.47).
+Playwright at 2 workers: 282 of 282 (baseline 261 of 264; the 3 were a
+date-dependent fonts check, fixed in its own commit). Production build exit 0;
+main JS +3.35 KB gzip, CSS +0.14, sign-in chunk +0.07, like for like.
+Impeccable critique: 26/40 before polish, every P1-P3 fixed or answered (plan).
+Screenshots: `Claude outputs/not-for-me/`.
+
+**Not run here.** `test:integration` and `test:e2e:live` (no Docker; CI's
+accounts job). Real phones. A real screen reader.
+
+**Next action.** The owner applies the migration with `db push` *before*
+merging (`docs/deploying-accounts.md`, "Later changes to the database"), then
+merges. Then Phase 2, starting with the iPhone home-screen sign-in check.
 
 ## Checkpoint - 03/10/2026: Optional Google sign-in
 

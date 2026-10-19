@@ -170,6 +170,10 @@ the order above is unchanged, one rung is simply absent.
 - **The catalogue is not on Today.** No "more to try" list: offering the rest of
   the library here reopens the deliberation the screen exists to close. "Deal me
   another" is the one-tap alternative, and Browse owns the catalogue.
+- **"Not for me" is the quietest action.** It follows "Deal me another" in the
+  same row, in soft ink with a thin underline, and changes nothing about the
+  order above: passing a piece over is dealing, with the same re-wet. See
+  **Not for me** below.
 - **The palette follows the controls**, not the piece. It is what you need once
   you have committed.
 - Requirement to preserve: when a control is in view, the artwork it changes is
@@ -325,6 +329,16 @@ first, in short landscape only:
 Verified 29/09/2026 by rendering every piece of the catalogue: the plate and
 the whole action row sit inside the first screen for all 189 at 863x360 and
 667x375, and the plate does at 412x839 and 1440x900 as well.
+
+**Re-measured 19/10/2026, with "Not for me" in the row.** The three actions
+need 492px and the row is 475px wide at 863x360 and 357px at 667x375, so "Not
+for me" takes the next line - which, in the row, pushed the action row past the
+fold for 160 of 189 pieces at 863x360 and 129 at 667x375. The user chose one
+short scroll over covering a corner of the reference with another button: the
+promise is now **the plate, "Open this piece" and "Deal me another"**, and it
+holds for all 189 at both sizes with the same margins as before (11px and 9px);
+"Not for me" sits at most 47px below the fold. `e2e/posture.spec.ts` asserts
+Open and Deal, and that Not for me is there.
 
 **Back goes where you came from.** A piece card records its origin
 (`state.from`), and Detail's back link names it - "Browse", "Your studio", or
@@ -591,6 +605,65 @@ order they are meant to be painted: "Seven tiny skies", "A week of leaves",
   place, the group held still. `e2e/series.spec.ts` asserts that the morph
   never starts above the screen.
 
+### Not for me: passing a piece over
+
+Built 19/10/2026 (`docs/plans/not-for-me-reminders-curation.md`, Phase 1).
+Someone who knows at a glance they will never paint a piece says so, and
+Today, "Deal me another" and Browse stop offering it. It is a preference about
+what is offered, not a verdict on the piece: no red, no strike-through, nothing
+final, and always one tap back.
+
+- **Where it appears.** Today, after "Deal me another"; a piece's own page,
+  under the action row; and the list on Sources. Never on cards, and never in
+  the header or the nav - a count of hidden pieces in the chrome would be a
+  tally of rejections.
+- **The control** (`NotForMeButton`, `DetailNotForMe`, `src/components/NotForMe.tsx`):
+  the eye-off icon and "Not for me" in `--ink-soft`, a 1px underline at 30%
+  ink, 44px tall - quieter than Deal's teal underline, because it is used
+  less and must never compete with "Open this piece". Its description names the
+  consequence and the way back for screen readers: "Hides <title> from Today and
+  Browse. You can bring it back from Where ideas come from."
+- **Two words, two meanings.** Un-hiding is always **"Bring it back"** (a
+  piece's page) or **"Bring back"** (the list); "Show" is kept for Browse's
+  momentary look. Before the critique (19/10/2026) both said "show", and
+  someone could believe they had restored pieces they had only revealed.
+- **On Today, hiding is dealing.** The piece goes and another is dealt in its
+  place with the deal's own re-wet, pinned like a deal. "<Title> won't come up
+  again." and **Undo** sit under the row until the next deal, filter or page -
+  no timer, like every notice here, because wet hands should not race a
+  countdown. Undo puts exactly that piece back. Focus stays on Not for me; if
+  the last matching piece was hidden, Undo takes focus. The Undo line is
+  scrolled into view if it lands below the fold - measured at 667x375 with Not
+  for me at the foot of the screen, it sat at 383-427 of 375 before.
+- **Today never moves for someone else's piece.** Each matching piece has its
+  own score for the day and the best one that may be offered wins, so hiding or
+  painting a different piece cannot swap Today's piece away. Today prefers
+  pieces not marked painted before today, and keeps one painted today: the
+  person who just painted it is still looking at it. Only today's own date is
+  compared, never how long ago (register rule 2).
+- **Untouched:** Saved, Painted, the painted tree and the series, which are
+  deliberate choices and fixed runs. A hidden piece still opens from any link;
+  its page says "Hidden from Today and Browse." with "Bring it back".
+- **Browse** leaves hidden pieces out, and one line under the results heading
+  says so ("3 pieces you've hidden are left out.") with "Show them". Shown,
+  they come first - in catalogue order they could sit pages down and the tap
+  seemed to do nothing - and each card's note reads "Hidden". The button's
+  words say what it will do, so it is not also an `aria-pressed` toggle.
+  Collection counts leave hidden pieces out too.
+- **Everything that matches is hidden:** Today's empty state says so - never
+  "Nothing matches" - and offers "See what you've hidden".
+- **The list** lives on Sources ("Where ideas come from"), the page of standing
+  choices about what is offered, not in the studio beside the record of what
+  someone kept and painted, and the page's lede says they wait there. Newest
+  first; "Bring back" on each; focus moves to the next piece, or the heading
+  once the list is empty. No count beside the heading: a number of pieces
+  turned down is a tally. Thumbnails are decorative (empty alt), since the
+  title beside each says what it is. Empty, it invites: "Nothing hidden.
+  Anything you mark Not for me waits here, in case you change your mind."
+- **Kept** like Saved: in this browser (`little-wash:hidden:v1`), and with the
+  account once someone signs in (`hidden_pieces`), moving across on sign-in
+  without being counted in the sign-in notice, which is about what was kept.
+
 ### Ornament restraint (load-bearing)
 
 - **No scattered background dabs** (removed - they competed with the artwork).
@@ -622,9 +695,15 @@ reference alternatives, full keyboard nav, >= 44px targets. Subtle paper-grain
 texture over the page. Motion has its own section below and honours
 `prefers-reduced-motion`.
 
+**A control that replaces the piece keeps focus.** The featured piece is keyed
+by its id, so "Deal me another" and "Not for me" replace the very button that
+was pressed; Today gives focus back to it after the change. Before 19/10/2026
+focus fell to the page body after a deal (measured at 390x844), so dealing by
+keyboard meant tabbing back from the top each time.
+
 **Announcements.** A change of piece is announced by name, not by count: a
 `role="status"` region reads "Now showing <title>, <n> minutes, <difficulty>",
-silent on first paint. A count-only live region is not sufficient - the piece can
+silent on first paint. After "Not for me" it begins "<title> is hidden.". A count-only live region is not sufficient - the piece can
 change off-screen with nothing to signal it. This matters more now that a piece
 can change behind a 520ms transition.
 
@@ -876,7 +955,8 @@ it plays once, waits to be seen, and is still under reduced motion.
 ## Accounts (optional sign-in)
 
 Built 02/10/2026: optional Google sign-in, so the pieces someone saves and
-marks painted follow them across devices. Plan, decisions and evidence:
+marks painted follow them across devices - and, from 19/10/2026, the pieces
+they mark Not for me. Plan, decisions and evidence:
 `docs/plans/google-sign-in.md`; the owner's setup steps:
 `docs/deploying-accounts.md`. A build without the two `VITE_SUPABASE_`
 variables has no accounts at all and looks exactly as it did before.

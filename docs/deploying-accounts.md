@@ -227,6 +227,31 @@ scopes there is no review and no warning screen.
 2. Repeat the first four checks of step 6 on `https://<your-site>.netlify.app`.
 3. Supabase, **Authentication, Users**: your account is there.
 
+## Later changes to the database: before merging, every time
+
+A pull request that adds a migration (a new file in `supabase/migrations/`)
+changes the live database. **Apply it before merging the pull request**, never
+after: the new code reads the new table on every signed-in start, so code that
+arrives first leaves every signed-in person with "Can't reach your account"
+until the table exists. The migrations only add things, so the code already
+live is unaffected by them.
+
+1. Read the migration in the pull request.
+2. From the pull request's branch:
+
+   ```bash
+   npx supabase@2.119.0 db push --dry-run    # shows exactly what would run
+   npx supabase@2.119.0 db push
+   ```
+
+3. Check it in the dashboard (below for each migration), then merge.
+
+| Migration | Adds | Check in the dashboard |
+| --- | --- | --- |
+| `20261019090000_hidden_pieces.sql` ("Not for me", 19/10/2026) | The `hidden_pieces` table and its rules | **Table Editor**: `hidden_pieces` exists, "RLS enabled". **Authentication, Policies**: four policies on it. **Advisors, Security Advisor**: nothing new for it |
+
+If the project is paused when you try, restore it first (below).
+
 ## Keeping it running
 
 - **Pausing.** Free Supabase projects pause after a week with no database
@@ -248,7 +273,7 @@ scopes there is no review and no warning screen.
   pieces stay in Supabase for when it is turned back on.
 - **Undo the code**: revert the merge commit on `main`.
 - **Remove the tables**: only on purpose, it deletes everyone's pieces:
-  `drop table public.saved_pieces, public.painted_pieces;` and
+  `drop table public.saved_pieces, public.painted_pieces, public.hidden_pieces;` and
   `drop function public.delete_my_account();` in the SQL Editor.
 
 ## Local development against the real project (optional)
