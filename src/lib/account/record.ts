@@ -1,5 +1,5 @@
 /**
- * A signed-in person's saved and painted pieces, as this device holds them.
+ * A signed-in person's saved, painted and hidden pieces, as this device holds them.
  *
  * Pure: no storage, no network, no clock - callers pass the time in. The
  * device shows this record at all times, so it renders at once and keeps
@@ -33,15 +33,25 @@ export interface PaintedRow {
   at: string;
 }
 
+/** A piece someone said is not for them ("Not for me"). */
+export interface HiddenRow {
+  id: string;
+  /** When it was hidden, as an ISO timestamp. Orders the list. */
+  at: string;
+}
+
 export interface AccountRecord {
   saved: SavedRow[];
   painted: PaintedRow[];
+  hidden: HiddenRow[];
 }
 
-export type PieceList = "saved" | "painted";
+export type PieceList = "saved" | "painted" | "hidden";
 export type PendingKey = `${PieceList}:${string}`;
 
-export const EMPTY_RECORD: AccountRecord = { saved: [], painted: [] };
+const LISTS: readonly PieceList[] = ["saved", "painted", "hidden"];
+
+export const EMPTY_RECORD: AccountRecord = { saved: [], painted: [], hidden: [] };
 
 /** The database's own check, so nothing is queued that it would refuse. */
 const PIECE_ID = /^[A-Za-z0-9][A-Za-z0-9_-]{0,119}$/;
@@ -81,8 +91,8 @@ function compareInstant(a: string, b: string): number {
   return Date.parse(a) - Date.parse(b);
 }
 
-/** Oldest first, the order the browser's own list keeps (it appends). */
-export function sortSaved(rows: readonly SavedRow[]): SavedRow[] {
+/** Oldest first, the order the browser's own list keeps (it appends). Hidden pieces too. */
+export function sortSaved<Row extends SavedRow | HiddenRow>(rows: readonly Row[]): Row[] {
   return [...rows].sort((a, b) => compareInstant(a.at, b.at) || compareText(a.id, b.id));
 }
 
@@ -144,6 +154,19 @@ export function togglePainted(
   return { record: { ...record, painted }, pending: withPending(pending, pendingKey("painted", id)) };
 }
 
+/** Hide the piece, or show it again if it is hidden - "Not for me" and its undo. */
+export function toggleHidden(
+  record: AccountRecord,
+  pending: readonly PendingKey[],
+  id: string,
+  at: string,
+): { record: AccountRecord; pending: PendingKey[] } {
+  const hidden = record.hidden.some((row) => row.id === id)
+    ? record.hidden.filter((row) => row.id !== id)
+    : sortSaved([...record.hidden, { id, at: afterLatest(record.hidden, at) }]);
+  return { record: { ...record, hidden }, pending: withPending(pending, pendingKey("hidden", id)) };
+}
+
 /**
  * The account's rows with this device's unsent changes laid over them.
  *
@@ -164,13 +187,15 @@ export function overlay(
   return {
     saved: sortSaved(keep("saved", account.saved, device.saved)),
     painted: sortPainted(keep("painted", account.painted, device.painted)),
+    hidden: sortSaved(keep("hidden", account.hidden, device.hidden)),
   };
 }
 
 /** One piece's latest state, as it is sent: the row, or null for "not there". */
 export type Change =
   | { key: PendingKey; list: "saved"; id: string; row: SavedRow | null }
-  | { key: PendingKey; list: "painted"; id: string; row: PaintedRow | null };
+  | { key: PendingKey; list: "painted"; id: string; row: PaintedRow | null }
+  | { key: PendingKey; list: "hidden"; id: string; row: HiddenRow | null };
 
 /** What sending the pending pieces means: an upsert or a delete for each. */
 export function changesFor(record: AccountRecord, pending: readonly PendingKey[]): Change[] {
@@ -183,12 +208,14 @@ export function changesFor(record: AccountRecord, pending: readonly PendingKey[]
       changes.push({ key, list, id, row: record.saved.find((row) => row.id === id) ?? null });
     } else if (list === "painted") {
       changes.push({ key, list, id, row: record.painted.find((row) => row.id === id) ?? null });
+    } else if (list === "hidden") {
+      changes.push({ key, list, id, row: record.hidden.find((row) => row.id === id) ?? null });
     }
   }
   return changes;
 }
 
-function sameRow(a: SavedRow | PaintedRow | null, b: SavedRow | PaintedRow | null): boolean {
+function sameRow(a: SavedRow | PaintedRow | HiddenRow | null, b: SavedRow | PaintedRow | HiddenRow | null): boolean {
   if (a === null || b === null) return a === b;
   return a.id === b.id && a.at === b.at && ("on" in a ? "on" in b && a.on === b.on : !("on" in b));
 }
@@ -215,12 +242,17 @@ export function settle(
 export interface GuestLibrary {
   saved: readonly string[];
   painted: readonly { id: string; on: string }[];
+  hidden: readonly string[];
 }
 
 export interface MergeResult {
   record: AccountRecord;
   pending: PendingKey[];
-  /** Pieces that are new to the account, for the notice that says so. */
+  /**
+   * Pieces that are new to the account, for the notice that says so. Hidden
+   * pieces move in too, but the notice is about what someone kept, so they are
+   * not counted.
+   */
   added: { saved: number; painted: number };
 }
 
@@ -242,6 +274,7 @@ export function mergeGuest(
   let next: PendingKey[] = [...pending];
   const saved = [...record.saved];
   const painted = [...record.painted];
+  const hidden = [...record.hidden];
   const added = { saved: 0, painted: 0 };
 
   guest.saved.forEach((id, index) => {
@@ -269,7 +302,17 @@ export function mergeGuest(
     next = withPending(next, pendingKey("painted", id));
   });
 
-  return { record: { saved: sortSaved(saved), painted: sortPainted(painted) }, pending: next, added };
+  guest.hidden.forEach((id, index) => {
+    if (!isPieceId(id) || hidden.some((row) => row.id === id)) return;
+    hidden.push({ id, at: new Date(now.getTime() + index).toISOString() });
+    next = withPending(next, pendingKey("hidden", id));
+  });
+
+  return {
+    record: { saved: sortSaved(saved), painted: sortPainted(painted), hidden: sortSaved(hidden) },
+    pending: next,
+    added,
+  };
 }
 
 /**
@@ -280,6 +323,7 @@ export function parseRecord(value: unknown): AccountRecord {
   const source = (value && typeof value === "object" ? value : {}) as {
     saved?: unknown;
     painted?: unknown;
+    hidden?: unknown;
   };
   const saved = new Map<string, SavedRow>();
   for (const row of Array.isArray(source.saved) ? source.saved : []) {
@@ -295,7 +339,18 @@ export function parseRecord(value: unknown): AccountRecord {
       painted.set(candidate.id, { id: candidate.id, on: candidate.on, at });
     }
   }
-  return { saved: sortSaved([...saved.values()]), painted: sortPainted([...painted.values()]) };
+  // Absent in a record stored before "Not for me" existed: nothing hidden.
+  const hidden = new Map<string, HiddenRow>();
+  for (const row of Array.isArray(source.hidden) ? source.hidden : []) {
+    const candidate = row as Partial<HiddenRow> | null;
+    const at = toInstant(candidate?.at);
+    if (candidate && isPieceId(candidate.id) && at) hidden.set(candidate.id, { id: candidate.id, at });
+  }
+  return {
+    saved: sortSaved([...saved.values()]),
+    painted: sortPainted([...painted.values()]),
+    hidden: sortSaved([...hidden.values()]),
+  };
 }
 
 /** Pending keys read back from storage, keeping only well-formed ones. */
@@ -307,8 +362,8 @@ export function parsePending(value: unknown): PendingKey[] {
     const split = item.indexOf(":");
     const list = item.slice(0, split);
     const id = item.slice(split + 1);
-    if ((list === "saved" || list === "painted") && isPieceId(id)) {
-      const key = pendingKey(list, id);
+    if ((LISTS as readonly string[]).includes(list) && isPieceId(id)) {
+      const key = pendingKey(list as PieceList, id);
       if (!keys.includes(key)) keys.push(key);
     }
   }

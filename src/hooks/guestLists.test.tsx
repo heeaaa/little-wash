@@ -12,11 +12,14 @@ import { describe, expect, it } from "vitest";
 import { act, renderHook } from "@testing-library/react";
 import { useFavorites } from "./useFavorites";
 import { usePainted } from "./usePainted";
+import { useHidden } from "./useHidden";
 import { replaceFavorites } from "@/lib/favorites";
 import { replacePainted } from "@/lib/painted";
+import { replaceHidden } from "@/lib/hidden";
 
 const FAVOURITES = "little-wash:favorites:v1";
 const PAINTED = "little-wash:painted:v1";
+const HIDDEN = "little-wash:hidden:v1";
 const DAY = new Date(2026, 9, 3, 9, 0);
 
 /** Another tab changed the key: the browser tells this one with a storage event. */
@@ -73,5 +76,38 @@ describe("a guest's painted record", () => {
     const { result } = renderHook(() => usePainted(DAY));
     act(() => replacePainted([{ id: "blue-jug", on: "2026-09-30" }]));
     expect(result.current.painted).toEqual([{ id: "blue-jug", on: "2026-09-30" }]);
+  });
+});
+
+describe("a guest's hidden pieces", () => {
+  it("hides and shows again, and keeps the list in this browser", () => {
+    const { result } = renderHook(() => useHidden());
+    expect(result.current.hidden).toEqual([]);
+
+    act(() => result.current.toggleHidden("ripe-pear"));
+    expect(result.current.isHidden("ripe-pear")).toBe(true);
+    expect(JSON.parse(localStorage.getItem(HIDDEN)!)).toEqual({ ids: ["ripe-pear"] });
+
+    act(() => result.current.toggleHidden("ripe-pear"));
+    expect(result.current.isHidden("ripe-pear")).toBe(false);
+    expect(JSON.parse(localStorage.getItem(HIDDEN)!)).toEqual({ ids: [] });
+  });
+
+  it("follows another tab emptying it, so a later hide cannot bring the old pieces back", () => {
+    localStorage.setItem(HIDDEN, JSON.stringify({ ids: ["ripe-pear", "blue-jug"] }));
+    const { result } = renderHook(() => useHidden());
+    expect(result.current.hidden).toEqual(["ripe-pear", "blue-jug"]);
+
+    changedElsewhere(HIDDEN, null);
+    expect(result.current.hidden).toEqual([]);
+
+    act(() => result.current.toggleHidden("teacup"));
+    expect(JSON.parse(localStorage.getItem(HIDDEN)!)).toEqual({ ids: ["teacup"] });
+  });
+
+  it("follows a replacement made in this tab, such as pieces put back after a session ended", () => {
+    const { result } = renderHook(() => useHidden());
+    act(() => replaceHidden(["blue-jug"]));
+    expect(result.current.hidden).toEqual(["blue-jug"]);
   });
 });

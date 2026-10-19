@@ -13,6 +13,7 @@ import { PaletteRow } from "@/components/PaletteRow";
 import { MetaRow } from "@/components/MetaRow";
 import { SaveButton } from "@/components/SaveButton";
 import { EnlargeDialog } from "@/components/EnlargeDialog";
+import { DetailNotForMe } from "@/components/NotForMe";
 import { SubjectTag } from "@/components/SubjectTag";
 import { WashiTag } from "@/components/studio/WashiTag";
 import { Icon } from "@/components/Icon";
@@ -58,7 +59,9 @@ export function Detail() {
       ? { to: from, label: "Browse" }
       : from?.startsWith("/studio")
         ? { to: from, label: "Your studio" }
-        : { to: { pathname: "/", search }, label: "Today’s wash" };
+        : from === "/sources"
+          ? { to: from, label: "Where ideas come from" }
+          : { to: { pathname: "/", search }, label: "Today’s wash" };
 
   if (!reference) {
     return (
@@ -179,6 +182,7 @@ export function Detail() {
               <Icon name="expand" size={18} /> Paint beside it
             </button>
           </div>
+          <DetailNotForMe reference={reference} />
 
           {series && inSeries ? (
             <SeriesSteps

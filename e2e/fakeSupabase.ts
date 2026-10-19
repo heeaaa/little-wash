@@ -36,6 +36,13 @@ interface PaintedRow {
   marked_at: string;
 }
 
+interface HiddenRow {
+  piece_id: string;
+  hidden_at: string;
+}
+
+type List = "saved" | "painted" | "hidden";
+
 const CORS = {
   "access-control-allow-origin": "*",
   "access-control-allow-headers": "*",
@@ -57,6 +64,7 @@ export class FakeSupabase {
   people = new Map<string, FakePerson>();
   saved = new Map<string, Map<string, SavedRow>>();
   painted = new Map<string, Map<string, PaintedRow>>();
+  hidden = new Map<string, Map<string, HiddenRow>>();
   /** Every request, as "METHOD /path", in order. */
   log: string[] = [];
   /** Every authorize request's parameters, for checking what the app asked for. */
@@ -73,12 +81,19 @@ export class FakeSupabase {
     this.people.set(person.id, person);
     this.saved.set(person.id, new Map());
     this.painted.set(person.id, new Map());
+    this.hidden.set(person.id, new Map());
     return person;
   }
 
   savedIds(person: FakePerson): string[] {
     return [...(this.saved.get(person.id)?.values() ?? [])]
       .sort((a, b) => a.saved_at.localeCompare(b.saved_at) || a.piece_id.localeCompare(b.piece_id))
+      .map((row) => row.piece_id);
+  }
+
+  hiddenIds(person: FakePerson): string[] {
+    return [...(this.hidden.get(person.id)?.values() ?? [])]
+      .sort((a, b) => a.hidden_at.localeCompare(b.hidden_at) || a.piece_id.localeCompare(b.piece_id))
       .map((row) => row.piece_id);
   }
 
@@ -152,9 +167,8 @@ export class FakeSupabase {
       return person ? this.json(route, 200, this.sessionFor(person).user) : this.json(route, 401, { code: 401, msg: "invalid JWT" });
     }
     if (url.pathname === "/rest/v1/rpc/delete_my_account") return this.deleteAccount(route);
-    if (url.pathname === "/rest/v1/saved_pieces" || url.pathname === "/rest/v1/painted_pieces") {
-      return this.rows(route, url, url.pathname.endsWith("saved_pieces") ? "saved" : "painted");
-    }
+    const list = /^\/rest\/v1\/(saved|painted|hidden)_pieces$/.exec(url.pathname)?.[1] as List | undefined;
+    if (list) return this.rows(route, url, list);
     return this.json(route, 404, { message: `The fake has no ${method} ${url.pathname}` });
   }
 
@@ -197,11 +211,12 @@ export class FakeSupabase {
     return this.json(route, 400, { error: "unsupported_grant_type" });
   }
 
-  private rows(route: Route, url: URL, list: "saved" | "painted") {
+  private rows(route: Route, url: URL, list: List) {
     const caller = this.who(route);
     if (!caller) return this.json(route, 401, { code: "42501", message: "permission denied" });
-    const table = list === "saved" ? this.saved : this.painted;
-    const mine = table.get(caller) ?? new Map();
+    const table: Map<string, Map<string, SavedRow | PaintedRow | HiddenRow>> =
+      list === "saved" ? this.saved : list === "painted" ? this.painted : this.hidden;
+    const mine = table.get(caller) ?? new Map<string, SavedRow | PaintedRow | HiddenRow>();
     const asked = url.searchParams.get("user_id")?.replace(/^eq\./, "");
     const method = route.request().method();
 
@@ -218,7 +233,9 @@ export class FakeSupabase {
       for (const row of rows) {
         mine.set(row.piece_id!, list === "saved"
           ? { piece_id: row.piece_id!, saved_at: row.saved_at! }
-          : { piece_id: row.piece_id!, painted_on: row.painted_on!, marked_at: row.marked_at! });
+          : list === "painted"
+            ? { piece_id: row.piece_id!, painted_on: row.painted_on!, marked_at: row.marked_at! }
+            : { piece_id: row.piece_id!, hidden_at: row.hidden_at! });
       }
       table.set(caller, mine);
       return this.empty(route, 201);
@@ -236,6 +253,7 @@ export class FakeSupabase {
     this.people.delete(caller);
     this.saved.delete(caller);
     this.painted.delete(caller);
+    this.hidden.delete(caller);
     for (const [token, id] of this.refreshTokens) if (id === caller) this.refreshTokens.delete(token);
     return this.empty(route, 204);
   }

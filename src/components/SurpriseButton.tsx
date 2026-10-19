@@ -8,6 +8,8 @@ interface SurpriseButtonProps {
   onSurprised?: (reference: PaintReference | null) => void;
   /** Id of the note explaining why the button is unavailable, when it is. */
   describedBy?: string;
+  /** Names the control for a screen that gives focus back to it after a deal. */
+  action?: string;
 }
 
 /** "Surprise me" - swaps the featured piece for a random one within the filter. */
@@ -16,6 +18,7 @@ export function SurpriseButton({
   className = "",
   onSurprised,
   describedBy,
+  action,
 }: SurpriseButtonProps) {
   const { surprise, visible } = useApp();
   const disabled = visible.length <= 1;
@@ -34,6 +37,7 @@ export function SurpriseButton({
         onClick={handleClick}
         disabled={disabled}
         aria-describedby={describe}
+        data-action={action}
         className={`inline-flex min-h-[44px] items-center gap-2 rounded-chip px-3 text-[0.95rem] font-semibold text-accent underline decoration-2 underline-offset-4 transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:text-ink-soft disabled:no-underline disabled:opacity-70 ${className}`}
       >
         <Icon name="dice" size={19} />

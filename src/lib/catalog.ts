@@ -120,17 +120,59 @@ export function activeFilterCount(filters: Filters): number {
 }
 
 /**
+ * What Today and "Deal me another" leave out, or offer last.
+ *
+ * - `hidden`: pieces the painter said are not for them. Never offered.
+ * - `paintedBefore`: pieces marked painted on a day before today. Offered only
+ *   once nothing unpainted matches, so running out of new pieces is never a
+ *   dead end. A piece painted today is deliberately not in it: the person who
+ *   just painted Today's piece is still looking at it.
+ */
+export interface SetAside {
+  hidden?: ReadonlySet<string>;
+  paintedBefore?: ReadonlySet<string>;
+}
+
+const NOTHING: ReadonlySet<string> = new Set();
+
+/** The catalogue without the pieces someone said are not for them, in order. */
+export function withoutHidden(
+  all: readonly PaintReference[],
+  hidden: ReadonlySet<string>,
+): PaintReference[] {
+  return all.filter((reference) => !hidden.has(reference.id));
+}
+
+/**
+ * The pieces marked painted on a day before `today` ("YYYY-MM-DD", the
+ * painter's own day). A comparison with today only: nothing here measures how
+ * long ago anything was, which DESIGN.md's register rule 2 rules out.
+ */
+export function paintedBefore(
+  entries: readonly PaintedEntry[],
+  today: string,
+): Set<string> {
+  return new Set(entries.filter((entry) => entry.on < today).map((entry) => entry.id));
+}
+
+/**
  * "Surprise me" - choose a reference from the currently filtered set, avoiding
  * the one already on screen. Randomness is injected so tests stay deterministic.
+ * Hidden pieces are never dealt; painted ones only once nothing unpainted is
+ * left to move to.
  */
 export function surpriseMe(
   all: readonly PaintReference[],
   filters: Filters,
   currentId: string | null,
   random: RandomSource,
+  { hidden = NOTHING, paintedBefore: painted = NOTHING }: SetAside = {},
 ): PaintReference | null {
-  const pool = filterReferences(all, filters);
-  return pickDifferent(pool, currentId, random);
+  const pool = withoutHidden(filterReferences(all, filters), hidden);
+  const fresh = pool.filter((reference) => !painted.has(reference.id));
+  // Somewhere new to move to, other than the piece already on screen.
+  const preferred = fresh.some((reference) => reference.id !== currentId) ? fresh : pool;
+  return pickDifferent(preferred, currentId, random);
 }
 
 /** Whole days since the epoch, in the viewer's own calendar day. */
@@ -160,26 +202,66 @@ export function dailySeed(filters: Filters, date: Date): number {
   return (hashFilters(filters) ^ Math.imul(dayNumber(date), 0x9e3779b1)) >>> 0;
 }
 
+/** FNV-1a over a piece id. */
+function hashId(id: string): number {
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < id.length; i += 1) {
+    hash ^= id.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return hash >>> 0;
+}
+
+/**
+ * Where a piece stands on one day, for one filter state: a draw of its own,
+ * seeded on the day, the filters and the piece. Each piece's place depends on
+ * nothing but itself, so taking another piece out of the running cannot move it.
+ */
+function dayScore(id: string, seed: number): number {
+  return mulberry32((seed ^ Math.imul(hashId(id), 0x9e3779b1)) >>> 0)();
+}
+
 /**
  * The featured piece for today, chosen from the pieces that match the active
  * filters.
  *
- * Deterministic in (date, filters): everyone sees the same "today", it survives
- * reloads, and there is no streak or pressure logic anywhere in it. Seeding on
- * the filters as well as the day matters because the filters are the primary
- * control on Today - picking the first match would hand back the same piece
- * every time a filter changed, making the app feel stuck exactly when someone
- * is engaging with it.
+ * Deterministic in (date, filters, set aside): everyone with the same pieces set
+ * aside sees the same "today", it survives reloads, and there is no streak or
+ * pressure logic anywhere in it. Seeding on the filters as well as the day
+ * matters because the filters are the primary control on Today - picking the
+ * first match would hand back the same piece every time a filter changed,
+ * making the app feel stuck exactly when someone is engaging with it.
+ *
+ * Every matching piece gets its own score for the day and the highest one that
+ * may be offered wins. It used to be an index into the matching list, which
+ * shifted whenever any piece left the list - so hiding one piece, or painting
+ * another from Browse, would have swapped Today's piece out from under the
+ * person looking at it. Now only setting aside Today's own piece moves it.
  */
 export function pickDaily(
   all: readonly PaintReference[],
   filters: Filters = DEFAULT_FILTERS,
   date: Date = new Date(),
+  { hidden = NOTHING, paintedBefore: painted = NOTHING }: SetAside = {},
 ): PaintReference | null {
-  const pool = filterReferences(all, filters);
-  if (pool.length === 0) return null;
-  const index = Math.floor(mulberry32(dailySeed(filters, date))() * pool.length);
-  return pool[index] ?? pool[0] ?? null;
+  const seed = dailySeed(filters, date);
+  let best: PaintReference | null = null;
+  let bestScore = -1;
+  let bestFresh: PaintReference | null = null;
+  let bestFreshScore = -1;
+  for (const reference of filterReferences(all, filters)) {
+    if (hidden.has(reference.id)) continue;
+    const score = dayScore(reference.id, seed);
+    if (score > bestScore) {
+      best = reference;
+      bestScore = score;
+    }
+    if (!painted.has(reference.id) && score > bestFreshScore) {
+      bestFresh = reference;
+      bestFreshScore = score;
+    }
+  }
+  return bestFresh ?? best;
 }
 
 export function findReference(

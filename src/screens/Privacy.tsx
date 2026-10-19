@@ -40,7 +40,8 @@ export function Privacy() {
 
         <Section title="Without an account">
           <p>
-            Everything you save, mark painted or switch off stays in this browser, on this device.
+            Everything you save, mark painted, mark Not for me or switch off stays in this browser,
+            on this device.
             None of it is sent anywhere. Clearing this site&rsquo;s data in your browser removes it.
           </p>
           <p>
@@ -60,8 +61,8 @@ export function Privacy() {
               </p>
               <p>
                 Your account holds your email address, the name and picture link Google shared, the
-                pieces you save and mark painted with the day you painted them, and when you signed
-                in. Supabase also records the internet address each sign-in came from, for security.
+                pieces you save and mark painted with the day you painted them, the pieces you mark
+                Not for me, and when you signed in. Supabase also records the internet address each sign-in came from, for security.
               </p>
               <p>
                 It is used only to show you your studio on each device you sign in on. It is not

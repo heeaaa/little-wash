@@ -192,7 +192,7 @@ describe("coming back from Google", () => {
   it("moves this browser's pieces into the account, says how many, and empties the browser's lists", async () => {
     localStorage.setItem(FAVOURITES, JSON.stringify({ ids: ["already-there", "pear"] }));
     localStorage.setItem(PAINTED, JSON.stringify({ entries: [{ id: "mug", on: "2026-09-14" }] }));
-    server.rows.set(ANA.id, { saved: [{ id: "already-there", at: "2026-09-01T00:00:00.000Z" }], painted: [] });
+    server.rows.set(ANA.id, { saved: [{ id: "already-there", at: "2026-09-01T00:00:00.000Z" }], painted: [], hidden: [] });
     server.session = ANA;
     at("/?code=from-google");
 
@@ -252,7 +252,7 @@ describe("coming back from Google", () => {
 
   it("keeps a still-valid session when a second attempt fails", async () => {
     storeSession();
-    saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: { saved: [], painted: [] }, pending: [], pulledAt: null });
+    saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: { saved: [], painted: [], hidden: [] }, pending: [], pulledAt: null });
     server.session = ANA;
     at("/?error=server_error");
     const { service } = make();
@@ -271,7 +271,7 @@ describe("a second visit, signed in", () => {
     saveDevice(localStorage, {
       userId: ANA.id,
       email: ANA.email,
-      record: { saved: [{ id: "pear", at: "2026-09-01T00:00:00.000Z" }], painted: [] },
+      record: { saved: [{ id: "pear", at: "2026-09-01T00:00:00.000Z" }], painted: [], hidden: [] },
       pending: [],
       pulledAt: null,
     });
@@ -282,6 +282,7 @@ describe("a second visit, signed in", () => {
         { id: "saved-on-the-phone", at: "2026-09-02T00:00:00.000Z" },
       ],
       painted: [],
+      hidden: [],
     });
 
     const { service } = make();
@@ -298,7 +299,7 @@ describe("a second visit, signed in", () => {
 
   it("ends a session the account no longer accepts, and leaves nothing behind", async () => {
     storeSession();
-    saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: { saved: [{ id: "pear", at: "2026-09-01T00:00:00.000Z" }], painted: [] }, pending: [], pulledAt: null });
+    saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: { saved: [{ id: "pear", at: "2026-09-01T00:00:00.000Z" }], painted: [], hidden: [] }, pending: [], pulledAt: null });
     server.session = null;
 
     const { service, forgetSeenLeaves } = make();
@@ -312,7 +313,7 @@ describe("a second visit, signed in", () => {
 
   it("carries on from this device's copy when the client cannot load, and tries again", async () => {
     storeSession();
-    saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: { saved: [{ id: "pear", at: "2026-09-01T00:00:00.000Z" }], painted: [] }, pending: [], pulledAt: null });
+    saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: { saved: [{ id: "pear", at: "2026-09-01T00:00:00.000Z" }], painted: [], hidden: [] }, pending: [], pulledAt: null });
     const { service } = make({ loadFails: true });
     service.start();
     await settle();
@@ -322,7 +323,7 @@ describe("a second visit, signed in", () => {
 
   it("never shows someone else's copy left on the device", async () => {
     storeSession(BEN);
-    saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: { saved: [{ id: "anas-pear", at: "2026-09-01T00:00:00.000Z" }], painted: [] }, pending: [], pulledAt: null });
+    saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: { saved: [{ id: "anas-pear", at: "2026-09-01T00:00:00.000Z" }], painted: [], hidden: [] }, pending: [], pulledAt: null });
     server.session = BEN;
     const { service } = make();
     service.start();
@@ -333,7 +334,7 @@ describe("a second visit, signed in", () => {
   });
 });
 
-async function signedIn(rows = { saved: [], painted: [] } as FakeServer["rows"] extends Map<string, infer R> ? R : never) {
+async function signedIn(rows = { saved: [], painted: [], hidden: [] } as FakeServer["rows"] extends Map<string, infer R> ? R : never) {
   storeSession();
   saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record: rows, pending: [], pulledAt: null });
   server.session = ANA;
@@ -496,7 +497,7 @@ describe("changes while signed in", () => {
     saveDevice(localStorage, {
       userId: ANA.id,
       email: ANA.email,
-      record: { saved: [], painted: [{ id: "blue-mug", on: "2026-10-01", at: "2026-10-01T19:00:00.000Z" }] },
+      record: { saved: [], painted: [{ id: "blue-mug", on: "2026-10-01", at: "2026-10-01T19:00:00.000Z" }], hidden: [] },
       pending: ["painted:blue-mug"],
       pulledAt: null,
     });
@@ -594,13 +595,13 @@ describe("first sign-in, when things go wrong", () => {
     service.start();
     await settle();
     expect(service.getSnapshot().notice).toMatchObject({ kind: "signed-in", added: { saved: 1 }, sent: false });
-    expect(loadDevice(localStorage, ANA.id)?.guestBackup).toEqual({ saved: ["ripe-pear"], painted: [] });
+    expect(loadDevice(localStorage, ANA.id)?.guestBackup).toEqual({ saved: ["ripe-pear"], painted: [], hidden: [] });
 
     // The first try again fails too; nothing has moved, and the backup stays.
     await vi.advanceTimersByTimeAsync(RETRY_FIRST_MS);
     await settle();
     expect(server.rowsOf(ANA.id).saved).toEqual([]);
-    expect(loadDevice(localStorage, ANA.id)?.guestBackup).toEqual({ saved: ["ripe-pear"], painted: [] });
+    expect(loadDevice(localStorage, ANA.id)?.guestBackup).toEqual({ saved: ["ripe-pear"], painted: [], hidden: [] });
 
     await vi.advanceTimersByTimeAsync(RETRY_FIRST_MS * 2);
     await settle();
@@ -630,7 +631,7 @@ describe("other tabs", () => {
   it("shows a change another tab made", async () => {
     const { service } = await signedIn();
     const stored = loadDevice(localStorage, ANA.id)!;
-    saveDevice(localStorage, { ...stored, record: { saved: [{ id: "from-the-other-tab", at: NOW.toISOString() }], painted: [] } });
+    saveDevice(localStorage, { ...stored, record: { saved: [{ id: "from-the-other-tab", at: NOW.toISOString() }], painted: [], hidden: [] } });
     window.dispatchEvent(new StorageEvent("storage", { key: DEVICE_KEY }));
     expect(service.getSnapshot().record?.saved.map((r) => r.id)).toEqual(["from-the-other-tab"]);
   });
@@ -794,7 +795,7 @@ describe("signing out", () => {
 
 describe("deleting the account", () => {
   it("deletes it and everything in it, and signs this device out", async () => {
-    const { service } = await signedIn({ saved: [{ id: "pear", at: NOW.toISOString() }], painted: [] });
+    const { service } = await signedIn({ saved: [{ id: "pear", at: NOW.toISOString() }], painted: [], hidden: [] });
     await service.deleteAccount();
     await settle();
     expect(server.rows.has(ANA.id)).toBe(false);
@@ -803,7 +804,7 @@ describe("deleting the account", () => {
   });
 
   it("keeps everything and says so when it cannot", async () => {
-    const { service } = await signedIn({ saved: [{ id: "pear", at: NOW.toISOString() }], painted: [] });
+    const { service } = await signedIn({ saved: [{ id: "pear", at: NOW.toISOString() }], painted: [], hidden: [] });
     server.failures.push("unavailable");
     await service.deleteAccount();
     expect(service.getSnapshot()).toMatchObject({ status: "signed-in", busy: null, notice: { kind: "delete-failed" } });
@@ -829,5 +830,103 @@ describe("notices", () => {
     expect(second.kind).toBe(first.kind);
     // A new id, so the page announces it again rather than treating it as old.
     expect(second.id).toBeGreaterThan(first.id);
+  });
+});
+
+/*
+  "Not for me" follows the account like the other two lists
+  (docs/plans/not-for-me-reminders-curation.md, Phase 1).
+*/
+describe("hidden pieces, with an account", () => {
+  const HIDDEN = "little-wash:hidden:v1";
+
+  it("move in from this browser on sign-in, quietly, and leave the browser's list", async () => {
+    saveSignInIntent(localStorage, "/studio", NOW);
+    localStorage.setItem(FAVOURITES, JSON.stringify({ ids: ["pear"] }));
+    localStorage.setItem(HIDDEN, JSON.stringify({ ids: ["tabby", "tower"] }));
+    server.rows.set(ANA.id, { saved: [], painted: [], hidden: [{ id: "tower", at: "2026-09-01T00:00:00.000Z" }] });
+    server.session = ANA;
+    at("/?code=from-google");
+
+    const { service } = make();
+    service.start();
+    await settle();
+
+    expect(server.rowsOf(ANA.id).hidden.map((r) => r.id)).toEqual(["tower", "tabby"]);
+    expect(service.getSnapshot().record?.hidden.map((r) => r.id)).toEqual(["tower", "tabby"]);
+    // The notice counts what someone kept; hidden pieces are not part of it.
+    expect(service.getSnapshot().notice).toMatchObject({ kind: "signed-in", added: { saved: 1, painted: 0 }, sent: true });
+    expect(localStorage.getItem(HIDDEN)).toBeNull();
+  });
+
+  it("go back to this browser if the session ends before the account has them", async () => {
+    saveSignInIntent(localStorage, "/studio", NOW);
+    localStorage.setItem(HIDDEN, JSON.stringify({ ids: ["tabby"] }));
+    server.session = ANA;
+    at("/?code=from-google");
+    server.failures.push("unavailable");
+
+    const { service } = make();
+    service.start();
+    await settle();
+    expect(server.rowsOf(ANA.id).hidden).toEqual([]);
+    expect(loadDevice(localStorage, ANA.id)?.guestBackup).toEqual({ saved: [], painted: [], hidden: ["tabby"] });
+
+    server.endSessionElsewhere();
+    await settle();
+    expect(service.getSnapshot().status).toBe("signed-out");
+    expect(JSON.parse(localStorage.getItem(HIDDEN)!)).toEqual({ ids: ["tabby"] });
+  });
+
+  it("are sent with other changes, and showing one again is sent too", async () => {
+    const { service } = await signedIn();
+    service.toggleHidden("tabby");
+    service.toggleSaved("pear");
+    expect(service.getSnapshot().record?.hidden.map((r) => r.id)).toEqual(["tabby"]);
+    expect(service.getSnapshot()).toMatchObject({ pending: 2, sync: "sending" });
+
+    await vi.advanceTimersByTimeAsync(SEND_DELAY_MS);
+    await settle();
+    expect(server.log.filter((entry) => entry.startsWith("push"))).toEqual(["push +hidden:tabby +saved:pear"]);
+    expect(server.rowsOf(ANA.id).hidden).toEqual([{ id: "tabby", at: NOW.toISOString() }]);
+
+    service.toggleHidden("tabby");
+    await vi.advanceTimersByTimeAsync(SEND_DELAY_MS);
+    await settle();
+    expect(server.rowsOf(ANA.id).hidden).toEqual([]);
+    expect(service.getSnapshot()).toMatchObject({ pending: 0, sync: "idle" });
+  });
+
+  it("wait on the device while offline, and go when the connection returns", async () => {
+    const { service } = await signedIn();
+    setOnline(false);
+    service.toggleHidden("tabby");
+    expect(service.getSnapshot().sync).toBe("offline");
+    await vi.advanceTimersByTimeAsync(SEND_DELAY_MS * 3);
+    await settle();
+    expect(server.rowsOf(ANA.id).hidden).toEqual([]);
+    expect(loadDevice(localStorage, ANA.id)?.pending).toEqual(["hidden:tabby"]);
+
+    setOnline(true);
+    await settle();
+    expect(server.rowsOf(ANA.id).hidden.map((r) => r.id)).toEqual(["tabby"]);
+  });
+
+  it("hidden on another device appear here when the account is heard from", async () => {
+    const { service } = await signedIn();
+    server.rows.set(ANA.id, { saved: [], painted: [], hidden: [{ id: "hidden-on-the-phone", at: NOW.toISOString() }] });
+    service.retry();
+    await settle();
+    expect(service.getSnapshot().record?.hidden.map((r) => r.id)).toEqual(["hidden-on-the-phone"]);
+  });
+
+  it("ignore ids the account would refuse, and anyone signed out", async () => {
+    const { service } = await signedIn();
+    service.toggleHidden("not an id");
+    expect(service.getSnapshot().pending).toBe(0);
+
+    const guest = make().service;
+    guest.toggleHidden("tabby");
+    expect(guest.getSnapshot().record).toBeNull();
   });
 });

@@ -17,19 +17,24 @@ import {
 import {
   enabledReferences,
   filterReferences,
+  paintedBefore,
   pickDaily,
   surpriseMe,
+  withoutHidden,
+  type SetAside,
 } from "@/lib/catalog";
+import { today as dayOf } from "@/lib/painted";
 import { useFavorites, type FavoritesApi } from "@/hooks/useFavorites";
 import { useSources, type SourcesApi } from "@/hooks/useSources";
 import { usePainted, type PaintedApi } from "@/hooks/usePainted";
+import { useHidden, type HiddenApi } from "@/hooks/useHidden";
 import { useAccountLists } from "@/hooks/useAccountLists";
 import { useAccount } from "@/state/AccountContext";
 import { rewet } from "@/lib/wash";
 import { SHOWN_PARAM } from "@/lib/paging";
 import type { RandomSource } from "@/lib/shuffle";
 
-interface AppContextValue extends FavoritesApi, SourcesApi, PaintedApi {
+interface AppContextValue extends FavoritesApi, SourcesApi, PaintedApi, HiddenApi {
   /**
    * Every reference there is, before source preferences are applied.
    *
@@ -37,18 +42,33 @@ interface AppContextValue extends FavoritesApi, SourcesApi, PaintedApi {
    * switching a source off never empties a shelf someone filled on purpose.
    */
   references: PaintReference[];
-  /** The catalogue after disabled sources are removed; what discovery draws on. */
+  /**
+   * The catalogue after disabled sources are removed. Series and saved pieces
+   * draw on this; Today, dealing and Browse's results also leave out hidden
+   * pieces (`offered`, `visible`).
+   */
   catalogue: PaintReference[];
+  /** The catalogue without the pieces someone said are not for them. */
+  offered: PaintReference[];
   filters: Filters;
   activeFilters: number;
   setFilter: (patch: Partial<Filters>) => void;
   resetFilters: () => void;
-  /** References matching the active filters, in catalogue order. */
+  /** Offered references matching the active filters, in catalogue order. */
   visible: PaintReference[];
+  /** Hidden references that match the active filters, for saying how many are left out. */
+  hiddenMatching: PaintReference[];
   /** The piece currently offered as "today's" idea (matches filters). */
   featured: PaintReference | null;
   /** Swap the featured piece for a random different one within the filter. */
   surprise: () => PaintReference | null;
+  /**
+   * "Not for me" on Today: hide the featured piece and deal another in its
+   * place. Returns the piece dealt, or null when nothing else matches.
+   */
+  notForMe: () => PaintReference | null;
+  /** Undo "Not for me": show the piece again and put it back on Today. */
+  undoNotForMe: (id: string) => void;
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
@@ -93,6 +113,7 @@ export function AppProvider({
   // Shares the injected clock with the daily pick, so a marked date is
   // deterministic under test.
   const guestPainted = usePainted(today);
+  const guestHidden = useHidden();
   /*
     Signed in, the pieces come from the account (src/lib/account); otherwise
     from this browser, exactly as before accounts existed. Same API either
@@ -103,10 +124,29 @@ export function AppProvider({
   const accountLists = useAccountLists(useAccount(), today);
   const favorites = accountLists?.favorites ?? guestFavorites;
   const painted = accountLists?.painted ?? guestPainted;
+  const hidden = accountLists?.hidden ?? guestHidden;
 
   const catalogue = useMemo(
     () => enabledReferences(references, sources.disabledSources),
     [references, sources.disabledSources],
+  );
+
+  /*
+    What Today and dealing leave out or offer last (lib/catalog.ts, SetAside).
+    "Before today" is today's own date compared with each painted day - never
+    how long ago, which the register rules forbid.
+  */
+  const setAside = useMemo<SetAside>(
+    () => ({
+      hidden: new Set(hidden.hidden),
+      paintedBefore: paintedBefore(painted.painted, dayOf(today)),
+    }),
+    [hidden.hidden, painted.painted, today],
+  );
+
+  const offered = useMemo(
+    () => withoutHidden(catalogue, setAside.hidden ?? new Set()),
+    [catalogue, setAside],
   );
 
   const filters: Filters = useMemo(
@@ -161,8 +201,13 @@ export function AppProvider({
   }, [setFilter]);
 
   const visible = useMemo(
-    () => filterReferences(catalogue, filters),
-    [catalogue, filters],
+    () => filterReferences(offered, filters),
+    [offered, filters],
+  );
+
+  const hiddenMatching = useMemo(
+    () => filterReferences(catalogue, filters).filter((reference) => setAside.hidden?.has(reference.id)),
+    [catalogue, filters, setAside],
   );
 
   /*
@@ -199,43 +244,83 @@ export function AppProvider({
     }
     // Seeded on the day and the filter combination, so narrowing a filter
     // moves to a genuinely different piece instead of the first match.
-    return pickDaily(catalogue, filters, today);
-  }, [visible, pinnedId, catalogue, filters, today]);
+    return pickDaily(catalogue, filters, today, setAside);
+  }, [visible, pinnedId, catalogue, filters, today, setAside]);
 
   const surprise = useCallback(() => {
-    const next = surpriseMe(catalogue, filters, featured?.id ?? null, random);
+    const next = surpriseMe(catalogue, filters, featured?.id ?? null, random, setAside);
     if (next) rewet(() => setPinnedId(next.id));
     return next;
-  }, [catalogue, filters, featured, random, setPinnedId]);
+  }, [catalogue, filters, featured, random, setPinnedId, setAside]);
+
+  /*
+    Hiding is dealing: the piece goes and another is dealt in its place, with
+    the same re-wet. The next piece is pinned like a deal, so Undo can put
+    exactly this piece back, and Back is not filled with skipped pieces.
+  */
+  const { toggleHidden } = hidden;
+  const notForMe = useCallback(() => {
+    if (!featured) return null;
+    const id = featured.id;
+    const next = surpriseMe(catalogue, filters, id, random, {
+      ...setAside,
+      hidden: new Set([...(setAside.hidden ?? []), id]),
+    });
+    rewet(() => {
+      toggleHidden(id);
+      if (next) setPinnedId(next.id);
+    });
+    return next;
+  }, [featured, catalogue, filters, random, setAside, toggleHidden, setPinnedId]);
+
+  const undoNotForMe = useCallback(
+    (id: string) => {
+      rewet(() => {
+        if (setAside.hidden?.has(id)) toggleHidden(id);
+        setPinnedId(id);
+      });
+    },
+    [setAside, toggleHidden, setPinnedId],
+  );
 
   const value = useMemo<AppContextValue>(
     () => ({
       references,
       catalogue,
+      offered,
       filters,
       activeFilters,
       setFilter,
       resetFilters,
       visible,
+      hiddenMatching,
       featured,
       surprise,
+      notForMe,
+      undoNotForMe,
       ...favorites,
       ...sources,
       ...painted,
+      ...hidden,
     }),
     [
       references,
       catalogue,
+      offered,
       filters,
       activeFilters,
       setFilter,
       resetFilters,
       visible,
+      hiddenMatching,
       featured,
       surprise,
+      notForMe,
+      undoNotForMe,
       favorites,
       sources,
       painted,
+      hidden,
     ],
   );
 

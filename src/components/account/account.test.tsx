@@ -64,7 +64,7 @@ function renderApp(path: string, withService: AccountService | null = makeServic
   );
 }
 
-function signedInAs(record: AccountRecord = { saved: [], painted: [] }) {
+function signedInAs(record: AccountRecord = { saved: [], painted: [], hidden: [] }) {
   localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ access_token: "a.b.c", user: { id: ANA.id, email: ANA.email } }));
   saveDevice(localStorage, { userId: ANA.id, email: ANA.email, record, pending: [], pulledAt: null });
   server.session = ANA;
@@ -241,7 +241,7 @@ describe("signed out, with accounts available", () => {
 
 describe("signed in", () => {
   it("shows who, the account's pieces, and a way out", async () => {
-    signedInAs({ saved: [{ id: PIECE.id, at: "2026-10-01T08:00:00.000Z" }], painted: [] });
+    signedInAs({ saved: [{ id: PIECE.id, at: "2026-10-01T08:00:00.000Z" }], painted: [], hidden: [] });
     renderApp("/studio");
     // Named twice on purpose: the line under the lede, and "Your account".
     expect(await within(main()).findByText(/^Signed in as/)).toHaveTextContent(`Signed in as ${ANA.email}.`);
@@ -300,7 +300,7 @@ describe("signed in", () => {
   });
 
   it("signs out, leaving an empty studio and a word about where things went", async () => {
-    signedInAs({ saved: [{ id: PIECE.id, at: "2026-10-01T08:00:00.000Z" }], painted: [] });
+    signedInAs({ saved: [{ id: PIECE.id, at: "2026-10-01T08:00:00.000Z" }], painted: [], hidden: [] });
     const user = userEvent.setup();
     renderApp("/studio");
     await user.click(await within(main()).findByRole("button", { name: "Sign out" }));
@@ -325,7 +325,7 @@ describe("signed in", () => {
   });
 
   it("says inside the dialog when the account cannot be deleted, and nothing is removed", async () => {
-    signedInAs({ saved: [{ id: PIECE.id, at: "2026-10-01T08:00:00.000Z" }], painted: [] });
+    signedInAs({ saved: [{ id: PIECE.id, at: "2026-10-01T08:00:00.000Z" }], painted: [], hidden: [] });
     const user = userEvent.setup();
     renderApp("/studio");
     await waitFor(() => expect(service.getSnapshot().sync).toBe("idle"));
@@ -347,7 +347,7 @@ describe("signed in", () => {
   });
 
   it("asks before deleting the account, with the safe answer first", async () => {
-    signedInAs({ saved: [{ id: PIECE.id, at: "2026-10-01T08:00:00.000Z" }], painted: [] });
+    signedInAs({ saved: [{ id: PIECE.id, at: "2026-10-01T08:00:00.000Z" }], painted: [], hidden: [] });
     const user = userEvent.setup();
     renderApp("/studio");
     await user.click(await within(main()).findByRole("button", { name: "Delete my account" }));

@@ -1,6 +1,6 @@
 // @vitest-environment node
 /**
- * The database's own rules for saved and painted pieces, tested against the
+ * The database's own rules for saved, painted and hidden pieces, tested against the
  * real migration (see database.ts for how and why on PGlite).
  *
  * These are the rules CLAUDE.md asks to be proven rather than trusted: user A
@@ -26,8 +26,9 @@ const ANA = "0b6f2c1e-0000-4000-8000-00000000000a";
 const BEN = "0b6f2c1e-0000-4000-8000-00000000000b";
 
 const TABLES = [
-  { table: "saved_pieces", columns: "user_id, piece_id", values: "$1, $2" },
-  { table: "painted_pieces", columns: "user_id, piece_id, painted_on", values: "$1, $2, '2026-09-14'" },
+  { table: "saved_pieces", columns: "user_id, piece_id", values: "$1, $2", at: "saved_at" },
+  { table: "painted_pieces", columns: "user_id, piece_id, painted_on", values: "$1, $2, '2026-09-14'", at: "marked_at" },
+  { table: "hidden_pieces", columns: "user_id, piece_id", values: "$1, $2", at: "hidden_at" },
 ] as const;
 
 const DEFAULTS: ProjectDefaults[] = ["exposes-nothing", "exposes-everything"];
@@ -57,10 +58,11 @@ describe.each(DEFAULTS)("on a project that %s by default", (defaults) => {
         "insert into public.painted_pieces (user_id, piece_id, painted_on) values ($1, $2, '2026-09-14')",
         [who, piece],
       );
+      await asOwner(db, "insert into public.hidden_pieces (user_id, piece_id) values ($1, $2)", [who, piece]);
     }
   });
 
-  describe.each(TABLES)("$table", ({ table, columns, values }) => {
+  describe.each(TABLES)("$table", ({ table, columns, values, at }) => {
     it("shows a signed-in person their own rows and nobody else's", async () => {
       const ana = await as<{ piece_id: string }>(db, person(ANA), `select piece_id from public.${table} order by piece_id`);
       const ben = await as<{ piece_id: string }>(db, person(BEN), `select piece_id from public.${table}`);
@@ -132,7 +134,7 @@ describe.each(DEFAULTS)("on a project that %s by default", (defaults) => {
     });
 
     it("keeps an unfiltered update to the person's own rows", async () => {
-      const column = table === "saved_pieces" ? "saved_at" : "marked_at";
+      const column = at;
       await as(db, person(ANA), `update public.${table} set ${column} = '2000-01-01T00:00:00Z'`);
       const bens = await asOwner<{ at: Date }>(db, `select ${column} as at from public.${table} where user_id = $1`, [BEN]);
       expect(bens[0]!.at.getUTCFullYear()).not.toBe(2000);
@@ -162,9 +164,9 @@ describe.each(DEFAULTS)("on a project that %s by default", (defaults) => {
     it("keeps at most 1,000 pieces per person, and still lets one be saved again at the limit", async () => {
       await asOwner(db, `delete from public.${table} where user_id = $1`, [ANA]);
       const fill =
-        table === "saved_pieces"
-          ? "insert into public.saved_pieces (user_id, piece_id) select $1, 'piece-' || g from generate_series(1, 1000) g"
-          : "insert into public.painted_pieces (user_id, piece_id, painted_on) select $1, 'piece-' || g, '2026-09-14' from generate_series(1, 1000) g";
+        table === "painted_pieces"
+          ? "insert into public.painted_pieces (user_id, piece_id, painted_on) select $1, 'piece-' || g, '2026-09-14' from generate_series(1, 1000) g"
+          : `insert into public.${table} (user_id, piece_id) select $1, 'piece-' || g from generate_series(1, 1000) g`;
       await asOwner(db, fill, [ANA]);
 
       await expect(
@@ -253,7 +255,9 @@ describe.each(DEFAULTS)("on a project that %s by default", (defaults) => {
       await asOwner(db, "delete from auth.users where id = $1", [ANA]);
       expect(await asOwner(db, "select 1 from public.saved_pieces where user_id = $1", [ANA])).toHaveLength(0);
       expect(await asOwner(db, "select 1 from public.painted_pieces where user_id = $1", [ANA])).toHaveLength(0);
+      expect(await asOwner(db, "select 1 from public.hidden_pieces where user_id = $1", [ANA])).toHaveLength(0);
       expect(await asOwner(db, "select 1 from public.saved_pieces where user_id = $1", [BEN])).toHaveLength(1);
+      expect(await asOwner(db, "select 1 from public.hidden_pieces where user_id = $1", [BEN])).toHaveLength(1);
     });
 
     it("lets a signed-in person delete their own account, and only theirs", async () => {
@@ -262,6 +266,7 @@ describe.each(DEFAULTS)("on a project that %s by default", (defaults) => {
       expect(users.map((u) => u.email)).toEqual(["ben@example.test"]);
       expect(await asOwner(db, "select 1 from public.painted_pieces where user_id = $1", [ANA])).toHaveLength(0);
       expect(await asOwner(db, "select 1 from public.painted_pieces where user_id = $1", [BEN])).toHaveLength(1);
+      expect(await asOwner(db, "select 1 from public.hidden_pieces where user_id = $1", [ANA])).toHaveLength(0);
     });
 
     it("cannot be called by anyone signed out", async () => {

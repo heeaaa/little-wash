@@ -1,6 +1,6 @@
 /**
  * AccountBackend on Supabase: Auth for the Google sign-in and the session,
- * the REST API for the two tables the migration creates.
+ * the REST API for the three tables the migrations create.
  *
  * Imported only through a dynamic import (see AccountContext), so supabase-js -
  * about 59 KB gzipped - is never downloaded by someone who has not chosen to
@@ -18,6 +18,7 @@ import {
   sortSaved,
   toInstant,
   type Change,
+  type HiddenRow,
   type PaintedRow,
   type SavedRow,
 } from "./record";
@@ -29,7 +30,7 @@ import {
   type SyncProblem,
 } from "./backend";
 
-/** The two tables, as the REST API returns them. */
+/** The three tables, as the REST API returns them. */
 interface SavedPieceRow {
   user_id: string;
   piece_id: string;
@@ -41,6 +42,12 @@ interface PaintedPieceRow {
   piece_id: string;
   painted_on: string;
   marked_at: string;
+}
+
+interface HiddenPieceRow {
+  user_id: string;
+  piece_id: string;
+  hidden_at: string;
 }
 
 /**
@@ -202,7 +209,7 @@ export function createSupabaseBackend(
 
     async fetchRecord(userId) {
       await signedIn();
-      const [saved, painted] = await Promise.all([
+      const [saved, painted, hidden] = await Promise.all([
         client
           .from("saved_pieces")
           .select("piece_id, saved_at")
@@ -222,8 +229,16 @@ export function createSupabaseBackend(
           .order("piece_id")
           .range(0, MAX_ROWS - 1)
           .retry(false),
+        client
+          .from("hidden_pieces")
+          .select("piece_id, hidden_at")
+          .eq("user_id", userId)
+          .order("hidden_at")
+          .order("piece_id")
+          .range(0, MAX_ROWS - 1)
+          .retry(false),
       ]);
-      for (const response of [saved, painted]) {
+      for (const response of [saved, painted, hidden]) {
         const problem = problemOf(response);
         if (problem) throw new SyncFailure(problem === "refused" ? "unavailable" : problem, response.error?.message);
       }
@@ -239,7 +254,12 @@ export function createSupabaseBackend(
           paintedRows.push({ id: row.piece_id, on: row.painted_on, at });
         }
       }
-      return { saved: sortSaved(savedRows), painted: sortPainted(paintedRows) };
+      const hiddenRows: HiddenRow[] = [];
+      for (const row of (hidden.data ?? []) as Pick<HiddenPieceRow, "piece_id" | "hidden_at">[]) {
+        const at = toInstant(row.hidden_at);
+        if (isPieceId(row.piece_id) && at) hiddenRows.push({ id: row.piece_id, at });
+      }
+      return { saved: sortSaved(savedRows), painted: sortPainted(paintedRows), hidden: sortSaved(hiddenRows) };
     },
 
     async push(userId, changes) {
@@ -261,7 +281,12 @@ export function createSupabaseBackend(
           batch.map(({ row }) => ({ user_id: userId, piece_id: row.id, painted_on: row.on, marked_at: row.at })),
           { onConflict: "user_id,piece_id" },
         );
-      const remove = (table: "saved_pieces" | "painted_pieces", batch: readonly Change[]) =>
+      const upsertHidden = (batch: Array<Change & { row: HiddenRow }>) =>
+        client.from("hidden_pieces").upsert(
+          batch.map(({ row }) => ({ user_id: userId, piece_id: row.id, hidden_at: row.at })),
+          { onConflict: "user_id,piece_id" },
+        );
+      const remove = (table: "saved_pieces" | "painted_pieces" | "hidden_pieces", batch: readonly Change[]) =>
         client
           .from(table)
           .delete()
@@ -286,6 +311,12 @@ export function createSupabaseBackend(
       }
       for (const batch of chunks(pick("painted", false), DELETE_BATCH)) {
         groups.push({ batch, send: (part) => remove("painted_pieces", part) });
+      }
+      for (const batch of chunks(pick("hidden", true), UPSERT_BATCH)) {
+        groups.push({ batch, send: (part) => upsertHidden(part as Array<Change & { row: HiddenRow }>) });
+      }
+      for (const batch of chunks(pick("hidden", false), DELETE_BATCH)) {
+        groups.push({ batch, send: (part) => remove("hidden_pieces", part) });
       }
 
       const settleGroup = async (batch: Change[], send: (batch: Change[]) => PromiseLike<Response>) => {
